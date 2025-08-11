@@ -1,0 +1,684 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Windows Logging for SOC</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="23e5b2cc-075b-8000-b04e-cbe1171cc142" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/678ecc92c80aa206339f0f23-1748608724312"/></div><h1 class="page-title">Windows Logging for SOC</h1><p class="page-description"></p></header><div class="page-body"><h2 id="23e5b2cc-075b-806e-a2fd-f188135b60a8" class="">Learning Objectives</h2><ul id="23e5b2cc-075b-80dc-a6f7-d733af4ede7f" class="bulleted-list"><li style="list-style-type:disc">Understand how to find and interpret important Windows event logs</li></ul><ul id="23e5b2cc-075b-8053-be9c-fed93df8d50a" class="bulleted-list"><li style="list-style-type:disc">Learn invaluable for monitoring log sources like Sysmon and PowerShell</li></ul><ul id="23e5b2cc-075b-80b7-af3d-dcae56024888" class="bulleted-list"><li style="list-style-type:disc">Prepare for using the mentioned logs in <a href="https://tryhackme.com/soc-sim">SOC-SIM</a> and the following rooms</li></ul><ul id="23e5b2cc-075b-8072-ad68-d08b60ae19ca" class="bulleted-list"><li style="list-style-type:disc">Practice your log analysis skills on multiple event log datasets</li></ul><p id="23e5b2cc-075b-80af-a6bf-e32610324e76" class=""><a href="https://www.ultimatewindowssecurity.com/securitylog/encyclopedia/">https://www.ultimatewindowssecurity.com/securitylog/encyclopedia/</a></p><p id="23e5b2cc-075b-80cd-a114-dca3356985d3" class="">
+</p><h2 id="23e5b2cc-075b-80df-94f2-e524ad3d4d19" class="">4624</h2><p id="23e5b2cc-075b-80f7-9318-f7c30552ed4d" class=""><a href="https://www.ultimatewindowssecurity.com/securitylog/encyclopedia/event.aspx?eventid=4624">https://www.ultimatewindowssecurity.com/securitylog/encyclopedia/event.aspx?eventid=4624</a></p><table id="23e5b2cc-075b-805b-b2cc-dd604c18a5e0" class="simple-table"><tbody><tr id="23e5b2cc-075b-8024-924e-c1d9dc2b3c2f"><td id="fg;a" class=""><strong>Logon Type</strong></td><td id="{;~E" class="" style="width:539px"><strong>Description</strong></td></tr><tr id="23e5b2cc-075b-801c-8939-f730e9de6a5a"><td id="fg;a" class="">2</td><td id="{;~E" class="" style="width:539px">Interactive (logon at keyboard and screen of system)</td></tr><tr id="23e5b2cc-075b-8089-8397-db412d491ad1"><td id="fg;a" class="">3</td><td id="{;~E" class="" style="width:539px">Network (i.e. connection to shared folder on this computer from elsewhere on network)</td></tr><tr id="23e5b2cc-075b-8011-8903-e7c2ee25858a"><td id="fg;a" class="">4</td><td id="{;~E" class="" style="width:539px">Batch (i.e. scheduled task)</td></tr><tr id="23e5b2cc-075b-80d3-a378-c2f0930c0a94"><td id="fg;a" class="">5</td><td id="{;~E" class="" style="width:539px">Service (Service startup)</td></tr><tr id="23e5b2cc-075b-80ef-8e9b-da978808b8c4"><td id="fg;a" class="">7</td><td id="{;~E" class="" style="width:539px">Unlock (i.e. unnattended workstation with password protected screen saver)</td></tr><tr id="23e5b2cc-075b-80ea-9b5c-cda945ccd342"><td id="fg;a" class="">8</td><td id="{;~E" class="" style="width:539px">NetworkCleartext (Logon with credentials sent in the clear text. <br/>Most often indicates a logon to IIS with &quot;basic authentication&quot;) <a href="http://www.windowsitpro.com/Articles/Print.cfm?ArticleID=45214">See this article for more information.</a></td></tr><tr id="23e5b2cc-075b-801c-944b-eaec42e4235a"><td id="fg;a" class="">9</td><td id="{;~E" class="" style="width:539px">NewCredentials such as with RunAs or mapping a network drive with<br/> alternate credentials.  This logon type does not seem to show up in any<br/> events.  If you want to track users attempting to logon with alternate <br/>credentials see <a href="http://www.ultimatewindowssecurity.com/wiki/SecurityLogEventID4648.ashx">4648</a>. <br/> MS says &quot;A caller cloned its current token and specified new <br/>credentials for outbound connections. The new logon session has the same<br/> local identity, but uses different credentials for other network <br/>connections.&quot;</td></tr><tr id="23e5b2cc-075b-8095-91eb-e0c6c9fbf997"><td id="fg;a" class="">10</td><td id="{;~E" class="" style="width:539px">RemoteInteractive (Terminal Services, Remote Desktop or Remote Assistance)</td></tr><tr id="23e5b2cc-075b-807c-b817-f29d1ee62661"><td id="fg;a" class="">11</td><td id="{;~E" class="" style="width:539px">CachedInteractive (logon with cached domain credentials such as when logging on to a laptop when away from the network)</td></tr></tbody></table><p id="23e5b2cc-075b-80fd-8069-e84ff54adf46" class=""><a href="https://superops.com/rmm/what-is-network-level-authentication">https://superops.com/rmm/what-is-network-level-authentication</a></p><figure id="23e5b2cc-075b-8084-9f82-c3802052768d" class="image"><a href="709028CA-ED03-4A3D-94B8-D723D8910767.png"><img style="width:619.9833374023438px" src="709028CA-ED03-4A3D-94B8-D723D8910767.png"/></a></figure><figure id="23e5b2cc-075b-80bb-b98a-cdd2d1a9520f" class="image"><a href="B498AAD4-6A31-4806-BEC9-D3A2C2FE7466.png"><img style="width:619.9833374023438px" src="B498AAD4-6A31-4806-BEC9-D3A2C2FE7466.png"/></a></figure><p id="23e5b2cc-075b-80c1-968e-ef6d61bc18b4" class="">
+</p><h2 id="23e5b2cc-075b-80f4-a188-ef099b68b784" class="">User Management</h2><figure id="23e5b2cc-075b-800b-bb45-e3eab1b7371c" class="image"><a href="DAFFF3C0-13B8-4339-8812-058181E3D5B1.png"><img style="width:620px" src="DAFFF3C0-13B8-4339-8812-058181E3D5B1.png"/></a></figure><figure id="23e5b2cc-075b-801c-abd2-ecb20e5f6c2f" class="image"><a href="AF78F681-8DD5-424E-9F92-C4F6DD05A7A1.png"><img style="width:620px" src="AF78F681-8DD5-424E-9F92-C4F6DD05A7A1.png"/></a></figure><p id="23e5b2cc-075b-800b-9f7c-ca19302cd8b9" class="">
+</p><p id="23e5b2cc-075b-8056-acc8-fc9ea4f75884" class=""><a href="https://thedfirreport.com/2023/04/03/malicious-iso-file-leads-to-domain-wide-ransomware/#:~:text=bat%0A2.bat-,The%20script%20pass.bat,-proceeded%20to%20reset">https://thedfirreport.com/2023/04/03/malicious-iso-file-leads-to-domain-wide-ransomware/#:~:text=bat%0A2.bat-,The%20script%20pass.bat,-proceeded%20to%20reset</a></p><p id="23e5b2cc-075b-802d-a6e2-f53cbaebbcec" class=""><a href="https://thedfirreport.com/2025/02/24/confluence-exploit-leads-to-lockbit-ransomware/#persistence:~:text=created%20a%20new%20account">https://thedfirreport.com/2025/02/24/confluence-exploit-leads-to-lockbit-ransomware/#persistence:~:text=created%20a%20new%20account</a></p><p id="23e5b2cc-075b-8007-a485-cf329bb1ec26" class="">
+</p><h2 id="23e5b2cc-075b-802e-9b53-fc36cdfd2d80" class="">Sysmon: Process Monitoring</h2><figure id="23e5b2cc-075b-8089-8db7-d1af3bc27c83" class="image"><a href="8F444C06-B923-4195-B828-207CE58B0A3B.png"><img style="width:620px" src="8F444C06-B923-4195-B828-207CE58B0A3B.png"/></a></figure><figure id="23e5b2cc-075b-80fc-8a46-d310486c98f6" class="image"><a href="037BE7E3-DDEE-4BA5-A010-7B9493FE1F3B.png"><img style="width:620px" src="037BE7E3-DDEE-4BA5-A010-7B9493FE1F3B.png"/></a></figure><h3 id="23e5b2cc-075b-807d-874e-fc66b11df159" class="">Sysmon Event ID 1 in Action</h3><p id="23e5b2cc-075b-808b-aa2f-db666909d787" class="">As you can see on the screenshot above, event ID 1 has a lot of different fields, the most important of which can be grouped as:</p><ul id="23e5b2cc-075b-8032-aa45-fce42d4b6230" class="bulleted-list"><li style="list-style-type:disc"><strong>Process Info</strong>: Context of the launched process, including its PID, path (image), and command line</li></ul><ul id="23e5b2cc-075b-80c5-958d-e28023c87f7c" class="bulleted-list"><li style="list-style-type:disc"><strong>Parent Info</strong>: Context of the parent process, very useful to build a process tree or an attack chain</li></ul><ul id="23e5b2cc-075b-8033-9c06-e2a545bc10a3" class="bulleted-list"><li style="list-style-type:disc"><strong>Binary Info</strong>: Process hash, signature, and PE metadata. You will need it for more advanced rooms</li></ul><ul id="23e5b2cc-075b-8045-8206-f72b8b400b3c" class="bulleted-list"><li style="list-style-type:disc"><strong>User Context</strong>: A user running the process and, most importantly, Logon ID - same as in the Security logs</li></ul><p id="23e5b2cc-075b-8015-8737-fca78f7f761a" class="">Since almost any attack works on the endpoint level and requires at least some process to be launched to breach the system or exfiltrate the data from it, process monitoring is the most important log source for any SOC team. Use the following workbook to perform a basic analysis of any process launch:</p><figure id="23e5b2cc-075b-8061-b855-f63ec5c758af" class="image"><a href="CEDE27BD-1E2F-48E3-BC30-0E9D9C70BAC8.png"><img style="width:619.9833374023438px" src="CEDE27BD-1E2F-48E3-BC30-0E9D9C70BAC8.png"/></a></figure><figure id="23e5b2cc-075b-8036-8a42-f0c7138b3fe7"><div class="source">https://github.com/Neo23x0/sysmon-config/blob/master/sysmonconfig-export.xml</div></figure><figure id="23e5b2cc-075b-804f-a82b-c394568a52ba" class="image"><a href="67A44A60-69A0-4795-95A1-791838CCC9B3.png"><img style="width:620px" src="67A44A60-69A0-4795-95A1-791838CCC9B3.png"/></a></figure></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

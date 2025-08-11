@@ -1,0 +1,709 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>SNORT</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="22a5b2cc-075b-8098-8400-c90921576ae6" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🤿</span></div><h1 class="page-title">SNORT</h1><p class="page-description"></p></header><div class="page-body"><figure id="22a5b2cc-075b-80d3-b408-f60beb4e7e25"><div class="source"><a href="SnortCheatsheet-TryHackMe-1647343678716.pdf">attachment:562c049c-c0cb-4409-a71a-8309fe72e358:SnortCheatsheet-TryHackMe-1647343678716.pdf</a></div></figure><p id="22b5b2cc-075b-80b8-91ee-de6f5e1e1c9f" class="">
+</p><h1 id="22b5b2cc-075b-8099-b688-d10f897a84fe" class=""><code>cat alert | grep &quot;\\[1:&quot; | cut -d &quot; &quot; -f2 | sort -u</code></h1><p id="22b5b2cc-075b-8068-a258-c78d9861a3a1" class="">
+</p><p id="22a5b2cc-075b-8076-9611-d61a9f930d24" class=""><strong>Snort</strong> is an <strong>open-source</strong>, <strong>rule-based</strong> Network Intrusion Detection and Prevention System (<strong>NIDS/NIPS</strong>) used to <strong>detect</strong> and optionally <strong>prevent</strong> malicious network activity.</p><h3 id="22a5b2cc-075b-80cf-b48f-d9a3e350bbd5" class="">🧠 Snort Capabilities</h3><ul id="22a5b2cc-075b-8002-8f87-d86339ded4d7" class="bulleted-list"><li style="list-style-type:disc">🟢 <strong>Live Traffic Analysis</strong> – Real-time monitoring of packet data</li></ul><ul id="22a5b2cc-075b-803e-af32-e532620b8c27" class="bulleted-list"><li style="list-style-type:disc">🔍 <strong>Attack &amp; Probe Detection</strong> – Identifies known attack signatures (e.g., port scans, buffer overflows)</li></ul><ul id="22a5b2cc-075b-8011-82a1-fd124482d795" class="bulleted-list"><li style="list-style-type:disc">📜 <strong>Packet Logging</strong> – Records traffic data for analysis and investigation</li></ul><ul id="22a5b2cc-075b-80ae-9a3a-c9222ae7d9b0" class="bulleted-list"><li style="list-style-type:disc">📶 <strong>Protocol Analysis</strong> – Parses and understands protocols (TCP, UDP, ICMP, etc.)</li></ul><ul id="22a5b2cc-075b-8030-8015-d81a73837a80" class="bulleted-list"><li style="list-style-type:disc">🚨 <strong>Real-time Alerting</strong> – Alerts based on rule matches (e.g., via syslog or console)</li></ul><ul id="22a5b2cc-075b-80d3-bcf1-d5cae4b42efe" class="bulleted-list"><li style="list-style-type:disc">🧩 <strong>Modular &amp; Extensible</strong> – Supports plugins and pre-processors for added detection logic</li></ul><ul id="22a5b2cc-075b-80db-91b3-f1b27b7fa5f9" class="bulleted-list"><li style="list-style-type:disc">💻 <strong>Cross-Platform</strong> – Works on Linux &amp; Windows</li></ul><hr id="22a5b2cc-075b-8024-90a9-d78f0cc61b94"/><h3 id="22a5b2cc-075b-801b-9ca5-db6a5ad8a9b8" class="">🔧 Snort Modes of Operation</h3><table id="22a5b2cc-075b-802a-bea1-c5602ea65ea2" class="simple-table"><thead class="simple-table-header"><tr id="22a5b2cc-075b-809d-a9bb-e98457ed2887"><th id="I_Au" class="simple-table-header-color simple-table-header">Mode</th><th id="CKX;" class="simple-table-header-color simple-table-header">Description</th></tr></thead><tbody><tr id="22a5b2cc-075b-80d2-978b-df7ceff49858"><td id="I_Au" class="">🧪 <strong>Sniffer Mode</strong></td><td id="CKX;" class="">Reads and displays packet data like <code>tcpdump</code></td></tr><tr id="22a5b2cc-075b-80b1-8384-cb9b99ef60b7"><td id="I_Au" class="">📁 <strong>Packet Logger Mode</strong></td><td id="CKX;" class="">Logs packets to disk for later analysis</td></tr><tr id="22a5b2cc-075b-8062-9cf9-d5b0b315b9d4"><td id="I_Au" class="">🛡️ <strong>NIDS/NIPS Mode</strong></td><td id="CKX;" class="">Detects and/or prevents malicious packets based on rules</td></tr></tbody></table><ul id="22a5b2cc-075b-80b3-8cea-f34c786070fb" class="bulleted-list"><li style="list-style-type:disc"><strong>NIDS (Detection)</strong>: Alerts on malicious traffic but does not block it</li></ul><ul id="22a5b2cc-075b-80b7-90de-f7742a1c377d" class="bulleted-list"><li style="list-style-type:disc"><strong>NIPS (Prevention)</strong>: Actively blocks malicious packets (when deployed inline)</li></ul><p id="22a5b2cc-075b-807b-98fb-dc422052bc9a" class="">
+</p><figure id="22a5b2cc-075b-8092-9251-d937389a864f" class="image"><a href="CD7A9301-B9B3-42BC-B845-3A4708536A8D.png"><img style="width:580.6302490234375px" src="CD7A9301-B9B3-42BC-B845-3A4708536A8D.png"/></a></figure><p id="22a5b2cc-075b-8039-8e28-c9dc28573aae" class="">Now we need to check if the snort config files are valid</p><figure id="22a5b2cc-075b-80dc-b552-d000c10ebfb2" class="image"><a href="7D5AE21B-61B0-4E61-9E1D-E4C0EFFF1834.png"><img style="width:580.5962524414062px" src="7D5AE21B-61B0-4E61-9E1D-E4C0EFFF1834.png"/></a></figure><h3 id="22a5b2cc-075b-80bc-8713-e45f9d7fda36" class="">📁 Snort Configuration File (<code>snort.conf</code>)</h3><p id="22a5b2cc-075b-8049-9927-c2607fe43e9f" class="">The <strong>Snort configuration file</strong> is the <strong>central brain</strong> of a Snort deployment. It defines how Snort behaves during runtime.</p><h3 id="22a5b2cc-075b-801a-8300-ecf3156a920f" class="">✅ Key Functions of the Configuration File:</h3><ul id="22a5b2cc-075b-801b-9355-e508142378c9" class="bulleted-list"><li style="list-style-type:disc">📜 <strong>Rules</strong>: Which detection rules to load</li></ul><ul id="22a5b2cc-075b-8050-8e89-dea89248f3ff" class="bulleted-list"><li style="list-style-type:disc">🧩 <strong>Plugins &amp; Preprocessors</strong>: Enable modules for deeper inspection (e.g., frag3, stream5)</li></ul><ul id="22a5b2cc-075b-80e5-9434-e2f64e70e3f0" class="bulleted-list"><li style="list-style-type:disc">⚙️ <strong>Detection Settings</strong>: Define what constitutes suspicious traffic</li></ul><ul id="22a5b2cc-075b-8005-84e3-e37dfa9fd830" class="bulleted-list"><li style="list-style-type:disc">📤 <strong>Output Options</strong>: How alerts are logged (console, file, unified2, etc.)</li></ul><ul id="22a5b2cc-075b-8090-8c68-f767d6a922da" class="bulleted-list"><li style="list-style-type:disc">🔁 <strong>Default Actions</strong>: Whether to alert, log, or drop packets</li></ul><blockquote id="22a5b2cc-075b-8012-8734-f6f09f372322" class="">🗂️ You can create multiple configuration files for different use cases (e.g., internal vs external traffic monitoring), but only one can be used at a time during execution.</blockquote><hr id="22a5b2cc-075b-80f4-b7c6-d246cd30a4b1"/><h3 id="22a5b2cc-075b-8041-9313-c1c58c218f4b" class="">🚀 Useful Snort Parameters</h3><table id="22a5b2cc-075b-806c-889e-f69cd2fca53d" class="simple-table"><thead class="simple-table-header"><tr id="22a5b2cc-075b-80e5-a149-ff79df7aba73"><th id="^byv" class="simple-table-header-color simple-table-header">Parameter</th><th id="&lt;?vf" class="simple-table-header-color simple-table-header">Description</th></tr></thead><tbody><tr id="22a5b2cc-075b-80d2-b55d-d704209071e1"><td id="^byv" class=""><code>-V</code> or <code>--version</code></td><td id="&lt;?vf" class="">Show the Snort version</td></tr><tr id="22a5b2cc-075b-80dc-84f8-fb06aa0cdf3f"><td id="^byv" class=""><code>-c &lt;file&gt;</code></td><td id="&lt;?vf" class="">Specify the configuration file to use (<code>snort.conf</code>)</td></tr><tr id="22a5b2cc-075b-8007-9882-e57fbd05f38c"><td id="^byv" class=""><code>-T</code></td><td id="&lt;?vf" class=""><strong>Test mode</strong> – Validates configuration and rules (no packets are analyzed)</td></tr><tr id="22a5b2cc-075b-8093-b444-f4d5aa15f0cf"><td id="^byv" class=""><code>-q</code></td><td id="&lt;?vf" class=""><strong>Quiet mode</strong> – Suppresses the default startup banner and setup info</td></tr></tbody></table><h3 id="22a5b2cc-075b-806a-bef7-eecd93902e12" class="">💡 Example Usage</h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22a5b2cc-075b-8094-ab69-cdc9dd8c4538" class="code code-wrap"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">snort -T -c /etc/snort/snort.conf</code></pre><p id="22a5b2cc-075b-80b6-8ecb-f221fe393dfc" class="">➡️ This runs a <strong>self-test</strong> on the configuration file to check for errors.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22a5b2cc-075b-802f-b6ad-c645841eb55a" class="code code-wrap"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">snort -q -c /etc/snort/snort.conf</code></pre><p id="22a5b2cc-075b-80e3-960d-cfb4f08ae6eb" class="">➡️ Runs Snort quietly using the specified configuration file (no banner output).</p><p id="22a5b2cc-075b-8050-b99a-e6dc5e2096e1" class="">
+</p><p id="22a5b2cc-075b-809d-a28b-ca2fbcd41d15" class="">Questions</p><p id="22a5b2cc-075b-8024-b2d7-f70aeb13a381" class="">Test the current instance with &quot;/etc/snort/snort.conf&quot; file and check how many rules are loaded with the current build.</p><p id="22a5b2cc-075b-8030-b72c-e75977857572" class=""><code>snort -T -q -c /etc/snort/snort.conf</code></p><figure id="22a5b2cc-075b-80ec-9902-e638f6ec07eb" class="image"><a href="image%2080.png"><img style="width:580.5962524414062px" src="image%2080.png"/></a></figure><p id="22a5b2cc-075b-806c-9230-ef0541a46a60" class="">
+</p><h2 id="22a5b2cc-075b-8053-bbab-d3d2e9620994" class=""><strong>SNIFFER MODE</strong></h2><table id="22a5b2cc-075b-80df-ad1d-c6913d9179b8" class="simple-table"><tbody><tr id="22a5b2cc-075b-80d9-b451-fb49498566cb"><td id="NQGM" class=""><strong>Parameter</strong></td><td id="=|Gp" class="" style="width:522.9887084960938px"><strong>Description</strong></td></tr><tr id="22a5b2cc-075b-803e-96eb-edb20df5046a"><td id="NQGM" class=""><strong>-v</strong></td><td id="=|Gp" class="" style="width:522.9887084960938px">Verbose. Display the TCP/IP output in the console.</td></tr><tr id="22a5b2cc-075b-80ea-934d-fbbc5e00daf9"><td id="NQGM" class=""><strong>-d</strong></td><td id="=|Gp" class="" style="width:522.9887084960938px">Display the packet data (payload).</td></tr><tr id="22a5b2cc-075b-800c-8da2-cd2b29ded54b"><td id="NQGM" class=""><strong>-e</strong></td><td id="=|Gp" class="" style="width:522.9887084960938px">Display the link-layer (TCP/IP/UDP/ICMP) headers.</td></tr><tr id="22a5b2cc-075b-80ec-a766-e08b126e8976"><td id="NQGM" class="">-<strong>X</strong></td><td id="=|Gp" class="" style="width:522.9887084960938px">Display the full packet details in HEX.</td></tr><tr id="22a5b2cc-075b-808d-965e-e90390fc87ca"><td id="NQGM" class="">-<strong>i</strong></td><td id="=|Gp" class="" style="width:522.9887084960938px">This parameter helps to define a specific network interface to listen/sniff. Once you have multiple interfaces, you can choose a specific interface to sniff.</td></tr></tbody></table><p id="22a5b2cc-075b-80b9-b624-ed883599a797" class="">
+</p><hr id="22a5b2cc-075b-8081-8aaa-d338d7fb45b4"/><h3 id="22a5b2cc-075b-80de-a700-d6044d68570f" class="">🐍 Snort Packet Display Modes (used without a config file)</h3><p id="22a5b2cc-075b-8043-8db4-f86b8c87652c" class="">These modes are typically used in <strong>sniffer/debugging scenarios</strong>, not for rule-based detection.</p><hr id="22a5b2cc-075b-80b2-b07d-d454000cb15f"/><h3 id="22a5b2cc-075b-8088-bc07-e4280dc18e5e" class=""><code>snort -v</code></h3><p id="22a5b2cc-075b-80fb-8953-ce9f2139975a" class=""><strong>Verbose Mode</strong></p><ul id="22a5b2cc-075b-80b1-b8ab-c7c619649a51" class="bulleted-list"><li style="list-style-type:disc">Displays packet headers (IP + higher-level protocols like TCP/UDP/ICMP) to the terminal.</li></ul><ul id="22a5b2cc-075b-8093-8e16-c8aeac1f99be" class="bulleted-list"><li style="list-style-type:disc">Good for basic inspection.</li></ul><p id="22a5b2cc-075b-8069-8cf9-f9a4105edfc7" class="">🧾 <strong>Example Output:</strong></p><p id="22a5b2cc-075b-8013-b839-e5e4194ee4ed" class="">Shows source/destination IPs, ports, and protocol info.</p><hr id="22a5b2cc-075b-80d9-99e9-ed925ab8fa77"/><h3 id="22a5b2cc-075b-80d1-901c-c24d3fe91c22" class=""><code>snort -vd</code></h3><p id="22a5b2cc-075b-809e-8e8a-d569ee0f7f7a" class=""><strong>Verbose + Data Mode</strong></p><ul id="22a5b2cc-075b-8000-a130-db6fb753c126" class="bulleted-list"><li style="list-style-type:disc">Displays packet headers <strong>and</strong> packet payloads (data).</li></ul><ul id="22a5b2cc-075b-80cc-ad64-d29dbf749b05" class="bulleted-list"><li style="list-style-type:disc">Useful for analyzing what’s inside the packet beyond just headers.</li></ul><p id="22a5b2cc-075b-8084-8e73-d7ffc7fae746" class="">🧾 <strong>Example Output:</strong></p><p id="22a5b2cc-075b-80e7-9b72-e11dcd1972dc" class="">Header + ASCII/hex dump of payload data.</p><hr id="22a5b2cc-075b-8088-990e-f2c453654de2"/><h3 id="22a5b2cc-075b-80bb-ba9a-ff370aa37215" class=""><code>snort -de</code></h3><p id="22a5b2cc-075b-807d-97a5-e2806ee2ded6" class=""><strong>Data + Ethernet Mode</strong></p><ul id="22a5b2cc-075b-8065-a572-c046c318db80" class="bulleted-list"><li style="list-style-type:disc">Displays <strong>only</strong> the data and <strong>Ethernet header</strong>.</li></ul><ul id="22a5b2cc-075b-80c0-b293-c72b7b9af3d8" class="bulleted-list"><li style="list-style-type:disc">Excludes IP/TCP/UDP headers.</li></ul><ul id="22a5b2cc-075b-80d5-920f-de32f4cc70b9" class="bulleted-list"><li style="list-style-type:disc">Useful if you’re focused on lower-level Ethernet frame analysis.</li></ul><p id="22a5b2cc-075b-804f-b5cf-faf0a23f2688" class="">🧾 <strong>Example Output:</strong></p><p id="22a5b2cc-075b-8016-81e7-e79b20b56544" class="">MAC addresses and raw data, without IP-level detail.</p><hr id="22a5b2cc-075b-80c2-b5ba-d0838db2e2a8"/><h3 id="22a5b2cc-075b-8058-857b-e144e6b48ba4" class=""><code>snort -v -d -e</code></h3><p id="22a5b2cc-075b-8089-b42f-ce0b1228c1b3" class=""><strong>Verbose + Data + Ethernet Mode</strong></p><ul id="22a5b2cc-075b-806e-b9f7-fa4378adf809" class="bulleted-list"><li style="list-style-type:disc">Displays <strong>Ethernet</strong>, <strong>IP</strong>, <strong>TCP/UDP</strong>, and <strong>payload</strong> in detail.</li></ul><ul id="22a5b2cc-075b-80f8-a165-f1920e93bb8e" class="bulleted-list"><li style="list-style-type:disc">Full visibility into the entire packet structure.</li></ul><ul id="22a5b2cc-075b-80cc-b776-c99d0582832d" class="bulleted-list"><li style="list-style-type:disc">Excellent for low-level packet inspection during troubleshooting or learning.</li></ul><p id="22a5b2cc-075b-80ba-aa0b-f33506dcebc2" class="">🧾 <strong>Example Output:</strong></p><p id="22a5b2cc-075b-8053-a6a8-e8c615877f93" class="">Everything: Ethernet → IP → TCP/UDP → Payload.</p><hr id="22a5b2cc-075b-803e-bb13-ff8218f155d9"/><h3 id="22a5b2cc-075b-80d3-be84-f26e3a7a0a43" class=""><code>snort -X</code></h3><p id="22a5b2cc-075b-8023-b748-cfe06fe141be" class=""><strong>Hex Dump Mode</strong></p><ul id="22a5b2cc-075b-8095-b5ec-e9603dfd5ced" class="bulleted-list"><li style="list-style-type:disc">Shows a full <strong>hexadecimal and ASCII dump</strong> of packet payloads only.</li></ul><ul id="22a5b2cc-075b-80e1-a36d-f8b7007870ec" class="bulleted-list"><li style="list-style-type:disc">Skips header-level display.</li></ul><ul id="22a5b2cc-075b-80ba-80e2-d41ba565981a" class="bulleted-list"><li style="list-style-type:disc">Useful for reverse engineering or malware analysis.</li></ul><p id="22a5b2cc-075b-8005-bfe2-fa1bd92af1b4" class="">🧾 <strong>Example Output:</strong></p><p id="22a5b2cc-075b-8057-9f84-cec250855ad2" class="">Hex + ASCII dump (like <code>xxd</code> or <code>hexdump</code>).</p><hr id="22a5b2cc-075b-801c-97e7-d1b6f6a3bbaa"/><h3 id="22a5b2cc-075b-80d8-9c47-eadb52255fd8" class="">🔁 Combine for More Detail</h3><p id="22a5b2cc-075b-80d8-b49b-ebd93d43aad7" class="">These switches are <strong>often combined</strong> to tailor what Snort displays, depending on your analysis needs.</p><hr id="22a5b2cc-075b-8078-88bc-cc28e2489f58"/><h3 id="22a5b2cc-075b-80df-a756-ef544c300dd3" class="">💡 Tip: Run in Live Sniffer Mode</h3><p id="22a5b2cc-075b-806f-927f-f440fd5ebaf6" class="">All of the above are typically used with:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22a5b2cc-075b-8032-b6a1-cdc3145ebeb4" class="code code-wrap"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">snort -i eth0 [options]</code></pre><p id="22a5b2cc-075b-80d7-9d97-d36a0c1c7d8c" class="">To read live packets from interface <code>eth0</code>.</p><hr id="22a5b2cc-075b-8088-afec-cc0ca7d84558"/><p id="22a5b2cc-075b-80ae-b83f-e41536d226d7" class="">
+</p><h2 id="22a5b2cc-075b-8047-a8a5-d3cf81a5ccc8" class="">PACKET LOGGER MODE </h2><table id="22a5b2cc-075b-803e-a18d-d3ce332648c6" class="simple-table"><tbody><tr id="22a5b2cc-075b-805e-97b3-cb7d7987f553"><td id="Ac`M" class=""><strong>Parameter</strong></td><td id="O:oS" class="" style="width:531.9887084960938px"><strong>Description</strong></td></tr><tr id="22a5b2cc-075b-80b1-bb18-d2d74d3a6101"><td id="Ac`M" class="">-l</td><td id="O:oS" class="" style="width:531.9887084960938px">Logger mode, target <strong>log and alert </strong>output directory. Default output folder is <strong>/var/log/snort</strong><br/>The default action is to dump as tcpdump format in <strong>/var/log/snort</strong></td></tr><tr id="22a5b2cc-075b-80a4-b37a-e73c7c4aef63"><td id="Ac`M" class=""><strong>-K ASCII</strong></td><td id="O:oS" class="" style="width:531.9887084960938px">Log packets in ASCII format.</td></tr><tr id="22a5b2cc-075b-80bd-b571-ef94ddb32a3f"><td id="Ac`M" class="">-r</td><td id="O:oS" class="" style="width:531.9887084960938px">Reading option, read the dumped logs in Snort.</td></tr><tr id="22a5b2cc-075b-80be-8825-ead8a9a1c135"><td id="Ac`M" class=""><strong>-n</strong></td><td id="O:oS" class="" style="width:531.9887084960938px">Specify the number of packets that will process/read. Snort will stop after reading the specified number of packets.</td></tr></tbody></table><p id="22a5b2cc-075b-807d-828f-ede84ac81b8f" class="">Questions,</p><p id="22a5b2cc-075b-8017-bd39-c574159bfd65" class="">Use snort.log.1640048004</p><ol type="1" id="22a5b2cc-075b-8091-ad31-fcad492d0036" class="numbered-list" start="1"><li>Read the snort.log file with Snort; what is the IP ID of the 10th packet?</li></ol><p id="22a5b2cc-075b-80cf-878f-edc359f37518" class=""><code>snort -r snort.log.1640048004 -n 10</code></p><figure id="22a5b2cc-075b-8090-b75d-cde844b6dbf7" class="image"><a href="27E95606-76F2-443B-B715-3485BAA39064.png"><img style="width:580.6415405273438px" src="27E95606-76F2-443B-B715-3485BAA39064.png"/></a></figure><p id="22a5b2cc-075b-8080-8212-faea149a9848" class="">IP ID - 49313</p><ol type="1" id="22a5b2cc-075b-80cd-921b-cca774b73683" class="numbered-list" start="2"><li>Read the &quot;<strong>snort.log.1640048004&quot;</strong> file with Snort; what is the referer of the 4th packet?<br/><br/><code>snort -r snort.log.1640048004 -n 4 -X</code></li></ol><p id="22a5b2cc-075b-801b-94da-d73ba965bb63" class="">-X is for full packet details.</p><figure id="22a5b2cc-075b-8056-a97a-ef26a8becc89" class="image"><a href="91358842-9536-4DB2-8AFD-4BD03C4769BB.png"><img style="width:580.6415405273438px" src="91358842-9536-4DB2-8AFD-4BD03C4769BB.png"/></a></figure><p id="22a5b2cc-075b-801a-a218-e90d7626564d" class="">
+</p><ol type="1" id="22a5b2cc-075b-8002-a3a5-c7b1120528a4" class="numbered-list" start="3"><li>Read the &quot;<strong>snort.log.1640048004&quot;</strong> file with Snort; what is the number of the <strong>&quot;TCP port 80&quot;</strong> packets?<br/><br/><a href="https://en.wikipedia.org/wiki/Berkeley_Packet_Filter">https://en.wikipedia.org/wiki/Berkeley_Packet_Filter</a><br/>I can use a BPF filter such as tcp port 80, to filter src/dst port 80 traffic</li></ol><p id="22a5b2cc-075b-806d-9f8c-db6681dc7a38" class=""><code>snort -r snort.log.1640048004 tcp port 80</code></p><figure id="22a5b2cc-075b-80cf-9dcb-cb70e8db4fb4" class="image"><a href="648C9604-8FCB-48BD-A421-049B3EE0D7FF.png"><img style="width:580.6415405273438px" src="648C9604-8FCB-48BD-A421-049B3EE0D7FF.png"/></a></figure><figure id="22a5b2cc-075b-80d1-b77e-de790959962d" class="image"><a href="44A75D0D-38DA-485A-AA62-72321F248097.png"><img style="width:580.6076049804688px" src="44A75D0D-38DA-485A-AA62-72321F248097.png"/></a></figure><p id="22a5b2cc-075b-8076-abca-e8a7145ceb00" class="">
+</p><h2 id="22a5b2cc-075b-8071-8ef5-cae2ebd51018" class="">IDS/IPS MODE</h2><p id="22a5b2cc-075b-807d-ab81-ce42db0ead35" class="">
+</p><p id="22a5b2cc-075b-80b0-875a-fa05a2676b82" class="">Investigate the traffic with the default configuration file.</p><p id="22a5b2cc-075b-8056-ac19-eeb9e24c6d5c" class=""><code>sudo snort -c /etc/snort/snort.conf -A full -l .</code></p><p id="22a5b2cc-075b-803b-8823-dfc6ea32bf47" class="">Execute the traffic generator script and choose <strong>&quot;TASK-7 Exercise&quot;</strong>. Wait until the traffic stops, then stop the Snort instance. Now analyse the output summary and answer the question.</p><p id="22a5b2cc-075b-80a2-88ae-cb80a03bc7d4" class=""><code>sudo ./traffic-generator.sh</code></p><ol type="1" id="22a5b2cc-075b-804e-8ad6-c9ea6fb8c8bf" class="numbered-list" start="1"><li>What is the number of the detected HTTP GET methods?</li></ol><figure id="22a5b2cc-075b-8090-a5fd-e94e14afbcc1" class="image"><a href="E4A54F55-B9A7-421E-9E03-1FD1669CBDC7.png"><img style="width:580.6415405273438px" src="E4A54F55-B9A7-421E-9E03-1FD1669CBDC7.png"/></a></figure><p id="22a5b2cc-075b-807d-bae3-de5541dcc894" class="">
+</p><h2 id="22a5b2cc-075b-80c4-b71e-c1d902e21b7d" class="">PCAP Investigation</h2><p id="22a5b2cc-075b-80af-b2be-d02901d4c7fd" class="">Great! This task was a hands-on demonstration of how to <strong>investigate PCAP files using Snort</strong>, using various command-line parameters to process one or more PCAPs effectively. Let’s review and break it down into key learnings:</p><hr id="22a5b2cc-075b-8007-9f41-d263c9953ca1"/><h3 id="22a5b2cc-075b-8026-b421-cc2224a29f49" class="">🔍 <strong>Snort’s PCAP Analysis Modes Recap</strong></h3><table id="22a5b2cc-075b-8000-b76b-d0c1f627c3b3" class="simple-table"><thead class="simple-table-header"><tr id="22a5b2cc-075b-8019-a12a-c6a9d3940898"><th id="Ygcc" class="simple-table-header-color simple-table-header"><strong>Parameter</strong></th><th id="K~GP" class="simple-table-header-color simple-table-header"><strong>Purpose</strong></th></tr></thead><tbody><tr id="22a5b2cc-075b-809a-a44f-f1e77ec7a700"><td id="Ygcc" class=""><code>-r &lt;pcap&gt;</code></td><td id="K~GP" class="">Read a <strong>single</strong> PCAP file.</td></tr><tr id="22a5b2cc-075b-8084-9a52-fa8fbf3cd1f7"><td id="Ygcc" class=""><code>--pcap-list=&quot;&lt;file1&gt; &lt;file2&gt;&quot;</code></td><td id="K~GP" class="">Process <strong>multiple</strong> PCAPs.</td></tr><tr id="22a5b2cc-075b-80ec-958f-e90731d48997"><td id="Ygcc" class=""><code>--pcap-show</code></td><td id="K~GP" class=""><strong>Show PCAP name</strong> when processing – useful for tracing alerts per file.</td></tr></tbody></table><hr id="22a5b2cc-075b-80c6-99a7-c987c420c9b9"/><h3 id="22a5b2cc-075b-8084-97cb-d1046e5dfcf9" class="">✅ <strong>Example Commands &amp; Their Use</strong></h3><h3 id="22a5b2cc-075b-8051-bdf3-ead3b807effa" class="">1. <strong>Single PCAP Investigation</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22a5b2cc-075b-80e9-8b34-ee0dbad10479" class="code code-wrap"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">sudo snort -c /etc/snort/snort.conf -q -r icmp-test.pcap -A console -n 10
+</code></pre><ul id="22a5b2cc-075b-802b-aa9e-f8588f972e6d" class="bulleted-list"><li style="list-style-type:disc"><code>c</code>: Specifies the config file.</li></ul><ul id="22a5b2cc-075b-804c-aad3-fd107e5b269c" class="bulleted-list"><li style="list-style-type:disc"><code>q</code>: Quiet mode (suppress banner and runtime messages).</li></ul><ul id="22a5b2cc-075b-8030-8d94-f634b13d871e" class="bulleted-list"><li style="list-style-type:disc"><code>r</code>: Input PCAP file.</li></ul><ul id="22a5b2cc-075b-80b8-856a-fae0825dc4ab" class="bulleted-list"><li style="list-style-type:disc"><code>A console</code>: Output alerts to the console.</li></ul><ul id="22a5b2cc-075b-808e-bc13-faf840d14016" class="bulleted-list"><li style="list-style-type:disc"><code>n 10</code>: Process only the first 10 packets.</li></ul><p id="22a5b2cc-075b-8011-b3dc-fd0a9ce0d81c" class="">📌 <strong>Result:</strong> Alerts triggered by ICMP packets in <code>icmp-test.pcap</code> based on the rule <code>[1:10000001:0] ICMP Packet found</code>.</p><hr id="22a5b2cc-075b-8000-9e87-c02308348b08"/><h3 id="22a5b2cc-075b-8089-a0e7-f6795b6a5e24" class="">2. <strong>Multiple PCAPs with </strong><code><strong>-pcap-list</strong></code></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22a5b2cc-075b-8039-b199-f5e0c7736ab2" class="code code-wrap"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">sudo snort -c /etc/snort/snort.conf -q --pcap-list=&quot;icmp-test.pcap http2.pcap&quot; -A console
+</code></pre><ul id="22a5b2cc-075b-803a-b191-d356e1727cfe" class="bulleted-list"><li style="list-style-type:disc">This runs Snort on both PCAPs, but <strong>doesn’t show which alert came from which file</strong>.</li></ul><p id="22a5b2cc-075b-8019-bf2d-c9b467899270" class="">📌 <strong>Limitation:</strong> You can’t easily trace alerts back to the source PCAP.</p><hr id="22a5b2cc-075b-801d-bf0a-d2d85338977b"/><h3 id="22a5b2cc-075b-803d-8fcd-c6ce3aeaf106" class="">3. <strong>Multiple PCAPs with </strong><code><strong>-pcap-show</strong></code></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22a5b2cc-075b-80aa-9801-e9f76f0b7219" class="code code-wrap"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">sudo snort -c /etc/snort/snort.conf -q --pcap-list=&quot;icmp-test.pcap http2.pcap&quot; -A console --pcap-show
+</code></pre><ul id="22a5b2cc-075b-80d9-bbe8-ec1400a32bcd" class="bulleted-list"><li style="list-style-type:disc">Adds <strong>PCAP filename</strong> before processing.</li></ul><ul id="22a5b2cc-075b-80b4-b45c-d0def22bfe73" class="bulleted-list"><li style="list-style-type:disc">Extremely useful in investigations where alerts need to be <strong>correlated with the original PCAP</strong>.</li></ul><p id="22a5b2cc-075b-8037-a587-f99f38c1fc2d" class="">📌 <strong>Result:</strong> Each alert is shown under the corresponding file name:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22a5b2cc-075b-8085-a576-d71c296bcd43" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">Reading network traffic from &quot;icmp-test.pcap&quot;
+[alert logs]
+Reading network traffic from &quot;http2.pcap&quot;
+[alert logs]
+</code></pre><hr id="22a5b2cc-075b-80a4-ab65-c631a2633c23"/><h3 id="22a5b2cc-075b-80c6-b4f6-c39919effdc0" class="">🧠 <strong>Key Takeaways</strong></h3><ul id="22a5b2cc-075b-8001-9fdb-e915c122d85a" class="bulleted-list"><li style="list-style-type:disc">Snort can <strong>analyze past captures (pcap files)</strong>, not just live traffic.</li></ul><ul id="22a5b2cc-075b-8013-9adc-e4276e28798b" class="bulleted-list"><li style="list-style-type:disc">The <strong>ruleset in </strong><code><strong>snort.conf</strong></code> determines what alerts are generated.</li></ul><ul id="22a5b2cc-075b-8005-b159-fef21d351c2c" class="bulleted-list"><li style="list-style-type:disc">Use <code>-pcap-show</code> with <code>-pcap-list</code> to separate and identify which alert came from which file — a must for investigations!</li></ul><ul id="22a5b2cc-075b-8003-86fa-eb9bddf7acde" class="bulleted-list"><li style="list-style-type:disc">The ICMP rule you wrote (likely in <code>local.rules</code>) is correctly detecting echo requests/replies, confirming proper rule syntax and Snort configuration.</li></ul><hr id="22a5b2cc-075b-8047-a557-ea91834adebc"/><h3 id="22a5b2cc-075b-801d-bd20-dcd8c8455064" class="">🧪 Now What?</h3><p id="22a5b2cc-075b-805d-a347-d7ee69add02e" class="">Head to the VM and navigate to:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22a5b2cc-075b-80d3-8864-d1be4318d76d" class="code code-wrap"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">cd ~/Desktop/Task-Exercises/Exercise-Files/TASK-8
+</code></pre><p id="22a5b2cc-075b-8028-914c-fb7840c3d0b7" class="">Then:</p><ul id="22a5b2cc-075b-809a-9bfe-c81ff6e7043b" class="bulleted-list"><li style="list-style-type:disc">Use the commands from above to investigate the <code>.pcap</code> files in this folder.</li></ul><ul id="22a5b2cc-075b-8095-98bc-f2c9505628fb" class="bulleted-list"><li style="list-style-type:disc">Pay attention to <strong>alerts</strong>, <strong>PCAP filenames</strong>, and <strong>source/destination IPs</strong>.</li></ul><hr id="22a5b2cc-075b-80a1-89f3-d10c6da0bc30"/><p id="22a5b2cc-075b-8079-8776-ff1a5c727e28" class="">
+</p><h3 id="22a5b2cc-075b-8049-8b59-e64f8c189314" class=""><strong>Snort in IDS/IPS Mode</strong></h3><p id="22a5b2cc-075b-80a1-99a3-dad2542e8d38" class="">Snort can not only sniff/log traffic but also manage it based on user-defined rules in <strong>IDS/IPS mode</strong>.</p><ul id="22a5b2cc-075b-805f-9252-ec6837c97cd1" class="bulleted-list"><li style="list-style-type:disc"><strong>Depends on rules &amp; config</strong> (see TASK-9/10 for rules, TASK-3 for config testing).</li></ul><ul id="22a5b2cc-075b-8012-9a5e-c74620c6b8b9" class="bulleted-list"><li style="list-style-type:disc"><strong>Requires active traffic</strong> (use <code><strong>traffic-generator</strong></code> script).</li></ul><hr id="22a5b2cc-075b-800a-8830-e51e472321ca"/><h3 id="22a5b2cc-075b-80ed-b069-f8711569bee8" class=""><strong>Key Parameters for IDS/IPS Mode</strong></h3><table id="22a5b2cc-075b-8001-8d5d-cd6858cde81a" class="simple-table"><thead class="simple-table-header"><tr id="22a5b2cc-075b-8021-94f9-fdbbe41b396e"><th id="yG^R" class="simple-table-header-color simple-table-header"><strong>Parameter</strong></th><th id="KLEW" class="simple-table-header-color simple-table-header"><strong>Description</strong></th></tr></thead><tbody><tr id="22a5b2cc-075b-80f1-bccc-d2326987ec27"><td id="yG^R" class=""><code><strong>-c</strong></code></td><td id="KLEW" class="">Specify config file (e.g., <code><strong>/etc/snort/snort.conf</strong></code>).</td></tr><tr id="22a5b2cc-075b-8021-a6db-f3fbe39853ac"><td id="yG^R" class=""><code><strong>-T</strong></code></td><td id="KLEW" class="">Test config file for errors.</td></tr><tr id="22a5b2cc-075b-80c0-a4b6-c777b3bdb287"><td id="yG^R" class=""><code><strong>-N</strong></code></td><td id="KLEW" class="">Disable logging (alerts still work).</td></tr><tr id="22a5b2cc-075b-8036-9cb7-f06276cbc3e4"><td id="yG^R" class=""><code><strong>-D</strong></code></td><td id="KLEW" class="">Run in background (daemon mode).</td></tr><tr id="22a5b2cc-075b-80dc-b738-ee7250da80f2"><td id="yG^R" class=""><code><strong>-A</strong></code></td><td id="KLEW" class="">Set alert mode: <code><strong>full</strong></code> (default), <code><strong>fast</strong></code>, <code><strong>console</strong></code>, <code><strong>cmg</strong></code>, <code><strong>none</strong></code>.</td></tr></tbody></table><hr id="22a5b2cc-075b-8013-be52-c55a54a5b0a1"/><h3 id="22a5b2cc-075b-80af-9249-d63c8b619882" class=""><strong>Alert Modes (</strong><code><strong>A</strong></code><strong>)</strong></h3><ol type="1" id="22a5b2cc-075b-801d-87e3-f5eed7df6848" class="numbered-list" start="1"><li><code><strong>A console</strong></code><ul id="22a5b2cc-075b-80da-871d-f8795e77beb2" class="bulleted-list"><li style="list-style-type:disc">Fast-style alerts in terminal.</li></ul><ul id="22a5b2cc-075b-80b6-8beb-c2ba2a5256cb" class="bulleted-list"><li style="list-style-type:disc">Shows: Alert message, timestamp, IPs, ports.</li></ul><p id="22a5b2cc-075b-8065-ba8d-d7942fde4bbd" class="">bash</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22a5b2cc-075b-807a-a49c-d7ef0a6dc748" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">sudo snort -c /etc/snort/snort.conf -A console</code></pre></li></ol><ol type="1" id="22a5b2cc-075b-809d-a293-fc1a3d765c98" class="numbered-list" start="2"><li><code><strong>A cmg</strong></code><ul id="22a5b2cc-075b-802f-9373-f35071b2230e" class="bulleted-list"><li style="list-style-type:disc">Detailed alerts with hex/text payload.</li></ul><p id="22a5b2cc-075b-80a0-b4fd-e63d516a9cea" class="">bash</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22a5b2cc-075b-8001-b065-ccff687e04ce" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">sudo snort -c /etc/snort/snort.conf -A cmg</code></pre></li></ol><ol type="1" id="22a5b2cc-075b-805c-aaa7-f4b7b68f16aa" class="numbered-list" start="3"><li><code><strong>A fast</strong></code><strong> / </strong><code><strong>A full</strong></code><ul id="22a5b2cc-075b-80a2-879b-ce1fbb692d9e" class="bulleted-list"><li style="list-style-type:disc">No terminal output; logs to file.</li></ul><ul id="22a5b2cc-075b-80ab-b1bd-da3600a3d1f3" class="bulleted-list"><li style="list-style-type:disc"><code><strong>fast</strong></code>: Basic alert info.</li></ul><ul id="22a5b2cc-075b-80fa-9eba-c32d117a1c85" class="bulleted-list"><li style="list-style-type:disc"><code><strong>full</strong></code>: All possible details.</li></ul></li></ol><ol type="1" id="22a5b2cc-075b-80df-9f15-e7f7eb29440c" class="numbered-list" start="4"><li><code><strong>A none</strong></code><ul id="22a5b2cc-075b-8023-b63e-c87845f61a28" class="bulleted-list"><li style="list-style-type:disc">Disables alerts (logs traffic in binary format).</li></ul></li></ol><hr id="22a5b2cc-075b-80bd-b612-f0ff0e9a843e"/><h3 id="22a5b2cc-075b-802c-9fa6-cefb1ab13587" class=""><strong>Other Modes</strong></h3><ul id="22a5b2cc-075b-809b-915f-fd567b9f8b63" class="bulleted-list"><li style="list-style-type:disc"><strong>Background Mode (</strong><code><strong>D</strong></code><strong>)</strong><ul id="22a5b2cc-075b-8055-a232-ee849d169df0" class="bulleted-list"><li style="list-style-type:circle">Runs Snort as a daemon.</li></ul><ul id="22a5b2cc-075b-80d0-a6ae-f7bcb63b0302" class="bulleted-list"><li style="list-style-type:circle">Check process: <code><strong>ps -ef | grep snort</strong></code>.</li></ul><ul id="22a5b2cc-075b-805c-b5df-f978bd6a8e1c" class="bulleted-list"><li style="list-style-type:circle">Kill process: <code><strong>sudo kill -9 [PID]</strong></code>.</li></ul></li></ul><ul id="22a5b2cc-075b-80b3-883e-d9c985027d6a" class="bulleted-list"><li style="list-style-type:disc"><strong>IPS Mode (Packet Dropping)</strong><ul id="22a5b2cc-075b-80de-b131-e56845ccc755" class="bulleted-list"><li style="list-style-type:circle">Requires <strong>two interfaces</strong> and <code><strong>afpacket</strong></code> DAQ module.</li></ul><p id="22a5b2cc-075b-80dd-8290-dd4528a95dea" class="">bash</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22a5b2cc-075b-8084-bc61-de1a166e826c" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">sudo snort -c /etc/snort/snort.conf -Q --daq afpacket -i eth0:eth1 -A console</code></pre><ul id="22a5b2cc-075b-80df-ab14-fdda636124a6" class="bulleted-list"><li style="list-style-type:circle">Drops packets matching rules (e.g., ICMP).</li></ul></li></ul><hr id="22a5b2cc-075b-8060-b8f0-d9bc39f2d298"/><h3 id="22a5b2cc-075b-8022-88e2-e412667409fc" class=""><strong>Rule Testing Without Config</strong></h3><ul id="22a5b2cc-075b-80bd-adb2-c187dbd760f2" class="bulleted-list"><li style="list-style-type:disc">Test rules directly (lower performance):<p id="22a5b2cc-075b-80fb-9d8c-c23999826b66" class="">bash</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22a5b2cc-075b-804e-8043-daec2e541157" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">sudo snort -c /etc/snort/rules/local.rules -A console</code></pre></li></ul><hr id="22a5b2cc-075b-8040-bb90-f89abdf6b84d"/><h3 id="22a5b2cc-075b-805d-8cd3-f284b41c6eca" class=""><strong>Key Notes</strong></h3><ul id="22a5b2cc-075b-803e-8004-f4ffa1d04d6d" class="bulleted-list"><li style="list-style-type:disc"><strong>Logs</strong>: Default path <code><strong>/var/log/snort/</strong></code>.</li></ul><ul id="22a5b2cc-075b-8035-b9c4-dfcb7a34aa68" class="bulleted-list"><li style="list-style-type:disc"><strong>Rules</strong>: Stored in <code><strong>/etc/snort/rules/</strong></code>. Example ICMP rule:<p id="22a5b2cc-075b-80b7-9fe8-f940cd992a31" class="">plaintext</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22a5b2cc-075b-80f2-ab07-dd702271eee9" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">alert icmp any any &lt;&gt; any any (msg: &quot;ICMP Packet Found&quot;; sid:100001; rev:1;)</code></pre></li></ul><ul id="22a5b2cc-075b-8085-99f5-d5b76ac8e94e" class="bulleted-list"><li style="list-style-type:disc"><strong>IPS Mode</strong>: Requires <code><strong>Q --daq afpacket</strong></code> and dual interfaces.</li></ul><p id="22a5b2cc-075b-8082-8747-e8fe2be034df" class="">
+</p><p id="22a5b2cc-075b-80a4-b782-ec7ebe095ed3" class="">Questions</p><ol type="1" id="22a5b2cc-075b-802c-bb28-c43a5262fa6b" class="numbered-list" start="1"><li>Investigate the <strong>mx-1.pcap</strong> file with the default configuration file.<br/><code>sudo snort -c /etc/snort/snort.conf -A full -l . -r mx-1.pcap</code><br/></li></ol><figure id="22a5b2cc-075b-802b-8108-cc63d4963409" class="image"><a href="D8A3723D-93BB-4C79-A380-A0DF5010785E.png"><img style="width:580.6415405273438px" src="D8A3723D-93BB-4C79-A380-A0DF5010785E.png"/></a></figure><figure id="22a5b2cc-075b-8093-8ca6-cf3f1b687b0b" class="image"><a href="7F1A7D2A-8BBF-4290-84E2-24B552E3C0B1.png"><img style="width:580.6415405273438px" src="7F1A7D2A-8BBF-4290-84E2-24B552E3C0B1.png"/></a></figure><ol type="1" id="22a5b2cc-075b-8054-b5a4-c7a2c19e734a" class="numbered-list" start="2"><li>Keep reading the output. What is the number of the detected TCP packets?</li></ol><figure id="22a5b2cc-075b-8047-a3e4-e5f26d6eb8a4" class="image"><a href="0C2E3B12-7679-4CF1-BAF6-8242F709C6AB.png"><img style="width:377.98870849609375px" src="0C2E3B12-7679-4CF1-BAF6-8242F709C6AB.png"/></a></figure><p id="22a5b2cc-075b-806e-9087-ed5250b126d6" class="">Total TCP Tracked packets - 82</p><ol type="1" id="22a5b2cc-075b-8013-be65-cb429eedb04d" class="numbered-list" start="3"><li>Investigate the mx-2.pcap and mx-3.pcap files with the default configuration file.</li></ol><p id="22a5b2cc-075b-80f6-9b32-e7ababfdb0e9" class=""><code>sudo snort -c /etc/snort/snort.conf -A full -l . --pcap-list=&quot;mx-2.pcap mx-3.pcap”</code></p><figure id="22a5b2cc-075b-80ae-b757-f0174c047547" class="image"><a href="68E10DEB-B7C5-40C3-87ED-464659205764.png"><img style="width:580.6415405273438px" src="68E10DEB-B7C5-40C3-87ED-464659205764.png"/></a></figure><p id="22a5b2cc-075b-800b-b56b-e77b0bf5406c" class="">
+</p><h1 id="22a5b2cc-075b-80ac-93a5-dd428eb2a4e9" class="">Snort Rule Structure</h1><figure id="22a5b2cc-075b-805b-9562-e76ddf4c880d" class="image"><a href="image%2081.png"><img style="width:580.6528930664062px" src="image%2081.png"/></a></figure><h1 id="22a5b2cc-075b-8070-978c-fa284e3db862" class=""><strong>IP and Port Numbers</strong></h1><p id="22a5b2cc-075b-803a-8c15-ffee18d8994a" class="">These parameters identify the source and destination IP addresses and associated port numbers filtered for the rule.</p><table id="22a5b2cc-075b-80ee-990e-f606006cebed" class="simple-table"><tbody><tr id="22a5b2cc-075b-80cc-9c89-d2d68883633f"><td id="Uvhw" class="">IP Filtering</td><td id="~&lt;:`" class="" style="width:493.98870849609375px"><code>alert icmp 192.168.1.56 any &lt;&gt; any any  (msg: &quot;ICMP Packet From &quot;; sid: 100001; rev:1;)</code><br/>This rule will create an alert for each ICMP packet originating from the 192.168.1.56 IP address.</td></tr><tr id="22a5b2cc-075b-80b6-9f31-d93dd2e1531c"><td id="Uvhw" class="">Filter an IP range</td><td id="~&lt;:`" class="" style="width:493.98870849609375px"><code>alert icmp 192.168.1.0/24 any &lt;&gt; any any  (msg: &quot;ICMP Packet Found&quot;; sid: 100001; rev:1;)</code><br/>This rule will create an alert for each ICMP packet originating from the 192.168.1.0/24 subnet.</td></tr><tr id="22a5b2cc-075b-80a8-a310-e08ab2a988ee"><td id="Uvhw" class="">Filter multiple IP ranges</td><td id="~&lt;:`" class="" style="width:493.98870849609375px"><code>alert icmp [192.168.1.0/24, 10.1.1.0/24] any &lt;&gt; any any  (msg: &quot;ICMP Packet Found&quot;; sid: 100001; rev:1;)</code><br/>This rule will create an alert for each ICMP packet originating from the 192.168.1.0/24 and 10.1.1.0/24 subnets.</td></tr><tr id="22a5b2cc-075b-80cf-8509-cc957c0cebb5"><td id="Uvhw" class="">Exclude IP addresses/ranges</td><td id="~&lt;:`" class="" style="width:493.98870849609375px">&quot;negation operator&quot; is used for excluding specific addresses and ports. Negation operator is indicated with &quot;!&quot;<br/><code>alert icmp !192.168.1.0/24 any &lt;&gt; any any  (msg: &quot;ICMP Packet Found&quot;; sid: 100001; rev:1;)</code><br/>This rule will create an alert for each ICMP packet not originating from the 192.168.1.0/24 subnet.</td></tr><tr id="22a5b2cc-075b-80d7-af1a-f5a9f9d588a0"><td id="Uvhw" class="">Port Filtering</td><td id="~&lt;:`" class="" style="width:493.98870849609375px"><code>alert tcp any any &lt;&gt; any 21  (msg: &quot;FTP Port 21 Command Activity Detected&quot;; sid: 100001; rev:1;)</code><br/>This rule will create an alert for each TCP packet sent to port 21.</td></tr><tr id="22a5b2cc-075b-805e-af52-cb7308f24189"><td id="Uvhw" class="">Exclude a specific port</td><td id="~&lt;:`" class="" style="width:493.98870849609375px"><code>alert tcp any any &lt;&gt; any !21  (msg: &quot;Traffic Activity Without FTP Port 21 Command Channel&quot;; sid: 100001; rev:1;)</code><br/>This rule will create an alert for each TCP packet not sent to port 21.</td></tr><tr id="22a5b2cc-075b-8063-b454-dfcdf2f4a403"><td id="Uvhw" class="">Filter a port range (Type 1)</td><td id="~&lt;:`" class="" style="width:493.98870849609375px"><code>alert tcp any any &lt;&gt; any 1:1024   (msg: &quot;TCP 1-1024 System Port Activity&quot;; sid: 100001; rev:1;)</code><br/>This rule will create an alert for each TCP packet sent to ports between 1-1024.</td></tr><tr id="22a5b2cc-075b-805f-818a-e71462722533"><td id="Uvhw" class="">Filter a port range (Type 2)</td><td id="~&lt;:`" class="" style="width:493.98870849609375px"><code>alert tcp any any &lt;&gt; any :1024   (msg: &quot;TCP 0-1024 System Port Activity&quot;; sid: 100001; rev:1;)</code><br/>This rule will create an alert for each TCP packet sent to ports less than or equal to 1024.</td></tr><tr id="22a5b2cc-075b-8007-8b19-cf9e3d428324"><td id="Uvhw" class="">Filter a port range (Type 3)</td><td id="~&lt;:`" class="" style="width:493.98870849609375px"><code>alert tcp any any &lt;&gt; any 1025: (msg: &quot;TCP Non-System Port Activity&quot;; sid: 100001; rev:1;)</code><br/>This rule will create an alert for each TCP packet sent to source port higher than or equal to 1025.</td></tr><tr id="22a5b2cc-075b-809e-8e56-cf4f3892e226"><td id="Uvhw" class="">Filter a port range (Type 4)</td><td id="~&lt;:`" class="" style="width:493.98870849609375px"><code>alert tcp any any &lt;&gt; any [21,23] (msg: &quot;FTP and Telnet Port 21-23 Activity Detected&quot;; sid: 100001; rev:1;)</code><br/>This rule will create an alert for each TCP packet sent to port 21 and 23.</td></tr></tbody></table><h1 id="22a5b2cc-075b-80f5-af91-c23c37dafd5c" class=""><strong>Direction</strong></h1><p id="22a5b2cc-075b-802e-96bb-fe468492fd7a" class="">The direction operator indicates the traffic flow to be filtered by Snort. The left side of the rule shows the source, and the right side shows the destination.</p><ul id="22a5b2cc-075b-8018-b6c6-e76d830163e7" class="bulleted-list"><li style="list-style-type:disc"><strong>&gt;</strong> Source to destination flow.</li></ul><ul id="22a5b2cc-075b-80d1-9672-d8db74a33416" class="bulleted-list"><li style="list-style-type:disc"><strong>&lt;&gt;</strong> Bidirectional flow</li></ul><p id="22a5b2cc-075b-80ae-b4bd-d5b6c43f44fb" class="">Note that<strong> there is no &quot;&lt;-&quot; operator in Snort.</strong></p><blockquote id="22a5b2cc-075b-8012-9b17-ff8dd51aae30" class="">Remember, once you create a rule, it is a local rule and should be in your &quot;local.rules&quot; file. This file is located under &quot;/etc/snort/rules/local.rules&quot;. A quick reminder on how to edit your local rules is shown below.</blockquote><p id="22a5b2cc-075b-80ae-bf9d-e7141439a816" class="">
+</p><p id="22a5b2cc-075b-8057-912a-ecae53b3ddb8" class="">Questions</p><ol type="1" id="22a5b2cc-075b-80a9-86a5-fe2f299a58d6" class="numbered-list" start="1"><li><strong>Use &quot;task9.pcap&quot;. Write a rule to filter IP ID &quot;35369&quot; and run it against the given pcap file. What is the request name of the detected packet? You may use this command: &quot;snort -c local.rules -A full -l . -r task9.pcap&quot;</strong></li></ol><figure id="22a5b2cc-075b-804c-b3ec-d6d2d98f4e18" class="image"><a href="BDD52E32-FC34-4200-A4F3-FCD4D9642AF3.png"><img style="width:580.6076049804688px" src="BDD52E32-FC34-4200-A4F3-FCD4D9642AF3.png"/></a></figure><p id="22a5b2cc-075b-80c4-bb15-d4e15f5d124e" class=""><code>alert ip any any → any any (msg:”ID FOUND”;id:35369; sid:10000001; rev:1;)</code><br/>I ran it against the pcap, and the alert was saved to a file, I cat the file and see the request that matched.</p><figure id="22a5b2cc-075b-80c8-82ab-f29bd92816d7" class="image"><a href="D90FB622-EEAF-447D-93BF-9FD1A3DD0BBC.png"><img style="width:580.618896484375px" src="D90FB622-EEAF-447D-93BF-9FD1A3DD0BBC.png"/></a></figure><p id="22a5b2cc-075b-80c6-86ce-df4ad214a13e" class="">
+</p><ol type="1" id="22a5b2cc-075b-80b1-9ffe-f3968c51de46" class="numbered-list" start="2"><li>Clear the previous alert file and comment out the old rules. Create a rule to filter packets with <strong>Syn </strong>flag and run it against the given pcap file. What is the number of detected packet<code>alert tcp any any &lt;&gt; any any ( msg:&quot;SYN FOUND&quot;; flags:S; sid:100000001; rev:1; )</code></li></ol><figure id="22a5b2cc-075b-80b0-9e71-d4a2dceb83ac" class="image"><a href="78229FFB-BAE3-490D-8CA9-DEA5CFBD3B34.png"><img style="width:580.6528930664062px" src="78229FFB-BAE3-490D-8CA9-DEA5CFBD3B34.png"/></a></figure><p id="22a5b2cc-075b-80cf-a83b-ffe1b794ce8d" class="">I created the rule, edited the config local.rules and ran against the pcap. I found one TCP packet with a SYN flag.q</p><p id="22a5b2cc-075b-804b-8448-d9cc3f637d36" class="">
+</p><ol type="1" id="22a5b2cc-075b-8085-9f0c-c1a18b19bdf0" class="numbered-list" start="3"><li>Clear the previous alert file and comment out the old rules. Write a rule to filter packets with <strong>Push-Ack </strong>flags and run it against the given pcap file. What is the number of detected packets?</li></ol><p id="22a5b2cc-075b-800b-9400-d6e4d84d932e" class=""><code>alert tcp any any &lt;&gt; any any (msg:&quot;PUSH-ACK&quot;;flags:PA;sid:10000002; rev:1;)</code></p><figure id="22a5b2cc-075b-8074-9dd2-df0e90038cce" class="image"><a href="85E3446E-8D5E-4EBB-8E1A-047B7F8D80BA.png"><img style="width:580.6528930664062px" src="85E3446E-8D5E-4EBB-8E1A-047B7F8D80BA.png"/></a></figure><p id="22a5b2cc-075b-8032-8303-eb0e60fb8022" class="">
+</p><ol type="1" id="22a5b2cc-075b-80ad-b181-fcf9552480f1" class="numbered-list" start="4"><li>Clear the previous alert file and comment out the old rules. Create a rule to filter <strong>UDP </strong>packets with the same source and destination IP and run it against the given pcap file. What is the number of packets that show the same source and destination address?</li></ol><p id="22a5b2cc-075b-8061-80fa-ef4a2ae75e11" class=""><code>alert ip any any &lt;&gt; any any (msg:&quot;SAME IP TEST&quot;;sameip;sid:10000000004; rev:1)</code></p><figure id="22a5b2cc-075b-8060-b14c-da686db74e28" class="image"><a href="7C0984D9-B85E-4867-AF36-52E33329243B.png"><img style="width:580.6528930664062px" src="7C0984D9-B85E-4867-AF36-52E33329243B.png"/></a></figure><p id="22a5b2cc-075b-8013-84ff-c1c39c4725d5" class="">
+</p><h3 id="22a5b2cc-075b-8053-bec0-d644d41c5a12" class="">POINTS TO REMEMBER</h3><hr id="22a5b2cc-075b-8003-801d-fa66881e1a39"/><h2 id="22a5b2cc-075b-80f2-9000-dec40909ebef" class="">🧠 <strong>Snort Architecture (Main Components)</strong></h2><table id="22a5b2cc-075b-809a-8fbd-e1be3a3a02b6" class="simple-table"><thead class="simple-table-header"><tr id="22a5b2cc-075b-8095-a764-e066631c124b"><th id="VEed" class="simple-table-header-color simple-table-header">Component</th><th id="jy}V" class="simple-table-header-color simple-table-header">Role</th></tr></thead><tbody><tr id="22a5b2cc-075b-80cb-98ca-e78bbee22272"><td id="VEed" class=""><strong>Packet Decoder</strong></td><td id="jy}V" class="">Captures raw packets and hands them to the pre-processors.</td></tr><tr id="22a5b2cc-075b-804f-b8b2-ed6218983c99"><td id="VEed" class=""><strong>Pre-processors</strong></td><td id="jy}V" class="">Reconstructs streams, normalizes packets, removes evasion tricks.</td></tr><tr id="22a5b2cc-075b-8019-9c1a-f6d35a61d400"><td id="VEed" class=""><strong>Detection Engine</strong></td><td id="jy}V" class="">The brain — checks packets against all loaded rules.</td></tr><tr id="22a5b2cc-075b-80f5-8a49-cfce62921e98"><td id="VEed" class=""><strong>Logging &amp; Alerting</strong></td><td id="jy}V" class="">Logs events, triggers alerts when a rule matches.</td></tr><tr id="22a5b2cc-075b-8003-93c6-df2e6aa9a803"><td id="VEed" class=""><strong>Outputs &amp; Plugins</strong></td><td id="jy}V" class="">Sends alerts to files, syslog, MySQL, etc., and supports modules.</td></tr></tbody></table><hr id="22a5b2cc-075b-80c7-9eef-fb181189291f"/><h2 id="22a5b2cc-075b-8032-a3c3-c20e2995ec44" class="">📜 <strong>Types of Snort Rules</strong></h2><table id="22a5b2cc-075b-8003-a655-f1f0bf27d18e" class="simple-table"><thead class="simple-table-header"><tr id="22a5b2cc-075b-8019-bd3c-f7149667bea7"><th id="oACB" class="simple-table-header-color simple-table-header">Type</th><th id="OQ`W" class="simple-table-header-color simple-table-header">Description</th></tr></thead><tbody><tr id="22a5b2cc-075b-8017-8f07-e8f919db4658"><td id="oACB" class=""><strong>Community Rules</strong></td><td id="OQ`W" class="">Free &amp; open source (GPL). Good for basic detection. No registration needed.</td></tr><tr id="22a5b2cc-075b-802c-a6ec-e595f5c5e87e"><td id="oACB" class=""><strong>Registered Rules</strong></td><td id="OQ`W" class="">Free but need registration. Same as paid set but 30-day delayed.</td></tr><tr id="22a5b2cc-075b-8023-b0af-c30a88693ecc"><td id="oACB" class=""><strong>Subscriber Rules</strong></td><td id="OQ`W" class="">Paid. Updated twice weekly. Most up-to-date and advanced.</td></tr></tbody></table><p id="22a5b2cc-075b-80d9-a6f6-f6256b12fb33" class=""><strong>🔗 Rule Source</strong>: <a href="https://www.snort.org/downloads">Snort.org rules download</a></p><hr id="22a5b2cc-075b-80f5-93ed-f2ca9b1d35ec"/><h2 id="22a5b2cc-075b-80e9-9120-c768e7392d92" class="">🛠️ <strong>Important Snort Files</strong></h2><table id="22a5b2cc-075b-8003-98c2-f5522e25c107" class="simple-table"><thead class="simple-table-header"><tr id="22a5b2cc-075b-805e-b79e-e3bdb6eaaea9"><th id="=}yq" class="simple-table-header-color simple-table-header">File</th><th id="L\CN" class="simple-table-header-color simple-table-header">Purpose</th></tr></thead><tbody><tr id="22a5b2cc-075b-80ae-921d-cf4b37d13076"><td id="=}yq" class=""><code>/etc/snort/snort.conf</code></td><td id="L\CN" class="">Main config — controls everything.</td></tr><tr id="22a5b2cc-075b-80a0-bbde-c4b88297a2e1"><td id="=}yq" class=""><code>/etc/snort/rules/local.rules</code></td><td id="L\CN" class="">Your own custom rules go here.</td></tr></tbody></table><hr id="22a5b2cc-075b-80b3-8d93-ee73d854301e"/><h2 id="22a5b2cc-075b-80f2-ac24-c6b40e0e3c28" class="">🔧 <strong>Important Snort.conf Sections</strong></h2><h3 id="22a5b2cc-075b-8082-ab95-fe2d44f3ded2" class="">✅ Step 1: <strong>Set Network Variables</strong></h3><table id="22a5b2cc-075b-80ca-b3c8-e2b4872a7fdf" class="simple-table"><thead class="simple-table-header"><tr id="22a5b2cc-075b-80bc-950f-d7f612ed0929"><th id="aQO[" class="simple-table-header-color simple-table-header">Variable</th><th id="@PuJ" class="simple-table-header-color simple-table-header">Meaning</th><th id="MqlW" class="simple-table-header-color simple-table-header">Example</th></tr></thead><tbody><tr id="22a5b2cc-075b-80c0-b863-d2d609d10f49"><td id="aQO[" class=""><code>HOME_NET</code></td><td id="@PuJ" class="">The network you&#x27;re protecting.</td><td id="MqlW" class=""><code>&#x27;any&#x27;</code> or <code>&#x27;192.168.1.0/24&#x27;</code></td></tr><tr id="22a5b2cc-075b-8016-9743-c25a79fe93d0"><td id="aQO[" class=""><code>EXTERNAL_NET</code></td><td id="@PuJ" class="">Usually everything else.</td><td id="MqlW" class=""><code>&#x27;any&#x27;</code> or <code>&#x27;!$HOME_NET&#x27;</code></td></tr><tr id="22a5b2cc-075b-80ab-b683-e6cc82842136"><td id="aQO[" class=""><code>RULE_PATH</code></td><td id="@PuJ" class="">Where rules are stored.</td><td id="MqlW" class=""><code>&#x27;/etc/snort/rules&#x27;</code></td></tr></tbody></table><hr id="22a5b2cc-075b-80ed-b60e-ccd6c35b44f7"/><h3 id="22a5b2cc-075b-80f4-be88-fda9927381bc" class="">✅ Step 2: <strong>Configure Decoder (DAQ Settings)</strong></h3><table id="22a5b2cc-075b-80db-8ca8-d842877dfaf0" class="simple-table"><thead class="simple-table-header"><tr id="22a5b2cc-075b-80d5-88e6-cb9130c3c9bb"><th id="cWzf" class="simple-table-header-color simple-table-header">Directive</th><th id="&gt;A`s" class="simple-table-header-color simple-table-header">Purpose</th><th id="[BnT" class="simple-table-header-color simple-table-header">Example</th></tr></thead><tbody><tr id="22a5b2cc-075b-80b3-a244-f4d448c9ebaa"><td id="cWzf" class=""><code>config daq:</code></td><td id="&gt;A`s" class="">Type of packet capture interface.</td><td id="[BnT" class=""><code>afpacket</code></td></tr><tr id="22a5b2cc-075b-80c8-9d75-fb562376679a"><td id="cWzf" class=""><code>config daq_mode:</code></td><td id="&gt;A`s" class="">Whether Snort runs inline (IPS).</td><td id="[BnT" class=""><code>inline</code></td></tr><tr id="22a5b2cc-075b-80d6-8349-dbc545758ae5"><td id="cWzf" class=""><code>config logdir:</code></td><td id="&gt;A`s" class="">Default logging directory.</td><td id="[BnT" class=""><code>/var/log/snort</code></td></tr></tbody></table><h3 id="22a5b2cc-075b-805d-bfef-e4eeb5d60f9c" class="">🔧 <strong>DAQ Modules</strong></h3><table id="22a5b2cc-075b-809e-b2ed-f2740f1a8661" class="simple-table"><thead class="simple-table-header"><tr id="22a5b2cc-075b-8045-94a9-d5f071bfb776"><th id="yBZ}" class="simple-table-header-color simple-table-header">DAQ Module</th><th id="ERef" class="simple-table-header-color simple-table-header">Description</th><th id=":fJN" class="simple-table-header-color simple-table-header">Use Case</th></tr></thead><tbody><tr id="22a5b2cc-075b-8039-bc6b-de1b3ed44946"><td id="yBZ}" class=""><code>pcap</code></td><td id="ERef" class="">Default. Sniffer/IDS mode.</td><td id=":fJN" class="">Monitoring only.</td></tr><tr id="22a5b2cc-075b-8036-be0e-d2b94dcc8073"><td id="yBZ}" class=""><code>afpacket</code></td><td id="ERef" class="">Inline IPS mode.</td><td id=":fJN" class="">Blocking threats.</td></tr><tr id="22a5b2cc-075b-8081-95a2-ea793cba9c7b"><td id="yBZ}" class=""><code>nfq</code></td><td id="ERef" class="">Netfilter queue. IPS mode.</td><td id=":fJN" class="">Linux systems.</td></tr></tbody></table><hr id="22a5b2cc-075b-805c-8db8-f95fd2b47607"/><h3 id="22a5b2cc-075b-807b-960a-e8fe13c331ed" class="">✅ Step 6: <strong>Configure Output Plugins</strong></h3><p id="22a5b2cc-075b-800d-a0b8-cfa21a3393a2" class="">Define how/where alerts are logged:</p><ul id="22a5b2cc-075b-804a-b4f0-dc6352642d7a" class="bulleted-list"><li style="list-style-type:disc">Console (default)</li></ul><ul id="22a5b2cc-075b-80d6-bf5f-c5d299e329c5" class="bulleted-list"><li style="list-style-type:disc">File</li></ul><ul id="22a5b2cc-075b-8052-88ae-cbff20efe359" class="bulleted-list"><li style="list-style-type:disc">Unified2 (for tools like Barnyard2)</li></ul><hr id="22a5b2cc-075b-807e-a0fd-e1e1c895a4e5"/><h3 id="22a5b2cc-075b-80bb-a3fa-d7dd77714c4e" class="">✅ Step 7: <strong>Custom Rules (Rule Includes)</strong></h3><table id="22a5b2cc-075b-809c-8753-f36975fd0929" class="simple-table"><thead class="simple-table-header"><tr id="22a5b2cc-075b-80c6-bac4-c38cdd8de259"><th id="hTFQ" class="simple-table-header-color simple-table-header">Directive</th><th id="i_&gt;O" class="simple-table-header-color simple-table-header">Effect</th></tr></thead><tbody><tr id="22a5b2cc-075b-800c-b701-eb9751cb1f4b"><td id="hTFQ" class=""><code>include $RULE_PATH/local.rules</code></td><td id="i_&gt;O" class="">Loads your custom rules.</td></tr><tr id="22a5b2cc-075b-8002-a795-f44730494ffd"><td id="hTFQ" class=""><code>#include $RULE_PATH/some.rules</code></td><td id="i_&gt;O" class="">Commented out — won’t load that file.</td></tr></tbody></table><p id="22a5b2cc-075b-8018-8503-e535f7b95e9e" class="">🟨 <strong>Note</strong>: Lines starting with <code>#</code> are <strong>comments</strong> — remove the <code>#</code> to activate.</p><hr id="22a5b2cc-075b-805a-ba5c-de54fe167b33"/><h2 id="22a5b2cc-075b-80ec-b587-e303d7f5f888" class="">⚠️ Best Practices</h2><ul id="22a5b2cc-075b-80d4-bd8c-f898c3dbf631" class="bulleted-list"><li style="list-style-type:disc"><strong>Never replace snort.conf blindly</strong> — always <strong>edit it manually</strong> to avoid breaking config.</li></ul><ul id="22a5b2cc-075b-8016-ac82-ef0ea1317034" class="bulleted-list"><li style="list-style-type:disc">Keep backups of your custom <code>local.rules</code>.</li></ul><ul id="22a5b2cc-075b-800c-903f-d55c6b2df068" class="bulleted-list"><li style="list-style-type:disc">When adding custom rules, test them with:</li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22a5b2cc-075b-803a-9b94-ca227197eb61" class="code code-wrap"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">snort -T -c /etc/snort/snort.conf
+</code></pre><p id="22a5b2cc-075b-80e1-8d20-cf8bf4a58135" class="">→ This checks for syntax errors.</p><hr id="22a5b2cc-075b-80a1-8d6f-fa1f74b2a880"/><p id="22a5b2cc-075b-8073-bc82-cc6cfc2010c9" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

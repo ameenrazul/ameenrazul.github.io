@@ -1,0 +1,686 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Autopsy</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2395b2cc-075b-803a-94c3-e7d357f1996b" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/3a5bffa10dcb6fec1e4ae8b63fedddd2.png"/></div><h1 class="page-title">Autopsy</h1><p class="page-description"></p></header><div class="page-body"><hr id="2395b2cc-075b-803f-b7e5-e9fce9f147f5"/><h3 id="2395b2cc-075b-8005-b82d-dea1296b4139" class=""><strong>Autopsy - Digital Forensics Platform</strong></h3><h3 id="2395b2cc-075b-80a7-82ea-f81c3c26235f" class=""><strong>Overview</strong></h3><ul id="2395b2cc-075b-80d3-9c34-e6c8a12fcf04" class="bulleted-list"><li style="list-style-type:disc"><strong>Autopsy</strong> is a <strong>powerful open-source digital forensics tool</strong>.</li></ul><ul id="2395b2cc-075b-805e-8fb5-eecfd4d8b7e9" class="bulleted-list"><li style="list-style-type:disc">Originally developed with support from the <strong>U.S. Department of Homeland Security</strong>.</li></ul><ul id="2395b2cc-075b-8062-affa-c2ad214e6d23" class="bulleted-list"><li style="list-style-type:disc">Designed for <strong>ease-of-use</strong>, <strong>speed</strong>, and <strong>extensibility</strong>.</li></ul><h3 id="2395b2cc-075b-80ea-be39-c7ec5626b89d" class=""><strong>Official Description</strong></h3><blockquote id="2395b2cc-075b-80d6-a04d-f2269e3ba785" class="">&quot;Autopsy is the premier open-source forensics platform which is fast, easy-to-use, and capable of analyzing all types of mobile devices and digital media. Its plug-in architecture enables extensibility from community-developed or custom-built modules. Autopsy evolves to meet the needs of hundreds of thousands of professionals in law enforcement, national security, litigation support, and corporate investigation.&quot;</blockquote><h3 id="2395b2cc-075b-807c-950c-ce918e4adea1" class=""><strong>Key Features</strong></h3><ul id="2395b2cc-075b-805f-b5bb-e0fce5ea20df" class="bulleted-list"><li style="list-style-type:disc">Supports a <strong>plug-in architecture</strong> for custom or third-party modules.</li></ul><ul id="2395b2cc-075b-801f-968c-c10f511daa6a" class="bulleted-list"><li style="list-style-type:disc">Actively used in:<ul id="2395b2cc-075b-80fb-afc6-f562c1192d61" class="bulleted-list"><li style="list-style-type:circle"><strong>Law enforcement</strong></li></ul><ul id="2395b2cc-075b-807c-9bd9-dce53fd6b830" class="bulleted-list"><li style="list-style-type:circle"><strong>National security</strong></li></ul><ul id="2395b2cc-075b-80c3-9ea6-d0ff603dc6ca" class="bulleted-list"><li style="list-style-type:circle"><strong>Litigation support</strong></li></ul><ul id="2395b2cc-075b-80b5-a4c7-c956e1c22292" class="bulleted-list"><li style="list-style-type:circle"><strong>Corporate investigations</strong></li></ul></li></ul><hr id="2395b2cc-075b-8071-aff9-dcf6b7533e6f"/><h3 id="2395b2cc-075b-802b-8dc7-c2906245a7d4" class=""><strong>Learning Objectives</strong></h3><ol type="1" id="2395b2cc-075b-800f-86e5-d83c5c81e71b" class="numbered-list" start="1"><li><strong>Workflow of Autopsy Tool</strong><ul id="2395b2cc-075b-8092-939a-ef71517bac4f" class="bulleted-list"><li style="list-style-type:disc">Understanding the sequence of tasks from data input to report generation.</li></ul></li></ol><ol type="1" id="2395b2cc-075b-803c-9376-cece7c45f209" class="numbered-list" start="2"><li><strong>Data Sources in Autopsy</strong><ul id="2395b2cc-075b-80d0-a318-cf1c5eb05f70" class="bulleted-list"><li style="list-style-type:disc">Adding and managing digital evidence sources like disk images, logical files, etc.</li></ul></li></ol><ol type="1" id="2395b2cc-075b-80fe-9467-df7aef2290ee" class="numbered-list" start="3"><li><strong>Ingest Modules in Autopsy</strong><ul id="2395b2cc-075b-808e-a910-ff931d35c317" class="bulleted-list"><li style="list-style-type:disc">Automated tools that analyze data (e.g., keyword search, file type identification, hash lookup).</li></ul></li></ol><ol type="1" id="2395b2cc-075b-804f-b8ec-f4d648fc0aa5" class="numbered-list" start="4"><li><strong>User Interface and Visualization Tools</strong><ul id="2395b2cc-075b-80d8-b09d-ef782387d627" class="bulleted-list"><li style="list-style-type:disc">Navigation panes, timeline view, keyword search, file metadata visualization, etc</li></ul></li></ol><hr id="2395b2cc-075b-8082-bce0-dabc2f11d85d"/><h2 id="2395b2cc-075b-8049-855b-f86104152dcd" class="">🧪 <strong>Autopsy Workflow Overview</strong></h2><h3 id="2395b2cc-075b-8097-8cb1-e456ad9f6d51" class=""><strong>Basic Workflow Steps</strong></h3><ol type="1" id="2395b2cc-075b-80be-9fd6-f81f3168e157" class="numbered-list" start="1"><li><strong>Create/Open a Case</strong> – Start a new investigation or continue an existing one.</li></ol><ol type="1" id="2395b2cc-075b-80db-a911-c2a1dfe5de1f" class="numbered-list" start="2"><li><strong>Add Data Source</strong> – Select the evidence to analyze (e.g., disk image, folder, memory dump).</li></ol><ol type="1" id="2395b2cc-075b-8083-865a-e214894d7864" class="numbered-list" start="3"><li><strong>Configure Ingest Modules</strong> – Choose which modules to run (e.g., keyword search, hash analysis).</li></ol><ol type="1" id="2395b2cc-075b-8058-a686-eb008eb6b01c" class="numbered-list" start="4"><li><strong>Review Artifacts</strong> – Inspect extracted data (emails, web history, user activity, etc.).</li></ol><ol type="1" id="2395b2cc-075b-8024-a181-c7fbdad26191" class="numbered-list" start="5"><li><strong>Generate Report</strong> – Export findings in formats like HTML, Excel, etc.</li></ol><hr id="2395b2cc-075b-80d7-a1fd-db4eb5c73b6c"/><h2 id="2395b2cc-075b-807f-bd13-e67c37c7f8e0" class="">🗂️ <strong>Case Analysis</strong></h2><h3 id="2395b2cc-075b-8025-aca5-e4a9c8c58f99" class="">🔹 <strong>Create a New Case</strong></h3><ul id="2395b2cc-075b-8051-89aa-cbd5fe9cce30" class="bulleted-list"><li style="list-style-type:disc">Use <strong>&quot;New Case&quot;</strong> from the Autopsy start screen.</li></ul><ul id="2395b2cc-075b-8059-9907-f8b6a7455bc7" class="bulleted-list"><li style="list-style-type:disc">Fill in the <strong>Case Information</strong>:<ul id="2395b2cc-075b-80ab-aeec-c86f04b5b3d3" class="bulleted-list"><li style="list-style-type:circle"><strong>Case Name</strong> – A name for the investigation.</li></ul><ul id="2395b2cc-075b-808d-af53-c4b91356787e" class="bulleted-list"><li style="list-style-type:circle"><strong>Base Directory</strong> – Location where all case-related files are stored.</li></ul><ul id="2395b2cc-075b-8046-8611-ef9240d866e2" class="bulleted-list"><li style="list-style-type:circle"><strong>Case Type</strong> –<ul id="2395b2cc-075b-809f-b38b-dda050dbc7c1" class="bulleted-list"><li style="list-style-type:square"><em>Single-User</em>: Local analysis (focus of this module).</li></ul><ul id="2395b2cc-075b-80ba-a81d-ecd90918ca1b" class="bulleted-list"><li style="list-style-type:square"><em>Multi-User</em>: Shared access via server.</li></ul></li></ul></li></ul><ul id="2395b2cc-075b-806c-b500-f00eca797436" class="bulleted-list"><li style="list-style-type:disc">The <strong>Optional Information</strong> screen can be skipped in practice but should be completed in real investigations.</li></ul><ul id="2395b2cc-075b-8076-9b6f-d0457c7469f4" class="bulleted-list"><li style="list-style-type:disc">After clicking <strong>&quot;Finish&quot;</strong>, the case is created and ready for data source import.</li></ul><hr id="2395b2cc-075b-806c-926f-d2e42af397f3"/><h3 id="2395b2cc-075b-809a-9fa2-cca24202a1d3" class="">🔹 <strong>Open an Existing Case</strong></h3><ul id="2395b2cc-075b-802d-b27a-f806b2f9aa86" class="bulleted-list"><li style="list-style-type:disc">Use <strong>&quot;Open Case&quot;</strong> option.</li></ul><ul id="2395b2cc-075b-8003-81ea-d37e33228264" class="bulleted-list"><li style="list-style-type:disc">Navigate to the case folder and select the <code>.aut</code> case file.</li></ul><ul id="2395b2cc-075b-8020-a409-e9703ed74e23" class="bulleted-list"><li style="list-style-type:disc">Autopsy loads the case and processes associated files.</li></ul><blockquote id="2395b2cc-075b-800b-bee7-cb3f13bbd3e3" class="">⚠️ Note: Autopsy case files use the .aut file extension.</blockquote><ul id="2395b2cc-075b-8059-916d-d99f321bb7b5" class="bulleted-list"><li style="list-style-type:disc">If the disk image is missing, Autopsy shows a warning:<ul id="2395b2cc-075b-800b-a802-edebc72ae452" class="bulleted-list"><li style="list-style-type:circle">You can <strong>re-locate</strong> the image manually.</li></ul><ul id="2395b2cc-075b-8047-8093-cff720440ffd" class="bulleted-list"><li style="list-style-type:circle">Or click <strong>&quot;No&quot;</strong> and still proceed with analyzing available data.</li></ul></li></ul><blockquote id="2395b2cc-075b-80db-bf5a-ff582e697f89" class="">🧠 Tip: The currently loaded case name is visible in the top-left corner of the Autopsy window.</blockquote><p id="2395b2cc-075b-801c-80c7-f0d248c4ad8f" class="">
+</p><h2 id="2395b2cc-075b-8041-bc5a-c42a1eb2cb02" class="">💾 <strong>Autopsy: Data Sources</strong></h2><h3 id="2395b2cc-075b-804a-9145-c24cbc19d965" class="">🔹 <strong>Overview</strong></h3><ul id="2395b2cc-075b-80f5-823d-cccf4910df74" class="bulleted-list"><li style="list-style-type:disc">Autopsy supports <strong>multiple digital evidence formats</strong>.</li></ul><ul id="2395b2cc-075b-803c-a5ed-f8cb33e3784b" class="bulleted-list"><li style="list-style-type:disc">Data sources are added using the <strong>“Add Data Source”</strong> button.</li></ul><hr id="2395b2cc-075b-809e-853b-d93c70494bd8"/><h3 id="2395b2cc-075b-80b9-a5df-dcca72275950" class="">🔍 <strong>Main Data Source in Focus (for this room)</strong></h3><ul id="2395b2cc-075b-800a-a1ae-c4384c5f5633" class="bulleted-list"><li style="list-style-type:disc"><strong>Disk Image or VM File</strong><p id="2395b2cc-075b-805f-a124-d65f45e08a88" class=""><em>(Primary type used for analysis in this module)</em></p></li></ul><hr id="2395b2cc-075b-8087-b446-c86ea73d3369"/><h3 id="2395b2cc-075b-8061-9659-d0a3d931b07c" class="">📂 <strong>Supported Disk Image Formats</strong></h3><table id="2395b2cc-075b-803d-85dc-ec5df043d705" class="simple-table"><thead class="simple-table-header"><tr id="2395b2cc-075b-80fb-8a2d-d0337bfb39dc"><th id="SRKl" class="simple-table-header-color simple-table-header">Format Type</th><th id="g?vw" class="simple-table-header-color simple-table-header" style="width:476.48333740234375px">Examples</th></tr></thead><tbody><tr id="2395b2cc-075b-8091-8c0e-fd4c864a2142"><td id="SRKl" class=""><strong>Raw (Single)</strong></td><td id="g?vw" class="" style="width:476.48333740234375px"><code>.img</code>, <code>.dd</code>, <code>.raw</code>, <code>.bin</code></td></tr><tr id="2395b2cc-075b-800d-a0f2-dad62a0ba8a8"><td id="SRKl" class=""><strong>Raw (Split)</strong></td><td id="g?vw" class="" style="width:476.48333740234375px"><code>.001</code>, <code>.002</code>, <code>.aa</code>, <code>.ab</code></td></tr><tr id="2395b2cc-075b-8086-89b3-cd7a5dd72c03"><td id="SRKl" class=""><strong>EnCase Format</strong></td><td id="g?vw" class="" style="width:476.48333740234375px"><code>.e01</code>, <code>.e02</code>, etc.</td></tr><tr id="2395b2cc-075b-8098-b1f1-ed7c66f2faa0"><td id="SRKl" class=""><strong>Virtual Machines</strong></td><td id="g?vw" class="" style="width:476.48333740234375px"><code>.vmdk</code>, <code>.vhd</code></td></tr></tbody></table><blockquote id="2395b2cc-075b-8090-803b-e40e3a989cbc" class="">🧠 Tip: If using split files (e.g., E01, E02, E03), just select the first file – Autopsy will load the rest automatically.</blockquote><hr id="2395b2cc-075b-80bd-8f30-c64405a95c8c"/><h3 id="2395b2cc-075b-80ad-8ef4-e31d3d20b2cc" class="">📘 <strong>Note</strong></h3><ul id="2395b2cc-075b-808d-9f56-f93b99772281" class="bulleted-list"><li style="list-style-type:disc">Other types of data sources can also be added (e.g., logical files, RAM dumps, mobile images).</li></ul><ul id="2395b2cc-075b-8091-b477-c70418a4a87f" class="bulleted-list"><li style="list-style-type:disc">Refer to <strong>Autopsy documentation</strong> for full list and instructions.</li></ul><h2 id="2395b2cc-075b-80e9-b3de-c4f65a86007c" class="block-color-gray">Ingest Modules</h2><p id="2395b2cc-075b-8051-b4f0-c58d0db52d70" class="">Essentially, <strong>Ingest Modules</strong> are Autopsy plug-ins. Each Ingest Module is designed to analyze and retrieve specific data from the drive. You can configure Autopsy to run <br/>specific modules during the source-adding stage or later by choosing the target data source available on the dashboard. By default, the Ingest Modules are configured to run on All Files, Directories, and Unallocated Space. You can change this setting during the module selecting step. You can track the process by clicking the bar in the lower right corner. We have demonstrated two different approaches to using the ingest modules in this task.</p><p id="2395b2cc-075b-8047-9078-f1c80a8afba2" class=""><strong>While Adding Data Sources</strong></p><p id="2395b2cc-075b-800b-b083-d3648249342e" class="">One of the ways to configure the ingest modules is to enable/disable them while adding a data source in Autopsy. This is a straightforward process, as you get this option while adding a data source.</p><figure id="2395b2cc-075b-8041-b8fe-d40dfba34e8a" class="image"><a href="https://assets.tryhackme.com/additional/autopsy/autopsy-configure-modules.png"><img style="width:700px" src="https://assets.tryhackme.com/additional/autopsy/autopsy-configure-modules.png"/></a></figure><p id="2395b2cc-075b-80ec-90a3-e2a7e497f682" class=""><strong>After Adding Data Sources</strong></p><p id="2395b2cc-075b-8029-937c-d0bd0ac94ded" class="">Another method of configuring the ingest modules is configuring them on a pre-loaded disk. This can be done by following the steps given <br/>below:</p><ol type="1" id="2395b2cc-075b-8057-bcff-fd41433111aa" class="numbered-list" start="1"><li>Open the &quot;Run Ingest Modules&quot; menu by right-clicking on the data source.</li></ol><ol type="1" id="2395b2cc-075b-804f-aab3-d53a8129f17f" class="numbered-list" start="2"><li>Choose the modules to implement and click on the finish button.</li></ol><ol type="1" id="2395b2cc-075b-80ba-ba8f-d211692ce237" class="numbered-list" start="3"><li>Track the progress of implementation.</li></ol><figure id="2395b2cc-075b-8009-a786-dcc7353afc24" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/6645aa8c024f7893371eb7ac/room-content/6645aa8c024f7893371eb7ac-1742820332562.gif"><img style="width:700px" src="https://tryhackme-images.s3.amazonaws.com/user-uploads/6645aa8c024f7893371eb7ac/room-content/6645aa8c024f7893371eb7ac-1742820332562.gif"/></a></figure><p id="2395b2cc-075b-807d-9d47-c33ae5f6fbae" class=""><strong>Note:</strong> Using ingest modules requires time to implement. Therefore, we will not cover ingest modules in this room.</p><p id="2395b2cc-075b-8093-b7b8-d78118479e3a" class="">The results of any Ingest Module you select to run against a data source <br/>will populate the Results node in the Tree view, which is the left pane <br/>of the Autopsy user interface. Below is an example of using the <strong>Interesting Files Identifier </strong>ingest module. Note that the results depend on the dataset. If you choose a <br/>module to retrieve specific data that is unavailable in the drive, there<br/> will be no results.</p><figure id="2395b2cc-075b-8021-add2-e88b737404c1" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/6131132af49360005df01ae3/room-content/9ee9f606ea3444fd04c45b15c2c7f819.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/6131132af49360005df01ae3/room-content/9ee9f606ea3444fd04c45b15c2c7f819.png"/></a></figure><p id="2395b2cc-075b-8001-adde-c9d3ccd423dc" class="">Drawing the attention back to the Configure Ingest Modules window, notice that some Ingest Modules have per-run settings and some do not. For example, the Keyword Search Ingest Module does not have per-run settings. In contrast, the Interesting Files Finder Ingest Module does. The yellow triangle represents the per-run settings option.</p><p id="2395b2cc-075b-80b7-a234-fa0755b2c36f" class="">As Ingest Modules run, alerts may appear in the <strong>Ingest Inbox</strong>. Below is an example of the Ingest Inbox after a few Ingest Modules have completed running.</p><figure id="2395b2cc-075b-80cd-8ac1-dab13a2ae46c" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/6131132af49360005df01ae3/room-content/212c83e75693ce2d8f485633a11dd697.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/6131132af49360005df01ae3/room-content/212c83e75693ce2d8f485633a11dd697.png"/></a></figure><p id="2395b2cc-075b-80c9-b6f6-e2fbfb2205d4" class="">To learn more about Ingest Modules, you can read Autopsy documentation <a href="http://sleuthkit.org/autopsy/docs/user-docs/4.12.0/ingest_page.html">here</a>.</p><p id="2395b2cc-075b-8071-b212-e6396e3d1300" class="">
+</p><h2 id="2395b2cc-075b-80b8-b62d-e67a0fe5d859" class="">The User Interface I</h2><p id="2395b2cc-075b-808e-889e-cb866d5847a0" class="">Let&#x27;s look at the Autopsy user interface, which is comprised of 5 primary areas:</p><p id="2395b2cc-075b-8001-84a9-c8cbd6affaa7" class=""><strong>Tree Viewer</strong></p><p id="2395b2cc-075b-8068-8a1f-dd699280af01" class="">The <strong>Tree Viewer </strong>has <strong>five top-level nodes</strong>:</p><figure id="2395b2cc-075b-800b-a0d9-ee65ef74e820" class="image"><a href="https://assets.tryhackme.com/additional/autopsy/autopsy-tree-view.png"><img style="width:434px" src="https://assets.tryhackme.com/additional/autopsy/autopsy-tree-view.png"/></a></figure><ul id="2395b2cc-075b-80fa-9206-ff709ed38860" class="bulleted-list"><li style="list-style-type:disc"><strong>Data Sources</strong>All the data will be organized as typically seen in a normal Windows File Explorer.</li></ul><ul id="2395b2cc-075b-804f-863e-da8c144ea554" class="bulleted-list"><li style="list-style-type:disc"><strong>Views</strong>Files will be organized based on the file types, MIME types, file size, etc.</li></ul><ul id="2395b2cc-075b-80bb-bc03-d9111ee3292d" class="bulleted-list"><li style="list-style-type:disc"><strong>Results</strong>As mentioned earlier in the previous task, this is where the results from Ingest Modules will appear.</li></ul><ul id="2395b2cc-075b-8040-bf03-cd3ab60e3439" class="bulleted-list"><li style="list-style-type:disc"><strong>Tags</strong>It will display files and/or results that have been tagged (read more about tagging <a href="http://sleuthkit.org/autopsy/docs/user-docs/4.12.0/tagging_page.html">here</a>).</li></ul><ul id="2395b2cc-075b-8079-b8d9-df8c438259bf" class="bulleted-list"><li style="list-style-type:disc"><strong>Reports</strong>It will display reports either generated by modules or the analyst (read more about reporting <a href="http://sleuthkit.org/autopsy/docs/user-docs/4.12.0/reporting_page.html">here</a>).</li></ul><p id="2395b2cc-075b-80f7-b52e-f9aee068b334" class="">Refer to the Autopsy documentation on the <strong>Tree Viewer</strong> for more information <a href="http://sleuthkit.org/autopsy/docs/user-docs/4.12.0/tree_viewer_page.html">here</a>.</p><p id="2395b2cc-075b-8030-b70a-dbd5cb101dcb" class=""><strong>Result Viewer</strong></p><p id="2395b2cc-075b-8059-86fc-dafdbe3394f2" class=""><strong>Note</strong>: Don&#x27;t confuse the <strong>Results</strong> node (from the Tree Viewer) with the <strong>Result Viewer</strong>.</p><p id="2395b2cc-075b-801c-8e8e-cf3313f8652c" class="">When a volume, file, folder, etc., is selected from the Tree Viewer, additional information about the selected item is displayed in the Result Viewer. For example, the sample case&#x27;s data source is selected, and additional information is now visible in the Results Viewer.</p><figure id="2395b2cc-075b-80c4-9c74-e2d9ab09c2a0" class="image"><a href="https://assets.tryhackme.com/additional/autopsy/autopsy-table-view.png"><img style="width:700px" src="https://assets.tryhackme.com/additional/autopsy/autopsy-table-view.png"/></a></figure><p id="2395b2cc-075b-80b5-8b68-f67fc83bf600" class="">If a volume is selected, the Result Viewer&#x27;s information will change to reflect the information in the local database for the selected volume. From within the Result Viewer, you can also extract any file if you right-click it and select the <strong>Extract File(s)</strong> option.</p><figure id="2395b2cc-075b-80de-ba25-ec4639d5ef05" class="image"><a href="https://assets.tryhackme.com/additional/autopsy/autopsy-table-view2.png"><img style="width:700px" src="https://assets.tryhackme.com/additional/autopsy/autopsy-table-view2.png"/></a></figure><p id="2395b2cc-075b-80f1-aee3-c332bda6abd8" class="">Notice that the Result Viewer pane has three tabs: <strong>Table</strong>, <strong>Thumbnail</strong>, and <strong>Summary</strong>. The above screenshots reflect the information displayed in the Table tab. The Thumbnail tab works best with image or video files. If the view of the above data is changed from Table to Thumbnail, not much information will be displayed. See below.</p><figure id="2395b2cc-075b-80b3-a310-ff62f84b2f11" class="image"><a href="https://assets.tryhackme.com/additional/autopsy/autopsy-thumbnail-view.png"><img style="width:700px" src="https://assets.tryhackme.com/additional/autopsy/autopsy-thumbnail-view.png"/></a></figure><p id="2395b2cc-075b-80bd-b898-d14bf1b3306d" class="">Volume nodes can be expanded, and an analyst can navigate the volume&#x27;s contents like a typical Windows system.</p><figure id="2395b2cc-075b-80a3-a97c-d4dd31bc3df0" class="image"><a href="https://assets.tryhackme.com/additional/autopsy/autopsy-volume.png"><img style="width:329px" src="https://assets.tryhackme.com/additional/autopsy/autopsy-volume.png"/></a></figure><p id="2395b2cc-075b-80e9-b6b3-de89971f00a4" class="">In the <strong>Views</strong> tree node, files are categorized by File Types:<strong> By Extension, By</strong> <strong>MIME Type</strong>, <strong>By</strong> <strong>Deleted Files</strong>, and <strong>By</strong> <strong>File Size</strong>.</p><figure id="2395b2cc-075b-80f7-8832-d664b95d32e8" class="image"><a href="https://assets.tryhackme.com/additional/autopsy/autopsy-views.png"><img style="width:203px" src="https://assets.tryhackme.com/additional/autopsy/autopsy-views.png"/></a></figure><p id="2395b2cc-075b-8004-a5d1-f95f7d9a89e7" class=""><strong>Tip</strong>: When it comes to <strong>File Types</strong>, pay attention to this section. An adversary can rename a file with a misleading file extension, so the file will be &#x27;miscategorized&#x27; <strong>By</strong> <strong>Extension</strong> but will be categorized appropriately <strong>By</strong> <strong>MIME Type</strong>. Expand <strong>By Extension</strong>, and more children nodes appear, categorizing files further (see below).</p><figure id="2395b2cc-075b-8052-aae4-f02c7a075433" class="image"><a href="https://assets.tryhackme.com/additional/autopsy/autopsy-byextension.png"><img style="width:197px" src="https://assets.tryhackme.com/additional/autopsy/autopsy-byextension.png"/></a></figure><p id="2395b2cc-075b-80cd-9913-c614ff9f593d" class="">Refer to the Autopsy documentation on the <strong>Result Viewer</strong> for more information <a href="http://sleuthkit.org/autopsy/docs/user-docs/4.12.0/result_viewer_page.html">here</a>.</p><p id="2395b2cc-075b-8085-8daf-dd85fed1b31d" class=""><strong>Contents Viewer</strong></p><p id="2395b2cc-075b-8090-b752-cb7a5edc4071" class="">If you click any folder or file from the Table tab in the Result Viewer, additional information is displayed in the <strong>Contents Viewer </strong>pane.</p><figure id="2395b2cc-075b-8035-b72d-eaa4f19166a9" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/6645aa8c024f7893371eb7ac/room-content/6645aa8c024f7893371eb7ac-1742847960282.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/6645aa8c024f7893371eb7ac/room-content/6645aa8c024f7893371eb7ac-1742847960282.png"/></a></figure><p id="2395b2cc-075b-80d1-9f2f-e11107417845" class="">In the image given above, three columns might not be quickly understood for what they represent.</p><ul id="2395b2cc-075b-8062-ab2d-daa0af7adbc5" class="bulleted-list"><li style="list-style-type:disc"><strong>S</strong> = <strong>Score</strong></li></ul><p id="2395b2cc-075b-8013-a6cc-e6c95f99acdc" class="">The <strong>Score</strong> will show a red exclamation point for a folder/file marked/tagged as notable and a yellow triangle pointing downward for a folder/file marked/tagged as suspicious. An Ingest Module or the analyst<br/> can mark/tag these items.</p><ul id="2395b2cc-075b-8081-8aad-f9aaeefe0612" class="bulleted-list"><li style="list-style-type:disc"><strong>C </strong>= <strong>Comment</strong></li></ul><p id="2395b2cc-075b-807b-959a-cee8a04d983a" class="">If a yellow page is visible in the Comment column, it will indicate that there is a comment for the folder/file.</p><ul id="2395b2cc-075b-801b-a2e2-f175e812d7fd" class="bulleted-list"><li style="list-style-type:disc"><strong>O</strong> = <strong>Occurrence</strong></li></ul><p id="2395b2cc-075b-80b8-adfd-ed758b03cdbe" class="">In a nutshell, this column will indicate how many times this file/folder has been seen in past cases (this will require the <a href="http://sleuthkit.org/autopsy/docs/user-docs/4.12.0/central_repo_page.html">Central Repository</a>) Refer to the Autopsy documentation on the Contents Viewer for more information <a href="http://sleuthkit.org/autopsy/docs/user-docs/4.12.0/content_viewer_page.html">here</a>.</p><p id="2395b2cc-075b-800a-a265-c131d51ac13d" class=""><strong>Keyword Search</strong></p><p id="2395b2cc-075b-80a7-9938-e07bdef5729b" class="">At the top right, you will find <strong>Keyword Lists</strong> and <strong>Keyword Search</strong>. With <strong>Keyword Search,</strong> an analyst can perform an AD-HOC keyword search.</p><figure id="2395b2cc-075b-808c-9c8e-c592972cc32b" class="image"><a href="https://assets.tryhackme.com/additional/autopsy/autopsy-keyword-search.png"><img style="width:345px" src="https://assets.tryhackme.com/additional/autopsy/autopsy-keyword-search.png"/></a></figure><p id="2395b2cc-075b-800d-b8ab-c0a989e573d3" class="">In the image above, the analyst searches for the word &#x27;secret.&#x27; Below are the search results for this keyword.</p><figure id="2395b2cc-075b-8019-b3c7-e71299c9fdbd" class="image"><a href="https://assets.tryhackme.com/additional/autopsy/autopsy-keyword-search2.png"><img style="width:700px" src="https://assets.tryhackme.com/additional/autopsy/autopsy-keyword-search2.png"/></a></figure><p id="2395b2cc-075b-8075-bcf3-f983ad383510" class="">Refer to the Autopsy <a href="http://sleuthkit.org/autopsy/docs/user-docs/4.12.0/ad_hoc_keyword_search_page.html">documentation</a> for more information on performing keyword searches with either option.</p><p id="2395b2cc-075b-808a-a609-c5fc2f77ad7f" class=""><strong>Status Area</strong></p><p id="2395b2cc-075b-80d7-9f46-c5fa7919990b" class="">Lastly, the <strong>Status Area</strong> is at the bottom right. When Ingest Modules run, a progress bar (along with the percentage completed) will be displayed in this area. If you click on the bar, more detailed information regarding the Ingest Modules is provided.</p><figure id="2395b2cc-075b-804c-b3ed-dfb47204987d" class="image"><a href="https://assets.tryhackme.com/additional/autopsy/autopsy-statusbar2.png"><img style="width:635px" src="https://assets.tryhackme.com/additional/autopsy/autopsy-statusbar2.png"/></a></figure><p id="2395b2cc-075b-80fa-b6c0-f2c363ddfcdf" class="">If the <code>X</code> (directly next to the progress bar) is clicked, a prompt will appear confirming if you wish to end/cancel the Ingest Modules.</p><p id="2395b2cc-075b-8093-b6af-ffc4d5f90a87" class="">Refer to the Autopsy documentation on the UI overview <a href="http://sleuthkit.org/autopsy/docs/user-docs/4.12.0/uilayout_page.html">here</a>.</p><h3 id="2395b2cc-075b-802d-8dc5-da560bc47c40" class="">The User Interface II</h3><p id="2395b2cc-075b-8011-a7e3-d78e3076381d" class="">Let&#x27;s look at where we can easily find summarised information. Summarised information can help analysts decide where to focus by evaluating available artifacts. It is suggested that you view the summary of the data sources before starting an investigation. This will give you a general idea about the system and artifacts.</p><p id="2395b2cc-075b-801a-b42c-c97badfe7379" class=""><strong>Data Sources Summary</strong></p><p id="2395b2cc-075b-8098-a76e-e15f86b530af" class="">The <strong>Data Sources Summary</strong> provides summarised info in nine different categories. Note that this is an overview of the total findings. If you want to dive deep into the findings and look for a specific artifact, you need to analyze each module separately using the <strong>Result Viewer</strong> shown in the previous task.</p><figure id="2395b2cc-075b-80a6-8651-d455219e4e93" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/6645aa8c024f7893371eb7ac/room-content/6645aa8c024f7893371eb7ac-1742819587858.gif"><img style="width:700px" src="https://tryhackme-images.s3.amazonaws.com/user-uploads/6645aa8c024f7893371eb7ac/room-content/6645aa8c024f7893371eb7ac-1742819587858.gif"/></a></figure><p id="2395b2cc-075b-8061-89f8-faa6406dcbdc" class=""><strong>Generate Report</strong></p><p id="2395b2cc-075b-8010-85f5-f51d6de9dafc" class="">You can create a report of your findings in multiple formats, enabling you to create data sheets for your investigation case. The report provides all the information listed under the <strong>Result Viewer</strong> pane. Reports can help you re-investigate the findings after finishing the live investigation. However, reports don&#x27;t have additional search <br/>options, so you must manually find artifacts for the event of interest.</p><p id="2395b2cc-075b-80b8-b63e-ed04b5e2e27c" class=""><strong>Tip:</strong> The Autopsy tool can be heavy for systems with low resources. Therefore, completing an investigation with Autopsy on low resources can be slow and painful. Browsing long results might end up with a system freeze. You can avoid that situation by using reports. You can use the tool to parse the data and generate the report, then <br/>continue to analyze through the generated report without a need for Autopsy. Note that it is always easier to conduct and manage an investigation with the GUI.</p><p id="2395b2cc-075b-80cf-b65c-cd5fc6b9bd28" class="">You can use the <strong>Generate Report </strong>option to create reports. The steps are shown below.</p><figure id="2395b2cc-075b-80d0-b62a-d7209fa06d47" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/6645aa8c024f7893371eb7ac/room-content/6645aa8c024f7893371eb7ac-1742820072105.gif"><img style="width:700px" src="https://tryhackme-images.s3.amazonaws.com/user-uploads/6645aa8c024f7893371eb7ac/room-content/6645aa8c024f7893371eb7ac-1742820072105.gif"/></a></figure><p id="2395b2cc-075b-807b-9ccc-d549a31b1e85" class="">Autopsy will generate the report once you choose your report format and scope. You can click the <strong>HTML Report</strong> section (shown above) to view the report on your browser. Reports contain all of the <strong>Result Viewer</strong> pane results on the left side.</p><figure id="2395b2cc-075b-80c5-b082-fbbea20c05fe" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/6645aa8c024f7893371eb7ac/room-content/6645aa8c024f7893371eb7ac-1742848219265.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/6645aa8c024f7893371eb7ac/room-content/6645aa8c024f7893371eb7ac-1742848219265.png"/></a></figure><p id="2395b2cc-075b-80aa-a035-cf2bcf8688fb" class="">
+</p><p id="2395b2cc-075b-801b-92d2-e8d933e7c4ee" class="">
+</p><h2 id="2395b2cc-075b-8013-9361-e62352eaf970" class="">Data Analysis</h2><ol type="1" id="2395b2cc-075b-80ee-aed2-feb508816920" class="numbered-list" start="1"><li>What is the name of an Installed Program with the version number of 6.2.0.2962?<br/>I used the keyword search to look for the answer<br/></li></ol><figure id="2395b2cc-075b-80a4-84c1-e546c4de51a5" class="image"><a href="image%20299.png"><img style="width:620px" src="image%20299.png"/></a></figure><ol type="1" id="2395b2cc-075b-80e4-84c6-e7a55c90a529" class="numbered-list" start="2"><li>A user has a Password Hint. What is the value?<br/>I used keyword search again to look for this<br/></li></ol><figure id="2395b2cc-075b-80ce-9147-c6c5dfaf4cac" class="image"><a href="image%20300.png"><img style="width:620px" src="image%20300.png"/></a></figure><ol type="1" id="2395b2cc-075b-80cc-8f35-f38c4e353f7e" class="numbered-list" start="3"><li>Numerous SECRET files were accessed from a network drive. What was the IP address?<br/>I used the keyword SECRET to search for this and got the following<br/></li></ol><figure id="2395b2cc-075b-80a2-834e-ced33ff3fa5f" class="image"><a href="image%20301.png"><img style="width:619.9833374023438px" src="image%20301.png"/></a></figure><ol type="1" id="2395b2cc-075b-8072-8173-d333f2e4f9fd" class="numbered-list" start="4"><li>What web search term has the most entries?<br/>I looked at Extract content - web search then ecported it and looked at the common text</li></ol><figure id="2395b2cc-075b-80d0-a5a0-d484a7f863c1" class="image"><a href="image%20302.png"><img style="width:620px" src="image%20302.png"/></a></figure><ol type="1" id="2395b2cc-075b-80f1-bbad-d03baa3a0dc9" class="numbered-list" start="5"><li>What was the web search conducted on 3/25/2015 21:46:44?<br/>From the same webs earch view, its visible</li></ol><figure id="2395b2cc-075b-8087-be64-fae86502c81c" class="image"><a href="image%20303.png"><img style="width:619.9833374023438px" src="image%20303.png"/></a></figure><ol type="1" id="2395b2cc-075b-80e1-817e-fcfbfa069476" class="numbered-list" start="6"><li>What MD5 hash value of the binary is listed as an Interesting File?<br/></li></ol><figure id="2395b2cc-075b-8062-af27-fa4e71e64651" class="image"><a href="image%20304.png"><img style="width:620px" src="image%20304.png"/></a></figure><ol type="1" id="2395b2cc-075b-80e3-b740-cc2cee9f127d" class="numbered-list" start="7"><li>What self-assuring message did the &#x27;Informant&#x27; write for himself on a Sticky Note? (no spaces)</li></ol><figure id="2395b2cc-075b-8078-988f-f060d69fc361" class="image"><a href="image%20305.png"><img style="width:620px" src="image%20305.png"/></a></figure><p id="2395b2cc-075b-8073-9861-e380ba401b59" class="">
+</p><h2 id="2395b2cc-075b-8089-b63f-d590c91c00a6" class="">Visualization Tools</h2><p id="2395b2cc-075b-8057-93b6-f311300f9750" class="">You may have noticed that other parts of the user interface haven&#x27;t been discussed yet.</p><figure id="2395b2cc-075b-8091-9155-d9d35de593f3" class="image"><a href="https://assets.tryhackme.com/additional/autopsy/autopsy-top-bar.png"><img style="width:700px" src="https://assets.tryhackme.com/additional/autopsy/autopsy-top-bar.png"/></a></figure><p id="2395b2cc-075b-80ab-b2aa-ff7f06ea3e94" class="">Please refer to the Autopsy documentation for the following visualization tool:</p><ul id="2395b2cc-075b-809e-9972-c64567a43d5b" class="bulleted-list"><li style="list-style-type:disc"><strong>Images/Videos:</strong><a href="http://sleuthkit.org/autopsy/docs/user-docs/4.12.0/image_gallery_page.html">http://sleuthkit.org/autopsy/docs/user-docs/4.12.0/image_gallery_page.html</a></li></ul><ul id="2395b2cc-075b-804f-b753-ce17cbe674d2" class="bulleted-list"><li style="list-style-type:disc"><strong>Communications:</strong><a href="http://sleuthkit.org/autopsy/docs/user-docs/4.12.0/communications_page.html">http://sleuthkit.org/autopsy/docs/user-docs/4.12.0/communications_page.html</a></li></ul><ul id="2395b2cc-075b-80ae-91d6-f41156fbfeaf" class="bulleted-list"><li style="list-style-type:disc"><strong>Timeline:</strong><a href="http://sleuthkit.org/autopsy/docs/user-docs/4.12.0/timeline_page.html">http://sleuthkit.org/autopsy/docs/user-docs/4.12.0/timeline_page.html</a></li></ul><p id="2395b2cc-075b-800c-9c5b-d70182e0702e" class="">Note: You can not practice with some visualization tools within the attached VM, except for <strong>Timeline</strong>. Below is a screenshot of the <strong>Timeline</strong>.</p><figure id="2395b2cc-075b-80da-a7ef-fb6e73c1666f" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/6645aa8c024f7893371eb7ac/room-content/6645aa8c024f7893371eb7ac-1742848455678.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/6645aa8c024f7893371eb7ac/room-content/6645aa8c024f7893371eb7ac-1742848455678.png"/></a></figure><p id="2395b2cc-075b-8044-8591-e9f0dd6f7c91" class="">The Timeline tool is composed of three areas:</p><ol type="1" id="2395b2cc-075b-8052-82ab-dac3ea25e674" class="numbered-list" start="1"><li><strong>Filters: </strong>Narrow the events displayed based on the filter criteria</li></ol><ol type="1" id="2395b2cc-075b-80d4-b61b-e82d8ef1d90b" class="numbered-list" start="2"><li><strong>Events: </strong>The events are displayed here based on the <strong>View Mode</strong></li></ol><ol type="1" id="2395b2cc-075b-8084-939f-e86dc2d002ab" class="numbered-list" start="3"><li><strong>Files/Contents: </strong>Additional information on the event(s) is displayed in this area</li></ol><p id="2395b2cc-075b-8021-b999-fc686a6a83c3" class="">There are three view modes:</p><ol type="1" id="2395b2cc-075b-80db-9807-c517d8008e9d" class="numbered-list" start="1"><li><strong>Counts: </strong>The number of events is displayed in a bar chart view</li></ol><ol type="1" id="2395b2cc-075b-80b7-a68a-ce4a19bb1221" class="numbered-list" start="2"><li><strong>Details: </strong>Information on events is displayed, but they are clustered and collapsed, so the UI is not overloaded</li></ol><ol type="1" id="2395b2cc-075b-80e9-abe6-f0fa5907c9bc" class="numbered-list" start="3"><li><strong>List: </strong>The events are displayed in a table view</li></ol><p id="2395b2cc-075b-8042-832d-d36d6a56a18e" class="">The View Mode in the above screenshot is <strong>Counts</strong>. Below is a screenshot of the <strong>Details</strong> View Mode.</p><figure id="2395b2cc-075b-8091-998d-d8dcc60562ac" class="image"><a href="https://assets.tryhackme.com/additional/autopsy/autopsy-timeline-details.png"><img style="width:678px" src="https://assets.tryhackme.com/additional/autopsy/autopsy-timeline-details.png"/></a></figure><p id="2395b2cc-075b-80c3-a06e-c57c6f92595e" class="">The numbers (seen above) indicate the number of clustered/collapsed events for a specific time frame. For example, for /Windows, there are 130,257 events between 2009-06-10 and 2010-03-18. Please take a look at the image below.</p><figure id="2395b2cc-075b-80c3-b53e-efd09f37fc51" class="image"><a href="https://assets.tryhackme.com/additional/autopsy/autopsy-timeline-clustered.png"><img style="width:440px" src="https://assets.tryhackme.com/additional/autopsy/autopsy-timeline-clustered.png"/></a></figure><p id="2395b2cc-075b-80cd-a608-d66623240770" class="">To expand a cluster, click the green icon with the plus sign. Please take a look at the example below.</p><figure id="2395b2cc-075b-80cb-ab06-cea213bc6922" class="image"><a href="https://assets.tryhackme.com/additional/autopsy/autopsy-cluster-expand.png"><img style="width:198px" src="https://assets.tryhackme.com/additional/autopsy/autopsy-cluster-expand.png"/></a></figure><p id="2395b2cc-075b-8091-8f41-e15df7d7a9e0" class="">To collapse the events, click the red icon with a minus sign. Click the map marker icon with a plus sign if you wish to pin a group of events. This will move (pin) the events to an isolated section of the Events view.</p><figure id="2395b2cc-075b-80c8-8f9a-df703f6b73b3" class="image"><a href="https://assets.tryhackme.com/additional/autopsy/autopsy-timeline-clustered2.png"><img style="width:343px" src="https://assets.tryhackme.com/additional/autopsy/autopsy-timeline-clustered2.png"/></a></figure><p id="2395b2cc-075b-803e-a840-c7820219b0b5" class="">To unpin the events, click on the map <br/>marker with the minus sign. The last group of icons to cover are the eye icons. If you wish to hide a group of events from the Events view, click on the eye with a minus sign. In the below screenshot, the clustered events for /Boot were hidden and placed in <code>Hidden Descriptions</code> (in the Filters area).</p><figure id="2395b2cc-075b-802e-a02a-cdb2d095de12" class="image"><a href="https://assets.tryhackme.com/additional/autopsy/autopsy-timeline-hidden.png"><img style="width:318px" src="https://assets.tryhackme.com/additional/autopsy/autopsy-timeline-hidden.png"/></a></figure><p id="2395b2cc-075b-80b9-a841-e0e78b634a36" class="">If you wish to reverse that action and unhide the events, right-click select <code>Unhide and remove them from the list</code>. See the example below.</p><figure id="2395b2cc-075b-8052-a5c0-f90c9553f447" class="image"><a href="https://assets.tryhackme.com/additional/autopsy/autopsy-timeline-unhide.png"><img style="width:293px" src="https://assets.tryhackme.com/additional/autopsy/autopsy-timeline-unhide.png"/></a></figure><p id="2395b2cc-075b-8079-9187-f3e5425c1f3d" class="">Last but not least, a screenshot of the <strong>List </strong>View Mode is below.</p><figure id="2395b2cc-075b-802d-bb2b-c1a1946e56fc" class="image"><a href="https://assets.tryhackme.com/additional/autopsy/autopsy-timeline-list.png"><img style="width:700px" src="https://assets.tryhackme.com/additional/autopsy/autopsy-timeline-list.png"/></a></figure><p id="2395b2cc-075b-804d-a546-e30ac9a9c222" class="">This should be enough information to get you started interacting with the Timeline with some level of confidence.</p><p id="2395b2cc-075b-8088-abb7-e1e5a53e7871" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

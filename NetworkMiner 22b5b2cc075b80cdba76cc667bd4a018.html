@@ -1,0 +1,694 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>NetworkMiner</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="22b5b2cc-075b-80cd-ba76-cc667bd4a018" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/12c08a0eb8d125e22e5f93f59fdb01ea.png"/></div><h1 class="page-title">NetworkMiner</h1><p class="page-description"></p></header><div class="page-body"><blockquote id="22b5b2cc-075b-804a-b14a-e1e0e67e20bb" class=""><em>NetworkMiner is an open source Network Forensic Analysis Tool (NFAT) for Windows (but also works in Linux / Mac OS X / FreeBSD). NetworkMiner can be used as a passive network  sniffer/packet capturing tool to detect operating systems, sessions, host names, open ports etc. without putting any traffic on the network. NetworkMiner can also parse PCAP files for off-line analysis and to regenerate/reassemble transmitted files and certificates from PCAP files. </em></blockquote><h3 id="22b5b2cc-075b-80cb-8af2-cd7ede652a05" class="">Network Miner in Forensics</h3><p id="22b5b2cc-075b-8071-8bf9-ec6bec6c926e" class="">The ultimate goal of network forensics is to provide sufficient information<br/>to detect malicious activities, security breaches, and network anomalies based on the network traffic. And NetworkMiner is a great tool to help, as it provides quick and useful hints on where to start from,  specifically:</p><ul id="22b5b2cc-075b-80d3-b7be-e3ef77c5da27" class="bulleted-list"><li style="list-style-type:disc">Context of captured hosts like their IP and MAC, hostnames, or OS information</li></ul><ul id="22b5b2cc-075b-807b-b0c7-c18dd33ea2ea" class="bulleted-list"><li style="list-style-type:disc">List of potential attack indicators or anomalies like traffic spikes or port scans</li></ul><ul id="22b5b2cc-075b-8014-971e-eb7f2b484943" class="bulleted-list"><li style="list-style-type:disc">Tools or toolkits used to perform the potential attacks like Nmap</li></ul><h3 id="22b5b2cc-075b-801b-8ce9-f58a725fc0cb" class="">Supported Data Types</h3><p id="22b5b2cc-075b-806f-a8df-e790531b43df" class="">There are three main data types investigated in Network Forensics</p><ul id="22b5b2cc-075b-80e7-9aad-f4f366ea624a" class="bulleted-list"><li style="list-style-type:disc"><strong>Live Traffic</strong></li></ul><ul id="22b5b2cc-075b-8074-ab11-fb7054783881" class="bulleted-list"><li style="list-style-type:disc"><strong>Traffic Captures</strong></li></ul><ul id="22b5b2cc-075b-8042-81f0-cbb1b3c84b6a" class="bulleted-list"><li style="list-style-type:disc"><strong>Log Files</strong></li></ul><p id="22b5b2cc-075b-8040-838c-ce0b95348835" class="">NetworkMiner is capable of processing and handling both packet pictures (PCAP) and live traffic</p><p id="22b5b2cc-075b-8024-b099-e36a53fa36e0" class="">
+</p><p id="22b5b2cc-075b-80fb-89bf-ea2283ab40d3" class=""><strong>Pros</strong></p><ul id="22b5b2cc-075b-8003-8a78-f81c5c77f524" class="bulleted-list"><li style="list-style-type:disc">OS fingerprinting</li></ul><ul id="22b5b2cc-075b-80f5-a037-edf0ffeb4d43" class="bulleted-list"><li style="list-style-type:disc">Easy file extraction</li></ul><ul id="22b5b2cc-075b-80b8-9f96-f0692bac1079" class="bulleted-list"><li style="list-style-type:disc">Credential grabbing</li></ul><ul id="22b5b2cc-075b-8067-9d27-df650b0a3487" class="bulleted-list"><li style="list-style-type:disc">Clear text keyword parsing</li></ul><ul id="22b5b2cc-075b-80ab-bbc3-d502cbb26568" class="bulleted-list"><li style="list-style-type:disc">Overall overview</li></ul><p id="22b5b2cc-075b-8025-9578-d43ff0c7e28e" class=""><strong>Cons</strong></p><ul id="22b5b2cc-075b-8013-93a3-fe6c49dc70e1" class="bulleted-list"><li style="list-style-type:disc">Not useful in active sniffing</li></ul><ul id="22b5b2cc-075b-804d-95d0-f594b986bda4" class="bulleted-list"><li style="list-style-type:disc">Not useful for large pcap investigation</li></ul><ul id="22b5b2cc-075b-8026-806e-f94b56dce267" class="bulleted-list"><li style="list-style-type:disc">Limited filtering</li></ul><ul id="22b5b2cc-075b-805e-b5a5-d010e5deb302" class="bulleted-list"><li style="list-style-type:disc">Not built for manual traffic investigation</li></ul><p id="22b5b2cc-075b-80cf-8fbd-decb1b3189a3" class="">
+</p><p id="22b5b2cc-075b-80af-b633-ec7baa1f1665" class="">Questions</p><ol type="1" id="22b5b2cc-075b-80c1-aca6-d4d483fa1b4b" class="numbered-list" start="1"><li>what is the total number of frames</li></ol><p id="22b5b2cc-075b-8011-9ba0-e406f30fb013" class="">Open the pcap, navigate to the right to Case panel to see the file metadata</p><p id="22b5b2cc-075b-80c7-95b6-f95f34aaabf2" class="">
+</p><figure id="22b5b2cc-075b-80ee-ae08-e985551d0270" class="image"><a href="image%20110.png"><img style="width:494px" src="image%20110.png"/></a></figure><ol type="1" id="22b5b2cc-075b-8060-a44e-dea4a42b568c" class="numbered-list" start="2"><li>How many IP addresses use the same MAC address with host 145.253.2.203?</li></ol><figure id="22b5b2cc-075b-80cf-9b85-f4de10f967aa" class="image"><a href="image%20111.png"><img style="width:710px" src="image%20111.png"/></a></figure><p id="22b5b2cc-075b-80c0-9bd8-cc2302b5e5da" class="">
+</p><ol type="1" id="22b5b2cc-075b-80b0-aa99-e9ea0426e6dc" class="numbered-list" start="3"><li>How many packets were sent from host 65.208.228.223?</li></ol><figure id="22b5b2cc-075b-8020-9746-d33896615029" class="image"><a href="image%20112.png"><img style="width:710px" src="image%20112.png"/></a></figure><p id="22b5b2cc-075b-80cb-80c4-d768bd71b37d" class="">
+</p><ol type="1" id="22b5b2cc-075b-803d-b322-e1d536bf9958" class="numbered-list" start="4"><li>What is the name of the webserver banner under host 65.208.228.223?</li></ol><figure id="22b5b2cc-075b-809f-b362-f5daa8c2141a" class="image"><a href="image%20113.png"><img style="width:683px" src="image%20113.png"/></a></figure><figure id="22b5b2cc-075b-802b-b45a-e0ed90efd0ec" class="image"><a href="image%20114.png"><img style="width:709.9833374023438px" src="image%20114.png"/></a></figure><figure id="22b5b2cc-075b-80c3-b4e7-d78c0b3c664d" class="image"><a href="image%20115.png"><img style="width:710px" src="image%20115.png"/></a></figure><p id="22c5b2cc-075b-8043-bfd5-ebeab3fa7aac" class="">
+</p><p id="22c5b2cc-075b-8010-951d-efaefc96121e" class="">
+</p><ol type="1" id="22b5b2cc-075b-8007-beb8-ef00615fdb9e" class="numbered-list" start="8"><li>What is the name of the Linux distro mentioned in the file associated with frame 63075? </li></ol><p id="22c5b2cc-075b-80d2-b033-dd9214988fc5" class="">Navigate to the frame number in the file column, and open the file det</p><figure id="22c5b2cc-075b-8090-bb6f-ec82c2471b1e" class="image"><a href="image%20116.png"><img style="width:710px" src="image%20116.png"/></a></figure><p id="22c5b2cc-075b-806c-ae1b-e9839601219b" class="">
+</p><p id="22c5b2cc-075b-809c-81ef-ed7494b2ef11" class="">
+</p><ol type="1" id="22c5b2cc-075b-8015-9a71-fe9a49a9ba6b" class="numbered-list" start="9"><li>What is the header of the page associated with frame 75942?</li></ol><figure id="22c5b2cc-075b-8078-bc17-e1eee32e7561" class="image"><a href="image%20117.png"><img style="width:710px" src="image%20117.png"/></a></figure><p id="22c5b2cc-075b-80ea-9621-c9a0ba0f475f" class="">
+</p><ol type="1" id="22c5b2cc-075b-80fe-9e60-eb572b9e239b" class="numbered-list" start="10"><li>What is the source address of the image &quot;ads.bmp.2E5F0FD9.bmp&quot;?</li></ol><figure id="22c5b2cc-075b-8001-ba00-e30f182c253f" class="image"><a href="image%20118.png"><img style="width:710px" src="image%20118.png"/></a></figure><p id="22c5b2cc-075b-807c-9c04-f648ebc4a2b4" class="">
+</p><ol type="1" id="22c5b2cc-075b-8069-a104-ce3389fba144" class="numbered-list" start="11"><li>What is the frame number of the possible TLS anomaly?</li></ol><figure id="22c5b2cc-075b-8087-8e33-de46f1a65f1d" class="image"><a href="image%20119.png"><img style="width:709.9833374023438px" src="image%20119.png"/></a></figure><p id="22c5b2cc-075b-8023-a71a-fb14ff24e7ae" class="">
+</p><ol type="1" id="22c5b2cc-075b-80d0-a56b-e365ecd6e5a2" class="numbered-list" start="12"><li>Look at the messages. Which platform sent a password reset email?</li></ol><figure id="22c5b2cc-075b-8043-abb2-e1353438e930" class="image"><a href="image%20120.png"><img style="width:710px" src="image%20120.png"/></a></figure><p id="22c5b2cc-075b-805b-945d-cb74c7ac8df0" class="">
+</p><ol type="1" id="22c5b2cc-075b-8015-be1a-c512ddd38166" class="numbered-list" start="13"><li>what si teh email address of brandsn mathesn</li></ol><figure id="22c5b2cc-075b-8096-af2a-d49c6c13440f" class="image"><a href="image%20121.png"><img style="width:709.9833374023438px" src="image%20121.png"/></a></figure><p id="22c5b2cc-075b-8022-b3f2-f2bc2b6f2bea" class="">
+</p><p id="22c5b2cc-075b-80ae-a3fd-db4d7d0e2db2" class="">Excercises</p><p id="22c5b2cc-075b-809e-b2d7-c679b2fade9c" class=""><strong>Use case1.pcap</strong></p><p id="22c5b2cc-075b-8030-85d5-eb9e56b069c6" class="">What is the OS name of the host 131.151.37.122?</p><figure id="22c5b2cc-075b-80ab-ade8-ce38c47ca858" class="image"><a href="image%20122.png"><img style="width:709.9833374023438px" src="image%20122.png"/></a></figure><p id="22c5b2cc-075b-8069-955c-ebf1bbbc7151" class="">Investigate the hosts 131.151.37.122 and 131.151.32.91.</p><p id="22c5b2cc-075b-8059-bff7-dd4f4524237e" class="">How many data bytes were received from host 131.151.32.91 to host 131.151.37.122 through port 1065?</p><figure id="22c5b2cc-075b-8024-9540-cf77a3999ad9" class="image"><a href="image%20123.png"><img style="width:710px" src="image%20123.png"/></a></figure><p id="22c5b2cc-075b-8079-8606-e12f4c94b790" class="">Investigate the hosts 131.151.37.122 and 131.151.32.21.</p><p id="22c5b2cc-075b-801d-8127-cb5175f78cc7" class="">How many data bytes were received from host 131.151.37.122 to host 131.151.32.21 through port 143?</p><figure id="22c5b2cc-075b-8050-97a2-fbc3cfd56238" class="image"><a href="image%20124.png"><img style="width:710px" src="image%20124.png"/></a></figure><p id="22c5b2cc-075b-806d-a228-fad9ada0b71d" class="">What is the sequence number of frame 9?</p><figure id="22c5b2cc-075b-8063-821c-cab344894d9a" class="image"><a href="image%20125.png"><img style="width:710px" src="image%20125.png"/></a></figure><p id="22c5b2cc-075b-8009-920c-fadc0923a670" class="">What is the number of the detected &quot;content types&quot;?</p><figure id="22c5b2cc-075b-8069-bd5e-df68ad7420a4" class="image"><a href="1_iCOfcyH085tPjsqK0-WXHg.webp"><img style="width:710px" src="1_iCOfcyH085tPjsqK0-WXHg.webp"/></a></figure><p id="22c5b2cc-075b-80c2-ba59-f6c417cbd65c" class="">Use case2.pcap and investigate the files.</p><p id="22c5b2cc-075b-8091-8c84-dc72f4f58209" class="">What is the USB product&#x27;s brand name?</p><figure id="22c5b2cc-075b-80c6-be77-d2e69354b5eb" class="image"><a href="image%20126.png"><img style="width:710px" src="image%20126.png"/></a></figure><p id="22c5b2cc-075b-805e-a4a5-c5dbc4c6509e" class="">What is the name of the phone model?</p><p id="22c5b2cc-075b-8087-866d-d7e4de698836" class="">We get that the phone is a lumia from going through thtimages, then we search for lumia in the files</p><figure id="22c5b2cc-075b-80b9-9a1c-eadc5995e9e4" class="image"><a href="image%20127.png"><img style="width:709.9833374023438px" src="image%20127.png"/></a></figure><p id="22c5b2cc-075b-80e1-a153-cb9b647519e6" class="">What is the source IP of the fish image?</p><figure id="22c5b2cc-075b-80d8-9cef-c93327a8a959" class="image"><a href="image%20128.png"><img style="width:709.9833374023438px" src="image%20128.png"/></a></figure><p id="22c5b2cc-075b-807f-8296-efc676e597e0" class="">What is the password of the &quot;homer.pwned.se@gmx.com&quot;?</p><figure id="22c5b2cc-075b-800d-9dcd-d39042673420" class="image"><a href="image%20129.png"><img style="width:710px" src="image%20129.png"/></a></figure><p id="22c5b2cc-075b-80bf-9aa4-cf09411a420e" class="">What is the DNS Query of frame 62001?</p><figure id="22c5b2cc-075b-80f8-99b8-d570f91b8ec2" class="image"><a href="image%20130.png"><img style="width:710px" src="image%20130.png"/></a></figure></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

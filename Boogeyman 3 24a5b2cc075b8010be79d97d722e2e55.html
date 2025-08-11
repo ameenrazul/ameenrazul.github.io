@@ -1,0 +1,694 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Boogeyman 3</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="24a5b2cc-075b-8010-be79-d97d722e2e55" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/fcaf0ba32b5d1904a428fbc17d297a65.png"/></div><h1 class="page-title"><strong>Boogeyman 3</strong></h1><p class="page-description"></p></header><div class="page-body"><p id="24a5b2cc-075b-8000-afe2-ef03f747b5d7" class=""><em>Due to the previous attacks of Boogeyman, Quick Logistics LLC hired a managed security service provider to handle its Security Operations Center. Little did they know, the Boogeyman was still lurking and waiting for the right moment to return.</em></p><p id="24a5b2cc-075b-80a7-838b-cc093dc4372d" class="">In this room, you will be tasked to analyse the new tactics, techniques, and procedures (TTPs) of the threat group named Boogeyman.</p><h1 id="24a5b2cc-075b-80c6-95fc-dfd89bfc7828" class="">Lurking in the Dark</h1><p id="24a5b2cc-075b-80dd-926e-f0ed59891465" class="">Without tripping any security defences of Quick Logistics LLC, the Boogeyman was able to compromise one of the employees and stayed in the dark, waiting for the right moment to continue the attack. Using this initial email access, the threat actors attempted to expand the impact by targeting the CEO, Evan Hutchinson.</p><figure id="24a5b2cc-075b-807e-ad39-c7ae095b1f95" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/5dbea226085ab6182a2ee0f7/room-content/15a4b939f2af60c700f3d44d54fb9d0d.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5dbea226085ab6182a2ee0f7/room-content/15a4b939f2af60c700f3d44d54fb9d0d.png"/></a></figure><p id="24a5b2cc-075b-80c5-b06e-f437898ba80b" class="">The email appeared questionable, but Evan still opened the attachment despite the scepticism. After opening the attached document and seeing that nothing happened, Evan reported the phishing email to the security team.</p><h1 id="24a5b2cc-075b-80e5-b578-c21e1e64ccb1" class="">Initial Investigation</h1><p id="24a5b2cc-075b-8044-9c8d-cd96e14796a8" class="">Upon receiving the phishing email report, the security team investigated the workstation of the <br/>CEO. During this activity, the team discovered the email attachment in the downloads folder of the victim.</p><figure id="24a5b2cc-075b-8008-a073-c65578cf02ce" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/5dbea226085ab6182a2ee0f7/room-content/00e31463f222fa36eeb979454f6305f0.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5dbea226085ab6182a2ee0f7/room-content/00e31463f222fa36eeb979454f6305f0.png"/></a></figure><p id="24a5b2cc-075b-80cb-90a2-f755da88251a" class="">In addition, the security team also observed a file inside the ISO payload, as shown in the image below.</p><figure id="24a5b2cc-075b-80a2-8f91-f3449573f49e" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/5dbea226085ab6182a2ee0f7/room-content/c5728f90243957944050c74703fadf6d.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5dbea226085ab6182a2ee0f7/room-content/c5728f90243957944050c74703fadf6d.png"/></a></figure><p id="24a5b2cc-075b-80d1-b3ed-d32db48c496b" class="">Lastly, it was presumed by the security team that the incident occurred between <strong>August 29 and August 30, 2023</strong>.</p><p id="24a5b2cc-075b-8070-9694-ef01bf61dfe5" class="">Given the initial findings, you are tasked to analyse and assess the impact of the compromise.</p><p id="24a5b2cc-075b-800f-a523-cc5ee93f928c" class="">
+</p><p id="24a5b2cc-075b-802e-9187-d82026f66770" class="">
+</p><h2 id="24a5b2cc-075b-80f2-aa3b-c0fd1df24026" class="">The Chaos Inside</h2><p id="24a5b2cc-075b-8088-8d7d-e55f7426099b" class="">
+</p><ul id="24a5b2cc-075b-80fd-97c8-dbfff94b0c52" class="bulleted-list"><li style="list-style-type:disc">Question 1: What is the PID of the process that executed the initial stage 1 payload?<br/></li></ul><p id="24a5b2cc-075b-8000-b59f-cfe6c60a3940" class="">First things first. After starting the lab environment, enter the <em>Elastic </em>web<em> </em>console and navigate to the <em>Analytics</em> &gt; <em>Discover </em>module. This dashboard is where we’ll be exploring the logs within the <code>winlogbeat</code> index<em>.</em></p><p id="24a5b2cc-075b-80da-bce7-e0d01188dd51" class=""><br/>“<em>the incident occurred between </em><em><strong>August 29 and August 30, 2023</strong></em>” so we can narrow the scope by modifying the dates in the time selection field.Now that we have the time period set, where do we start? Well, remember from the scenario that the initial access method was a spear phishing <br/>email that had an attachment executed by the CEO, Evan Hutchinson. The security team discovered that the attachment was an <strong>ISO</strong> file containing a “PDF” file — <strong>ProjectFinancialSummary_Q3.pdf.</strong></p><p id="24a5b2cc-075b-80f6-ada6-d97271879933" class="">We saw from the triage that <strong>Windows Explorer</strong> displayed this is an <strong>HTML application (HTA)</strong>, not a <strong>PDF</strong>. So, we’re potentially looking for malicious <strong><a href="https://attack.mitre.org/techniques/T1218/005/">Mshta</a></strong><strong> </strong>code execution activity. But let’s start broadly and simply search for the file name by entering it into the search bar at the top of the window.</p><figure id="24a5b2cc-075b-8088-8940-e3f9c40f57d0" class="image"><a href="7B78CA26-9710-49A2-8CEB-B6C3690A7169.png"><img style="width:2580px" src="7B78CA26-9710-49A2-8CEB-B6C3690A7169.png"/></a></figure><p id="24a5b2cc-075b-8076-a37e-f68481e81925" class="">There are 4 hits, and we can see from the earliest hit that when the hta was executed, with pid of 6392</p><figure id="24a5b2cc-075b-8079-886d-cec315503b8b" class="image"><a href="E4A825BE-C3FD-4A36-882E-606EE8F09289.png"><img style="width:2220px" src="E4A825BE-C3FD-4A36-882E-606EE8F09289.png"/></a></figure><p id="24a5b2cc-075b-80b0-83e8-ed5ec3b939dc" class="">Time of execution - Aug 29, 2023 @ 23:51:15</p><p id="24a5b2cc-075b-80c0-a8c4-e0440f92f6cd" class="">ProcessId: 6392</p><p id="24a5b2cc-075b-80d3-94c9-e3aee5c42efa" class="">ParentUser: QUICKLOGISTICS\evan.hutchinson</p><p id="24a5b2cc-075b-80fa-8912-e5153c5c26a1" class="">host.ip - fe80::91da:6b4:8ed3:2ef8,<mark class="highlight-brown"> 10.10.155.159</mark></p><figure id="24a5b2cc-075b-80d9-88ee-e40656092f81" class="image"><a href="4A66CE8A-E03B-42BA-A75A-CA409EF6B491.png"><img style="width:710px" src="4A66CE8A-E03B-42BA-A75A-CA409EF6B491.png"/></a></figure><p id="24a5b2cc-075b-8092-b369-f26843701fa6" class="">
+</p><ul id="24a5b2cc-075b-809d-ada9-c140a80bca5e" class="bulleted-list"><li style="list-style-type:disc"><strong>Question 2: The stage 1 payload attempted to implant a file to another location. What is the full command-line value of this execution?<br/><br/>I added two more columns to see things more clearly, I added process parent command line and process command line, then I used the same search as before and saw a copy action being spawned from the mshta.exe that we observed earlier</strong></li></ul><figure id="24a5b2cc-075b-80e8-a0a3-f3494763bdcd" class="image"><a href="C7A228E2-8BED-49F6-A0EB-BA9DE83F197A.png"><img style="width:2576px" src="C7A228E2-8BED-49F6-A0EB-BA9DE83F197A.png"/></a></figure><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="24a5b2cc-075b-8005-8005-f73cd7b30204" class="code code-wrap"><code class="language-Objective-C" style="white-space:pre-wrap;word-break:break-all">&quot;C:\Windows\System32\xcopy.exe&quot; /s /i /e /h D:\review.dat C:\Users\EVAN~1.HUT\AppData\Local\Temp\review.dat</code></pre><p id="24a5b2cc-075b-807b-90e4-e4aa0d625615" class="">
+</p><ul id="24a5b2cc-075b-8020-967f-e73f1240e345" class="bulleted-list"><li style="list-style-type:disc"><strong>Question 3: The implanted file was eventually used and executed by the stage 1 payload. What is the full command-line value of this execution?<br/><br/>We can see from the subsequent event that the review.dat was run with rundll.exe</strong></li></ul><figure id="24a5b2cc-075b-80c6-9c05-f3886de3545e" class="image"><a href="66CF9FAA-033E-4954-A4C4-80EEB6C41530.png"><img style="width:2214px" src="66CF9FAA-033E-4954-A4C4-80EEB6C41530.png"/></a></figure><p id="24a5b2cc-075b-80be-b0ea-cff6feab2765" class="">
+</p><ul id="24a5b2cc-075b-8065-9733-f07e41781998" class="bulleted-list"><li style="list-style-type:disc"><strong>Question 4: </strong>The stage 1 payload established a persistence mechanism. What is the name of the scheduled task created by the malicious script?<br/></li></ul><p id="24a5b2cc-075b-80ab-98bf-d5503f02a7e6" class="">By following the events, we notice that there was an attempt to create a scheduled task names Review</p><figure id="24a5b2cc-075b-8099-bfac-cca4243a1e9e" class="image"><a href="293BCD0B-5FF4-4C43-A2DF-42F0219FA300.png"><img style="width:2218px" src="293BCD0B-5FF4-4C43-A2DF-42F0219FA300.png"/></a></figure><p id="24a5b2cc-075b-800d-be09-dbec2563a160" class="">
+</p><ul id="24a5b2cc-075b-8093-af2e-d9ec2a7b5457" class="bulleted-list"><li style="list-style-type:disc"><strong>Question 5: </strong>The execution of the implanted file inside the machine has initiated a potential C2 connection. What is the IP and port used by this connection? (format: IP:port)<br/><br/>I added a filter to see only sysmon event code 3, then added some fields such as det ip and port then looked at the outgoing network connections initiated, and 99.6% of connections were to this IP</li></ul><figure id="24a5b2cc-075b-8009-84a2-ca7b4c7ba1b6" class="image"><a href="image%20319.png"><img style="width:625px" src="image%20319.png"/></a></figure><p id="24a5b2cc-075b-806b-acb2-d89a341ad7e8" class="">
+</p><ul id="24a5b2cc-075b-80d1-afeb-c63eedece46c" class="bulleted-list"><li style="list-style-type:disc">The attacker has discovered that the current access is a local administrator. What is the name of the process used by the attacker to execute a UAC bypass?<br/><br/>I follwed review.dat and tried to find out what it was doing, I found a process called fodhelper.exe, while doing a search , i learned that it was an auto uac elevated process</li></ul><figure id="24a5b2cc-075b-809f-b6c0-df3772d47295" class="image"><a href="728F9AD1-8246-4246-9BBE-13B6BC1C2163.png"><img style="width:2200px" src="728F9AD1-8246-4246-9BBE-13B6BC1C2163.png"/></a></figure><p id="24a5b2cc-075b-8064-92fe-e4c7eafabff2" class="">
+</p><ul id="24a5b2cc-075b-8049-a643-ef883f53c101" class="bulleted-list"><li style="list-style-type:disc">Having a high privilege machine access, the attacker attempted to dump the credentials inside the machine. What is the GitHub link used by the attacker to download a tool for credential dumping?<br/></li></ul><p id="24a5b2cc-075b-80dd-9a65-e30eadf23e12" class="">i searched for <em>github and found a lot of  entries to download mimikatz</em></p><figure id="24a5b2cc-075b-8056-b3db-e68fbb999c42" class="image"><a href="3422D16C-5BF8-45D2-9B0F-5476FE7E2A32.png"><img style="width:2564px" src="3422D16C-5BF8-45D2-9B0F-5476FE7E2A32.png"/></a></figure><p id="24a5b2cc-075b-80fc-8163-cf4c29f1d211" class="">
+</p><ul id="24a5b2cc-075b-8056-b3d1-e403f80371a4" class="bulleted-list"><li style="list-style-type:disc">After successfully dumping the credentials inside the machine, the attacker used the credentials to gain access to another machine. What is the username and hash of the new credential pair? (format: username:hash)<br/><br/>I followed mimikatz, and observed the events, I noticed the attacker trying to do a pass the hash after they have dumped the SAM hashes</li></ul><figure id="24a5b2cc-075b-809e-bdcd-c37900604dd3" class="image"><a href="E2BFF0E6-C6C9-439D-A656-0E94B892A2D5.png"><img style="width:2555px" src="E2BFF0E6-C6C9-439D-A656-0E94B892A2D5.png"/></a></figure><p id="24a5b2cc-075b-80bf-9328-ff451c5b234d" class="">
+</p><ul id="24a5b2cc-075b-8099-9649-de0331fe3bc6" class="bulleted-list"><li style="list-style-type:disc">Using the new credentials, the attacker attempted to enumerate accessible file shares. What is the name of the file accessed by the attacker from a remote share?<br/><br/>Scrolling down, we can see that the attacker utilized another popular PowerShell script for finding file shares in the machine. It was also able to read the contents of it.</li></ul><figure id="24a5b2cc-075b-80d3-80e7-c6d92c143d1f" class="image"><a href="FEB44E7B-CDE5-4E2D-AECB-472B882359D2.png"><img style="width:2575px" src="FEB44E7B-CDE5-4E2D-AECB-472B882359D2.png"/></a></figure><ul id="24a5b2cc-075b-80f1-b2a3-edf90dff5d07" class="bulleted-list"><li style="list-style-type:disc">After getting the contents of the remote file, the attacker used the new credentials to move laterally. What is the new set of credentials discovered by the attacker? (format: username:password)<br/><br/>We can see that right after the ps1 script has been run, we notice a lateral movement using the following crednetial</li></ul><figure id="24a5b2cc-075b-802d-ad6a-dc9b267442ed" class="image"><a href="4BD08EC0-910D-4591-81CA-6A1412313C2F.png"><img style="width:2203px" src="4BD08EC0-910D-4591-81CA-6A1412313C2F.png"/></a></figure><p id="24a5b2cc-075b-80eb-94da-e9947c606b0a" class="">
+</p><ul id="24a5b2cc-075b-8079-abdd-ca3301c31b7c" class="bulleted-list"><li style="list-style-type:disc">What is the hostname of the attacker&#x27;s target machine for its lateral movement attempt?<br/><br/>WKSTN-1327 as seen from the previous screenshot<br/></li></ul><ul id="24a5b2cc-075b-8031-a5e6-fd4b47551819" class="bulleted-list"><li style="list-style-type:disc">Using the malicious command executed by the attacker from the first machine to move laterally, what is the parent process name of the malicious command executed on the second compromised machine?</li></ul><p id="24a5b2cc-075b-8020-937c-fee8a5b1c5c5" class="">Filter events with Event ID of 1 and with the host name of “WKSTN-1327”.</p><figure id="24a5b2cc-075b-80c7-9bdc-f622874ac6ba" class="image"><a href="https://igorsec.blog/wp-content/uploads/2023/11/image-139.png?w=1024"><img style="width:700px" src="https://igorsec.blog/wp-content/uploads/2023/11/image-139.png?w=1024"/></a></figure><p id="24a5b2cc-075b-8039-997c-eb0780241057" class="">We can see that the command issued to move laterally was a child process of another process.</p><figure id="24a5b2cc-075b-80da-98c9-c41b52c4b162" class="image"><a href="https://igorsec.blog/wp-content/uploads/2023/11/image-140.png?w=1024"><img style="width:700px" src="https://igorsec.blog/wp-content/uploads/2023/11/image-140.png?w=1024"/></a></figure><p id="24a5b2cc-075b-80c8-aa48-ea067857d314" class="">
+</p><ul id="24a5b2cc-075b-8025-a175-c2f1cb34a0bf" class="bulleted-list"><li style="list-style-type:disc">The attacker then dumped the hashes in this second machine. What is the username and hash of the newly dumped credentials? (format: username:hash)<br/><br/>Right after, we see that mimikatz wa bought into and was used to dump credentials again</li></ul><figure id="24a5b2cc-075b-807e-aa2b-db57afb55141" class="image"><a href="C1A3BEE5-7230-42F4-AA81-8428A90E947C.png"><img style="width:2579px" src="C1A3BEE5-7230-42F4-AA81-8428A90E947C.png"/></a></figure><ul id="24a5b2cc-075b-8053-bc40-eb4d1ce624db" class="bulleted-list"><li style="list-style-type:disc">After gaining access to the domain controller, the attacker attempted to dump the hashes via a DCSync attack. Aside from the administrator account, what account did the attacker dump?</li></ul><p id="24a5b2cc-075b-80ec-9007-f394738df397" class=""><br/><strong>We see here the flow of attack performed by the attacker. After passing the hash of the Administrator, the attacker performed a few commands and the conducted a DCSYN attack against the user Administrator.</strong><br/></p><figure id="24a5b2cc-075b-807f-9eee-c25b54f3ba3d" class="image"><a href="E45BCFDF-6F66-41F0-9B3C-F02EFED5B1D1.png"><img style="width:2571px" src="E45BCFDF-6F66-41F0-9B3C-F02EFED5B1D1.png"/></a></figure><figure id="24a5b2cc-075b-80c0-8c0b-c2fe6710f28a" class="image"><a href="image-144.png"><img style="width:710px" src="image-144.png"/></a></figure><figure id="24a5b2cc-075b-8040-a664-d776068a24f1" class="image"><a href="96D9E41B-199D-4B6B-AABC-EDFE8838503A.png"><img style="width:710px" src="96D9E41B-199D-4B6B-AABC-EDFE8838503A.png"/></a></figure><ul id="24a5b2cc-075b-8056-b2fa-e93d35c138ec" class="bulleted-list"><li style="list-style-type:disc">After dumping the hashes, the attacker attempted to download another remote file to execute ransomware. What is the link used by the attacker to download the ransomware binary?<br/><br/>shortly after, we see the following file being downloaded</li></ul><figure id="24a5b2cc-075b-809d-9297-d131554097a8" class="image"><a href="CAE0CDAD-C151-4819-95C5-35146D8855F7.png"><img style="width:709.933349609375px" src="CAE0CDAD-C151-4819-95C5-35146D8855F7.png"/></a></figure><p id="24a5b2cc-075b-8070-9c8c-d70122dad7d0" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

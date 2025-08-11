@@ -1,0 +1,733 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Intro to Logs</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="24a5b2cc-075b-8028-bb90-f70f476bbd42" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/19b19a4e55a402acb3161cd43f520381.png"/></div><h1 class="page-title"><strong>Intro to Logs</strong></h1><p class="page-description"></p></header><div class="page-body"><p id="24a5b2cc-075b-8080-be5c-da023f6af4af" class=""><em>How can we identify malicious activities? What kind of evidence is generated when an intruder breaches a network? Why is it essential to recognise these indicators within our environment?</em></p><p id="24a5b2cc-075b-8096-b186-e8f361b6d642" class="">Logs serve as invaluable records of past events, providing essential insights to address these questions. By preserving an archive of historical activities, we can bolster our security posture and protect our digital assets more effectively. </p><figure id="24a5b2cc-075b-807d-bbeb-dc02c92771b9" class="image"><a href="993C3590-4F14-4B2E-941B-6341B5EDDAED.png"><img style="width:686px" src="993C3590-4F14-4B2E-941B-6341B5EDDAED.png"/></a></figure><p id="24a5b2cc-075b-80ec-a24d-d11cd19d7bb2" class="">By analysing logs as records of historical activities, individuals and organisations can gain essential knowledge, enhancing their overall awareness and preparedness across a wide range of situations. </p><h2 id="24a5b2cc-075b-8071-a278-f0f690fe26f5" class="">Working with Logs: Scenario</h2><p id="24a5b2cc-075b-80a6-bf64-c9ec57cc2020" class=""><strong>Scenario:</strong> A web server of <strong>SwiftSpend Financial</strong> is constantly bombarded with scans from an adversary. As a systems administrator of this organisation tasked to address this predicament, you must identify what the adversary is doing by configuring logging and analysing collected logs.<br/></p><figure id="24a5b2cc-075b-80ee-a68b-df2741067b83" class="image"><a href="0170DD9A-5929-4977-AC41-950E3BC71C53.png"><img style="width:685.9833374023438px" src="0170DD9A-5929-4977-AC41-950E3BC71C53.png"/></a></figure><p id="24a5b2cc-075b-8040-97f6-c4e7915648d9" class="">
+</p><h2 id="24a5b2cc-075b-807f-bb3f-f226ccd6da5b" class="">The True Power of Logs: Contextual Correlation</h2><p id="24a5b2cc-075b-8003-bdce-f9d6f1e3b6af" class="">A single log entry may seem insignificant on its own. But when log data is aggregated, analysed, and cross-referenced with other sources of information, it becomes a potent investigation tool. Logs can answer critical questions about an event, such as:</p><ul id="24a5b2cc-075b-80db-a148-d606db7295c6" class="bulleted-list"><li style="list-style-type:disc"><strong>What</strong> happened?</li></ul><ul id="24a5b2cc-075b-808f-8bc4-e29b872a11be" class="bulleted-list"><li style="list-style-type:disc"><strong>When</strong> did it happen?</li></ul><ul id="24a5b2cc-075b-806f-b169-ca8a6271c0f5" class="bulleted-list"><li style="list-style-type:disc"><strong>Where</strong> did it happen?</li></ul><ul id="24a5b2cc-075b-80ab-a557-c6f6702b002c" class="bulleted-list"><li style="list-style-type:disc"><strong>Who</strong> is responsible?</li></ul><ul id="24a5b2cc-075b-80e1-8aad-f127eaddba59" class="bulleted-list"><li style="list-style-type:disc"><strong>Were</strong> their actions <strong>successful</strong>?</li></ul><ul id="24a5b2cc-075b-8076-8194-c10f08dbdd7e" class="bulleted-list"><li style="list-style-type:disc"><strong>What</strong> was the result of their action?</li></ul><p id="24a5b2cc-075b-8001-8c34-c7876bd1b377" class="">The following hypothetical scenario can illustrate this aspect. Suppose a student allegedly accessed inappropriate content on a University network. By reviewing the logs, a systems administrator could then answer the following:</p><table id="24a5b2cc-075b-80ae-89fb-d5541368dfb8" class="simple-table"><thead class="simple-table-header"><tr id="24a5b2cc-075b-80df-9bdb-dd717fb6778b"><th id="yT;&gt;" class="simple-table-header-color simple-table-header">Question</th><th id="{onF" class="simple-table-header-color simple-table-header" style="width:518px">Answer</th></tr></thead><tbody><tr id="24a5b2cc-075b-8023-97bf-cc9ee08e2725"><td id="yT;&gt;" class="">What happened?</td><td id="{onF" class="" style="width:518px">An adversary was <strong>confirmed</strong> to have accessed SwiftSpend Financial&#x27;s GitLab instance.</td></tr><tr id="24a5b2cc-075b-80b0-87ad-c3a165a8428e"><td id="yT;&gt;" class="">When did it happen?</td><td id="{onF" class="" style="width:518px">Access started at 22:10 on Wednesday, September 8th, 2023.</td></tr><tr id="24a5b2cc-075b-802c-be96-c2832ffea8eb"><td id="yT;&gt;" class="">Where did it happen?</td><td id="{onF" class="" style="width:518px">The event originated from a device with an IP address of 10.10.133.168 within the VPN Users&#x27; segment (10.10.133.0/24).</td></tr><tr id="24a5b2cc-075b-803c-9f4d-fc1b6bcd2833"><td id="yT;&gt;" class="">Who is responsible?</td><td id="{onF" class="" style="width:518px">Upon examining the network logs, it was observed that <br/>the device, identified by the User-Agent &quot;Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/115.0&quot;, was allocated the IP address 10.10.133.168.</td></tr><tr id="24a5b2cc-075b-80b6-b280-c9f04b9e658e"><td id="yT;&gt;" class="">Were they successful?</td><td id="{onF" class="" style="width:518px">Yes, since an API Key was found to be publicly exposed on the GitLab instance. Moreover, the web proxy logs confirm that the adversary device reached <em>gitlab.swiftspend.finance</em> and maintained access through their uploaded web shell.</td></tr><tr id="24a5b2cc-075b-8010-aea5-e18b11c8047e"><td id="yT;&gt;" class="">What is the result of their action?</td><td id="{onF" class="" style="width:518px">The adversary achieved remote code execution on <em>gitlab.swiftspend.finance</em> and performed post-exploitation activities.</td></tr></tbody></table><p id="24a5b2cc-075b-8003-bc62-e061aa14538f" class="">The example above emphasises how logs are instrumental in piecing together a complete picture of an event, thereby enhancing our understanding and ability to respond effectively.</p><p id="24a5b2cc-075b-8051-8963-d77e5eb1b72e" class="">
+</p><ul id="24a5b2cc-075b-80c5-bb45-d07527c95713" class="bulleted-list"><li style="list-style-type:disc">What is the name of your colleague who left a note on your Desktop?<br/>Perry!</li></ul><figure id="24a5b2cc-075b-8025-b9d9-d2a54e7979c3" class="image"><a href="E1A6BE9E-1EA0-44FB-B51B-2D827B517C90.png"><img style="width:685.9833374023438px" src="E1A6BE9E-1EA0-44FB-B51B-2D827B517C90.png"/></a></figure><ul id="24a5b2cc-075b-80ca-8a73-de105f8367f6" class="bulleted-list"><li style="list-style-type:disc">What is the full path to the suggested log file for initial investigation?<br/><br/><code>/var/log/gitlab/nginx/access.log</code></li></ul><figure id="24a5b2cc-075b-80a2-baed-d5945d072108" class="image"><a href="12E96B06-E555-4435-90FC-0F87F69AB8B7.png"><img style="width:686px" src="12E96B06-E555-4435-90FC-0F87F69AB8B7.png"/></a></figure><p id="24a5b2cc-075b-801c-b628-c4c28b911409" class=""><br/></p><h2 id="24a5b2cc-075b-80f7-af45-d691534b41f7" class="">Types, Formats, and Standards</h2><p id="24a5b2cc-075b-80ec-86d6-c790efae2846" class="">Specific log types can offer a unique perspective on a system&#x27;s operation, performance, and security. While there are various log types, we will focus on the most common ones that cover approximately 80% of the typical use cases.</p><p id="24a5b2cc-075b-8081-a077-c7a339653b6a" class="">Below is a list of some of the most common log types:</p><figure id="24a5b2cc-075b-8092-94b2-f945280aa238" class="image"><a href="0F11B537-FDC1-4746-8623-CE770ED67A92.png"><img style="width:890px" src="0F11B537-FDC1-4746-8623-CE770ED67A92.png"/></a></figure><p id="24a5b2cc-075b-80b1-a075-c1c93dac9647" class="">Understanding the various log types, formats, and standards is critical for practical log analysis. It enables an analyst to effectively parse, interpret, and gain insights from log data, facilitating troubleshooting, performance optimisation, incident response, and threat hunting. </p><p id="24a5b2cc-075b-80c9-8263-e38177e0c85f" class="">
+</p><h2 id="24a5b2cc-075b-802c-bda8-f294aa3d18bd" class=""><strong>Log Formats</strong></h2><p id="24a5b2cc-075b-80a4-850b-d50d96bf471b" class="">A log format defines the structure and organisation of data within a log file. It specifies how the data is encoded, how each entry is delimited, and what fields are included in each row. These formats can vary widely and may fall into three main categories: Semi-structured, Structured, and Unstructured. We&#x27;ll explore these categories and illustrate their usage with examples.</p><ul id="24a5b2cc-075b-80a5-adff-e438a51cf74a" class="bulleted-list"><li style="list-style-type:disc"><strong>Semi-structured Logs:</strong> These logs may contain structured and unstructured data, with predictable components accommodating free-form text. Examples include:<ul id="24a5b2cc-075b-805a-b608-d10a6b13c289" class="bulleted-list"><li style="list-style-type:circle"><strong>Syslog Message Format:</strong> A widely adopted logging protocol for system and network logs.<p id="24a5b2cc-075b-801b-a8b3-cf396bc31733" class="">Example of a log file utilising the Syslog Format</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="24a5b2cc-075b-803f-9bd4-d93106a96a4c" class="code code-wrap"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">damianhall@WEBSRV-02:~/logs$ cat syslog.txtMay 31 12:34:56 WEBSRV-02 CRON[2342593]: (root) CMD ([ -x /etc/init.d/anacron ] &amp;&amp; if [ ! -d /run/systemd/system ]; then /usr/sbin/invoke-rc.d anacron start &gt;/dev/null; fi)</code></pre></li></ul><ul id="24a5b2cc-075b-80fb-be24-c8c0a6e53b5f" class="bulleted-list"><li style="list-style-type:circle"><strong>Windows Event Log (EVTX) Format:</strong> Proprietary Microsoft log for Windows systems.<p id="24a5b2cc-075b-809d-8034-fa6230fa34f3" class="">Example of a log file utilising the Windows Event Log (EVTX) Format</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="24a5b2cc-075b-80dc-8b68-f92bb6ab8a46" class="code code-wrap"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">PS C:\WINDOWS\system32&gt; Get-WinEvent -Path &quot;C:\Windows\System32\winevt\Logs\Application.evtx&quot;
+
+
+   ProviderName: Microsoft-Windows-Security-SPP
+
+TimeCreated                      Id LevelDisplayName Message
+-----------                      -- ---------------- -------
+31/05/2023 17:18:24           16384 Information      Successfully scheduled Software Protection service for re-start
+31/05/2023 17:17:53           16394 Information      Offline downlevel migration succeeded.</code></pre></li></ul></li></ul><ul id="24a5b2cc-075b-80f3-a386-d551d1ea9885" class="bulleted-list"><li style="list-style-type:disc"><strong>Structured Logs:</strong> Following a strict and standardised format, these logs are conducive to parsing and analysis.<br/>Typical structured log formats include:<ul id="24a5b2cc-075b-800f-88e3-d6f4978de0c6" class="bulleted-list"><li style="list-style-type:circle"><strong>Field Delimited Formats:</strong> Comma-Separated Values (CSV) and Tab-Separated Values (TSV) are formats often used for tabular data.<p id="24a5b2cc-075b-8020-a8b8-decb77b8cd6e" class="">Example of a log file utilising CSV Format</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="24a5b2cc-075b-80e2-bf96-ef948636bd46" class="code code-wrap"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">damianhall@WEBSRV-02:~/logs$ cat log.csv&quot;time&quot;,&quot;user&quot;,&quot;action&quot;,&quot;status&quot;,&quot;ip&quot;,&quot;uri&quot;
+&quot;2023-05-31T12:34:56Z&quot;,&quot;adversary&quot;,&quot;GET&quot;,200,&quot;34.253.159.159&quot;,&quot;http://gitlab.swiftspend.finance:80/&quot;</code></pre></li></ul><ul id="24a5b2cc-075b-8061-90f7-f54be8834603" class="bulleted-list"><li style="list-style-type:circle"><strong>JavaScript Object Notation (JSON):</strong> Known for its readability and compatibility with modern programming languages.<p id="24a5b2cc-075b-80c9-a43a-c783d23e1368" class="">Example of a log file utilising the JSON Format</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="24a5b2cc-075b-809c-874c-da8ee795d1ff" class="code code-wrap"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">damianhall@WEBSRV-02:~/logs$ cat log.json{&quot;time&quot;: &quot;2023-05-31T12:34:56Z&quot;, &quot;user&quot;: &quot;adversary&quot;, &quot;action&quot;: &quot;GET&quot;, &quot;status&quot;: 200, &quot;ip&quot;: &quot;34.253.159.159&quot;, &quot;uri&quot;: &quot;http://gitlab.swiftspend.finance:80/&quot;}</code></pre></li></ul><ul id="24a5b2cc-075b-806e-8931-cef8b15e6303" class="bulleted-list"><li style="list-style-type:circle"><strong>W3C Extended Log Format (ELF):</strong> Defined by the World Wide Web Consortium (W3C), customizable for web server<br/>logging. It is typically used by Microsoft Internet Information Services (IIS) Web Server.<p id="24a5b2cc-075b-80fd-ab54-c4a609cd657f" class="">Example of a log file utilising W3C Extended Log Format (ELF)</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="24a5b2cc-075b-80f9-8734-e4f14c834c7b" class="code code-wrap"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">damianhall@WEBSRV-02:~/logs$ cat elf.log#Version: 1.0
+#Fields: date time c-ip c-username s-ip s-port cs-method cs-uri-stem sc-status
+31-May-2023 13:55:36 34.253.159.159 adversary 34.253.127.157 80 GET /explore 200</code></pre></li></ul><ul id="24a5b2cc-075b-80ee-bbdb-e80ca727ac81" class="bulleted-list"><li style="list-style-type:circle"><strong>eXtensible Markup Language (XML):</strong> Flexible and customizable for creating standardized logging formats.<p id="24a5b2cc-075b-802e-bbf9-ce5dc3b829eb" class="">Example of a log file utilising an XML Format</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="24a5b2cc-075b-80ef-9706-c5bcce650e45" class="code code-wrap"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">damianhall@WEBSRV-02:~/logs$ cat log.xml&lt;log&gt;&lt;time&gt;2023-05-31T12:34:56Z&lt;/time&gt;&lt;user&gt;adversary&lt;/user&gt;&lt;action&gt;GET&lt;/action&gt;&lt;status&gt;200&lt;/status&gt;&lt;ip&gt;34.253.159.159&lt;/ip&gt;&lt;url&gt;https://gitlab.swiftspend.finance/&lt;/url&gt;&lt;/log&gt;</code></pre></li></ul></li></ul><ul id="24a5b2cc-075b-808d-9d3f-c892ad8678ec" class="bulleted-list"><li style="list-style-type:disc"><strong>Unstructured Logs:</strong> Comprising free-form text, these logs can be rich in context but may pose challenges in systematic parsing. Examples include:<ul id="24a5b2cc-075b-800a-aa42-dc9f8a57c1c0" class="bulleted-list"><li style="list-style-type:circle"><strong>NCSA Common Log Format (CLF):</strong> A standardized web server log format for client requests. It is typically used by the Apache HTTP Server by default.<p id="24a5b2cc-075b-8025-86e0-f3f5311ed2f7" class="">Example of a log file utilising NCSA Common Log Format (CLF)</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="24a5b2cc-075b-80cd-b6dc-ce28a68c4b49" class="code code-wrap"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">damianhall@WEBSRV-02:~/logs$ cat clf.log34.253.159.159 - adversary [31/May/2023:13:55:36 +0000] &quot;GET /explore HTTP/1.1&quot; 200 4886</code></pre></li></ul><ul id="24a5b2cc-075b-8043-a743-f749b71fb6af" class="bulleted-list"><li style="list-style-type:circle"><strong>NCSA Combined Log Format (Combined):</strong> An extension of CLF, adding fields like referrer and user agent. It is typically used by Nginx HTTP Server by default.<p id="24a5b2cc-075b-80d8-8f30-d1f9d26d3496" class="">Example of a log file utilising NCSA Combined Log Format (Combined)</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="24a5b2cc-075b-8091-81ba-f3332cb9fac7" class="code code-wrap"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">damianhall@WEBSRV-02:~/logs$ cat combined.log34.253.159.159 - adversary [31/May/2023:13:55:36 +0000] &quot;GET /explore HTTP/1.1&quot; 200 4886 &quot;http://gitlab.swiftspend.finance/&quot; &quot;Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/115.0&quot;</code></pre></li></ul></li></ul><h3 id="24a5b2cc-075b-8044-bfca-e41f254419c3" class="">Log Standards</h3><p id="24a5b2cc-075b-8074-b861-de28bf7648b5" class="">A log standard is a set of guidelines or specifications that define how logs should be generated, transmitted, and stored. Log standards may specify the use of particular log formats, but they also cover other aspects of logging, such as what events should be logged, how logs should be transmitted securely, and how long logs should be retained. <br/>Examples of log standards include:</p><ul id="24a5b2cc-075b-8026-ba25-fb5192908531" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue"><strong><a href="https://cee.mitre.org/">Common Event Expression (CEE)</a></strong></mark><strong><a href="https://cee.mitre.org/">:</a></strong><strong> </strong>This standard, developed by MITRE, provides a common structure for log data, making it easier to generate, transmit, store, and analyse logs.</li></ul><ul id="24a5b2cc-075b-80eb-ae94-e61d2f98e745" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue"><strong><a href="https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html">OWASP Logging Cheat Sheet:</a></strong></mark><strong> </strong>A guide for developers on building application logging mechanisms, especially related to security logging.</li></ul><ul id="24a5b2cc-075b-8001-9a10-ef3ec84a8049" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue"><strong><a href="https://datatracker.ietf.org/doc/html/rfc5424">Syslog Protocol:</a></strong></mark><strong> </strong>Syslog is a standard for message logging, allowing separation of the software<br/>that generates messages from the system that stores them and the<br/>software that reports and analyses them.</li></ul><ul id="24a5b2cc-075b-802c-9597-ed816456eceb" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue"><strong><a href="https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-92.pdf">NIST Special Publication 800-92:</a></strong></mark><strong> </strong>This publication guides computer security log management.</li></ul><ul id="24a5b2cc-075b-805b-91df-d36756884a1e" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue"><strong><a href="https://learn.microsoft.com/en-us/azure/azure-monitor/logs/data-platform-logs">Azure Monitor Logs:</a></strong></mark><strong> </strong>Guidelines for log monitoring on Microsoft Azure.</li></ul><ul id="24a5b2cc-075b-8046-9bf8-e9c77b3e366d" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue"><strong><a href="https://cloud.google.com/logging/docs">Google Cloud Logging:</a></strong></mark><strong> </strong>Guidelines for logging on the Google Cloud Platform (GCP).</li></ul><ul id="24a5b2cc-075b-8085-a913-c137f9060a3a" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue"><strong><a href="https://docs.oracle.com/en-us/iaas/Content/Logging/Concepts/loggingoverview.htm">Oracle Cloud Infrastructure Logging:</a></strong></mark><strong> </strong>Guidelines for logging on the Oracle Cloud Infrastructure (OCI).</li></ul><ul id="24a5b2cc-075b-808d-88f1-e6dc4f6f7956" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue"><strong><a href="https://it.vt.edu/content/dam/it_vt_edu/policies/Standard_for_Information_Technology_Logging.pdf">Virginia Tech - Standard for Information Technology Logging:</a></strong></mark><mark class="highlight-blue"><strong> </strong></mark>Sample log review and compliance guideline.</li></ul><p id="24a5b2cc-075b-80fe-ae07-c16d990a6bcc" class="">
+</p><h2 id="24a5b2cc-075b-8069-b3ad-fa0e5085d4d7" class="">Collection, Management, and Centralization</h2><hr id="24a5b2cc-075b-80a3-b6e4-f1c8870a0c0f"/><h3 id="24a5b2cc-075b-80af-8a5c-fe0f07af034b" class=""><strong>1. Accurate Timekeeping in Logs</strong></h3><ul id="24a5b2cc-075b-8003-8784-ecfab91d471e" class="bulleted-list"><li style="list-style-type:disc">Logs must have correct timestamps to maintain chronological accuracy.</li></ul><ul id="24a5b2cc-075b-8091-b31e-eadd8bb1fac0" class="bulleted-list"><li style="list-style-type:disc"><strong>Use NTP</strong> (Network Time Protocol) to sync system time and preserve log integrity.</li></ul><ul id="24a5b2cc-075b-806d-8827-f4713e94c96e" class="bulleted-list"><li style="list-style-type:disc"><strong>Steps:</strong><ol type="1" id="24a5b2cc-075b-800f-a559-e2653eb5ac0e" class="numbered-list" start="1"><li>Identify log sources (servers, DBs, apps, network devices).</li></ol><ol type="1" id="24a5b2cc-075b-80bf-8acd-d386199c0d29" class="numbered-list" start="2"><li>Choose a suitable log collector.</li></ol><ol type="1" id="24a5b2cc-075b-8087-8822-f7745b6600da" class="numbered-list" start="3"><li>Configure collection parameters:<ul id="24a5b2cc-075b-80db-bd26-d5e2d20091f4" class="bulleted-list"><li style="list-style-type:disc">Enable NTP.</li></ul><ul id="24a5b2cc-075b-802f-bb89-ef4a2e5d0d9d" class="bulleted-list"><li style="list-style-type:disc">Decide which events to log and at what intervals.</li></ul><ul id="24a5b2cc-075b-809e-8d04-fa545be329dc" class="bulleted-list"><li style="list-style-type:disc">Prioritise important data.</li></ul></li></ol><ol type="1" id="24a5b2cc-075b-80a2-a54e-e27bacae4ceb" class="numbered-list" start="4"><li>Test the collection process.</li></ol></li></ul><ul id="24a5b2cc-075b-803f-8751-fb52581934a9" class="bulleted-list"><li style="list-style-type:disc"><strong>Note:</strong> In air-gapped/VM environments without internet, NTP sync may not be possible. In practice, use <code>pool.ntp.org</code>.</li></ul><ul id="24a5b2cc-075b-8094-b14e-d2221a08fdf5" class="bulleted-list"><li style="list-style-type:disc"><strong>Example Command (Linux):</strong></li></ul><figure id="24a5b2cc-075b-8087-9492-d946d3cd1af2" class="image"><a href="8891F0AA-F016-4BDB-A6B2-D0D470898AF4.png"><img style="width:890px" src="8891F0AA-F016-4BDB-A6B2-D0D470898AF4.png"/></a></figure><hr id="24a5b2cc-075b-80b6-89d4-efd05d9f865e"/><h3 id="24a5b2cc-075b-8013-a5c3-cbdd31d85fec" class=""><strong>2. Log Management</strong></h3><ul id="24a5b2cc-075b-8019-b89a-f2a5c3a43b04" class="bulleted-list"><li style="list-style-type:disc"><strong>Purpose:</strong> Securely store, organise, and make logs retrievable.</li></ul><ul id="24a5b2cc-075b-809f-b2e9-e5dc2d29c8f4" class="bulleted-list"><li style="list-style-type:disc"><strong>Best Practices:</strong><ul id="24a5b2cc-075b-8024-8f09-d3815b5dd90a" class="bulleted-list"><li style="list-style-type:circle"><strong>Storage:</strong> Secure, with defined retention policies.</li></ul><ul id="24a5b2cc-075b-807b-9521-cc857acffb85" class="bulleted-list"><li style="list-style-type:circle"><strong>Organisation:</strong> Classify by source/type for easier access.</li></ul><ul id="24a5b2cc-075b-80a7-bd38-ef3edca9b7e0" class="bulleted-list"><li style="list-style-type:circle"><strong>Backup:</strong> Regular backups to prevent loss.</li></ul><ul id="24a5b2cc-075b-80dc-939a-e1b53104e31d" class="bulleted-list"><li style="list-style-type:circle"><strong>Review:</strong> Periodic checks to ensure logs are intact and correctly categorised.</li></ul></li></ul><ul id="24a5b2cc-075b-80f2-833d-d742133123e6" class="bulleted-list"><li style="list-style-type:disc"><strong>Hybrid approach:</strong> Keep all logs but trim non-essential ones for efficiency.</li></ul><hr id="24a5b2cc-075b-800e-bcf2-fcdb35e679ac"/><h3 id="24a5b2cc-075b-803f-94ff-f4509d2885ad" class=""><strong>3. Log Centralisation</strong></h3><ul id="24a5b2cc-075b-80df-909f-ec200b0cf127" class="bulleted-list"><li style="list-style-type:disc"><strong>Benefits:</strong> Faster access, better analysis, quicker incident response.</li></ul><ul id="24a5b2cc-075b-80b6-b212-e64dab91f9e5" class="bulleted-list"><li style="list-style-type:disc"><strong>Steps:</strong><ol type="1" id="24a5b2cc-075b-801c-aafd-dd135100689c" class="numbered-list" start="1"><li>Choose a centralised system (e.g., <strong>Elastic Stack</strong>, <strong>Splunk</strong>).</li></ol><ol type="1" id="24a5b2cc-075b-804d-b93d-f9395593c9c7" class="numbered-list" start="2"><li>Integrate all sources into it.</li></ol><ol type="1" id="24a5b2cc-075b-8018-b400-d5a6d993b77f" class="numbered-list" start="3"><li>Enable real-time monitoring and alerts.</li></ol><ol type="1" id="24a5b2cc-075b-800d-a483-fd66f044d67a" class="numbered-list" start="4"><li>Ensure integration with incident management tools.</li></ol></li></ul><hr id="24a5b2cc-075b-8071-bc4c-dafd5cb529b9"/><p id="24a5b2cc-075b-8002-8621-ea8f603e1558" class="">
+</p><h3 id="24a5b2cc-075b-80fe-9cee-d1dcbafb5062" class=""><strong>Practical Activity: Log Collection with rsyslog<br/></strong></h3><p id="24a5b2cc-075b-80fd-a4ff-f3b9eb5f8120" class="">This activity aims to introduce <code>rsyslog</code> and demonstrate how it can enhance the centralisation and management of logs. As part of the collection process, we will configure <code>rsyslog</code> to log all sshd messages to a specific file, such as <code>/var/log/websrv-02/rsyslog_sshd.log</code>. The steps below can be followed to achieve this:</p><ol type="1" id="24a5b2cc-075b-8005-8f0c-d880883502b3" class="numbered-list" start="1"><li><strong>Open a Terminal.</strong></li></ol><ol type="1" id="24a5b2cc-075b-80b0-845e-da58ad9e5776" class="numbered-list" start="2"><li><strong>Ensure rsyslog is Installed:</strong> You can check if rsyslog is installed by running the command: <code>sudo systemctl status rsyslog</code></li></ol><figure id="24a5b2cc-075b-8004-9939-e97e3526b935" class="image"><a href="7DE91BEF-1825-41E6-A28E-4FBAA25FF5A8.png"><img style="width:889.9833374023438px" src="7DE91BEF-1825-41E6-A28E-4FBAA25FF5A8.png"/></a></figure><ol type="1" id="24a5b2cc-075b-8031-b3bc-defba6987e9a" class="numbered-list" start="1"><li><strong>Create a Configuration File:</strong> Use a text editor to create the following configuration file: <code>gedit /etc/rsyslog.d/98-websrv-02-sshd.conf</code>, <code>nano /etc/rsyslog.d/98-websrv-02-sshd.conf</code>, <code>vi /etc/rsyslog.d/98-websrv-02-sshd.conf</code>, or <code>vim /etc/rsyslog.d/98-websrv-02-sshd.conf</code></li></ol><figure id="24a5b2cc-075b-804c-a03d-e3bab5868ac6" class="image"><a href="5DB33774-CB75-4311-9F01-60BDAC51F673.png"><img style="width:889.9500122070312px" src="5DB33774-CB75-4311-9F01-60BDAC51F673.png"/></a></figure><ol type="1" id="24a5b2cc-075b-8089-99be-d0a685f221c3" class="numbered-list" start="1"><li><strong>Add the Configuration:</strong> Add the following lines in <code>/etc/rsyslog.d/98-websrv-02-sshd.conf</code> to direct the sshd messages to the specific log file:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="24a5b2cc-075b-801e-aab4-cd7807d55f45" class="code code-wrap"><code class="language-YAML" style="white-space:pre-wrap;word-break:break-all">$FileCreateMode 0644
+:programname, isequal, &quot;sshd&quot; /var/log/websrv-02/rsyslog_sshd.log</code></pre></li></ol><ol type="1" id="24a5b2cc-075b-8054-a213-eba307bbcee6" class="numbered-list" start="2"><li><strong>Save and Close the Configuration File.</strong></li></ol><ol type="1" id="24a5b2cc-075b-80da-9f64-caec0529bc67" class="numbered-list" start="3"><li><strong>Restart rsyslog:</strong> Apply the changes by restarting rsyslog with the command: <code>sudo systemctl restart rsyslog</code></li></ol><ol type="1" id="24a5b2cc-075b-80fe-b80f-d6939432fab2" class="numbered-list" start="4"><li><strong>Verify the Configuration:</strong> You can verify the configuration works by initiating an SSH connection to localhost via <code>ssh localhost</code> or by checking the log file after a minute or two.</li></ol><figure id="24a5b2cc-075b-808c-9c82-dfcf450fcc2f" class="image"><a href="DAF46DB7-E597-43B5-9ABA-A77E42455E10.png"><img style="width:890px" src="DAF46DB7-E597-43B5-9ABA-A77E42455E10.png"/></a></figure><p id="24a5b2cc-075b-80eb-8873-c3ec6b9f143b" class="">
+</p><ul id="24a5b2cc-075b-8061-a5a2-c99ae057d1fb" class="bulleted-list"><li style="list-style-type:disc">After configuring rsyslog for sshd, what username repeatedly appears in the sshd logs at /var/log/websrv-02/rsyslog_sshd.log, indicating failed login attempts or brute forcing?</li></ul><figure id="24a5b2cc-075b-80e2-bc88-d18f9b6fa75f" class="image"><a href="276FF475-D544-41E6-9226-A5F942BF28AC.png"><img style="width:889.9833374023438px" src="276FF475-D544-41E6-9226-A5F942BF28AC.png"/></a></figure><p id="24a5b2cc-075b-80b1-93b2-e55d8a04ef4e" class="">
+</p><ul id="24a5b2cc-075b-80b6-b8ef-f1f4c4fe178d" class="bulleted-list"><li style="list-style-type:disc">What is the IP address of SIEM-02 based on the rsyslog configuration file /etc/rsyslog.d/99-websrv-02-cron.conf, which is used to monitor cron messages?</li></ul><figure id="24a5b2cc-075b-8012-99fd-d2db91be9456" class="image"><a href="692E8638-3E78-4BC0-B50D-CD27760BC38B.png"><img style="width:889.9833374023438px" src="692E8638-3E78-4BC0-B50D-CD27760BC38B.png"/></a></figure><ul id="24a5b2cc-075b-8037-8d92-cbc9c4e6893e" class="bulleted-list"><li style="list-style-type:disc">Based on the generated logs in /var/log/websrv-02/rsyslog_cron.log, what command is being executed by the root user?</li></ul><figure id="24a5b2cc-075b-80e1-a826-f454567dab52" class="image"><a href="632E927F-EE21-4CE6-A576-237810BC683B.png"><img style="width:890px" src="632E927F-EE21-4CE6-A576-237810BC683B.png"/></a></figure><p id="24a5b2cc-075b-8083-80e2-f87c579137ea" class="">
+</p><p id="24a5b2cc-075b-8070-aa03-d4290f5bf1c5" class="">
+</p><h2 id="24a5b2cc-075b-8074-8b07-c04c6e08bf16" class="">Storage, Retention, and Deletion</h2><h3 id="24a5b2cc-075b-80cc-8ebe-d5a5afe2fc78" class="">Log Storage</h3><p id="24a5b2cc-075b-80da-a241-d0414fd39924" class="">Logs can be stored in various locations, such as the local system that generates them, a centralised repository, or cloud-based storage. The choice of storage location typically depends on multiple factors:</p><figure id="24a5b2cc-075b-80f6-8092-cc798e9f646e" class="image"><a href="2066B3EA-69C2-4A9E-861A-995E75D7032B.png"><img style="width:890px" src="2066B3EA-69C2-4A9E-861A-995E75D7032B.png"/></a></figure><h3 id="24a5b2cc-075b-809a-bb22-e254d3353c72" class="">Log Retention</h3><p id="24a5b2cc-075b-805a-b21a-f17a1083cf0c" class="">It is vital to recognise that log storage is not infinite. Therefore, a reasonable balance between retaining logs for potential <br/>future needs and the storage cost is necessary. Understanding the concepts of Hot, Warm, and Cold storage can aid in this decision-making:</p><figure id="24a5b2cc-075b-80dc-962a-ff9350ad891e" class="image"><a href="A6A60600-4CE0-4E5F-A670-1E5373E8DF05.png"><img style="width:890px" src="A6A60600-4CE0-4E5F-A670-1E5373E8DF05.png"/></a></figure><p id="24a5b2cc-075b-8056-83d5-c6ea624f362e" class="">Managing the cost of storing logs is critical for organisations, and carefully selecting Hot, Warm, or Cold storage strategies can help keep these costs in check. </p><h3 id="24a5b2cc-075b-80c7-bb18-c6d9ff34b451" class="">Log Deletion</h3><p id="24a5b2cc-075b-80a4-9abe-f02278ff5026" class="">Log deletion must be performed carefully to avoid removing logs that could still be of value. The backup of log files, especially crucial ones, is necessary before deletion. It is essential to have a well-defined deletion policy to ensure <br/>compliance with data protection laws and regulations. Log deletion helps to:</p><ul id="24a5b2cc-075b-80fa-92ee-eac308b562f2" class="bulleted-list"><li style="list-style-type:disc">Maintain a manageable size of logs for analysis.</li></ul><ul id="24a5b2cc-075b-80f2-a80b-c2e5ea88879a" class="bulleted-list"><li style="list-style-type:disc">Comply with privacy regulations, such as GDPR, which require unnecessary data to be deleted.</li></ul><ul id="24a5b2cc-075b-804e-8154-ec6d83b36cea" class="bulleted-list"><li style="list-style-type:disc">Keep storage costs in balance.</li></ul><h3 id="24a5b2cc-075b-802c-b922-e65c21cd6ccd" class="">Best Practices: Log Storage, Retention and Deletion</h3><ul id="24a5b2cc-075b-80dc-93ab-ca9693ba26ec" class="bulleted-list"><li style="list-style-type:disc">Determine the storage, retention, and deletion policy based on both business needs and legal requirements.</li></ul><ul id="24a5b2cc-075b-806c-819b-e8d9dc914138" class="bulleted-list"><li style="list-style-type:disc">Regularly review and update the guidelines per changing conditions and regulations.</li></ul><ul id="24a5b2cc-075b-8021-b849-f177136fad6c" class="bulleted-list"><li style="list-style-type:disc">Automate the storage, retention, and deletion processes to ensure consistency and avoid human errors.</li></ul><ul id="24a5b2cc-075b-8053-ad69-cb2ad46a22cb" class="bulleted-list"><li style="list-style-type:disc">Encrypt sensitive logs to protect data.</li></ul><ul id="24a5b2cc-075b-805f-bd3d-dc4fa3c27f39" class="bulleted-list"><li style="list-style-type:disc">Regular backups should be made, especially before deletion.</li></ul><p id="24a5b2cc-075b-8095-a038-c69a003aff78" class="">
+</p><h2 id="24a5b2cc-075b-80eb-8b58-d251d9b4b7f1" class=""><strong>Practical Activity: Log Management with logrotate</strong></h2><p id="24a5b2cc-075b-806f-af88-ea98e744c210" class=""><br/>This activity aims to introduce <code>logrotate</code>, a tool that automates log file rotation, compression, and management, ensuring that log files are handled systematically. It allows automatic rotation, compression, and removal of log files. As an example, here&#x27;s how we can set it up for <code>/var/log/websrv-02/rsyslog_sshd.log</code>:<br/></p><ol type="1" id="24a5b2cc-075b-80ae-acf0-f1859682b396" class="numbered-list" start="1"><li><strong>Create a Configuration File:</strong> <code>sudo gedit /etc/logrotate.d/98-websrv-02_sshd.conf</code>, <code>sudo nano /etc/logrotate.d/98-websrv-02_sshd.conf</code>, <code>sudo vi /etc/logrotate.d/98-websrv-02_sshd.conf</code>, or <code>sudo vim /etc/logrotate.d/98-websrv-02_sshd.conf</code></li></ol><ol type="1" id="24a5b2cc-075b-80ad-99a8-d8ea116ee10c" class="numbered-list" start="2"><li><strong>Define Log Settings:</strong><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="24a5b2cc-075b-8038-b12d-ca91fb4c3053" class="code code-wrap"><code class="language-VB.Net" style="white-space:pre-wrap;word-break:break-all">/var/log/websrv-02/rsyslog_sshd.log {
+    daily
+    rotate 30
+    compress
+    lastaction
+        DATE=$(date +&quot;%Y-%m-%d&quot;)
+        echo &quot;$(date)&quot; &gt;&gt; &quot;/var/log/websrv-02/hashes_&quot;$DATE&quot;_rsyslog_sshd.txt&quot;
+        for i in $(seq 1 30); do
+            FILE=&quot;/var/log/websrv-02/rsyslog_sshd.log.$i.gz&quot;
+            if [ -f &quot;$FILE&quot; ]; then
+                HASH=$(/usr/bin/sha256sum &quot;$FILE&quot; | awk &#x27;{ print $1 }&#x27;)
+                echo &quot;rsyslog_sshd.log.$i.gz &quot;$HASH&quot;&quot; &gt;&gt; &quot;/var/log/websrv-02/hashes_&quot;$DATE&quot;_rsyslog_sshd.txt&quot;
+            fi
+        done
+        systemctl restart rsyslog
+    endscript
+}</code></pre></li></ol><ol type="1" id="24a5b2cc-075b-80f5-b33a-f4ac541b8213" class="numbered-list" start="3"><li><strong>Save and Close the file.</strong></li></ol><ol type="1" id="24a5b2cc-075b-8035-9220-f75c9a845756" class="numbered-list" start="4"><li><strong>Manual Execution:</strong> <code>sudo logrotate -f /etc/logrotate.d/98-websrv-02_sshd.conf</code></li></ol><figure id="24a5b2cc-075b-8033-bbe3-dcef2d606660" class="image"><a href="9763BB32-64DD-45E9-B742-C54FBBAC9E04.png"><img style="width:889.9833374023438px" src="9763BB32-64DD-45E9-B742-C54FBBAC9E04.png"/></a></figure><p id="24a5b2cc-075b-80c5-824b-febec3bf1ba2" class="">
+</p><ul id="24a5b2cc-075b-8037-a9a4-c859293730d5" class="bulleted-list"><li style="list-style-type:disc">Based on the logrotate configuration /etc/logrotate.d/99-websrv-02_cron.conf, how many versions of old compressed log file copies will be kept?<br/>24</li></ul><figure id="24a5b2cc-075b-808f-b2b1-efffe06898d2" class="image"><a href="E59682CF-7502-4586-9FF2-E60E5419929C.png"><img style="width:889.9833374023438px" src="E59682CF-7502-4586-9FF2-E60E5419929C.png"/></a></figure><ul id="24a5b2cc-075b-806e-9f84-e28707a4d256" class="bulleted-list"><li style="list-style-type:disc">Based on the logrotate configuration /etc/logrotate.d/99-websrv-02_cron.conf, what is the log rotation frequency?<br/>hourly!</li></ul><figure id="24a5b2cc-075b-8014-be24-cb2cef57c5b3" class="image"><a href="45AABCB6-C2C9-460B-B6AC-3433B15B5DB5.png"><img style="width:889.9833374023438px" src="45AABCB6-C2C9-460B-B6AC-3433B15B5DB5.png"/></a></figure><p id="24a5b2cc-075b-8035-a969-fda5132271d4" class="">
+</p><h2 id="24a5b2cc-075b-802e-814e-cab4ee91f5d1" class="">Hands-on Exercise: Log analysis process, tools, and techniques</h2><p id="24a5b2cc-075b-8075-beb7-eab897c61a5c" class=""><br/>Logs are more than mere records of historical events; they can serve as a guiding compass. They are invaluable resources that, when skillfully leveraged, can enhance system diagnostics, cyber security, and regulatory compliance efforts. Their role in keeping a record of historical activity for a system or application is crucial.</p><h3 id="24a5b2cc-075b-8039-b709-d3ae81bfe3c3" class="">Log Analysis Process</h3><p id="24a5b2cc-075b-8006-b5ca-f8033d45bd97" class="">Log analysis involves Parsing, Normalisation, Sorting, Classification, Enrichment, Correlation, Visualisation, and Reporting. It can be done through various tools and techniques, ranging from complex systems like Splunk and ELK to ad-hoc methods ranging from default command-line tools to open-source tools.</p><figure id="24a5b2cc-075b-80c1-a3c3-f2d0a80b4c0f" class="image"><a href="8EDC00B6-0E53-44DD-8BF6-8A5713682278.png"><img style="width:889.9833374023438px" src="8EDC00B6-0E53-44DD-8BF6-8A5713682278.png"/></a></figure><figure id="24a5b2cc-075b-8067-96f2-c5c690751add" class="image"><a href="8CD04922-2C03-4C23-92D7-8EF5D2C7F5A5.png"><img style="width:890px" src="8CD04922-2C03-4C23-92D7-8EF5D2C7F5A5.png"/></a></figure><figure id="24a5b2cc-075b-80b7-80db-f1e79c1b5c83" class="image"><a href="16BA9A77-0C3B-40C2-BBD3-29B48DDEF2A2.png"><img style="width:889.9666748046875px" src="16BA9A77-0C3B-40C2-BBD3-29B48DDEF2A2.png"/></a></figure><p id="24a5b2cc-075b-809b-ae89-da1bf01db660" class="">
+</p><h3 id="24a5b2cc-075b-806b-9f16-e56fd6516c0c" class="">Log Analysis Tools</h3><p id="24a5b2cc-075b-809f-98b4-f1566dd33fd4" class="">Security Information and Event Management (SIEM) tools such as Splunk or Elastic Search can be used for complex log analysis tasks.</p><p id="24a5b2cc-075b-80c8-9a5a-fdc39fc172b8" class="">However, in scenarios where immediate data analysis is needed, such as during incident response, Linux-based systems can employ default tools like <code>cat</code>, <code>grep</code>, <code>sed</code>, <code>sort</code>, <code>uniq</code>, and <code>awk</code>, along with <code>sha256sum</code> for hashing log files. Windows-based systems can utilise <a href="https://ericzimmerman.github.io/#!index.md">EZ-Tools</a> and the default cmdlet <code>Get-FileHash</code> for similar purposes. These tools enable rapid parsing and analysis, which suits these situations.</p><p id="24a5b2cc-075b-8030-af37-df6d2a78f4a4" class="">Additionally, proper acquisition should be observed by taking the log file&#x27;s <strong>hash during collection</strong> to ensure its admissibility in a court of law.</p><p id="24a5b2cc-075b-80cb-893a-c425db901de5" class="">Therefore, it is imperative not only to log events but also to ensure their integrity, that they are analysed, and any lessons obtained from the logs be learned, as the safety and efficiency of an organisation can depend on them.</p><h3 id="24a5b2cc-075b-800e-b8f6-d47dbcc74a32" class="">Log Analysis Techniques</h3><p id="24a5b2cc-075b-804b-a282-d057984b3c37" class="">Log analysis techniques are methods or practices used to interpret and derive insights from log data. These techniques can range from simple to complex and are vital for identifying patterns, anomalies, and critical insights. Here are some common techniques:<br/></p><ul id="24a5b2cc-075b-8061-b93a-c90af4fe1288" class="bulleted-list"><li style="list-style-type:disc"><em><mark class="highlight-brown"><strong>Pattern Recognition:</strong></mark></em><em><mark class="highlight-brown"> This involves identifying recurring sequences or trends in log data. It can detect regular system behaviour or identify unusual activities that may indicate a security threat.<br/></mark></em></li></ul><ul id="24a5b2cc-075b-80cd-9bca-f0c9aa111ed8" class="bulleted-list"><li style="list-style-type:disc"><em><mark class="highlight-brown"><strong>Anomaly Detection:</strong></mark></em><em><mark class="highlight-brown"> Anomaly detection focuses on identifying data points that deviate from the expected pattern. It is crucial to spot potential issues or malicious activities early on.<br/></mark></em></li></ul><ul id="24a5b2cc-075b-80f1-bcb3-d064bc438a78" class="bulleted-list"><li style="list-style-type:disc"><em><mark class="highlight-brown"><strong>Correlation Analysis:</strong></mark></em><em><mark class="highlight-brown"> Correlating different log entries helps understand the relationship between various events. It can reveal <br/>causation and dependencies between system components and is vital in root cause analysis.<br/></mark></em></li></ul><ul id="24a5b2cc-075b-803e-a414-f28a6f43b5b0" class="bulleted-list"><li style="list-style-type:disc"><em><mark class="highlight-brown"><strong>Timeline Analysis:</strong></mark></em><em><mark class="highlight-brown"> Analysing logs over time helps understand trends, seasonalities, and periodic behaviours. It can be essential for performance monitoring and forecasting system loads.<br/></mark></em></li></ul><ul id="24a5b2cc-075b-80d8-9a42-d7011fced2b5" class="bulleted-list"><li style="list-style-type:disc"><em><mark class="highlight-brown"><strong>Machine Learning and AI:</strong></mark></em><em><mark class="highlight-brown"> Leveraging machine learning models can automate and enhance various log analysis techniques, such as classification and enrichment. AI can provide predictive insights and help in automating responses to specific events.<br/></mark></em></li></ul><ul id="24a5b2cc-075b-80a7-9b62-c2fdb64a2cc2" class="bulleted-list"><li style="list-style-type:disc"><em><mark class="highlight-brown"><strong>Visualisation:</strong></mark></em><em><mark class="highlight-brown"> Representing log data through graphs and charts allows for intuitive understanding and quick insights. Visualisation can make complex data more accessible and assist in identifying key patterns and relationships.<br/></mark></em></li></ul><ul id="24a5b2cc-075b-8054-ac98-eac4d9fcb262" class="bulleted-list"><li style="list-style-type:disc"><em><mark class="highlight-brown"><strong>Statistical Analysis:</strong></mark></em><em><mark class="highlight-brown"> Using statistical methods to analyse log data can provide quantitative insights and help make data-driven decisions. Regression analysis and hypothesis testing can infer relationships and validate assumptions.</mark></em><br/></li></ul><p id="24a5b2cc-075b-80e1-a930-c60c3331c71c" class="">These techniques can be applied individually or in combination, depending on the specific requirements and complexity of the log analysis task. Understanding and using these techniques can significantly enhance the effectiveness of log analysis, leading to more informed decisions and robust security measures.</p><p id="24a5b2cc-075b-8027-9f32-ff67d95de1c1" class="">
+</p><h2 id="24a5b2cc-075b-8060-8961-dc1fd42e678c" class=""><strong>Working with Logs: Practical Application<br/></strong></h2><p id="24a5b2cc-075b-80f4-8190-d98bbf895391" class="">Working with logs is a complex task requiring both comprehension and manipulation of data. This tutorial covers two scenarios. The first is handling unparsed raw log files accessed directly via an open-source <a href="https://github.com/sevdokimov/log-viewer">Log Viewer</a> tool. This method allows immediate analysis without preprocessing, which is ideal for quick inspections or preserving the original format.</p><p id="24a5b2cc-075b-80b0-bfdb-e2c5467bfacb" class="">The second scenario focuses on creating a parsed and consolidated log file using Unix tools like <code>cat</code>, <code>grep</code>, <code>sed</code>, <code>sort</code>, <code>uniq</code>, and <code>awk</code>. It involves merging, filtering, and formatting logs to create a standardized file. Accessible through the <a href="https://github.com/sevdokimov/log-viewer">Log Viewer</a> tool, this consolidated file offers a clear and efficient view of the data, aiding in identifying patterns and issues.</p><p id="24a5b2cc-075b-80c2-8cd1-e9e0ecede2de" class="">These approaches highlight the flexibility and significance of log analysis in system diagnostics and cyber security. Whether using raw or parsed logs, the ability to compile, view, and analyse data is vital for an organization&#x27;s safety and efficiency.</p><p id="24a5b2cc-075b-8031-8e79-efc8073bd3dd" class=""><strong>Unparsed Raw Log Files</strong></p><p id="24a5b2cc-075b-8018-bdbf-fb0f68f5655a" class="">When dealing with raw log files, you can access them directly through the Log Viewer tool by specifying the paths in the URL. Here&#x27;s an example URL that includes multiple log files:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="24a5b2cc-075b-808c-b451-d3abc9aaa1b5" class="code code-wrap"><code class="language-YAML" style="white-space:pre-wrap;word-break:break-all">http://10.10.178.214:8111/log?log=%2Fvar%2Flog%2Fgitlab%2Fnginx%2Faccess.log&amp;log=%2Fvar%2Flog%2Fwebsrv-02%2Frsyslog_cron.log&amp;log=%2Fvar%2Flog%2Fwebsrv-02%2Frsyslog_sshd.log&amp;log=%2Fvar%2Flog%2Fgitlab%2Fgitlab-rails%2Fapi_json.log</code></pre><p id="24a5b2cc-075b-801a-a876-fa7c21864b4b" class="">Paste this URL into your browser to view the unparsed raw log files using the <a href="https://github.com/sevdokimov/log-viewer">Log Viewer</a> tool.</p><p id="24a5b2cc-075b-803b-abe1-ca6450750215" class=""><strong>Parsed and Consolidated Log File</strong></p><p id="24a5b2cc-075b-804f-8d7b-d37c732e100d" class="">To create a parsed and consolidated log file, you can use a combination of Unix tools like <code>cat</code>, <code>grep</code>, <code>sed</code>, <code>sort</code>, <code>uniq</code>, and <code>awk</code>. Here&#x27;s a step-by-step guide:</p><ol type="1" id="24a5b2cc-075b-8029-a7e7-d19f72615360" class="numbered-list" start="1"><li>Use <code>awk</code> and <code>sed</code> to normalize the log entries to the desired format. For this example, we will sort by date and time:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="24a5b2cc-075b-80e9-b8bf-dc313980773d" class="code code-wrap"><code class="language-YAML" style="white-space:pre-wrap;word-break:break-all"># Process nginx access log
+awk -F&#x27;[][]&#x27; &#x27;{print &quot;[&quot; $2 &quot;]&quot;, &quot;--- /var/log/gitlab/nginx/access.log ---&quot;, &quot;\&quot;&quot; $0 &quot;\&quot;&quot;}&#x27; /var/log/gitlab/nginx/access.log  | sed &quot;s/ +0000//g&quot; &gt; /tmp/parsed_consolidated.log
+
+# Process rsyslog_cron.log
+awk &#x27;{ original_line = $0; gsub(/ /, &quot;/&quot;, $1); printf &quot;[%s/%s/2023:%s] --- /var/log/websrv-02/rsyslog_cron.log --- \&quot;%s\&quot;\n&quot;, $2, $1, $3, original_line }&#x27; /var/log/websrv-02/rsyslog_cron.log &gt;&gt; /tmp/parsed_consolidated.log
+
+# Process rsyslog_sshd.log
+awk &#x27;{ original_line = $0; gsub(/ /, &quot;/&quot;, $1); printf &quot;[%s/%s/2023:%s] --- /var/log/websrv-02/rsyslog_sshd.log --- \&quot;%s\&quot;\n&quot;, $2, $1, $3, original_line }&#x27; /var/log/websrv-02/rsyslog_sshd.log &gt;&gt; /tmp/parsed_consolidated.log
+
+# Process gitlab-rails/api_json.log
+awk -F&#x27;&quot;&#x27; &#x27;{timestamp = $4; converted = strftime(&quot;[%d/%b/%Y:%H:%M:%S]&quot;, mktime(substr(timestamp, 1, 4) &quot; &quot; substr(timestamp, 6, 2) &quot; &quot; substr(timestamp, 9, 2) &quot; &quot; substr(timestamp, 12, 2) &quot; &quot; substr(timestamp, 15, 2) &quot; &quot; substr(timestamp, 18, 2) &quot; 0 0&quot;)); print converted, &quot;--- /var/log/gitlab/gitlab-rails/api_json.log ---&quot;, &quot;\&quot;&quot;$0&quot;\&quot;&quot;}&#x27; /var/log/gitlab/gitlab-rails/api_json.log &gt;&gt; /tmp/parsed_consolidated.log</code></pre></li></ol><ol type="1" id="24a5b2cc-075b-80ad-983e-c914e094d2a0" class="numbered-list" start="2"><li><strong>Optional:</strong> Use <code>grep</code> to filter specific entries:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="24a5b2cc-075b-8072-bf84-ddcd4d761046" class="code code-wrap"><code class="language-YAML" style="white-space:pre-wrap;word-break:break-all">grep &quot;34.253.159.159&quot; /tmp/parsed_consolidated.log &gt; /tmp/filtered_consolidated.log</code></pre></li></ol><ol type="1" id="24a5b2cc-075b-80c2-a604-fcafdbbdd4ad" class="numbered-list" start="3"><li>Use <code>sort</code> to sort all the log entries by date and time:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="24a5b2cc-075b-800c-bfbd-c7136439d12c" class="code code-wrap"><code class="language-YAML" style="white-space:pre-wrap;word-break:break-all">sort /tmp/parsed_consolidated.log &gt; /tmp/sort_parsed_consolidated.log</code></pre></li></ol><ol type="1" id="24a5b2cc-075b-80b2-86ca-f52bfba83c3a" class="numbered-list" start="4"><li>Use <code>uniq</code> to remove duplicate entries:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="24a5b2cc-075b-80ec-853d-c357c72eff7a" class="code code-wrap"><code class="language-YAML" style="white-space:pre-wrap;word-break:break-all">uniq /tmp/sort_parsed_consolidated.log &gt; /tmp/uniq_sort_parsed_consolidated.log</code></pre></li></ol><p id="24a5b2cc-075b-8064-9df1-e1c869994abe" class="">You can now access the parsed and consolidated log file through the <a href="https://github.com/sevdokimov/log-viewer">Log Viewer</a> tool using the following URL:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="24a5b2cc-075b-802d-a824-f0743a4f37d9" class="code code-wrap"><code class="language-YAML" style="white-space:pre-wrap;word-break:break-all">http://10.10.178.214:8111/log?path=%2Ftmp%2Funiq_sort_parsed_consolidated.log</code></pre><figure id="24a5b2cc-075b-80f8-9ebf-c4bf5f95f4ae" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/63da722f2d207d0049da10b1/room-content/5ef64ce6f3e0eaf396d91cf2409c473f.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/63da722f2d207d0049da10b1/room-content/5ef64ce6f3e0eaf396d91cf2409c473f.png"/></a></figure><p id="24a5b2cc-075b-8065-8813-cb5616e9504a" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

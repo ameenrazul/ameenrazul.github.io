@@ -1,0 +1,691 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Tshark</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="22e5b2cc-075b-80c0-9c11-f822768e1db1" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/6131132af49360005df01ae3-1717498281351"/></div><h1 class="page-title">Tshark</h1><p class="page-description"></p></header><div class="page-body"><p id="22e5b2cc-075b-80eb-aa75-c30cdb11f75c" class="">TShark is an open-source command-line network traffic analyser. It is created by the Wireshark developers and has most of the features of Wireshark. It is commonly used as a command-line version of Wireshark. However, it can also be used like tcpdump. Therefore it is preferred for comprehensive packet assessments.</p><h1 id="22e5b2cc-075b-8013-9212-c2dd132a7633" class="">Command-Line Packet Analysis Hints</h1><p id="22e5b2cc-075b-8001-85ce-ff6e8d108d52" class="">TShark is a text-based tool, and it is suitable for data carving, in-depth packet analysis, and automation with scripts. This strength and flexibility come out of the nature of the CLI tools, as the produced/processed data can be pipelined to additional tools. The most common tools used in packet analysis are listed below.</p><table id="22e5b2cc-075b-80e8-8320-c9ddf7b6e9a3" class="simple-table"><tbody><tr id="22e5b2cc-075b-801d-bd70-f7a1b52f8c60"><td id="T]C]" class=""><strong>Tool/Utility</strong></td><td id="eShU" class="" style="width:623.9842834472656px"><strong>Purpose and Benefit</strong></td></tr><tr id="22e5b2cc-075b-80c8-aceb-e5dc0279825a"><td id="T]C]" class=""><strong>capinfos</strong></td><td id="eShU" class="" style="width:623.9842834472656px">A program that provides details of a specified capture file. It is suggested to view the summary of the capture file before starting an investigation.</td></tr><tr id="22e5b2cc-075b-8017-ad2d-d9c652354651"><td id="T]C]" class=""><mark class="highlight-pink"><strong>grep</strong></mark></td><td id="eShU" class="" style="width:623.9842834472656px">Helps search plain-text data.</td></tr><tr id="22e5b2cc-075b-8009-a3b9-e603730fb418"><td id="T]C]" class=""><strong>cut</strong></td><td id="eShU" class="" style="width:623.9842834472656px">Helps cut parts of lines from a specified data source.</td></tr><tr id="22e5b2cc-075b-80a3-8182-da284ab22121"><td id="T]C]" class=""><strong>uniq</strong></td><td id="eShU" class="" style="width:623.9842834472656px">Filters repeated lines/values.</td></tr><tr id="22e5b2cc-075b-8051-8dbb-e530121e70e5"><td id="T]C]" class=""><strong>nl</strong></td><td id="eShU" class="" style="width:623.9842834472656px">Views the number of shown lines.</td></tr><tr id="22e5b2cc-075b-80c2-b38e-e7ea439cc6c3"><td id="T]C]" class=""><strong>sed</strong></td><td id="eShU" class="" style="width:623.9842834472656px">A stream editor.</td></tr><tr id="22e5b2cc-075b-8006-bf5d-c85cc85b0dae"><td id="T]C]" class=""><strong>awk</strong></td><td id="eShU" class="" style="width:623.9842834472656px">Scripting language that helps pattern search and processing.</td></tr></tbody></table><p id="22e5b2cc-075b-807b-8e24-ff99717f9922" class="">capinfos - a tool to get information about a pcap</p><figure id="22e5b2cc-075b-805e-a7e2-c04941b5a4a4" class="image"><a href="0727F9A4-CDC6-44EA-962F-2873C7EECCE9.png"><img style="width:693.7893676757812px" src="0727F9A4-CDC6-44EA-962F-2873C7EECCE9.png"/></a></figure><p id="22e5b2cc-075b-8053-b521-ff4d854963c5" class="">
+</p><h2 id="22e5b2cc-075b-80b0-932d-f53ed2c02332" class=""><strong>Command-Line Interface and Parameters</strong></h2><p id="22e5b2cc-075b-8024-836b-efd1af393a25" class="">TShark is a text-based (command-line) tool. Therefore, conducting an in-depth and consecutive analysis of the obtained results is easy. Multiple built-in options are ready to use to help analysts conduct such investigations. However, learning the parameters is essential; you will need the built-in options and associated parameters to keep control of the output and not be flooded with the detailed output of TShark. The most common parameters are explained in the given table below. Note that TShark requires superuser privileges to sniff live traffic and list all available interfaces.</p><table id="22e5b2cc-075b-80c9-bc0b-ce1e0a2da791" class="simple-table"><tbody><tr id="22e5b2cc-075b-8053-ba15-df358a566d3c"><td id="F~yL" class=""><strong>Parameter</strong></td><td id="nsYi" class="" style="width:553.9842834472656px"><strong>Purpose</strong></td></tr><tr id="22e5b2cc-075b-8039-8e23-cf4bbe9df5d8"><td id="F~yL" class="">-h</td><td id="nsYi" class="" style="width:553.9842834472656px">• Display the help page with the most common features.<br/>• <code>tshark -h</code></td></tr><tr id="22e5b2cc-075b-80aa-90bc-fead143e2efa"><td id="F~yL" class="">-v</td><td id="nsYi" class="" style="width:553.9842834472656px">• Show version info.<br/>• <code>tshark -v</code></td></tr><tr id="22e5b2cc-075b-803f-93ad-c5d23cd43f5d"><td id="F~yL" class="">-D</td><td id="nsYi" class="" style="width:553.9842834472656px">• List available sniffing interfaces.<br/>• <code>tshark -D</code></td></tr><tr id="22e5b2cc-075b-801f-a211-de8806933bba"><td id="F~yL" class="">-i</td><td id="nsYi" class="" style="width:553.9842834472656px">• Choose an interface to capture live traffic.<br/>• <code>tshark -i 1</code><br/>• <code>tshark -i ens55</code></td></tr><tr id="22e5b2cc-075b-800e-9bc2-ec2e5758ff03"><td id="F~yL" class=""><strong>No Parameter</strong></td><td id="nsYi" class="" style="width:553.9842834472656px">• Sniff the traffic like tcpdump.<br/>• <code>tshark</code></td></tr></tbody></table><figure id="22e5b2cc-075b-800f-8276-d983027f02ba" class="image"><a href="3CE6B2B6-898F-4236-97DD-1945DFB5649A.png"><img style="width:709.9214477539062px" src="3CE6B2B6-898F-4236-97DD-1945DFB5649A.png"/></a></figure><p id="22e5b2cc-075b-8043-a656-fb9001c188d8" class="">Sniffing can be done with and without selecting a specific interface. When a particular interface is selected, TShark uses that interface to sniff the traffic. TShark will use the first available interface when no interface is selected, usually listed as 1 in the terminal. Having no interface argument is an alias for <code>-i 1</code>. You can also set different sniffing interfaces by using the parameter <code>-i</code>. TShark always echoes the used interface name at the beginning of the sniffing.</p><figure id="22e5b2cc-075b-8083-b698-ea05cf839633" class="image"><a href="image%20216.png"><img style="width:709.9685668945312px" src="image%20216.png"/></a></figure><p id="22e5b2cc-075b-80f7-97a0-c9125edb0a47" class=""><strong>﻿﻿</strong></p><h2 id="22e5b2cc-075b-807e-8491-d387f736860d" class=""><strong>Command-Line Interface and Parameters II</strong></h2><table id="22e5b2cc-075b-8020-b5e8-f58be475965a" class="simple-table"><tbody><tr id="22e5b2cc-075b-8008-93fd-f9cea6ef59d4"><td id="YPPF" class=""><strong>Parameter</strong></td><td id="ORjl" class="" style="width:604.9842834472656px"><strong>Purpose</strong></td></tr><tr id="22e5b2cc-075b-80d6-b717-e3306f859072"><td id="YPPF" class="">-r</td><td id="ORjl" class="" style="width:604.9842834472656px">• Read/input function. Read a capture file.<br/>• <code>tshark -r demo.pcapng</code></td></tr><tr id="22e5b2cc-075b-8087-b25b-fa2e7ad211d0"><td id="YPPF" class="">-c</td><td id="ORjl" class="" style="width:604.9842834472656px">• Packet count. Stop after capturing a specified number of packets.<br/>• E.g. stop after capturing/filtering/reading 10 packets.<br/>• <code>tshark -c 10</code></td></tr><tr id="22e5b2cc-075b-806e-929a-fab71e1591a2"><td id="YPPF" class="">-w</td><td id="ORjl" class="" style="width:604.9842834472656px">• Write/output function. Write the sniffed traffic to a file.<br/>• <code>tshark -w sample-capture.pcap</code></td></tr><tr id="22e5b2cc-075b-80a6-816b-cd87049ea6e3"><td id="YPPF" class="">-V</td><td id="ORjl" class="" style="width:604.9842834472656px">• Verbose.<br/>• Provide detailed information <strong>for each packet</strong>. This option will provide details similar to Wireshark&#x27;s &quot;Packet Details Pane&quot;.<br/>• <code>tshark -V</code></td></tr><tr id="22e5b2cc-075b-800b-b626-dedd20e9d9ea"><td id="YPPF" class="">-q</td><td id="ORjl" class="" style="width:604.9842834472656px">• Silent mode.<br/>• Suspress the packet outputs on the terminal.<br/>• <code>tshark -q</code></td></tr><tr id="22e5b2cc-075b-8089-a9f3-c3e78844c5dc"><td id="YPPF" class="">-x</td><td id="ORjl" class="" style="width:604.9842834472656px">• Display packet bytes.<br/>• Show packet details in hex and ASCII dump for each packet.<br/>• <code>tshark -x</code></td></tr><tr id="22e5b2cc-075b-80d4-a1c8-fe9ee5557867"><td id="YPPF" class="">-Y</td><td id="ORjl" class="" style="width:604.9842834472656px"><code>Y “frame.number == 25”</code> will only give 25th frame</td></tr></tbody></table><p id="22e5b2cc-075b-8036-ba01-e5484eeab922" class="">
+</p><h2 id="22e5b2cc-075b-80b7-9485-c0ee086f8e05" class="">Questions</h2><ol type="1" id="22e5b2cc-075b-80c3-a1c9-d8044399f0f2" class="numbered-list" start="1"><li>What are the assigned TCP flags in the 29th packet?</li></ol><p id="22e5b2cc-075b-803e-ab72-db832a69370e" class=""><code>tshark -r demo.pcapng -V -c29</code></p><figure id="22e5b2cc-075b-8087-bb61-d572452d2797" class="image"><a href="9C77296F-A531-4E0A-B187-AD6E5D63685F.png"><img style="width:664.9685668945312px" src="9C77296F-A531-4E0A-B187-AD6E5D63685F.png"/></a></figure><p id="22e5b2cc-075b-80b2-81f2-f507f61a1abc" class="">
+</p><ol type="1" id="22e5b2cc-075b-80bf-8637-ef3cc9b6f65e" class="numbered-list" start="2"><li>What is the &quot;Ack&quot; value of the 25th packet?</li></ol><p id="22e5b2cc-075b-805c-8973-d027b1188b5e" class=""><code>tshark -r demo.pcapng -Y &quot;frame.number == 25&quot; -V</code></p><figure id="22e5b2cc-075b-806f-b4c9-e6e02545529f" class="image"><a href="image%20217.png"><img style="width:658.97802734375px" src="image%20217.png"/></a></figure><p id="22e5b2cc-075b-803a-810b-fb238894861a" class="">
+</p><ol type="1" id="22e5b2cc-075b-8012-8039-e9fa878846f2" class="numbered-list" start="3"><li>What is the &quot;Window size value&quot; of the 9th packet?</li></ol><figure id="22e5b2cc-075b-8083-9870-c565e1adb49c" class="image"><a href="CEB9E24E-C087-419E-B24E-409408B5C9FB.png"><img style="width:709.8270874023438px" src="CEB9E24E-C087-419E-B24E-409408B5C9FB.png"/></a></figure><p id="22e5b2cc-075b-8087-aa46-f3188cd5f949" class="">
+</p><h2 id="22e5b2cc-075b-80cb-ae4d-c4f3699b5823" class="">TShark Fundamentals II | Capture Conditions</h2><h1 id="22e5b2cc-075b-80f8-8ca8-f33282592e79" class="">Capture Condition Parameters</h1><p id="22e5b2cc-075b-80d3-9f10-ce75e5a1b3a3" class="">As a network sniffer and packet analyser, TShark can be configured to count packets and stop at a specific point or run in a loop structure. The most common parameters are explained below.</p><table id="22e5b2cc-075b-803a-85b5-ead1972a1bd8" class="simple-table"><tbody><tr id="22e5b2cc-075b-8028-be1d-d0bf8912d899"><td id="SviA" class=""><strong>Parameter</strong></td><td id="\jNB" class="" style="width:576.9842834472656px"><strong>Purpose</strong></td></tr><tr id="22e5b2cc-075b-80f6-a372-d6f193cca09c"><td id="SviA" class=""></td><td id="\jNB" class="" style="width:576.9842834472656px">Define capture conditions for a single run/loop. STOP after completing the condition. Also known as &quot;Autostop&quot;.</td></tr><tr id="22e5b2cc-075b-8090-9a7e-f31a94d4d26e"><td id="SviA" class="">-a</td><td id="\jNB" class="" style="width:576.9842834472656px">• <strong>Duration:</strong> Sniff the traffic and stop after X seconds. Create a new file and write output to it.<br/>    ◦ <code>tshark -w test.pcap -a duration:1</code><br/>• <strong>Filesize:</strong> Define the maximum capture file size. Stop after reaching X file size (KB).<br/>    ◦ <code>tshark -w test.pcap -a filesize:10</code><br/>• <strong>Files:</strong> Define the maximum number of output files. Stop after X files.<br/>    ◦ <code>tshark -w test.pcap -a filesize:10 -a files:3</code></td></tr><tr id="22e5b2cc-075b-80ae-8569-ce4aa86d30b7"><td id="SviA" class=""></td><td id="\jNB" class="" style="width:576.9842834472656px">Ring buffer control options. Define capture conditions for multiple runs/loops. (INFINITE LOOP).</td></tr><tr id="22e5b2cc-075b-807b-871a-fb52660db83f"><td id="SviA" class="">-b</td><td id="\jNB" class="" style="width:576.9842834472656px">• <strong>Duration:</strong> Sniff the traffic for X seconds, create a new file and write output to it. <br/>    ◦ <code>tshark -w test.pcap -b duration:1</code><br/>• <strong>Filesize: </strong>Define the maximum capture file size. Create a new file and write output to it after reaching filesize X (KB).<br/>    ◦ <code>tshark -w test.pcap -b filesize:10</code><br/>• <strong>Files:</strong> Define the maximum number of output files. Rewrite the first/oldest file after creating X files.<br/>    ◦ <code>tshark -w test.pcap -b filesize:10 -b files:3</code></td></tr></tbody></table><p id="22e5b2cc-075b-804d-a74d-dc1245aa1332" class="">Capture condition parameters only work in the &quot;capturing/sniffing&quot; mode. You will receive an error message if you try to read a pcap file and apply the capture condition parameters. The idea is to save the capture files in specific sizes for different purposes during live capturing. If you need to extract sorts of packets from a specific capture file, you will need to use the read&amp;write options discussed in the previous task.</p><p id="22e5b2cc-075b-80b6-b9a1-e791e14cf14f" class="">Hint: TShark supports combining autostop (<code>-a</code>) parameters with ring buffer control parameters (<code>-b</code>). You can combine the parameters according to your needs. Use the infinite loop options carefully; remember, you must use at least one autostop parameter to stop the infinite loop.</p><figure id="22e5b2cc-075b-8078-9b6c-d457b5a55bfb" class="image"><a href="E26EBE77-F4CA-41F5-9887-9E5F0E0F7FB3.png"><img style="width:709.952880859375px" src="E26EBE77-F4CA-41F5-9887-9E5F0E0F7FB3.png"/></a></figure><figure id="22e5b2cc-075b-80fd-94ae-fdf065c510aa" class="image"><a href="2C5DFDFC-E5D4-4799-AD8C-DBB9DC93D52D.png"><img style="width:709.9057006835938px" src="2C5DFDFC-E5D4-4799-AD8C-DBB9DC93D52D.png"/></a></figure><p id="22e5b2cc-075b-80f8-a730-ecc36d471c19" class="">
+</p><h2 id="22e5b2cc-075b-8000-825b-e72f024e089a" class=""><strong>Packet Filtering Parameters | Capture &amp; Display Filters</strong></h2><p id="22e5b2cc-075b-809b-a49b-e40df24a20b9" class="">There are two dimensions of packet filtering in TShark; live (capture) and post-capture (display) filtering. These two dimensions can be filtered with two different approaches; using a predefined syntax or Berkeley Packet Filters (BPF). TShark supports both, so you can use Wireshark filters and BPF to filter traffic. As mentioned earlier, TShark is a command-line version of Wireshark, so we will need to use different filters for capturing and filtering packets. A quick recap from the<strong> </strong><a href="https://tryhackme.com/r/room/wiresharkpacketoperations">Wireshark: Packet Operations</a> room:</p><table id="22e5b2cc-075b-801c-8d27-f4b81eab7c60" class="simple-table"><tbody><tr id="22e5b2cc-075b-80da-ab43-f94710f65623"><td id="I}]n" class=""><strong>Capture Filters</strong></td><td id="esHg" class="" style="width:586.9842834472656px">Live filtering options. The purpose is to<strong> save</strong> only a specific part of the traffic. It is set before capturing traffic and is not changeable during live capture.</td></tr><tr id="22e5b2cc-075b-8077-aa8c-dbccb2599d22"><td id="I}]n" class=""><strong>Display Filters</strong></td><td id="esHg" class="" style="width:586.9842834472656px">Post-capture filtering options. The purpose is to investigate packets by <strong>reducing the number of visible packets</strong>, which is changeable during the investigation.</td></tr></tbody></table><p id="22e5b2cc-075b-8021-bb3b-f9a58bc1a08b" class="">Capture filters are used to have a specific type of traffic in the capture file rather than having everything. Capture filters have limited filtering features, and the purpose is to implement a scope by range, protocol, and direction filtering. This might sound like bulk/raw filtering, but it still provides organised capture files with reasonable file size. The display filters investigate the capture files in-depth without modifying the packet.</p><table id="22e5b2cc-075b-8046-8787-f1b7e1cadf3f" class="simple-table"><tbody><tr id="22e5b2cc-075b-80ce-b041-c0cec11b3905"><td id="Asjk" class=""><strong>Parameter</strong></td><td id="_d@j" class="" style="width:589.9842834472656px"><strong>Purpose</strong></td></tr><tr id="22e5b2cc-075b-80b7-9946-d62c0a3b6d07"><td id="Asjk" class="">-f</td><td id="_d@j" class="" style="width:589.9842834472656px">Capture filters. Same as BPF syntax and Wireshark&#x27;s capture filters.</td></tr><tr id="22e5b2cc-075b-803d-bbb2-de5976a512a8"><td id="Asjk" class="">-Y</td><td id="_d@j" class="" style="width:589.9842834472656px">Display filters. Same as <strong>Wireshark&#x27;s display filters.</strong></td></tr></tbody></table><p id="22e5b2cc-075b-801c-bea4-c4460967fc78" class="">
+</p><h2 id="22e5b2cc-075b-80c9-b3fc-f5e7c63deb3e" class="">TShark Fundamentals IV | Packet Filtering Options: Capture Filters</h2><p id="22e5b2cc-075b-8000-8423-f06e64814911" class="">Wireshark&#x27;s capture filter syntax is used here. The basic syntax for the Capture/BPF filter is shown below. You can read more on capture filter syntax <a href="https://www.wireshark.org/docs/man-pages/pcap-filter.html">here</a> and <a href="https://gitlab.com/wireshark/wireshark/-/wikis/CaptureFilters#useful-filters">here</a>. Boolean operators can also be used in both types of filters.</p><table id="22e5b2cc-075b-8093-b35c-d6cbc489ec1a" class="simple-table"><tbody><tr id="22e5b2cc-075b-809f-a4d9-fdcb08d671f0"><td id="{lCW" class=""><strong>Qualifier</strong></td><td id="tDK~" class="" style="width:585.9842834472656px"><strong>Details and Available Options</strong></td></tr><tr id="22e5b2cc-075b-800f-802b-c39c59c8f1d8"><td id="{lCW" class=""><strong>Type</strong></td><td id="tDK~" class="" style="width:585.9842834472656px">Target match type. You can filter IP addresses, hostnames, IP ranges, and port numbers. Note that if you don&#x27;t set a qualifier, the &quot;host&quot; qualifier will be used by default.<br/>• host | net | port | portrange<br/>• Filtering a host<br/>    ◦ <code>tshark -f &quot;host 10.10.10.10&quot;</code><br/>• Filtering a network range <br/>    ◦ <code>tshark -f &quot;net 10.10.10.0/24&quot;</code><br/>• Filtering a Port<br/>    ◦ <code>tshark -f &quot;port 80&quot;</code><br/>• Filtering a port range<br/>    ◦ <code>tshark -f &quot;portrange 80-100&quot;</code></td></tr><tr id="22e5b2cc-075b-8067-99cb-d90389a2fec4"><td id="{lCW" class=""><strong>Direction</strong></td><td id="tDK~" class="" style="width:585.9842834472656px">Target direction/flow. Note that if you don&#x27;t use the direction operator, it will be equal to &quot;either&quot; and cover both directions.<br/>• src | dst<br/>• Filtering source address<br/>    ◦ <code>tshark -f &quot;src host 10.10.10.10&quot;</code><br/>• Filtering destination address<br/>    ◦ <code>tshark -f &quot;dst host 10.10.10.10&quot;</code></td></tr><tr id="22e5b2cc-075b-809d-9da4-dcc8200845b8"><td id="{lCW" class=""><strong>Protocol</strong></td><td id="tDK~" class="" style="width:585.9842834472656px">Target protocol.<br/>• arp | ether | icmp | ip | ip6 | tcp | udp<br/>• Filtering TCP<br/>    ◦ <code>tshark -f &quot;tcp&quot;</code><br/>• Filtering MAC address<br/>    ◦ <code>tshark -f &quot;ether host F8:DB:C5:A2:5D:81&quot;</code><br/>• You can also filter protocols with IP Protocol numbers assigned by IANA.<br/>• Filtering IP Protocols 1 (ICMP)<br/>    ◦ <code>tshark -f &quot;ip proto 1&quot;</code><br/>    ◦ <strong><a href="https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml">Assigned Internet Protocol Numbers</a></strong></td></tr></tbody></table><p id="22e5b2cc-075b-80d8-bcb2-f98f9a3ba554" class="">
+</p><h3 id="22e5b2cc-075b-808b-b3d4-edd8f1c17cc3" class="">Terminator</h3><figure id="22e5b2cc-075b-80dc-9489-c6b54f44cda2" class="image"><a href="A3DC2E83-2E1B-4307-BB3A-C3A1CF6C6D28.png"><img style="width:709.9685668945312px" src="A3DC2E83-2E1B-4307-BB3A-C3A1CF6C6D28.png"/></a></figure><p id="22e5b2cc-075b-80cb-b249-dd40f5783493" class="">Being comfortable with the command line and TShark filters requires time and practice. You can use the below table to practice TShark capture filters.</p><table id="22e5b2cc-075b-80df-8999-c4f0c769cf78" class="simple-table"><tbody><tr id="22e5b2cc-075b-809e-8b68-c3c7d81ce5c3"><td id="Zx}}" class="" style="width:166.05661010742188px"><strong>Capture Filter Category</strong></td><td id="nv~?" class="" style="width:539.9842834472656px"><strong>Details</strong></td></tr><tr id="22e5b2cc-075b-8078-b286-f96276bd13e7"><td id="Zx}}" class="" style="width:166.05661010742188px"><strong>Host Filtering</strong></td><td id="nv~?" class="" style="width:539.9842834472656px"><span style="border-bottom:0.05em solid">Capturing</span> traffic to or from a specific host.<br/>• Traffic generation with cURL. This command sends a default HTTP query to a specified address.<br/>    ◦ <code>curl tryhackme.com</code><br/>• TShark capture filter for a host<br/>    ◦ <code>tshark -f &quot;host tryhackme.com&quot;</code></td></tr><tr id="22e5b2cc-075b-8050-80ba-cde228f763b8"><td id="Zx}}" class="" style="width:166.05661010742188px"><strong>IP Filtering</strong></td><td id="nv~?" class="" style="width:539.9842834472656px"><span style="border-bottom:0.05em solid">Capturing</span> traffic to or from a specific port. We will use the Netcat tool to create noise on specific ports.<br/>• Traffic generation with Netcat. Here Netcat is instructed to provide details (verbosity), and timeout is set to 5 seconds.<br/>    ◦ <code>nc 10.10.10.10 4444 -vw 5</code><br/>• TShark capture filter for specific IP address<br/>    ◦ <code>tshark -f &quot;host 10.10.10.10&quot;</code></td></tr><tr id="22e5b2cc-075b-8050-a2e1-d5bb63abe7c4"><td id="Zx}}" class="" style="width:166.05661010742188px"><strong>Port Filtering</strong></td><td id="nv~?" class="" style="width:539.9842834472656px"><span style="border-bottom:0.05em solid">Capturing</span> traffic to or from a specific port. We will use the Netcat tool to create noise on specific ports.<br/>• Traffic generation with Netcat. Here Netcat is instructed to provide details (verbosity), and timeout is set to 5 seconds.<br/>    ◦ <code>nc 10.10.10.10 4444 -vw 5</code><br/>• TShark capture filter for port 4444<br/>    ◦ <code>tshark -f &quot;port 4444&quot;</code></td></tr><tr id="22e5b2cc-075b-805c-bfff-ca95b9e730a5"><td id="Zx}}" class="" style="width:166.05661010742188px"><strong>Protocol Filtering</strong></td><td id="nv~?" class="" style="width:539.9842834472656px"><span style="border-bottom:0.05em solid">Capturing</span> traffic to or from a specific protocol. We will use the Netcat tool to create noise on specific ports.<br/>• Traffic generation with Netcat. Here Netcat is instructed to use UDP, provide details (verbosity), and timeout is set to 5 seconds.<br/>    ◦ <code>nc -u 10.10.10.10 4444 -vw 5</code><br/>• TShark capture filter for<br/>    ◦ <code>tshark -f &quot;udp&quot;</code></td></tr></tbody></table><figure id="22e5b2cc-075b-8000-bd55-eb8626561066" class="image"><a href="image%20218.png"><img style="width:709.952880859375px" src="image%20218.png"/></a></figure><p id="22e5b2cc-075b-80dd-8933-e8998738c547" class="">
+</p><h2 id="22e5b2cc-075b-8025-ab89-ed5407c10d0c" class="">TShark Fundamentals V | Packet Filtering Options: Display Filters</h2><p id="22e5b2cc-075b-800d-9f6c-ef28ab59ce01" class="">Wireshark&#x27;s display filter syntax is used here. You can use the official <strong><a href="https://www.wireshark.org/docs/dfref/">Display Filter Reference</a></strong> to find the protocol breakdown for filtering. Additionally, you can use Wireshark&#x27;s build-in &quot;Display Filter Expression&quot; menu to break down protocols for filters. Note that Boolean operators can also be used in both types of filters. Common filtering options are shown in the given table below.</p><p id="22e5b2cc-075b-807b-933a-db18eb284d09" class=""><strong>Note:</strong> Using single quotes for capture filters is recommended to avoid space and bash expansion problems</p><p id="22e5b2cc-075b-80a7-9073-ce12d40b3f01" class="">
+</p><table id="22e5b2cc-075b-8019-8a1e-d681e49572c3" class="simple-table"><tbody><tr id="22e5b2cc-075b-8053-bad8-e992628cf150"><td id="k[Xs" class=""><strong>Display Filter Category</strong></td><td id="~Vv\" class="" style="width:535.9842834472656px"><strong>Details and Available Options</strong></td></tr><tr id="22e5b2cc-075b-80d9-923f-f70e9293f071"><td id="k[Xs" class=""><strong>Protocol: IP</strong></td><td id="~Vv\" class="" style="width:535.9842834472656px">• <span style="border-bottom:0.05em solid">Filtering</span> an IP without specifying a direction.<br/>    ◦ <code>tshark -Y &#x27;ip.addr == 10.10.10.10&#x27;</code><br/>• <span style="border-bottom:0.05em solid">Filtering</span> a network range <br/>    ◦ <code>tshark -Y &#x27;ip.addr == 10.10.10.0/24&#x27;</code><br/>• <span style="border-bottom:0.05em solid">Filtering</span> a source IP<br/>    ◦ <code>tshark -Y &#x27;ip.src == 10.10.10.10&#x27;</code><br/>• <span style="border-bottom:0.05em solid">Filtering</span> a destination IP<br/>    ◦ <code>tshark -Y &#x27;ip.dst == 10.10.10.10&#x27;</code></td></tr><tr id="22e5b2cc-075b-8007-a850-f6a311807953"><td id="k[Xs" class=""><strong>Protocol: TCP</strong></td><td id="~Vv\" class="" style="width:535.9842834472656px">• <span style="border-bottom:0.05em solid">Filtering</span> TCP port<br/>    ◦ <code>tshark -Y &#x27;tcp.port == 80&#x27;</code><br/>• <span style="border-bottom:0.05em solid">Filtering</span> source TCP port<br/>    ◦ <code>tshark -Y &#x27;tcp.srcport == 80&#x27;</code></td></tr><tr id="22e5b2cc-075b-8033-83d0-f080371dcc49"><td id="k[Xs" class=""><strong>Protocol: HTTP</strong></td><td id="~Vv\" class="" style="width:535.9842834472656px">• <span style="border-bottom:0.05em solid">Filtering</span> HTTP packets<br/>    ◦ <code>tshark -Y &#x27;http&#x27;</code><br/>• <span style="border-bottom:0.05em solid">Filtering</span> HTTP packets with response code &quot;200&quot;<br/>    ◦ <code>tshark -Y &quot;http.response.code == 200&quot;</code></td></tr><tr id="22e5b2cc-075b-802d-933f-d2e9d45ec9c9"><td id="k[Xs" class=""><strong>Protocol: DNS</strong></td><td id="~Vv\" class="" style="width:535.9842834472656px">• <span style="border-bottom:0.05em solid">Filtering</span> DNS packets<br/>    ◦ <code>tshark -Y &#x27;dns&#x27;</code><br/>• <span style="border-bottom:0.05em solid">Filtering</span> all DNS &quot;A&quot; packets<br/>    ◦ <code>tshark -Y &#x27;dns.qry.type == 1&#x27;</code></td></tr></tbody></table><figure id="22e5b2cc-075b-80ab-885b-d208edf8cb13" class="image"><a href="A81A6AE2-5B04-438E-970E-9551117D7820.png"><img style="width:709.9371337890625px" src="A81A6AE2-5B04-438E-970E-9551117D7820.png"/></a></figure><p id="22e5b2cc-075b-80f1-b3a0-f860a5c41ae2" class=""><strong>Use the &quot;demo.pcapng&quot; file to answer the questions.</strong></p><ul id="22e5b2cc-075b-8031-9a67-f4fd86cd034e" class="bulleted-list"><li style="list-style-type:disc">What is the number of packets with a &quot;65.208.228.223&quot; IP address?</li></ul><p id="22e5b2cc-075b-80e6-bef1-ea811d3f308f" class=""><code>tshark -r demo.pcapng -Y &#x27;ip.addr == 65.208.228.223&#x27; | nl</code></p><figure id="22e5b2cc-075b-809b-82a7-fa0e8ce6db0a" class="image"><a href="1334C6DF-7215-448F-BBF9-C6EDA260A92D.png"><img style="width:709.9685668945312px" src="1334C6DF-7215-448F-BBF9-C6EDA260A92D.png"/></a></figure><ul id="22e5b2cc-075b-801d-aae1-c7636028ea3e" class="bulleted-list"><li style="list-style-type:disc">What is the number of packets with a &quot;TCP port 3371&quot;?</li></ul><p id="22e5b2cc-075b-8092-b0c8-c7480b17ba7b" class=""><code>tshark -r demo.pcapng -Y &#x27;tcp.port == 3371&#x27; | nl</code></p><figure id="22e5b2cc-075b-807b-b3b7-cdb790a379df" class="image"><a href="ED26A02D-0826-46C5-876F-870A9FCCE539.png"><img style="width:709.9057006835938px" src="ED26A02D-0826-46C5-876F-870A9FCCE539.png"/></a></figure><ul id="22e5b2cc-075b-8043-80ba-c06e50444a40" class="bulleted-list"><li style="list-style-type:disc">What is the number of packets with a &quot;145.254.160.237&quot; IP address as a source address?</li></ul><p id="22e5b2cc-075b-8051-bf45-e06c63789bcd" class=""><code>tshark -r demo.pcapng -Y &#x27;ip.src == 145.254.160.237&#x27; | nl</code></p><figure id="22e5b2cc-075b-800a-a444-e7cea5eef76f" class="image"><a href="19385B6E-DE26-4758-AE49-C21CA469B2C7.png"><img style="width:709.952880859375px" src="19385B6E-DE26-4758-AE49-C21CA469B2C7.png"/></a></figure><ul id="22e5b2cc-075b-8061-8b4a-d273bf4610d6" class="bulleted-list"><li style="list-style-type:disc"><strong>Rerun the previous query and look at the output. </strong>What is the packet number of the &quot;Duplicate&quot; packet?</li></ul><figure id="22e5b2cc-075b-8030-9226-e0c18a0f5a06" class="image"><a href="A346DE93-8777-477F-A1F4-95EA73AAAACA.png"><img style="width:709.9371337890625px" src="A346DE93-8777-477F-A1F4-95EA73AAAACA.png"/></a></figure><p id="22e5b2cc-075b-80b0-b07d-f0c32200a674" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

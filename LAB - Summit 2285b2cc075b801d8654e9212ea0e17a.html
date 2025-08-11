@@ -1,0 +1,680 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>LAB - Summit</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2285b2cc-075b-801d-8654-e9212ea0e17a" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">⛰️</span></div><h1 class="page-title">LAB - Summit</h1><p class="page-description"></p></header><div class="page-body"><p id="2285b2cc-075b-8037-8411-f2ad0f48c263" class="">What is the first flag you receive after successfully detecting <strong>sample1.exe</strong>?</p><p id="2285b2cc-075b-8013-bffe-d7434d362d4b" class="">THM{f3cbf08151a11a6a331db9c6cf5f4fe4}</p><p id="2285b2cc-075b-80d8-ba57-f0ede0bddde2" class=""><strong>My approach :</strong></p><p id="2285b2cc-075b-80f5-a5f6-ca62b77a7bd6" class="">Sample1.exe is the first file I uploaded to the malware sandbox.” Maybe there’s a unique way for you to distinguish this file and add a detection rule to block it,” the email that sent us the malware sample said. Thus, it should be clear that the file signature allows us to stop this infection. After adding one of the hashes to the hash blocklist, I unexpectedly received a second email with sample2.exe and the first flag in it.</p><figure id="2285b2cc-075b-8010-aed7-c653317cea58" class="image"><a href="https://miro.medium.com/v2/resize:fit:1031/1*0OENFjewGHMmkyOgg4zKmg.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1031/1*0OENFjewGHMmkyOgg4zKmg.png"/></a></figure><figure id="2285b2cc-075b-803e-a2d5-ce3499f799d0" class="image"><a href="https://miro.medium.com/v2/resize:fit:1031/1*LnlSag82C6fR_qw6oGVa2w.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1031/1*LnlSag82C6fR_qw6oGVa2w.png"/></a></figure><figure id="2285b2cc-075b-80b5-af8f-fcfdf11bb6ca" class="image"><a href="https://miro.medium.com/v2/resize:fit:1031/1*Ot66JpxLrzyQ3IxksEA0QQ.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1031/1*Ot66JpxLrzyQ3IxksEA0QQ.png"/></a></figure><figure id="2285b2cc-075b-8092-b1a3-de487388ebcf" class="image"><a href="https://miro.medium.com/v2/resize:fit:1031/1*mRUn_EpsSicD9WOuGPA_AA.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1031/1*mRUn_EpsSicD9WOuGPA_AA.png"/></a></figure><p id="2285b2cc-075b-8055-8896-fbec3c3caa06" class="">What is the second flag you receive after successfully detecting <strong>sample2.exe</strong>?</p><p id="2285b2cc-075b-8090-9387-ee2cae13689b" class="">THM{2ff48a3421a938b388418be273f4806d}</p><p id="2285b2cc-075b-8055-bab3-f211a0ea8ec1" class=""><strong>The method I used :</strong></p><p id="2285b2cc-075b-805f-b91b-cf80b0eefc04" class="">While signature-based file blocking is a straightforward way to stop malicious files, it has some drawbacks, like false positives or negatives, being restricted to known threats, and — most importantly — being easily circumvented by changing the content of the file, which will result in a completely different hash of the file. Because of this, the attacker now makes it impossible for us to block his file using a hash blacklist.</p><p id="2285b2cc-075b-807b-8b55-de8b1a192877" class="">I used a malware sandbox to detect that the suspicious process “sample2.exe” was attempting to connect to IP 154.35.10.133. As a result, I created a firewall rule to ban all traffic to that IP. The tester then sent me one more email.</p><figure id="2285b2cc-075b-80eb-91df-ce0ce8b03bfe" class="image"><a href="https://miro.medium.com/v2/resize:fit:1031/1*JJ3kkii_kkYHUvzyW5Jb5w.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1031/1*JJ3kkii_kkYHUvzyW5Jb5w.png"/></a></figure><figure id="2285b2cc-075b-80b1-a3a3-dd2c9da131cd" class="image"><a href="https://miro.medium.com/v2/resize:fit:1031/1*XkdxqqgYADDT8Ws3DsFReg.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1031/1*XkdxqqgYADDT8Ws3DsFReg.png"/></a></figure><figure id="2285b2cc-075b-80d1-95b7-fb49858ca7fc" class="image"><a href="https://miro.medium.com/v2/resize:fit:1031/1*lPYW6SOtEzioLYdI7dENmA.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1031/1*lPYW6SOtEzioLYdI7dENmA.png"/></a></figure><figure id="2285b2cc-075b-8093-b50b-e87e8b70036f" class="image"><a href="https://miro.medium.com/v2/resize:fit:1031/1*uZBxlth7Umrb4w24iXH98g.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1031/1*uZBxlth7Umrb4w24iXH98g.png"/></a></figure><p id="2285b2cc-075b-806c-9785-c8424a287416" class="">What is the third flag you receive after successfully detecting <strong>sample3.exe</strong>?</p><p id="2285b2cc-075b-8077-800d-cb9a6e631053" class="">THM{4eca9e2f61a19ecd5df34c788e7dce16}</p><p id="2285b2cc-075b-8012-bd4b-c9c281d45611" class=""><strong>My thought of solving :</strong></p><p id="2285b2cc-075b-80cb-a005-e99f3ed0c984" class="">The attacker now utilizes a cloud service provider to change his IP address over time after we ban his server’s IP address. Additionally, I need to modify my approach to identify this evolving threat in sample3.exe.</p><p id="2285b2cc-075b-80c0-8362-c581b233aaf5" class="">I added <strong>emudyn.bresonicz.info </strong>to the DNS Filter to block the malicious domain linked to the threat, rather than depending only on IP addresses.</p><figure id="2285b2cc-075b-803c-9a6e-dab6a8f122c9" class="image"><a href="https://miro.medium.com/v2/resize:fit:1031/1*uZBxlth7Umrb4w24iXH98g.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1031/1*uZBxlth7Umrb4w24iXH98g.png"/></a></figure><figure id="2285b2cc-075b-80c7-a2e1-e353300f136e" class="image"><a href="https://miro.medium.com/v2/resize:fit:1031/1*88Rc_iCTemRaM2MBPinouQ.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1031/1*88Rc_iCTemRaM2MBPinouQ.png"/></a></figure><figure id="2285b2cc-075b-80fa-a7df-dcd43c4dedaa" class="image"><a href="https://miro.medium.com/v2/resize:fit:1031/1*CWxykHnZOI5PNzFsAKba2Q.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1031/1*CWxykHnZOI5PNzFsAKba2Q.png"/></a></figure><figure id="2285b2cc-075b-802a-afda-ca18cc05d664" class="image"><a href="https://miro.medium.com/v2/resize:fit:1031/1*7TBhAAmThNmAKySXQzgTMQ.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1031/1*7TBhAAmThNmAKySXQzgTMQ.png"/></a></figure><figure id="2285b2cc-075b-8094-ac22-d6cec50740bd" class="image"><a href="https://miro.medium.com/v2/resize:fit:1031/1*isZtLQKMOjmWxBX71lseGA.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1031/1*isZtLQKMOjmWxBX71lseGA.png"/></a></figure><p id="2285b2cc-075b-80fa-bc3b-c860b3811380" class="">What is the fourth flag you receive after successfully detecting <strong>sample4.exe</strong>?</p><p id="2285b2cc-075b-80d7-9af7-cfa6115ae945" class="">THM{c956f455fc076aea829799c0876ee399}</p><p id="2285b2cc-075b-809e-bbb7-f915e56fe83c" class=""><strong>My thought for solving:</strong></p><p id="2285b2cc-075b-80b6-90af-e2343ba9acca" class="">We can’t just block hashes, IP addresses, or domains this time, but we’re not done yet. With the help of our closest friend, the malware sandbox, we can see sample4.exe’s activities in changing Real-time Protection. I went to a tool we had never used before Sigma Rule Builder, which allows us to establish many rules. I utilize Sysmon Event Logs -&gt; Registry Modifications to create a rule that detects a change in settings and notifies me via email.</p><figure id="2285b2cc-075b-8063-8b97-f78081b244fb" class="image"><a href="https://miro.medium.com/v2/resize:fit:1031/1*isZtLQKMOjmWxBX71lseGA.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1031/1*isZtLQKMOjmWxBX71lseGA.png"/></a></figure><figure id="2285b2cc-075b-805e-a7ed-e982999ea3a7" class="image"><a href="https://miro.medium.com/v2/resize:fit:1031/1*L8-DgvvXAX0ucfFMXFyGDg.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1031/1*L8-DgvvXAX0ucfFMXFyGDg.png"/></a></figure><figure id="2285b2cc-075b-8071-abb1-ef04ab962e03" class="image"><a href="https://miro.medium.com/v2/resize:fit:1031/1*8iRW2Jp65p1f0PNmWL2bmg.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1031/1*8iRW2Jp65p1f0PNmWL2bmg.png"/></a></figure><figure id="2285b2cc-075b-802e-9336-dab0a0710308" class="image"><a href="https://miro.medium.com/v2/resize:fit:1031/1*Hu1kA--UiIOPobBzbt5IYg.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1031/1*Hu1kA--UiIOPobBzbt5IYg.png"/></a></figure><figure id="2285b2cc-075b-80c4-970f-e946a689d0f1" class="image"><a href="https://miro.medium.com/v2/resize:fit:1031/1*aMbijH7JZSbbyIBJilW_aQ.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1031/1*aMbijH7JZSbbyIBJilW_aQ.png"/></a></figure><figure id="2285b2cc-075b-80b7-987b-e2ef548a7fbb" class="image"><a href="https://miro.medium.com/v2/resize:fit:1031/1*sWwAB4UB6uJbO4sLe_6ddA.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1031/1*sWwAB4UB6uJbO4sLe_6ddA.png"/></a></figure><figure id="2285b2cc-075b-807e-af5a-df54f4cda3dc" class="image"><a href="https://miro.medium.com/v2/resize:fit:1031/1*q7nDIACOg2MwOdDWUw4Cfw.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1031/1*q7nDIACOg2MwOdDWUw4Cfw.png"/></a></figure><figure id="2285b2cc-075b-8004-b795-e10b2415a1e7" class="image"><a href="https://miro.medium.com/v2/resize:fit:1031/1*GQAirdJjSbf2ROxPbUo-Hw.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1031/1*GQAirdJjSbf2ROxPbUo-Hw.png"/></a></figure><p id="2285b2cc-075b-80aa-a0d1-e95c053996b1" class="">What is the fifth flag you receive after successfully detecting <strong>sample5.exe</strong>?</p><p id="2285b2cc-075b-8088-8774-ec3326e56cf9" class="">THM{46b21c4410e47dc5729ceadef0fc722e}</p><p id="2285b2cc-075b-80c4-8fff-d0b6d67d1165" class="">For sample5.exe, we concentrate on the log file because the danger has advanced to the point where the attacker can dynamically change numerous artifacts such as IP addresses and ports.</p><p id="2285b2cc-075b-80b3-9b38-e6dc49e578c3" class="">To detect network traffic patterns, I utilize Sigma Rule Builder, Sysmon Event Logs, and Network Connections. R-host and R-port are set to Any so that the attacker can change them at any time.</p><figure id="2285b2cc-075b-8091-b849-cbfc8272aeb1" class="image"><a href="https://miro.medium.com/v2/resize:fit:1031/1*GQAirdJjSbf2ROxPbUo-Hw.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1031/1*GQAirdJjSbf2ROxPbUo-Hw.png"/></a></figure><figure id="2285b2cc-075b-8004-940e-d9729f8b8e60" class="image"><a href="https://miro.medium.com/v2/resize:fit:1031/1*3w0gPnuFb1koRPJV5qN5yA.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1031/1*3w0gPnuFb1koRPJV5qN5yA.png"/></a></figure><figure id="2285b2cc-075b-80cb-83db-f9c9a5637eb6" class="image"><a href="https://miro.medium.com/v2/resize:fit:1031/1*nUNgi4MLp94qBJdwxElqQQ.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1031/1*nUNgi4MLp94qBJdwxElqQQ.png"/></a></figure><figure id="2285b2cc-075b-80ca-a4d8-c6e6fd822e1f" class="image"><a href="https://miro.medium.com/v2/resize:fit:1031/1*LRKQeRGnAbkq09ASn8zYYg.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1031/1*LRKQeRGnAbkq09ASn8zYYg.png"/></a></figure><figure id="2285b2cc-075b-806a-93c2-ff73239ef29d" class="image"><a href="https://miro.medium.com/v2/resize:fit:1031/1*7Un05Vgd18QdCkrimf4Bcw.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1031/1*7Un05Vgd18QdCkrimf4Bcw.png"/></a></figure><figure id="2285b2cc-075b-80f2-9a32-c51226f2fd59" class="image"><a href="https://miro.medium.com/v2/resize:fit:1031/1*wjIPjpc4IKkxs9qxQX_jLA.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1031/1*wjIPjpc4IKkxs9qxQX_jLA.png"/></a></figure><figure id="2285b2cc-075b-8084-ab8f-d9bd93ad057b" class="image"><a href="https://miro.medium.com/v2/resize:fit:1031/1*NvJMGFdxXXP7EYdSt2lrlg.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1031/1*NvJMGFdxXXP7EYdSt2lrlg.png"/></a></figure><figure id="2285b2cc-075b-80ad-abc3-df51e7b4ae01" class="image"><a href="https://miro.medium.com/v2/resize:fit:1031/1*j05WD1bj2NNAtivCGO7inA.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1031/1*j05WD1bj2NNAtivCGO7inA.png"/></a></figure><p id="2285b2cc-075b-80f4-9095-f7e1a4499ae6" class="">What is the final flag you receive from Sphinx?</p><p id="2285b2cc-075b-8027-b0c9-e02fc0c5dd6b" class="">THM{c8951b2ad24bbcbac60c16cf2c83d92c}</p><p id="2285b2cc-075b-805c-83c9-e56dca40eb63" class="">In this final challenge, sample6.exe, we can see from the command history that the malware runs a series of command lines to gather information about the system and network configuration, then stores the data to a log file entitled “exfiltr&amp;.log” in the “temp” folder.</p><p id="2285b2cc-075b-8018-b884-e5f5ab8e8bcc" class="">I set Sigma Rule Builder/Sysmon Event Logs/File Creation and Modification to detect file creation/modification in order to keep malware from acquiring system information. And with that, the adversary gave up and sent us the final flag.</p><figure id="2285b2cc-075b-80ac-9f16-f60cf2a10021" class="image"><a href="https://miro.medium.com/v2/resize:fit:1031/1*FqBv_aDNDDp5cBOxBLNCMw.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1031/1*FqBv_aDNDDp5cBOxBLNCMw.png"/></a></figure><figure id="2285b2cc-075b-80c2-ba25-d769262cb160" class="image"><a href="https://miro.medium.com/v2/resize:fit:1031/1*faT7XQrXsWD8JCZzzEfPUg.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1031/1*faT7XQrXsWD8JCZzzEfPUg.png"/></a></figure><figure id="2285b2cc-075b-8083-b15c-ce14c411be43" class="image"><a href="https://miro.medium.com/v2/resize:fit:1031/1*0YYtNPN7qxo4Thtqetj9Hg.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1031/1*0YYtNPN7qxo4Thtqetj9Hg.png"/></a></figure></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

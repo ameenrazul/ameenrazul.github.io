@@ -1,0 +1,685 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Critical</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2445b2cc-075b-807c-87ad-ccb6ad871dd1" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/66264cef7bba67a6bbbe7179-1718813358080"/></div><h1 class="page-title"><strong>Critical</strong></h1><p class="page-description"></p></header><div class="page-body"><h1 id="2445b2cc-075b-80a3-a1ba-ed469283a9be" class="">Incident Scenario</h1><p id="2445b2cc-075b-8095-b78b-da951e4af309" class="">Our user &quot;Hattori&quot; has reported strange behavior on his computer and realized that some PDF files have been encrypted, including a critical document to the company named <code>important_document.pdf</code>. He decided to report it; since it was suspected that some credentials might have been stolen, the <code>DFIR</code> team has been involved and has captured some evidence. Join the team to investigate and learn how to get information from a memory dump in a practical scenario.</p><h1 id="2445b2cc-075b-80f5-8eef-f917b6491b2c" class="">Learning Objectives</h1><p id="2445b2cc-075b-8033-b439-c01124cec5f8" class="">In this room, we&#x27;ll cover the following learning objectives.</p><ul id="2445b2cc-075b-8002-8b8e-c1ddbbe1ef87" class="bulleted-list"><li style="list-style-type:disc">Memory Forensics’ basic concepts.</li></ul><ul id="2445b2cc-075b-80a3-a455-eabea5be89d8" class="bulleted-list"><li style="list-style-type:disc">How to access and set up the environment.</li></ul><ul id="2445b2cc-075b-800b-87b1-f62e54024b95" class="bulleted-list"><li style="list-style-type:disc">Gathering information from the compromised target.</li></ul><ul id="2445b2cc-075b-80dc-99a9-c611014fc253" class="bulleted-list"><li style="list-style-type:disc">Search for suspicious activity using the information obtained.</li></ul><ul id="2445b2cc-075b-8028-9454-f240c1fe9b09" class="bulleted-list"><li style="list-style-type:disc">Extracting and analysing data from memory.</li></ul><ul id="2445b2cc-075b-8074-b428-d7a333c1b139" class="bulleted-list"><li style="list-style-type:disc">Conclusion &amp; further steps after completing the room.</li></ul><p id="2445b2cc-075b-80f8-b4ba-d5b6cec4d6d3" class="">In this room, we&#x27;ll learn how to extract essential information and artifacts when performing a memory forensic task in a compromised machine using the Windows OS. First, we&#x27;ll learn basic memory forensics concepts before setting up our working environment. Next, we&#x27;ll learn how to get basic information about the compromised target and how to search for suspicious activity. Finally, we will extract interesting data that may help us identify potential malicious actors.</p><h1 id="2445b2cc-075b-800a-a31a-e77a662f59bb" class="">Learning Prerequisites</h1><p id="2445b2cc-075b-807b-9ae1-cbfeec96e7ea" class="">An understanding of the following topics is recommended before starting the room:</p><ul id="2445b2cc-075b-80fa-9e2d-e8e5f9e2579b" class="bulleted-list"><li style="list-style-type:disc"><a href="https://tryhackme.com/r/room/analysingvolatilememory">Analysing Volatile Memory</a></li></ul><ul id="2445b2cc-075b-8043-bd9e-edacd3178182" class="bulleted-list"><li style="list-style-type:disc"><a href="https://tryhackme.com/r/room/volatility">Volatility</a></li></ul><ul id="2445b2cc-075b-800f-bebd-cb8e133bab86" class="bulleted-list"><li style="list-style-type:disc"><a href="https://tryhackme.com/r/room/irdifficultiesandchallenges">IR Difficulties and Challenges</a></li></ul><p id="2445b2cc-075b-808c-bf41-ed64048c7c34" class="">Let&#x27;s begin our task!</p><hr id="2445b2cc-075b-8057-8ff5-e8ab89ee96b8"/><h2 id="2445b2cc-075b-8080-9620-db45a3894159" class="">🧠 <strong>Memory Forensics Overview</strong></h2><p id="2445b2cc-075b-8048-8254-f7ef19d343db" class="">Memory forensics is a <strong>critical component</strong> of digital forensics, focusing on the analysis of a system’s <strong>volatile memory (RAM)</strong>. It&#x27;s especially important during live incident response and can reveal <strong>runtime behavior</strong> that disk forensics cannot.</p><hr id="2445b2cc-075b-80ef-9c0c-e9cfa9c67c46"/><h3 id="2445b2cc-075b-8008-ac67-cbeb3731aa95" class="">🔍 <strong>Why Memory Forensics Matters</strong></h3><ul id="2445b2cc-075b-808d-8746-d485f03084f6" class="bulleted-list"><li style="list-style-type:disc"><strong>Volatile data</strong> is lost on shutdown/reboot — must be captured early.</li></ul><ul id="2445b2cc-075b-80d9-954b-ea6639fa792c" class="bulleted-list"><li style="list-style-type:disc">Can reveal:<ul id="2445b2cc-075b-804d-84d4-f54d071492e4" class="bulleted-list"><li style="list-style-type:circle">Active processes and network connections</li></ul><ul id="2445b2cc-075b-80b4-b493-df706f47b0ba" class="bulleted-list"><li style="list-style-type:circle">Injected code or in-memory-only malware</li></ul><ul id="2445b2cc-075b-8097-99b6-c037d419f343" class="bulleted-list"><li style="list-style-type:circle">Unpacked binaries or decrypted payloads</li></ul><ul id="2445b2cc-075b-8005-8530-d0ff13266a88" class="bulleted-list"><li style="list-style-type:circle">Command history, credentials, and encryption keys</li></ul><ul id="2445b2cc-075b-8012-b0fa-e220f8936ace" class="bulleted-list"><li style="list-style-type:circle">Evidence of persistence mechanisms</li></ul></li></ul><ul id="2445b2cc-075b-808b-91ac-ef287f67aa91" class="bulleted-list"><li style="list-style-type:disc">Helps build a <strong>timeline</strong> of attacker behavior.</li></ul><hr id="2445b2cc-075b-8085-9471-e69167f438f4"/><h2 id="2445b2cc-075b-8081-9087-c8fbdf6ce19b" class="">🛠️ <strong>Two Phases of Memory Forensics</strong></h2><hr id="2445b2cc-075b-8077-86fe-f04dedc34452"/><h3 id="2445b2cc-075b-80d9-b156-da78712fb6d0" class="">📥 <strong>1. Memory Acquisition</strong></h3><p id="2445b2cc-075b-80dd-a947-f47b279feda4" class="">Goal: Create a <strong>bit-for-bit copy</strong> of the RAM (a memory dump) to preserve the evidence.</p><ul id="2445b2cc-075b-809c-82aa-f32b353575df" class="bulleted-list"><li style="list-style-type:disc">Tools:<ul id="2445b2cc-075b-8015-b895-f6c53da739ad" class="bulleted-list"><li style="list-style-type:circle"><strong>Windows</strong>: <code>DumpIt</code>, <code>Belkasoft RAM Capturer</code>, <code>FTK Imager</code>, <code>Magnet RAM Capture</code></li></ul><ul id="2445b2cc-075b-8073-bae2-d8137415a9b5" class="bulleted-list"><li style="list-style-type:circle"><strong>Linux</strong>: <code>LiME</code>, <code>avml</code>, <code>dd</code> (with <code>/dev/mem</code>)</li></ul></li></ul><ul id="2445b2cc-075b-808a-91bf-dbdbf9cd3c69" class="bulleted-list"><li style="list-style-type:disc">Format: RAW (e.g., <code>.raw</code>, <code>.mem</code>), sometimes EWF (<code>.E01</code>)</li></ul><ul id="2445b2cc-075b-804c-aa90-d6fd083a36e6" class="bulleted-list"><li style="list-style-type:disc">Key considerations:<ul id="2445b2cc-075b-800d-ac8e-d18af47f13d8" class="bulleted-list"><li style="list-style-type:circle">Use write blockers or isolated storage</li></ul><ul id="2445b2cc-075b-8007-8643-c0407bf9a8ef" class="bulleted-list"><li style="list-style-type:circle">Avoid altering memory state as much as possible</li></ul><ul id="2445b2cc-075b-8002-89c7-e2328b57ce53" class="bulleted-list"><li style="list-style-type:circle">Document the acquisition (who, when, how)</li></ul></li></ul><hr id="2445b2cc-075b-8058-9423-cee0aa44689b"/><h3 id="2445b2cc-075b-80e4-90cb-feccc7a0c9e9" class="">🧪 <strong>2. Memory Analysis</strong></h3><p id="2445b2cc-075b-809b-9709-c8ee9abec55a" class="">Goal: Extract indicators of compromise, attacker behavior, and forensic artifacts from the dump.</p><ul id="2445b2cc-075b-80b8-8d20-e057c61c012f" class="bulleted-list"><li style="list-style-type:disc">Tools:<ul id="2445b2cc-075b-80b1-b765-d78b3eba7162" class="bulleted-list"><li style="list-style-type:circle"><strong>Volatility / Volatility 3</strong> (open-source)</li></ul><ul id="2445b2cc-075b-8095-b9d2-d7e276fca199" class="bulleted-list"><li style="list-style-type:circle"><strong>Rekall</strong> (Google)</li></ul><ul id="2445b2cc-075b-8018-b081-d5e628673306" class="bulleted-list"><li style="list-style-type:circle"><strong>Redline</strong> (FireEye, GUI-based)</li></ul><ul id="2445b2cc-075b-8053-8dff-c6ddb8dc1d3b" class="bulleted-list"><li style="list-style-type:circle"><strong>MemProcFS</strong> (mount RAM as a filesystem)</li></ul></li></ul><ul id="2445b2cc-075b-802b-8607-c2848121a722" class="bulleted-list"><li style="list-style-type:disc">Typical analysis tasks:<ul id="2445b2cc-075b-8021-8a10-f892c5ac1621" class="bulleted-list"><li style="list-style-type:circle">List active processes (<code>pslist</code>, <code>psscan</code>)</li></ul><ul id="2445b2cc-075b-80c8-b536-c20e604e6dad" class="bulleted-list"><li style="list-style-type:circle">Detect hidden/malicious processes (<code>psxview</code>)</li></ul><ul id="2445b2cc-075b-80fd-baf2-e78c1a49d27a" class="bulleted-list"><li style="list-style-type:circle">Analyze loaded DLLs and memory sections (<code>dlllist</code>, <code>ldrmodules</code>)</li></ul><ul id="2445b2cc-075b-80d3-b54e-ddb19137b4d7" class="bulleted-list"><li style="list-style-type:circle">List open network connections (<code>netscan</code>)</li></ul><ul id="2445b2cc-075b-806a-b843-efa3434364df" class="bulleted-list"><li style="list-style-type:circle">Examine command-line activity (<code>cmdline</code>, <code>consoles</code>)</li></ul><ul id="2445b2cc-075b-80a0-8f5e-ef84c0712423" class="bulleted-list"><li style="list-style-type:circle">Extract suspicious binaries or injected code (<code>malfind</code>, <code>procdump</code>)</li></ul><ul id="2445b2cc-075b-8008-a6d7-f9fdeeea3b08" class="bulleted-list"><li style="list-style-type:circle">Check for registry and clipboard content (<code>printkey</code>, <code>clipboards</code>)</li></ul><ul id="2445b2cc-075b-8043-a721-ed21abde73df" class="bulleted-list"><li style="list-style-type:circle">Search for indicators (strings, YARA rules)</li></ul></li></ul><hr id="2445b2cc-075b-80d1-b36d-fbbaec4b214e"/><h2 id="2445b2cc-075b-8064-bbd9-fae397403792" class="">🧠 Use Cases in Incident Response</h2><ul id="2445b2cc-075b-808d-9156-fab5266f6f88" class="bulleted-list"><li style="list-style-type:disc">Confirm malware is active in memory even if deleted from disk</li></ul><ul id="2445b2cc-075b-80f9-ab90-caf7172f6398" class="bulleted-list"><li style="list-style-type:disc">Trace lateral movement techniques (e.g., credential dumping)</li></ul><ul id="2445b2cc-075b-80a9-a371-cb5883f5ab47" class="bulleted-list"><li style="list-style-type:disc">Uncover rootkits or memory-only implants</li></ul><ul id="2445b2cc-075b-8071-a8a3-d57687b29a25" class="bulleted-list"><li style="list-style-type:disc">Reconstruct attacker timeline and tools used</li></ul><ul id="2445b2cc-075b-8021-ade0-c6cc1b879a63" class="bulleted-list"><li style="list-style-type:disc">Support timeline correlation with logs and endpoint telemetry</li></ul><hr id="2445b2cc-075b-8026-9bdf-eda85af64eec"/><p id="2445b2cc-075b-80f3-902c-e0f1b48a2318" class="">Let me know if you&#x27;d like:</p><ul id="2445b2cc-075b-80e9-b569-cd1dea61ffe0" class="bulleted-list"><li style="list-style-type:disc">A <strong>Volatility cheat sheet</strong></li></ul><ul id="2445b2cc-075b-807f-a36b-f6d506508d11" class="bulleted-list"><li style="list-style-type:disc">A <strong>memory forensics lab</strong> setup guide</li></ul><ul id="2445b2cc-075b-8085-bf7f-cf85b254a9e3" class="bulleted-list"><li style="list-style-type:disc">Help interpreting output from a memory image you&#x27;re analyzing</li></ul><p id="2445b2cc-075b-802f-a363-e5a58747ec81" class="">This topic is gold for any SOC analyst, malware hunter, or DFIR responder.</p><p id="2445b2cc-075b-8050-8ae1-f8ad4921a5cc" class="">
+</p><h1 id="2445b2cc-075b-8090-a6a4-ecdcf170626a" class="">Imaging Tools</h1><p id="2445b2cc-075b-8048-b8cb-c4c79b9ae66b" class="">There are several ways to acquire the memory from the target machine if needed; several tools can help us, but which one to use will depend on personal preference and the OS involved in the imaging task. Some of these tools are:</p><table id="2445b2cc-075b-8079-adff-cd275b5c1a07" class="simple-table"><tbody><tr id="2445b2cc-075b-80e2-b03c-e731d5cb00e0"><td id="DIFl" class="">Windows</td><td id="nR&gt;z" class=""><a href="https://www.exterro.com/digital-forensics-software/ftk-imager">FTK imager</a>, <a href="https://github.com/Velocidex/WinPmem">WinPmem</a></td></tr><tr id="2445b2cc-075b-80a2-bbfc-c00d260c9015"><td id="DIFl" class="">Linux</td><td id="nR&gt;z" class=""><a href="https://github.com/504ensicsLabs/LiME">LIME</a></td></tr><tr id="2445b2cc-075b-809d-9e6e-fd41c1e3cea6"><td id="DIFl" class="">macOS</td><td id="nR&gt;z" class=""><a href="https://code.google.com/archive/p/pmem/wikis/OSXPmem.wiki">osxpmem</a></td></tr></tbody></table><figure id="2445b2cc-075b-80c8-bfd4-e18b22e2e86b" class="image"><a href="EDE8C9CD-9AF5-438D-881A-75A02EFC543C.png"><img style="width:546.9500122070312px" src="EDE8C9CD-9AF5-438D-881A-75A02EFC543C.png"/></a></figure><p id="2445b2cc-075b-80f6-8616-f8aac1bce390" class="">Memory dump is already in the home directory. Volatility is installed.</p><p id="2445b2cc-075b-8034-a9b9-fad51c53eb31" class="">Relevant Plugins to use here for the windows memory analysis</p><table id="2445b2cc-075b-80a0-9835-c9b5e31dd1d0" class="simple-table"><tbody><tr id="2445b2cc-075b-80e5-b38e-edf1a61e8b4e"><td id="MLSW" class="">Windows.cmdline</td><td id="IgOR" class="" style="width:361px">Lists process command line arguments</td></tr><tr id="2445b2cc-075b-8048-ae29-cd8c39a8ac70"><td id="MLSW" class="">windows.drivermodule</td><td id="IgOR" class="" style="width:361px">Determines if any loaded drivers were hidden by a rootkit</td></tr><tr id="2445b2cc-075b-80cd-bdc8-d321486ff6f8"><td id="MLSW" class="">Windows.filescan</td><td id="IgOR" class="" style="width:361px">Scans for file objects present in a particular Windows memory image</td></tr><tr id="2445b2cc-075b-808c-ae4f-fac4d9d241e9"><td id="MLSW" class="">Windows.getsids</td><td id="IgOR" class="" style="width:361px">Print the SIDs owning each process</td></tr><tr id="2445b2cc-075b-8006-876b-e3f7a0fe0f82"><td id="MLSW" class="">Windows.handles</td><td id="IgOR" class="" style="width:361px">Lists process open handles</td></tr><tr id="2445b2cc-075b-809f-8a91-f1be4c7754cc"><td id="MLSW" class="">Windows.info</td><td id="IgOR" class="" style="width:361px">Show OS &amp; kernel details of the memory sample being analyzed</td></tr><tr id="2445b2cc-075b-80c5-9c9d-cb3178891ada"><td id="MLSW" class="">Windows.netscan</td><td id="IgOR" class="" style="width:361px">Scans for network objects present in a particular Windows memory image</td></tr><tr id="2445b2cc-075b-80bc-9f2f-c9233f5de997"><td id="MLSW" class="">Widnows.netstat</td><td id="IgOR" class="" style="width:361px">Traverses network tracking structures present in a particular Windows memory image.</td></tr><tr id="2445b2cc-075b-8055-a9ea-fe2889e8fd5b"><td id="MLSW" class="">Windows.mftscan</td><td id="IgOR" class="" style="width:361px">Scans for Alternate Data Stream</td></tr><tr id="2445b2cc-075b-802e-80cf-fb044b3a982a"><td id="MLSW" class="">Windows.pslist</td><td id="IgOR" class="" style="width:361px">Lists the processes present in a particular Windows memory image</td></tr><tr id="2445b2cc-075b-8001-b862-e8c36f1223f0"><td id="MLSW" class="">Windows.pstree</td><td id="IgOR" class="" style="width:361px">List processes in a tree based on their parent process ID</td></tr></tbody></table><h2 id="2445b2cc-075b-8046-8e9f-c4ba99923d30" class="">Gathering Target Information</h2><figure id="2445b2cc-075b-8089-98fd-c0a7f158f12f" class="image"><a href="F5F5AFE1-FB19-4EDC-BBC7-7EF70C40D131.png"><img style="width:547px" src="F5F5AFE1-FB19-4EDC-BBC7-7EF70C40D131.png"/></a></figure><figure id="2445b2cc-075b-80d6-94e4-ecacc9b9cd95" class="image"><a href="7F3E7435-D199-4DC4-9679-6ED99913DC1F.png"><img style="width:547px" src="7F3E7435-D199-4DC4-9679-6ED99913DC1F.png"/></a></figure><p id="2445b2cc-075b-805f-9d2e-e40f7beceab0" class="">
+</p><h2 id="2445b2cc-075b-803f-9c3d-e9bdff993f29" class="">Searching for Suspicious Activity</h2><p id="2445b2cc-075b-80e9-9541-cc0f0549e186" class="">We can start by observing any potential network activity. We can use the plugin <code>windows.netstat</code> to see if there&#x27;s an interesting or unusual connection. At this stage, remote access connections or access to suspicious sites are something to look for. </p><figure id="2445b2cc-075b-80aa-b682-c8dd172824e0" class="image"><a href="D92DE75D-B51F-4F95-822D-55E786AF8219.png"><img style="width:547px" src="D92DE75D-B51F-4F95-822D-55E786AF8219.png"/></a></figure><p id="2445b2cc-075b-80c5-8eb5-c0da899fbc27" class="">An initial RDP connection was established on port 3389</p><figure id="2445b2cc-075b-801c-9af5-d1960c9ba056" class="image"><a href="CBB11EE2-8597-4EE7-A9D0-6579AF0AD032.png"><img style="width:547px" src="CBB11EE2-8597-4EE7-A9D0-6579AF0AD032.png"/></a></figure><p id="2445b2cc-075b-802d-a28f-fb60bf587db8" class="">Now we look into the process lists</p><figure id="2445b2cc-075b-8096-843c-ec231f5f1767" class="image"><a href="7472EEA2-0D72-4EFF-AB96-C08736E3CA06.png"><img style="width:547px" src="7472EEA2-0D72-4EFF-AB96-C08736E3CA06.png"/></a></figure><p id="2445b2cc-075b-80a4-9a0c-c42d989bb9d8" class="">But how can we identify a suspicious process? One of the most common ways is to check the name of the process; threat actors commonly use names to try to disguise the execution. One of the ways to do this is to check that this process is not usually present. We can find a list of processes commonly used in Windows represented in the image below.</p><figure id="2445b2cc-075b-8034-a2a5-c72dec29516a" class="image"><a href="66264cef7bba67a6bbbe7179-1718813719752.png"><img style="width:428px" src="66264cef7bba67a6bbbe7179-1718813719752.png"/></a></figure><p id="2445b2cc-075b-802e-8f10-f42aadcfc038" class="">I used <code>vol -f memdump.mem windows.pslist.PsList</code> to get an organized view of the process tree, and I found a very weird program</p><figure id="2445b2cc-075b-803b-9d2e-d365d8f0475e" class="image"><a href="66264cef7bba67a6bbbe7179-1718997024575.png"><img style="width:546.9833374023438px" src="66264cef7bba67a6bbbe7179-1718997024575.png"/></a></figure><p id="2445b2cc-075b-8038-9006-f0567dd05786" class=""><br/>This process does not look like it is part of the system, and observing in detail, it&#x27;s the parent process of <code>updater.exe</code>, which is also not listed as a process part of the Windows OS.<br/></p><ul id="2445b2cc-075b-809c-9246-d6e608aca775" class="bulleted-list"><li style="list-style-type:disc">Using the plugin &quot;windows.netscan&quot;. Can you identify the destination IP address where a connection is established on port 80?<br/><br/>I can use windows.netscan and grep for any ESTABLISHED connections</li></ul><figure id="2445b2cc-075b-802e-868b-e29ca62ff442" class="image"><a href="98802145-6E7E-4AF9-8573-7B9738EC8343.png"><img style="width:547px" src="98802145-6E7E-4AF9-8573-7B9738EC8343.png"/></a></figure><p id="2445b2cc-075b-80e1-a57a-c075e2005b3d" class="">
+</p><ul id="2445b2cc-075b-8039-bfd1-ffac8338e3b5" class="bulleted-list"><li style="list-style-type:disc">Using the plugin &quot;windows.netscan,&quot; can you identify the program (owner) used to access through port 80?<br/><br/>msedge.exe<br/></li></ul><ul id="2445b2cc-075b-80a3-80b3-d0e15d5aabb2" class="bulleted-list"><li style="list-style-type:disc">Analyzing the processes present on the dump, what is the PID of the child process of critical_updat?<br/><br/>critical_update PID - 1648, its PPID is 7960</li></ul><figure id="2445b2cc-075b-8094-be40-d2772bcda1e5" class="image"><a href="AB788046-6FCA-4306-AD35-E441BC17D4B6.png"><img style="width:547px" src="AB788046-6FCA-4306-AD35-E441BC17D4B6.png"/></a></figure><p id="2445b2cc-075b-8009-9fdc-c8f846fe7331" class="">So i used critical_update’s PID to look for its child</p><figure id="2445b2cc-075b-8057-a1cd-cde9f15dbd46" class="image"><a href="2D9534D1-AAEB-43F1-A116-98999613D79B.png"><img style="width:546.88330078125px" src="2D9534D1-AAEB-43F1-A116-98999613D79B.png"/></a></figure><ul id="2445b2cc-075b-8014-acf6-c8ed9f4d0ef2" class="bulleted-list"><li style="list-style-type:disc">What is the time stamp time for the process with the truncated name critical_updat?</li></ul><p id="2445b2cc-075b-80b3-ba55-e873924c5d10" class="">2024-02-24 22:51:50.000000</p><p id="2445b2cc-075b-80d9-ad85-ea9450d88e26" class="">
+</p><h2 id="2445b2cc-075b-805a-bd91-f34414b116ed" class="">Finding Interesting Data</h2><p id="2445b2cc-075b-8078-8187-fa2b98cd0e5d" class="">With the information we have collected, we can investigate the process <code>critical_updat</code>  that we identified in our previous task, which has a child process called <code>updater</code><strong>.</strong> Let&#x27;s investigate the child process more in-depth. Let&#x27;s start by looking at where on the disk it was saved; for that, we can use the plugin <code>windows.filescan</code> which will allow us to examine the files accessed that are stored in the memory dump. This output is quite big, so to access the data in a better way, we will use the <code>&gt;</code><strong> </strong>character in bash to redirect the output to a file, in this case, <code>filescan_out</code>.</p><p id="2445b2cc-075b-80c1-a382-c11f6e166248" class=""><code>vol -f memdump.mem windows.filescan &gt; filescan_out</code></p><p id="2445b2cc-075b-80dc-9157-d950fc4e92f2" class="">After executing the command, we can inspect the data by using <code>cat</code> and filtering using the <code>grep</code> command as shown below.</p><p id="2445b2cc-075b-806c-bd6a-e6ff567d3072" class=""><code>cat filescan_out |grep updater</code></p><figure id="2445b2cc-075b-8020-9fa6-fb47eb176d88" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/66264cef7bba67a6bbbe7179/room-content/66264cef7bba67a6bbbe7179-1718810458883"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/66264cef7bba67a6bbbe7179/room-content/66264cef7bba67a6bbbe7179-1718810458883"/></a></figure><p id="2445b2cc-075b-8019-bffc-fde5c4c166d1" class="">Above, we can observe that the files have been stored in the Directory <code>\Users\user01\Documents\updater.exe</code> or <code>C:\Users\user01\Documents\updater.exe</code></p><p id="2445b2cc-075b-802d-8178-f9e8964ff454" class="">If we want to have more detailed information like when the file was accessed or modified, we can use the plugin <code>windows.mftscan.MFTScan</code>, whose output is also quite big, so we will redirect the output to the file <code>mftscan_out</code> as shown below.</p><p id="2445b2cc-075b-8081-a014-e3a5dbbbe7d6" class=""><code>vol -f memdump.mem windows.mftscan.MFTScan &gt; mftscan_out</code></p><p id="2445b2cc-075b-80d2-909b-c0a4ced0a881" class="">We can then use the grep command again to parse the file for the appearance of<code> updater.exe</code>.</p><p id="2445b2cc-075b-80a5-891e-d2630083b0b8" class=""><code>cat mftscan_out | grep updater</code></p><figure id="2445b2cc-075b-8090-b37b-de4f92020af8" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/66264cef7bba67a6bbbe7179/room-content/66264cef7bba67a6bbbe7179-1718810459624"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/66264cef7bba67a6bbbe7179/room-content/66264cef7bba67a6bbbe7179-1718810459624"/></a></figure><p id="2445b2cc-075b-8066-b619-c4157805934c" class="">From the output above, we observe the last four timestamps correspond to the Created, Modified, Updated, and Accessed TimeStamps; we can take notes of those.</p><h3 id="2445b2cc-075b-8096-b988-cfeb320d6a1e" class=""><strong>Getting the Goods</strong></h3><p id="2445b2cc-075b-806a-b118-cc1d23e586b3" class="">Let&#x27;s get information on the process. There are several ways to examine memory, but we will continue using volatility. This time, we will dump the <br/>memory region corresponding to <code>updater.exe</code> , and examine it.</p><p id="2445b2cc-075b-80b4-811d-f0d799036e82" class="">To accomplish the above, we&#x27;ll use the plugin <code>windows.memmap</code>. This time, we&#x27;ll specify the output dir with the <code>-o</code> switch. In this case, we will use the same directory denoted by the character &quot; <code>.</code> &quot;and the option <code>--dump</code> followed by the option <code>--pid</code> and the PID of the process, which in the case of updater.exe is.</p><p id="2445b2cc-075b-8083-b63e-e9e35e52a5fa" class=""><code>vol -f memdump.mem -o . windows.memmap --dump --pid 1612</code></p><p id="2445b2cc-075b-80ac-9e23-cd051e8ea00a" class="">When the command above is finished, we will have a file with an extension <code>.dmp</code> in our working directory.</p><p id="2445b2cc-075b-8001-badd-c744e8526d30" class="">Examining the file is difficult since it contains non-printable characters, so we&#x27;ll use the strings command to analyze the output better. Since we have the file strings available to us now, we could look for key patterns like <code>HTTP</code> or <code>key</code> or any pattern that can lead us quickly to an artefact. Another way to scroll the terminal is by using the <code>strings</code> command piped to <code>less</code> to navigate through the output as shown in the command output below.</p><p id="2445b2cc-075b-8058-b7f7-e932f4c720c8" class=""><code>strings pid.1612.dmp |less</code></p><figure id="2445b2cc-075b-8037-ab1b-eaa64c3e7556" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/66264cef7bba67a6bbbe7179/room-content/66264cef7bba67a6bbbe7179-1718811341324"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/66264cef7bba67a6bbbe7179/room-content/66264cef7bba67a6bbbe7179-1718811341324"/></a></figure><p id="2445b2cc-075b-80de-9440-fe3a5383d4df" class="">As we can observe, we immediately identified a possible key and a domain from a URL that the process may have accessed. Also, by scrolling down, we <br/>found more indications that this is a malicious process since we can find the <code>important_document.pdf</code>  filename indicating an interaction with the file.</p><figure id="2445b2cc-075b-804d-bde4-eadce70954c2" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/66264cef7bba67a6bbbe7179/room-content/66264cef7bba67a6bbbe7179-1718811341816"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/66264cef7bba67a6bbbe7179/room-content/66264cef7bba67a6bbbe7179-1718811341816"/></a></figure><p id="2445b2cc-075b-80b5-a5f8-eea13382f94c" class="">Great, we can infer that the process updater.exe accessed the document <code>important_document.pdf</code> and accessed a &quot;key&quot; at some point in the URL <code>http://key.critical-update.com/encKEY.txt</code> .</p><p id="2445b2cc-075b-8013-b647-cd69d5878456" class="">If we use the command grep to look for the HTTP request that may be stored in memory, we can do it using -B and -A to look for 10 lines above and below our match to see if we can spot something else.</p><p id="2445b2cc-075b-8040-ac89-c8cbdd2f750d" class=""><code>strings pid.1612.dmp |grep -B 10 -A 10 &quot;http://key.critical-update.com/encKEY.txt&quot;</code></p><p id="2445b2cc-075b-801e-9d94-d0c5bb1deece" class="">Scrolling up, we can observe the HTTP request, as displayed.</p><figure id="2445b2cc-075b-8000-855e-e1b23dd62ef6" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/66264cef7bba67a6bbbe7179/room-content/66264cef7bba67a6bbbe7179-1718811342193"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/66264cef7bba67a6bbbe7179/room-content/66264cef7bba67a6bbbe7179-1718811342193"/></a></figure><p id="2445b2cc-075b-80a3-8629-e159260bc62f" class="">From the above, we can observe at the end of the HTTP request the content of the file <code>encKey.txt</code>, and on the same request, we can observe data with the value <code>cafebabe</code>. This could be the key to encrypting the PDF used by the attacker that was not downloaded to disk.</p><figure id="2445b2cc-075b-8014-b999-ee0ae3bbb5db" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/66264cef7bba67a6bbbe7179/room-content/66264cef7bba67a6bbbe7179-1718811342931"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/66264cef7bba67a6bbbe7179/room-content/66264cef7bba67a6bbbe7179-1718811342931"/></a></figure><p id="2445b2cc-075b-8019-93e0-fd761ee3a711" class="">Excellent. We collected valuable information from the memory dump, including the possible key used to encrypt the documents.</p><p id="2445b2cc-075b-80bd-be61-cb70d8961a6e" class="">
+</p><ul id="2445b2cc-075b-8034-8cf8-defefe34134f" class="bulleted-list"><li style="list-style-type:disc">Analyzing the &quot;windows.filescan&quot; output, what is the full path and name for critical_updat?<br/></li></ul><figure id="2445b2cc-075b-8045-b433-c91ef63358a8" class="image"><a href="4028FA19-C134-44AB-B116-8444AE066AAE.png"><img style="width:547px" src="4028FA19-C134-44AB-B116-8444AE066AAE.png"/></a></figure><ul id="2445b2cc-075b-800c-9dac-c929c0d3ec85" class="bulleted-list"><li style="list-style-type:disc">Analyzing the &quot;windows.mftscan.MFTScan&quot; what is the Timestamp for the created date of important_document.pdf?</li></ul><figure id="2445b2cc-075b-80f0-91ce-d1a2261d924c" class="image"><a href="815366C3-B07A-4F0C-AA30-B1DFA4DCD2EF.png"><img style="width:1634px" src="815366C3-B07A-4F0C-AA30-B1DFA4DCD2EF.png"/></a></figure><ul id="2445b2cc-075b-808d-96c7-f566d8a6dd7c" class="bulleted-list"><li style="list-style-type:disc">Analyzing the updater.exe memory output, can you observe the HTTP request and determine the server used by the attacker?</li></ul><p id="2445b2cc-075b-80e5-81b3-f16c7cb65b74" class="">when I ran <code>strings pid.1612.dmp |grep -B 10 -A 10 &quot;</code><code><a href="http://key.critical-update.com/encKEY.txt">http://key.critical-update.com/encKEY.txt</a></code><code>&quot;</code>trying to locate <strong>where the URL appears in memory</strong>, and inspect the <strong>context around it</strong>.<br/>and in one of the http requests, I found the server name</p><figure id="2445b2cc-075b-80ba-bc6c-fe0ff16c84f0" class="image"><a href="92EC9D1C-9943-48A8-8822-98ED9979C39F.png"><img style="width:547px" src="92EC9D1C-9943-48A8-8822-98ED9979C39F.png"/></a></figure></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

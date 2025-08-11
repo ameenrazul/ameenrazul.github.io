@@ -1,0 +1,697 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>MISP</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2295b2cc-075b-8047-8559-f9168309b2d8" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">⁉️</span></div><h1 class="page-title">MISP</h1><p class="page-description"></p></header><div class="page-body"><h2 id="2295b2cc-075b-804c-ab2c-cc9782e7551a" class="">📌 What is MISP?</h2><p id="2295b2cc-075b-80f0-8aa9-fd7afc464f09" class=""><strong>MISP (Malware Information Sharing Platform)</strong> is an <strong>open-source threat intelligence platform</strong> designed to:</p><ul id="2295b2cc-075b-8081-ac0a-cca350264c5d" class="bulleted-list"><li style="list-style-type:disc">Collect, store, and share <strong>cyber threat intelligence</strong> (CTI)</li></ul><ul id="2295b2cc-075b-80b7-9339-ff89dca81033" class="bulleted-list"><li style="list-style-type:disc">Distribute <strong>Indicators of Compromise (IOCs)</strong> such as:<ul id="2295b2cc-075b-8063-b6bf-ccc5b8b9b630" class="bulleted-list"><li style="list-style-type:circle">Malware hashes</li></ul><ul id="2295b2cc-075b-8010-bbdc-d577c46d7d6e" class="bulleted-list"><li style="list-style-type:circle">IP addresses</li></ul><ul id="2295b2cc-075b-80a1-9af3-f7316a620491" class="bulleted-list"><li style="list-style-type:circle">URLs/domains</li></ul><ul id="2295b2cc-075b-804f-bcd3-d7e1c989c247" class="bulleted-list"><li style="list-style-type:circle">Tactics, Techniques, and Procedures (TTPs)</li></ul></li></ul><p id="2295b2cc-075b-8056-942b-c91657b8a1e9" class="">It helps <strong>analysts, researchers, SOC teams, law enforcement, and threat intelligence communities</strong> collaborate more effectively.</p><hr id="2295b2cc-075b-8008-bf5d-e36b1a41a65c"/><h2 id="2295b2cc-075b-80d9-9d3b-d399df251a36" class="">🔄 MISP Sharing Model</h2><p id="2295b2cc-075b-80c6-a992-c549c1aa8eac" class="">MISP uses a <strong>distributed model</strong>:</p><ul id="2295b2cc-075b-804f-832b-f511427527d1" class="bulleted-list"><li style="list-style-type:disc">Supports <strong>private</strong>, <strong>semi-private</strong>, or <strong>public</strong> sharing</li></ul><ul id="2295b2cc-075b-80fa-be53-c0bed33a3e82" class="bulleted-list"><li style="list-style-type:disc">Can sync with other MISP instances</li></ul><ul id="2295b2cc-075b-8000-a5c2-ec96d3989acf" class="bulleted-list"><li style="list-style-type:disc">Allows <strong>automated sharing</strong> across trusted communities</li></ul><hr id="2295b2cc-075b-8002-9709-e87034aea3a5"/><h2 id="2295b2cc-075b-807e-9090-e728a89fdd90" class="">🔍 Common Use Cases</h2><table id="2295b2cc-075b-80de-ab0b-cee3b56a6c64" class="simple-table"><thead class="simple-table-header"><tr id="2295b2cc-075b-80c7-9b4d-e6f766502670"><th id="b=nH" class="simple-table-header-color simple-table-header">Use Case</th><th id="Iozc" class="simple-table-header-color simple-table-header">Description</th></tr></thead><tbody><tr id="2295b2cc-075b-80c6-b76c-ee1b92a87843"><td id="b=nH" class=""><strong>Malware Analysis</strong></td><td id="Iozc" class="">Share and understand malware IOCs and behaviors</td></tr><tr id="2295b2cc-075b-8060-be1b-ec20a46fd724"><td id="b=nH" class=""><strong>Security Investigations</strong></td><td id="Iozc" class="">Use IOCs to track down intrusions or ongoing threats</td></tr><tr id="2295b2cc-075b-803d-af5d-cda410e82735"><td id="b=nH" class=""><strong>Threat Intelligence</strong></td><td id="Iozc" class="">Profile adversary groups, campaigns, and techniques</td></tr><tr id="2295b2cc-075b-80c1-b381-c901c237f5d5"><td id="b=nH" class=""><strong>Law Enforcement</strong></td><td id="Iozc" class="">Support forensics and digital crime investigations</td></tr><tr id="2295b2cc-075b-80a4-9ca8-c684f0d565b5"><td id="b=nH" class=""><strong>Risk Analysis</strong></td><td id="Iozc" class="">Evaluate threat trends and likelihood</td></tr><tr id="2295b2cc-075b-804d-ba77-c1a4d040fd62"><td id="b=nH" class=""><strong>Fraud Detection</strong></td><td id="Iozc" class="">Share financial fraud indicators (e.g. card fraud, phishing)</td></tr></tbody></table><hr id="2295b2cc-075b-80ff-9da2-dc34253101f4"/><h2 id="2295b2cc-075b-8085-809e-ecc66400be97" class="">⚙️ Core Functionalities</h2><h3 id="2295b2cc-075b-800f-8a26-d4658416e6fd" class="">1. <strong>IOC Database</strong></h3><ul id="2295b2cc-075b-808a-bdec-dcd59b679a73" class="bulleted-list"><li style="list-style-type:disc">Central storage for <strong>technical</strong> (e.g., IPs, hashes) and <strong>non-technical</strong> data (e.g., threat actor names)</li></ul><h3 id="2295b2cc-075b-80a2-90be-fbfea086767e" class="">2. <strong>Automatic Correlation</strong></h3><ul id="2295b2cc-075b-804b-a36a-d54e6859c9eb" class="bulleted-list"><li style="list-style-type:disc">Detects relationships between events, attributes, and campaigns</li></ul><h3 id="2295b2cc-075b-8078-8cb5-ea9a7d692faa" class="">3. <strong>Data Sharing</strong></h3><ul id="2295b2cc-075b-8010-8b32-c86a5c68df6c" class="bulleted-list"><li style="list-style-type:disc">Securely share intelligence across MISP instances and user groups</li></ul><h3 id="2295b2cc-075b-8052-9567-d5b678fd3160" class="">4. <strong>Import &amp; Export</strong></h3><ul id="2295b2cc-075b-807f-bc56-df6559bf2563" class="bulleted-list"><li style="list-style-type:disc">Import/export in various formats:<ul id="2295b2cc-075b-8056-b8e7-d2a6e75b6574" class="bulleted-list"><li style="list-style-type:circle">STIX, OpenIOC, Suricata, Snort</li></ul><ul id="2295b2cc-075b-8014-b696-ea01c3a7d0a2" class="bulleted-list"><li style="list-style-type:circle">Integrates with <strong>NIDS</strong>, <strong>SIEMs</strong>, and <strong>HIDS</strong></li></ul></li></ul><h3 id="2295b2cc-075b-80bc-8e44-cd6d92ecdecf" class="">5. <strong>Event Graph</strong></h3><ul id="2295b2cc-075b-807f-9205-f7ad1e6525d9" class="bulleted-list"><li style="list-style-type:disc">Visual map of how events, objects, and attributes are linked</li></ul><h3 id="2295b2cc-075b-8024-8ad8-e63e8c38d9a0" class="">6. <strong>API Integration</strong></h3><ul id="2295b2cc-075b-80b0-b105-fabbbba01088" class="bulleted-list"><li style="list-style-type:disc">RESTful API for automation and integration with other platforms</li></ul><hr id="2295b2cc-075b-8049-bb48-e94f5b09a9be"/><h2 id="2295b2cc-075b-800a-beb0-c13ec55c2748" class="">🧩 Key Concepts &amp; Terminology</h2><table id="2295b2cc-075b-800c-bf13-f2d7346dd922" class="simple-table"><thead class="simple-table-header"><tr id="2295b2cc-075b-8061-ba62-fc3f2aa820b9"><th id="I}xW" class="simple-table-header-color simple-table-header">Term</th><th id="RVLO" class="simple-table-header-color simple-table-header">Meaning</th></tr></thead><tbody><tr id="2295b2cc-075b-80e5-b614-f3855f37a384"><td id="I}xW" class=""><strong>Event</strong></td><td id="RVLO" class="">A group of related IOCs (e.g. a phishing attack)</td></tr><tr id="2295b2cc-075b-8033-a8f0-e3c70b5391c6"><td id="I}xW" class=""><strong>Attribute</strong></td><td id="RVLO" class="">A single data point (IP, hash, URL, etc.)</td></tr><tr id="2295b2cc-075b-80d2-875e-cc929d2bd73c"><td id="I}xW" class=""><strong>Object</strong></td><td id="RVLO" class="">Group of attributes forming a real-world object (e.g., an email, file)</td></tr><tr id="2295b2cc-075b-8090-82f3-f98ab68a6e60"><td id="I}xW" class=""><strong>Object Reference</strong></td><td id="RVLO" class="">Links between objects to show relationships</td></tr><tr id="2295b2cc-075b-805d-aab8-ce2f501cc0c2"><td id="I}xW" class=""><strong>Sighting</strong></td><td id="RVLO" class="">Report of when and where an indicator was observed</td></tr><tr id="2295b2cc-075b-8016-9d37-dd9cbb31fb1a"><td id="I}xW" class=""><strong>Tag</strong></td><td id="RVLO" class="">User-defined label for attributes/events</td></tr><tr id="2295b2cc-075b-80cc-8610-eddaa45f64cf"><td id="I}xW" class=""><strong>Taxonomy</strong></td><td id="RVLO" class="">Predefined classification scheme (e.g., TLP, threat level)</td></tr><tr id="2295b2cc-075b-804d-8dfd-d4df95f5d78b"><td id="I}xW" class=""><strong>Galaxy</strong></td><td id="RVLO" class="">External knowledge libraries (e.g., APT groups, malware families)</td></tr><tr id="2295b2cc-075b-8096-b213-c1641d613398"><td id="I}xW" class=""><strong>Indicator</strong></td><td id="RVLO" class="">A data point that suggests malicious activity</td></tr></tbody></table><hr id="2295b2cc-075b-800c-8efd-dbc9fb405fc6"/><h2 id="2295b2cc-075b-80b0-8394-c37de4825352" class="">📊 Visual Flow (optional for visual learners)</h2><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2295b2cc-075b-8068-8628-fb949ee5feb7" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">plaintext
+CopyEdit
+[Event] --&gt; [Objects + Attributes] --&gt; [Tags | Sightings | Taxonomies]
+        \-&gt; [Export/Share to other MISP instances, SIEM, NIDS]
+        \-&gt; [API Integration] &lt;--&gt; [Other tools/platforms]
+
+</code></pre><hr id="2295b2cc-075b-8044-a941-ec9f3d4c414c"/><h2 id="2295b2cc-075b-8034-be7f-ea0d8cbab558" class="">✅ Summary</h2><p id="2295b2cc-075b-80d0-8b00-ed0f5b46dffa" class="">MISP is a <strong>collaborative, open-source platform</strong> that enables:</p><ul id="2295b2cc-075b-80b0-9128-f4a8fb0d4ffb" class="bulleted-list"><li style="list-style-type:disc"><strong>Actionable threat intel sharing</strong></li></ul><ul id="2295b2cc-075b-80ea-96f9-d62300db9b32" class="bulleted-list"><li style="list-style-type:disc"><strong>IOC enrichment and correlation</strong></li></ul><ul id="2295b2cc-075b-8062-aeda-d0644af461b1" class="bulleted-list"><li style="list-style-type:disc"><strong>Community-driven investigation support</strong></li></ul><ul id="2295b2cc-075b-804c-b016-e99a47d477e0" class="bulleted-list"><li style="list-style-type:disc">Integration with security tools and <strong>automation via APIs</strong></li></ul><h2 id="2295b2cc-075b-805b-9c4b-eeab3beac776" class="">🧭 <strong>MISP Dashboard Overview</strong></h2><p id="2295b2cc-075b-80d5-978f-f9dea2b0a6b7" class="">The <strong>Dashboard</strong> is the analyst’s hub for:</p><ul id="2295b2cc-075b-80d5-9cd7-dc36d68e0a5d" class="bulleted-list"><li style="list-style-type:disc"><strong>Tracking</strong>, <strong>sharing</strong>, and <strong>correlating</strong> events and IOCs</li></ul><ul id="2295b2cc-075b-80ba-95f9-eea1273627eb" class="bulleted-list"><li style="list-style-type:disc">Navigating between features like <strong>Events</strong>, <strong>Galaxies</strong>, <strong>Filters</strong>, and <strong>Attributes</strong></li></ul><hr id="2295b2cc-075b-80e1-85cb-c2ee0e0cb677"/><h3 id="2295b2cc-075b-801d-a37a-eebfae4e62d8" class="">🔹 <strong>Main Dashboard Menu Options</strong></h3><table id="2295b2cc-075b-8095-860b-efdeb888b805" class="simple-table"><thead class="simple-table-header"><tr id="2295b2cc-075b-80c3-801e-c33229dacb2a"><th id="D=qw" class="simple-table-header-color simple-table-header"><strong>Option</strong></th><th id="pq@p" class="simple-table-header-color simple-table-header"><strong>Function</strong></th></tr></thead><tbody><tr id="2295b2cc-075b-8064-ae5e-d6d9d2207c37"><td id="D=qw" class=""><strong>Home</strong></td><td id="pq@p" class="">Go to event index or custom homepage</td></tr><tr id="2295b2cc-075b-80ea-a30b-d54d0a0ae19e"><td id="D=qw" class=""><strong>Event Actions</strong></td><td id="pq@p" class="">Create, modify, search, delete, publish events &amp; attributes</td></tr><tr id="2295b2cc-075b-8077-9c02-fc4631073981"><td id="D=qw" class=""><strong>Dashboard</strong></td><td id="pq@p" class="">Customize dashboard using widgets</td></tr><tr id="2295b2cc-075b-80ad-94af-f575f278a5d7"><td id="D=qw" class=""><strong>Galaxies</strong></td><td id="pq@p" class="">Shortcut to MISP Galaxies (APT groups, malware families, etc.)</td></tr><tr id="2295b2cc-075b-8063-80d4-f721ac61eb72"><td id="D=qw" class=""><strong>Input Filters</strong></td><td id="pq@p" class="">View rules for allowed/disallowed values and entry validation</td></tr><tr id="2295b2cc-075b-80b4-84bb-fcd396ee6a3b"><td id="D=qw" class=""><strong>Global Actions</strong></td><td id="pq@p" class="">Access profile, terms of use, user org stats, etc.</td></tr><tr id="2295b2cc-075b-8098-90a3-cca9ad0490d5"><td id="D=qw" class=""><strong>MISP</strong></td><td id="pq@p" class="">Link to base URL of the instance</td></tr><tr id="2295b2cc-075b-803b-bc03-e5b6bea85193"><td id="D=qw" class=""><strong>Name</strong></td><td id="pq@p" class="">Username of currently logged-in analyst</td></tr><tr id="2295b2cc-075b-80d5-ae12-eeb0865a2403"><td id="D=qw" class=""><strong>Envelope Icon</strong></td><td id="pq@p" class="">Notifications and proposals for your org</td></tr><tr id="2295b2cc-075b-8085-b64c-d277ba97e417"><td id="D=qw" class=""><strong>Log Out</strong></td><td id="pq@p" class="">End the current session securely</td></tr></tbody></table><hr id="2295b2cc-075b-80d8-8f07-d40ae97d21cc"/><h2 id="2295b2cc-075b-805e-ab24-e7abed00a1e5" class="">📝 <strong>Event Management in MISP</strong></h2><p id="2295b2cc-075b-8007-9a24-cd45bf408a3d" class="">Events are containers for <strong>linked intelligence</strong> on malware, attacks, and investigations.</p><h3 id="2295b2cc-075b-80ed-9cac-db24544c5398" class="">🛠️ 1. <strong>Event Creation</strong></h3><p id="2295b2cc-075b-801e-9b99-c4cdff1fbe9b" class="">Create an event by providing:</p><ul id="2295b2cc-075b-80df-8726-fbada1898357" class="bulleted-list"><li style="list-style-type:disc"><strong>Title/Description</strong></li></ul><ul id="2295b2cc-075b-80b2-be82-d56151c8bee1" class="bulleted-list"><li style="list-style-type:disc"><strong>Date</strong></li></ul><ul id="2295b2cc-075b-8088-baf5-f1da10776c40" class="bulleted-list"><li style="list-style-type:disc"><strong>Threat Level</strong> (Low / Medium / High / Undefined)</li></ul><ul id="2295b2cc-075b-8071-903f-cfd2daf314f0" class="bulleted-list"><li style="list-style-type:disc"><strong>Distribution Level</strong> (Who can see this?)</li></ul><h3 id="2295b2cc-075b-80c8-96ae-dffe85478cd0" class="">📤 <strong>Distribution Levels:</strong></h3><table id="2295b2cc-075b-80a1-95c3-ed5098a2eccc" class="simple-table"><thead class="simple-table-header"><tr id="2295b2cc-075b-803d-93d2-fba2ede58fe8"><th id="pZ]O" class="simple-table-header-color simple-table-header">Option</th><th id="CzLm" class="simple-table-header-color simple-table-header">Visibility Scope</th></tr></thead><tbody><tr id="2295b2cc-075b-80dd-9348-c3401dbe8bd2"><td id="pZ]O" class="">Your Organisation Only</td><td id="CzLm" class="">Internal users only</td></tr><tr id="2295b2cc-075b-80fd-b28c-d5875e167339"><td id="pZ]O" class="">This Community Only</td><td id="CzLm" class="">Local MISP server &amp; connected orgs</td></tr><tr id="2295b2cc-075b-80c9-b3be-e0e39e96a3e1"><td id="pZ]O" class="">Connected Communities</td><td id="CzLm" class="">Local + 1-2 hop away synced servers</td></tr><tr id="2295b2cc-075b-805c-af0c-de2a1e93bf44"><td id="pZ]O" class="">All Communities</td><td id="CzLm" class="">Public propagation to all MISP nodes</td></tr><tr id="2295b2cc-075b-801e-9403-dcbb43a95f71"><td id="pZ]O" class="">Sharing Group</td><td id="CzLm" class="">Custom list of trusted orgs</td></tr></tbody></table><hr id="2295b2cc-075b-8007-b569-fdf199a5e358"/><h3 id="2295b2cc-075b-804b-bd20-ea31bc393e18" class="">✍️ 2. <strong>Adding Attributes &amp; Attachments</strong></h3><h3 id="2295b2cc-075b-802f-a26d-feacdfdb450f" class="">➕ <strong>Add Attribute:</strong></h3><ul id="2295b2cc-075b-80a7-a817-cdbb3e29355f" class="bulleted-list"><li style="list-style-type:disc">Manual input (single IOC like IP, hash, URL)</li></ul><ul id="2295b2cc-075b-8012-8b74-d6974940a06e" class="bulleted-list"><li style="list-style-type:disc">Batch import (e.g., multiple IPs via line break)</li></ul><ul id="2295b2cc-075b-80e7-9fa1-e3c1e09e53f2" class="bulleted-list"><li style="list-style-type:disc">Import from external formats (OpenIOC, ThreatConnect)</li></ul><h3 id="2295b2cc-075b-8052-817b-c276b1a84dc5" class="">🛡️ <strong>Special Options:</strong></h3><table id="2295b2cc-075b-8029-844a-f25574c323fc" class="simple-table"><thead class="simple-table-header"><tr id="2295b2cc-075b-80a2-9daa-e97ec12ae41a"><th id="hPjR" class="simple-table-header-color simple-table-header">Setting</th><th id="Q_VT" class="simple-table-header-color simple-table-header">Use</th></tr></thead><tbody><tr id="2295b2cc-075b-8048-84e6-fbd1feafe340"><td id="hPjR" class=""><strong>For Intrusion Detection System</strong></td><td id="Q_VT" class="">Marks attribute as usable by IDS (e.g., Suricata/Snort)</td></tr><tr id="2295b2cc-075b-807f-b63e-dd6f635b3db9"><td id="hPjR" class=""><strong>Batch Import</strong></td><td id="Q_VT" class="">Paste multiple IOCs at once</td></tr><tr id="2295b2cc-075b-8056-87f5-e64d8f42acf7"><td id="hPjR" class=""><strong>Malware Checkbox</strong></td><td id="Q_VT" class="">For attachments; ZIPs + passwords them to prevent misuse</td></tr></tbody></table><h3 id="2295b2cc-075b-808e-8c1e-c5d5c21838cd" class="">📎 <strong>Add Attachment:</strong></h3><ul id="2295b2cc-075b-80e8-a011-c3c6f6e1255b" class="bulleted-list"><li style="list-style-type:disc">Upload malware samples, reports, binaries, dropped files</li></ul><ul id="2295b2cc-075b-80e5-af21-cdb8943470cd" class="bulleted-list"><li style="list-style-type:disc">Mark file as malware (adds safe packaging)</li></ul><p id="2295b2cc-075b-80e2-8952-ea1d71ce4b6e" class="">Example: Upload <code>CobaltStrike.exe</code> and tag it as malware.</p><hr id="2295b2cc-075b-80d7-9e42-f39425c679e5"/><h3 id="2295b2cc-075b-802d-87b9-dafe2dc135d1" class="">📣 3. <strong>Publish Event</strong></h3><ul id="2295b2cc-075b-80a0-a12b-dd00005abf2e" class="bulleted-list"><li style="list-style-type:disc">Events are <strong>not shared</strong> until published.</li></ul><ul id="2295b2cc-075b-80b3-8d50-fe2c7cc91f0b" class="bulleted-list"><li style="list-style-type:disc">Publishing adds them to:<ul id="2295b2cc-075b-802c-8001-cba46b247a3d" class="bulleted-list"><li style="list-style-type:circle"><strong>Your MISP instance&#x27;s event pool</strong></li></ul><ul id="2295b2cc-075b-80bd-bddf-c4c556e09968" class="bulleted-list"><li style="list-style-type:circle"><strong>Connected communities or groups</strong> (based on distribution setting)</li></ul></li></ul><ul id="2295b2cc-075b-80e6-8991-ccc5ac3157a2" class="bulleted-list"><li style="list-style-type:disc">Typically reviewed by <strong>org admin</strong> before publishing</li></ul><hr id="2295b2cc-075b-80c8-b82d-ee264aceb3ba"/><h2 id="2295b2cc-075b-8010-89fe-e428570c2872" class="">✅ Summary Workflow</h2><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2295b2cc-075b-805a-8b16-caf711ac78b8" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">plaintext
+CopyEdit
+1. Create Event → Add Description, Date, Threat Level, Distribution
+2. Add Attributes (IP, hash, URL, etc.)
+3. Add Attachments (Malware binaries, IOC files)
+4. Submit → Reviewed by Admin
+5. Publish → Shared with communities
+
+</code></pre><p id="2295b2cc-075b-8022-a65a-f53befd6e309" class="">
+</p><figure id="2295b2cc-075b-805f-bb2f-de1431f07dd8" class="image"><a href="image%2075.png"><img style="width:580.6528930664062px" src="image%2075.png"/></a></figure><p id="2295b2cc-075b-8026-98a4-d785b2250783" class="">
+</p><h1 id="2295b2cc-075b-80e0-b34b-d50b2161b330" class="">Scenario</h1><ol type="1" id="2295b2cc-075b-800f-9e84-ece420d1d357" class="numbered-list" start="1"><li>What event ID has been assigned to the PupyRAT event?</li></ol><figure id="2295b2cc-075b-807e-a717-c4cce2b84236" class="image"><a href="0372260B-71AF-4941-91F1-CE0F19825650.png"><img style="width:580.6528930664062px" src="0372260B-71AF-4941-91F1-CE0F19825650.png"/></a></figure><ol type="1" id="2295b2cc-075b-80e9-827b-fafa56e4a4ae" class="numbered-list" start="2"><li>The event is associated with the adversary gaining ______ into organisations.</li></ol><figure id="2295b2cc-075b-807f-8330-ed930d9ba396" class="image"><a href="EF7FF889-3AAB-4E30-94F9-CE1765B81A67.png"><img style="width:580.6415405273438px" src="EF7FF889-3AAB-4E30-94F9-CE1765B81A67.png"/></a></figure><p id="2295b2cc-075b-808c-9760-fe99654d77a2" class="">the misuse vector is remote access</p><ol type="1" id="2295b2cc-075b-80e9-84d8-e9b63d25bcf7" class="numbered-list" start="3"><li>What IP address has been mapped as the PupyRAT C2 Server</li></ol><p id="2295b2cc-075b-8016-b8d0-c9a218956214" class="">click on view event, and you can see the C2 server IP</p><figure id="2295b2cc-075b-8059-b081-d019a8a0b555" class="image"><a href="B5436C9C-6F47-49E5-B95D-4A010B92B860.png"><img style="width:580.6415405273438px" src="B5436C9C-6F47-49E5-B95D-4A010B92B860.png"/></a></figure><ol type="1" id="2295b2cc-075b-8056-8d29-c3afc663745c" class="numbered-list" start="4"><li>From the Intrusion Set Galaxy, what attack group is known to use this form of attack?</li></ol><p id="2295b2cc-075b-80bd-a05c-fbffd31e4010" class="">From the view event tab, we can see that Magic hound is the intrution set</p><figure id="2295b2cc-075b-8049-afbc-f1bfdcdd6ed4" class="image"><a href="EA23E244-7C05-4666-A33D-D1CD24E0EDAE.png"><img style="width:580.6415405273438px" src="EA23E244-7C05-4666-A33D-D1CD24E0EDAE.png"/></a></figure><ol type="1" id="2295b2cc-075b-80da-94fb-cb0cfd8cca99" class="numbered-list" start="5"><li>There is a taxonomy tag set with a Certainty level of 50. Which one is it?</li></ol><p id="2295b2cc-075b-8063-8564-d346992c3a2a" class="">its mentioned in the tags that the osin certainty is 50</p><figure id="2295b2cc-075b-807b-8d6c-e53de83ca129" class="image"><a href="11768660-CF5D-4A63-95B3-C4F088BE2547.png"><img style="width:505.9811706542969px" src="11768660-CF5D-4A63-95B3-C4F088BE2547.png"/></a></figure><p id="2295b2cc-075b-8008-a38b-e7ddfc65e542" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

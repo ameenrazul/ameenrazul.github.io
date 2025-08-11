@@ -1,0 +1,687 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>OpenCTI</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2295b2cc-075b-80ab-8334-c041866cd831" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🦣</span></div><h1 class="page-title">OpenCTI</h1><p class="page-description"></p></header><div class="page-body"><p id="2295b2cc-075b-805d-9402-debc4a666cb2" class=""><a href="https://github.com/OpenCTI-Platform/opencti">OpenCTI</a> is another open-sourced platform designed to provide organisations with the means to manage CTI through the storage, analysis, visualisation and presentation of threat campaigns, malware and IOCs.<br/></p><figure id="2295b2cc-075b-8070-8971-cfdb88b4f989" class="image"><a href="image%2072.png"><img style="width:3360px" src="image%2072.png"/></a></figure><blockquote id="2295b2cc-075b-8042-a396-d19a75ab455d" class="">OpenCTI uses a variety of knowledge schemas in structuring data, the main one being the Structured <em>Threat Information Expression (</em><em><a href="https://oasis-open.github.io/cti-documentation/stix/intro">STIX2</a></em><em>) standards</em></blockquote><blockquote id="2295b2cc-075b-80e7-a9b3-dba6f624d4be" class=""> It allows for the data to be implemented as entities and relationships, effectively tracing the origin of the provided information.</blockquote><figure id="2295b2cc-075b-8019-9eb9-e01a15cf0d36" class="image"><a href="image%2073.png"><img style="width:1140px" src="image%2073.png"/></a></figure><ul id="2295b2cc-075b-80b2-8c12-e8992124ceaf" class="bulleted-list"><li style="list-style-type:disc"><strong>GraphQL API:</strong> The API connects clients to the database and the messaging system.</li></ul><ul id="2295b2cc-075b-806b-bac7-dc508426ec25" class="bulleted-list"><li style="list-style-type:disc"><strong>Write workers:</strong> Python processes utilised to write queries asynchronously from the RabbitMQ messaging system.</li></ul><ul id="2295b2cc-075b-802a-a6f4-eb1d4efb045f" class="bulleted-list"><li style="list-style-type:disc"><strong>Connectors: </strong>Another set of Python processes used to ingest, enrich or export data on the platform. These connectors provide the application with a robust network of integrated systems and frameworks to create threat intelligence relations and allow users to improve their defence tactics.</li></ul><figure id="2295b2cc-075b-8082-8383-c59ee409e592" class="image"><a href="47879CDF-17AE-46E8-A818-B640CFFE9394.png"><img style="width:1389px" src="47879CDF-17AE-46E8-A818-B640CFFE9394.png"/></a></figure><p id="2295b2cc-075b-804e-8e8a-e1f3fe615e8c" class="">
+</p><p id="2295b2cc-075b-80df-a1de-fd2c16342734" class="">Dashboard</p><figure id="2295b2cc-075b-809b-a783-e2f4e418c4de" class="image"><a href="D7231CF4-326B-4A4F-8FE9-BEFD189816AF.png"><img style="width:1318px" src="D7231CF4-326B-4A4F-8FE9-BEFD189816AF.png"/></a></figure><p id="2295b2cc-075b-8070-9376-d4905d9f8f08" class="">
+</p><hr id="2295b2cc-075b-8068-b167-d767b705fa5a"/><h2 id="2295b2cc-075b-80f9-aa15-f32888d652fd" class="">🧠 <strong>OpenCTI Dashboard &amp; Interface – Notes</strong></h2><p id="2295b2cc-075b-8082-92a1-e994fb88438a" class="">OpenCTI is a platform for <strong>centralising, analysing, and enriching threat intelligence</strong>. It organises data into visual widgets, categories, and tabs to help analysts <strong>understand threats, incidents, and actors</strong>.</p><hr id="2295b2cc-075b-8055-a34f-e79e93dc4d8e"/><h3 id="2295b2cc-075b-80ff-beb1-fb94a90bf0e7" class="">📊 <strong>Dashboard Overview</strong></h3><ul id="2295b2cc-075b-80a3-a1f4-e974da69a60d" class="bulleted-list"><li style="list-style-type:disc"><strong>Visual Widgets</strong> show:<ul id="2295b2cc-075b-80c5-854a-c967076a5acc" class="bulleted-list"><li style="list-style-type:circle">Total number of <strong>entities</strong>, <strong>relationships</strong>, <strong>reports</strong>, and <strong>observables</strong>.</li></ul><ul id="2295b2cc-075b-80ab-b623-df9f074e900b" class="bulleted-list"><li style="list-style-type:circle"><strong>Changes within the last 24 hours</strong>.</li></ul></li></ul><hr id="2295b2cc-075b-80cc-bd0c-fa8674a7c87a"/><h3 id="2295b2cc-075b-80a4-86dc-c0e708f8ada8" class="">📁 <strong>Activities &amp; Knowledge Panel (Left Sidebar)</strong></h3><h3 id="2295b2cc-075b-8093-89c0-ce63495a2077" class="">🔍 Activities:</h3><ul id="2295b2cc-075b-80fd-88cb-dd89c20f4cbc" class="bulleted-list"><li style="list-style-type:disc">Displays <strong>ingested reports</strong> (security incidents).</li></ul><ul id="2295b2cc-075b-8042-8e3e-e607487c48ee" class="bulleted-list"><li style="list-style-type:disc">Helps analysts quickly investigate and access related data.</li></ul><h3 id="2295b2cc-075b-802a-bc0d-e9ac05df41f1" class="">📚 Knowledge:</h3><ul id="2295b2cc-075b-80bf-934d-d017081fa8ff" class="bulleted-list"><li style="list-style-type:disc">Provides detailed intel on:<ul id="2295b2cc-075b-80f5-8cc0-f52419d31e49" class="bulleted-list"><li style="list-style-type:circle"><strong>Adversary tools</strong></li></ul><ul id="2295b2cc-075b-8029-a05e-c6f3d8e329df" class="bulleted-list"><li style="list-style-type:circle"><strong>Victims</strong></li></ul><ul id="2295b2cc-075b-80d2-87bf-f4b926480f51" class="bulleted-list"><li style="list-style-type:circle"><strong>Threat actors</strong></li></ul><ul id="2295b2cc-075b-806d-9999-c43d183d135a" class="bulleted-list"><li style="list-style-type:circle"><strong>Campaigns</strong></li></ul></li></ul><ul id="2295b2cc-075b-8021-aca4-fa5a362ba773" class="bulleted-list"><li style="list-style-type:disc">All items are <strong>linked and cross-referenced</strong> for easier threat mapping.</li></ul><hr id="2295b2cc-075b-80e8-b0e3-c856d89f64c5"/><h3 id="2295b2cc-075b-8069-96d7-df12d9e9f6cd" class="">🧾 <strong>Analysis Tab</strong></h3><ul id="2295b2cc-075b-807c-b8c4-da83c4119db5" class="bulleted-list"><li style="list-style-type:disc">Contains threat <strong>reports</strong>, associated <strong>observables</strong>, and <strong>external references</strong>.</li></ul><ul id="2295b2cc-075b-80c0-b51f-faa111850a6a" class="bulleted-list"><li style="list-style-type:disc">Reports are key to:<ul id="2295b2cc-075b-8006-a5bc-c7fdbfa84b44" class="bulleted-list"><li style="list-style-type:circle">Documenting <strong>threat intel</strong></li></ul><ul id="2295b2cc-075b-80d3-aa87-d16be0faf18d" class="bulleted-list"><li style="list-style-type:circle">Adding <strong>analyst notes</strong></li></ul><ul id="2295b2cc-075b-80a6-92c3-eadcddd2b7d9" class="bulleted-list"><li style="list-style-type:circle">Linking <strong>MITRE ATT&amp;CK data</strong></li></ul></li></ul><ul id="2295b2cc-075b-809d-b1ec-e27891ff1f4f" class="bulleted-list"><li style="list-style-type:disc">Example: The <strong>Triton Software</strong> report shows intel extracted from MITRE and allows further investigation.</li></ul><hr id="2295b2cc-075b-80fd-aa33-c476179b2e94"/><h3 id="2295b2cc-075b-8085-8cd5-de5212bfae00" class="">⚠️ <strong>Events Tab</strong></h3><ul id="2295b2cc-075b-80d6-98d6-ff818224bc92" class="bulleted-list"><li style="list-style-type:disc">Used by analysts to:<ul id="2295b2cc-075b-8076-a548-cc317309f64b" class="bulleted-list"><li style="list-style-type:circle">Record <strong>investigation findings</strong></li></ul><ul id="2295b2cc-075b-8070-be76-d3156cafea19" class="bulleted-list"><li style="list-style-type:circle">Enrich intel with <strong>incident associations</strong></li></ul></li></ul><ul id="2295b2cc-075b-806c-a8ef-d1a73cced3df" class="bulleted-list"><li style="list-style-type:disc">Helps in <strong>organising attack events</strong> during a hunt or response.</li></ul><hr id="2295b2cc-075b-8059-a552-e98cd1ca9aaa"/><h3 id="2295b2cc-075b-8099-87f8-dffc31bee697" class="">👁️ <strong>Observations Tab</strong></h3><ul id="2295b2cc-075b-807c-bfc0-ef4a65626527" class="bulleted-list"><li style="list-style-type:disc">Contains:<ul id="2295b2cc-075b-80b9-9ff8-fab82512be8f" class="bulleted-list"><li style="list-style-type:circle"><strong>Technical artefacts</strong>, <strong>indicators</strong>, and <strong>detection rules</strong>.</li></ul></li></ul><ul id="2295b2cc-075b-806b-98d1-c771f7d6b2a6" class="bulleted-list"><li style="list-style-type:disc">Analysts use it to:<ul id="2295b2cc-075b-80d1-b54c-e6e5651910de" class="bulleted-list"><li style="list-style-type:circle">Map threat events.</li></ul><ul id="2295b2cc-075b-809f-88c4-e1270588ea32" class="bulleted-list"><li style="list-style-type:circle"><strong>Correlate observations</strong> from their environment with intel feeds.</li></ul></li></ul><hr id="2295b2cc-075b-80ad-a7bb-e70039ba16da"/><h3 id="2295b2cc-075b-80df-a414-c6e6cf6b3bb3" class="">☠️ <strong>Threats Tab</strong></h3><p id="2295b2cc-075b-8035-bde9-d26d27cd6b36" class="">All known threat-related data is grouped here:</p><ul id="2295b2cc-075b-80c3-bffb-f97b5829e8f1" class="bulleted-list"><li style="list-style-type:disc"><strong>Threat Actors</strong>: Individuals/groups launching attacks.</li></ul><ul id="2295b2cc-075b-8043-81ae-e294b3b349f8" class="bulleted-list"><li style="list-style-type:disc"><strong>Intrusion Sets</strong>:<ul id="2295b2cc-075b-8005-b2cb-f4bb144d2828" class="bulleted-list"><li style="list-style-type:circle">TTPs, tools, malware, and infrastructure used by threat groups.</li></ul><ul id="2295b2cc-075b-8093-b89f-f22acc6dfd14" class="bulleted-list"><li style="list-style-type:circle">Example: APTs and other persistent threat groups.</li></ul></li></ul><ul id="2295b2cc-075b-806f-8be0-f049f0b30517" class="bulleted-list"><li style="list-style-type:disc"><strong>Campaigns</strong>:<ul id="2295b2cc-075b-8099-9ff3-d818729d446c" class="bulleted-list"><li style="list-style-type:circle">Coordinated attacks over time by APTs or cybercrime groups.</li></ul><ul id="2295b2cc-075b-8045-a471-d57286bdadab" class="bulleted-list"><li style="list-style-type:circle">Have <strong>specific goals</strong> and targets.</li></ul></li></ul><hr id="2295b2cc-075b-809c-ae11-c9d69db96c39"/><h3 id="2295b2cc-075b-8027-b87f-cb3ab6e8aad8" class="">🧰 <strong>Arsenal Tab</strong></h3><p id="2295b2cc-075b-80a1-b628-edbd0e91588e" class="">Lists technical tools used in attacks, both <strong>malicious and legitimate</strong>:</p><ul id="2295b2cc-075b-80b3-aba8-fbf6173b3fc9" class="bulleted-list"><li style="list-style-type:disc"><strong>Malware</strong>: Active trojans and malware with related intel (e.g., 4H RAT).</li></ul><ul id="2295b2cc-075b-80e3-93fb-e48634100b5a" class="bulleted-list"><li style="list-style-type:disc"><strong>Attack Patterns</strong>:<ul id="2295b2cc-075b-809e-a92d-ef1be443f9e5" class="bulleted-list"><li style="list-style-type:circle">Tactics, techniques, and procedures (TTPs) like <strong>Command-Line Interface</strong>.</li></ul></li></ul><ul id="2295b2cc-075b-8044-858a-f6c9dabb2305" class="bulleted-list"><li style="list-style-type:disc"><strong>Courses of Action (CoA)</strong>:<ul id="2295b2cc-075b-80e4-a82a-d12c88da0f5b" class="bulleted-list"><li style="list-style-type:circle">Defensive measures mapped to MITRE ATT&amp;CK techniques.</li></ul></li></ul><ul id="2295b2cc-075b-809f-b377-e7951cb159b0" class="bulleted-list"><li style="list-style-type:disc"><strong>Tools</strong>:<ul id="2295b2cc-075b-800c-bf06-f46e8dbf52af" class="bulleted-list"><li style="list-style-type:circle">Legit tools (e.g., CMD) that may be <strong>abused by attackers</strong>.</li></ul></li></ul><ul id="2295b2cc-075b-80bc-85d4-d44489b5f1e5" class="bulleted-list"><li style="list-style-type:disc"><strong>Vulnerabilities</strong>:<ul id="2295b2cc-075b-80a2-a9e9-dd6bac9438a5" class="bulleted-list"><li style="list-style-type:circle">Pulled from CVE databases.</li></ul><ul id="2295b2cc-075b-80f6-bf42-ea27c6d34192" class="bulleted-list"><li style="list-style-type:circle">Used to enrich understanding of <strong>exploitable weaknesses</strong>.</li></ul></li></ul><hr id="2295b2cc-075b-805d-98aa-d86b64c2cdde"/><h3 id="2295b2cc-075b-80b2-bcaf-f817b83510f4" class="">🧍 <strong>Entities Tab</strong></h3><ul id="2295b2cc-075b-80fc-92f7-eaf12b366054" class="bulleted-list"><li style="list-style-type:disc">Categorises data by:<ul id="2295b2cc-075b-8037-91d0-d7d8d7013dd5" class="bulleted-list"><li style="list-style-type:circle"><strong>Sectors</strong></li></ul><ul id="2295b2cc-075b-8027-a927-f4aeea21ebf1" class="bulleted-list"><li style="list-style-type:circle"><strong>Countries</strong></li></ul><ul id="2295b2cc-075b-801e-a983-f9b35c19edd4" class="bulleted-list"><li style="list-style-type:circle"><strong>Organisations</strong></li></ul><ul id="2295b2cc-075b-8019-a917-ef4121de5fcf" class="bulleted-list"><li style="list-style-type:circle"><strong>Individuals</strong></li></ul></li></ul><ul id="2295b2cc-075b-8062-b68f-de64f4e59b09" class="bulleted-list"><li style="list-style-type:disc">Supports deeper intel <strong>enrichment and attribution</strong>.</li></ul><hr id="2295b2cc-075b-80d8-a274-ee58c50feb61"/><h2 id="2295b2cc-075b-804e-aaf8-fd192eefa419" class="">✅ Summary:</h2><table id="2295b2cc-075b-804d-a8b4-c451e2c1bb52" class="simple-table"><thead class="simple-table-header"><tr id="2295b2cc-075b-8052-b13a-d4e39854da47"><th id="]KlU" class="simple-table-header-color simple-table-header">Section</th><th id="eR\?" class="simple-table-header-color simple-table-header">Purpose</th></tr></thead><tbody><tr id="2295b2cc-075b-80c2-8a5c-f535bdf6b727"><td id="]KlU" class=""><strong>Dashboard</strong></td><td id="eR\?" class="">Visual overview of all ingested intel</td></tr><tr id="2295b2cc-075b-80c4-ba05-fa237a43513c"><td id="]KlU" class=""><strong>Activities</strong></td><td id="eR\?" class="">View and investigate reports (incidents)</td></tr><tr id="2295b2cc-075b-8083-a24c-cd01a7ff086b"><td id="]KlU" class=""><strong>Knowledge</strong></td><td id="eR\?" class="">Reference threat actors, campaigns, tools</td></tr><tr id="2295b2cc-075b-8092-9a4e-c33dbdff94d0"><td id="]KlU" class=""><strong>Analysis</strong></td><td id="eR\?" class="">Review and add to threat reports</td></tr><tr id="2295b2cc-075b-809e-b792-d399253deaf1"><td id="]KlU" class=""><strong>Events</strong></td><td id="eR\?" class="">Log and enrich incident-level data</td></tr><tr id="2295b2cc-075b-8034-8ade-f9daab2b27e9"><td id="]KlU" class=""><strong>Observations</strong></td><td id="eR\?" class="">View indicators and map technical artefacts</td></tr><tr id="2295b2cc-075b-8053-b77e-c397840d6fa5"><td id="]KlU" class=""><strong>Threats</strong></td><td id="eR\?" class="">Group info on actors, campaigns, intrusion sets</td></tr><tr id="2295b2cc-075b-804f-a472-d9b951ffeb16"><td id="]KlU" class=""><strong>Arsenal</strong></td><td id="eR\?" class="">Tools, malware, TTPs, CoAs, and vulnerabilities</td></tr><tr id="2295b2cc-075b-8062-8653-dff231a0a91e"><td id="]KlU" class=""><strong>Entities</strong></td><td id="eR\?" class="">Classify by people, orgs, sectors, geography</td></tr></tbody></table><hr id="2295b2cc-075b-807a-9688-d4fc6f0c1a84"/><p id="2295b2cc-075b-8057-8657-c6946babe45d" class="">What is the name of the group that uses the <strong>4H RAT</strong> malware?<br/>Under Arsenal - Select the Malware - and in description we can see that its Putter Panda<br/></p><figure id="2295b2cc-075b-8015-9b2f-f712519035ca" class="image"><a href="710C44D7-F96F-42BD-BAEB-C6181E6FCBCE.png"><img style="width:1304px" src="710C44D7-F96F-42BD-BAEB-C6181E6FCBCE.png"/></a></figure><p id="2295b2cc-075b-800f-95d9-c85b10a855c6" class="">What kill-chain phase is linked with the <strong>Command-Line Interface</strong> Attack Pattern? <br/><br/>Under Arsenal - Find the Attack pattern - check under Kill chain phase</p><figure id="2295b2cc-075b-80ce-8027-fbe59805b4ef" class="image"><a href="1A0FE845-F05F-4DA2-AF5E-F86903E9D577.png"><img style="width:1319px" src="1A0FE845-F05F-4DA2-AF5E-F86903E9D577.png"/></a></figure><p id="2295b2cc-075b-804e-984d-c78785f50e51" class="">Within the Activities category, which tab would house the <strong>Indicators</strong>?</p><p id="2295b2cc-075b-807a-9287-ddcf7671f8bf" class="">Under Activities-Obesrvations is where we find the indicators</p><figure id="2295b2cc-075b-808d-b991-c03638d384c6" class="image"><a href="image%2074.png"><img style="width:1317px" src="image%2074.png"/></a></figure><p id="2295b2cc-075b-804b-a831-c513d00cee0b" class="">
+</p><p id="2295b2cc-075b-80d2-a40b-cf9999de1d91" class="">What Intrusion sets are associated with the Cobalt Strike malware with a Good confidence level? (Intrusion1, Intrusion2)</p><p id="2295b2cc-075b-8003-8603-f75493409fdd" class="">Under the knowledge bad, we can see the intrusion sets, and there are 2 with a good confidence level.</p><figure id="2295b2cc-075b-8037-81c6-ef700c4b462e" class="image"><a href="68BA89AA-D32B-47E7-B5C0-DF88B9DF867D.png"><img style="width:1314px" src="68BA89AA-D32B-47E7-B5C0-DF88B9DF867D.png"/></a></figure><p id="2295b2cc-075b-80a6-b350-e7b559d41ceb" class="">Who is the author of the entity?</p><p id="2295b2cc-075b-800b-8bf8-f9e6bfc904b4" class="">We can see the author of the malware overview in the following section</p><figure id="2295b2cc-075b-805a-8fd8-d7a4a95db951" class="image"><a href="C371F452-5807-473F-BE5E-FB9FA23DD75A.png"><img style="width:376.924560546875px" src="C371F452-5807-473F-BE5E-FB9FA23DD75A.png"/></a></figure><p id="2295b2cc-075b-80b7-808c-f98dadb89ef3" class="">
+</p><h1 id="2295b2cc-075b-8091-83e3-ce8e04626857" class="">Investigative Scenario</h1><ol type="1" id="2295b2cc-075b-800c-a75b-f59dbfcc12f8" class="numbered-list" start="1"><li>What is the earliest date recorded related to <strong>CaddyWiper</strong>?<br/></li></ol><p id="2295b2cc-075b-80b6-bd64-ceab66a90729" class="">Navigate to the Malware infromation, check history, if you cant find anyting there, maybe check reports in the reports secitn, open it and the entity details will mention when the malware was first recorded.<br/></p><figure id="2295b2cc-075b-805d-835f-eb0fd99d2ff1" class="image"><a href="98212DFB-2B3F-49CD-8D01-7B362F96A7FE.png"><img style="width:1320px" src="98212DFB-2B3F-49CD-8D01-7B362F96A7FE.png"/></a></figure><p id="2295b2cc-075b-8048-b3d8-f85df69f4466" class="">
+</p><ol type="1" id="2295b2cc-075b-804a-a9e1-dd6d13767901" class="numbered-list" start="2"><li>Which <strong>Attack technique</strong> is used by the malware for execution?<br/><br/>in order to see the attack patterns and execution methods in mitre , we can navigate to Knowledge, from there the attack patterns are shown in a mitre attack chart</li></ol><figure id="2295b2cc-075b-802d-8a67-c695ce17c8eb" class="image"><a href="9517A468-EC31-4422-98E6-9C6D49CF7E7A.png"><img style="width:376.9358825683594px" src="9517A468-EC31-4422-98E6-9C6D49CF7E7A.png"/></a></figure><p id="2295b2cc-075b-802c-8ede-e186a9a1c957" class="">
+</p><ol type="1" id="2295b2cc-075b-8077-b591-ce31bdedd4b8" class="numbered-list" start="3"><li>How many malware relations are linked to this Attack technique?</li></ol><p id="2295b2cc-075b-8019-9206-feea7b6dab62" class="">We have to go into the Native API attack pattern and see the Malware relations form there, as shown in the following screenshot</p><figure id="2295b2cc-075b-80ae-9a0c-f9bef875aa65" class="image"><a href="542C98BA-A3CD-476E-8816-79C8D9FE1D4B.png"><img style="width:1314px" src="542C98BA-A3CD-476E-8816-79C8D9FE1D4B.png"/></a></figure><ol type="1" id="2295b2cc-075b-80e9-90eb-c9bf52be9a86" class="numbered-list" start="4"><li>Which 3 tools were used by the Attack Technique in 2016?</li></ol><p id="2295b2cc-075b-80f8-afd7-d261fc5456dd" class="">This information is availabel under the Tools section of the Knowledge tab of the Attack pattern</p><figure id="2295b2cc-075b-80fa-a7f6-f2d373f871ce" class="image"><a href="F2FEF458-05FB-4A32-A53A-2C4C4EDE1384.png"><img style="width:1142px" src="F2FEF458-05FB-4A32-A53A-2C4C4EDE1384.png"/></a></figure><ol type="1" id="2295b2cc-075b-809d-a60b-e51562a2980d" class="numbered-list" start="5"><li>What country is <strong>APT37</strong> associated with?<br/><br/>search for APT37 in the intrusion set, and get the information from teh description.</li></ol><figure id="2295b2cc-075b-8050-a127-f9d0f9630a08" class="image"><a href="9F3C3477-F178-414D-9D11-14E3928AEBC5.png"><img style="width:1313px" src="9F3C3477-F178-414D-9D11-14E3928AEBC5.png"/></a></figure><ol type="1" id="2295b2cc-075b-8036-a863-d5d3cdbf4de3" class="numbered-list" start="6"><li>Which Attack techniques are used by the group for initial access?</li></ol><p id="2295b2cc-075b-80e8-bd1e-dbe2a6c8c572" class="">Under Knowledge - Global kill Chain then chose intial access and see the techniques form there</p><figure id="2295b2cc-075b-80fb-9d64-c4680a9c89f8" class="image"><a href="BCBBBD3E-C66B-442B-A609-0159B1F781BD.png"><img style="width:1316px" src="BCBBBD3E-C66B-442B-A609-0159B1F781BD.png"/></a></figure><p id="2295b2cc-075b-80bc-b4b4-c8a54e0bdc13" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

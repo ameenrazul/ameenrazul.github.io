@@ -1,0 +1,711 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Volatility</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="23f5b2cc-075b-802f-8797-fa700c32517c" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/bdd7dca765920c9724b54dea1d17761f.png"/></div><h1 class="page-title">Volatility</h1><p class="page-description"></p></header><div class="page-body"><p id="23f5b2cc-075b-804e-93ce-ed336f863b1e" class="">Volatility is a free memory forensics tool developed and maintained by Volatility Foundation, commonly used by malware and SOC analysts within a blue team or as part of their detection and monitoring solutions. Volatility is written in Python and is made up of python plugins and modules designed as a plug-and-play way of analyzing memory dumps.</p><p id="23f5b2cc-075b-80ae-9a71-d965847e466e" class="">Volatility is available for Windows, Linux, and Mac OS and is written purely in Python.</p><h3 id="23f5b2cc-075b-806c-915d-c84815ec11d1" class="">✅ Summary of Volatility Overview:</h3><ul id="23f5b2cc-075b-807b-b707-de065683ddf4" class="bulleted-list"><li style="list-style-type:disc"><strong>Volatility</strong> is the <strong>most widely used tool</strong> for extracting digital artifacts from <strong>RAM (volatile memory)</strong>.</li></ul><ul id="23f5b2cc-075b-80f8-9516-f1c9b542cd6a" class="bulleted-list"><li style="list-style-type:disc">It works <strong>independently</strong> of the system under investigation, but provides <strong>deep visibility</strong> into its <strong>runtime state</strong>.</li></ul><ul id="23f5b2cc-075b-8097-88d4-e7e019d7295d" class="bulleted-list"><li style="list-style-type:disc">Volatility uses a <strong>plugin-based architecture</strong> to analyze memory dumps.</li></ul><ul id="23f5b2cc-075b-801b-8626-f854d1cc9d2c" class="bulleted-list"><li style="list-style-type:disc"><strong>First step</strong> in analysis: Identify the <strong>image type</strong> of the memory dump.</li></ul><ul id="23f5b2cc-075b-807f-8170-ca3a61aad23c" class="bulleted-list"><li style="list-style-type:disc">Once identified, you can use various <strong>Volatility plugins</strong> for analysis (to be covered later).</li></ul><ul id="23f5b2cc-075b-808d-b9ec-e54ac79ced80" class="bulleted-list"><li style="list-style-type:disc">There are <strong>two versions</strong>:<ul id="23f5b2cc-075b-8054-afaa-e2209bc94d60" class="bulleted-list"><li style="list-style-type:circle"><strong>Volatility 2</strong> (Python 2-based, older)</li></ul><ul id="23f5b2cc-075b-8061-ad76-ddb3e71a36e7" class="bulleted-list"><li style="list-style-type:circle"><strong>Volatility 3</strong> (Python 3-based, current and recommended)<ul id="23f5b2cc-075b-809e-9d32-d196c72e6399" class="bulleted-list"><li style="list-style-type:square">GitHub: <a href="https://github.com/volatilityfoundation/volatility3">https://github.com/volatilityfoundation/volatility3</a></li></ul></li></ul></li></ul><ul id="23f5b2cc-075b-8010-9723-e23ba4fe7382" class="bulleted-list"><li style="list-style-type:disc">⚠️ <strong>Volatility 3 syntax is different</strong> from Volatility 2; use the latest syntax in your analysis.</li></ul><p id="23f5b2cc-075b-80c0-9bcf-e62ad1ea87fc" class="">In short: Volatility helps extract and investigate data from memory dumps using plugins, and <strong>Volatility 3 (Python 3)</strong> is the version you should use going forward.</p><p id="23f5b2cc-075b-8068-823a-f50a1fdb5f6f" class="">Extracting a memory dump can be performed in numerous ways, varying <br/>based on the requirements of your investigation. Listed below are a few <br/>of the techniques and tools that can be used to extract a memory from a <br/>bare-metal machine.</p><ul id="23f5b2cc-075b-80d4-b52a-f4f81b89c7fe" class="bulleted-list"><li style="list-style-type:disc">FTK Imager</li></ul><ul id="23f5b2cc-075b-8022-9642-d3d4521a0881" class="bulleted-list"><li style="list-style-type:disc">Redline</li></ul><ul id="23f5b2cc-075b-80ce-b457-cc51bc676d56" class="bulleted-list"><li style="list-style-type:disc">DumpIt.exe</li></ul><ul id="23f5b2cc-075b-80f4-ad64-c517f63c20ed" class="bulleted-list"><li style="list-style-type:disc">win32dd.exe / win64dd.exe</li></ul><ul id="23f5b2cc-075b-808e-b389-d1e1dd6d1ac6" class="bulleted-list"><li style="list-style-type:disc">Memoryze</li></ul><ul id="23f5b2cc-075b-80b3-95a9-f33afd779382" class="bulleted-list"><li style="list-style-type:disc">FastDump</li></ul><p id="23f5b2cc-075b-8092-ad96-e84125e02b39" class="">When using an extraction tool on a bare-metal host, it can usually <br/>take a considerable amount of time; take this into consideration during <br/>your investigation if time is a constraint.</p><p id="23f5b2cc-075b-80e2-a75e-ec1fa49c77b2" class="">Most of the tools mentioned above for memory extraction will output a<br/> .raw file with some exceptions like Redline that can use its own agent <br/>and session structure.</p><figure id="23f5b2cc-075b-8095-b80d-c247d8ac7cf0" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/5e73cca6ec4fcf1309f2df86/room-content/17eb1ceec9932bc5e445613ff5f5aa88.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5e73cca6ec4fcf1309f2df86/room-content/17eb1ceec9932bc5e445613ff5f5aa88.png"/></a></figure><p id="23f5b2cc-075b-8088-8c86-d42937e36f6c" class="">For virtual machines, gathering a memory file can easily be done by <br/>collecting the virtual memory file from the host machine’s drive. This <br/>file can change depending on the hypervisor used; listed below are a few<br/> of the hypervisor virtual memory files you may encounter.</p><ul id="23f5b2cc-075b-80c8-b103-dcb917c5a18b" class="bulleted-list"><li style="list-style-type:disc">VMWare - .vmem</li></ul><ul id="23f5b2cc-075b-801c-9b95-dfa509095f5e" class="bulleted-list"><li style="list-style-type:disc">Hyper-V - .bin</li></ul><ul id="23f5b2cc-075b-807a-93bf-d6dc11920fb0" class="bulleted-list"><li style="list-style-type:disc">Parallels - .mem</li></ul><ul id="23f5b2cc-075b-8041-b614-e43ba49f22f3" class="bulleted-list"><li style="list-style-type:disc">VirtualBox - .sav file *<em>this is only a partial memory file</em></li></ul><p id="23f5b2cc-075b-80c0-99a0-cac931322acb" class="">
+</p><p id="23f5b2cc-075b-8002-8101-cbf22725d7b4" class="">By default, Volatility comes with all existing Windows profiles from Windows XP to Windows 10.</p><p id="23f5b2cc-075b-800c-b4bd-e7b27151005e" class="">Image profiles can be hard to determine if you don&#x27;t know exactly what version and build the machine you extracted a memory dump from was. In some cases, you may be given a memory file with no other context, and it is up to you to figure out where to go from there. In that case, <br/>Volatility has your back and comes with the <code>imageinfo</code> plugin. This plugin will take the provided memory dump and assign it a list of the best possible OS profiles. OS profiles have since been deprecated with Volatility3, so we will only need to worry about identifying the profile if using Volatility2; this makes life much easier for analyzing memory dumps.</p><p id="23f5b2cc-075b-80bd-99ba-c350d47810cc" class="">Note: <code>imageinfo</code> is not always correct and can have varied results depending on the provided dump; use with caution and test multiple profiles from the provided list.</p><p id="23f5b2cc-075b-8047-af8d-ef4d3e9971e6" class="">If we are still looking to get information about what the host is running from the memory dump, we can use the following three plugins <code>windows.info</code> <code>linux.info</code> <code>mac.info</code>.  This plugin will provide information about the host from the memory dump.</p><p id="23f5b2cc-075b-80d5-87f2-fbc461f59e1d" class="">Syntax: <code>python3 vol.py -f &lt;file&gt; windows.info</code></p><p id="23f5b2cc-075b-806e-ad85-fe9aaeb4c994" class="">
+</p><h3 id="23f5b2cc-075b-802d-9fdc-c23f77c582f9" class="">✅ Summary: Volatility Process &amp; Network Plugins (with Pros &amp; Cons)</h3><hr id="23f5b2cc-075b-8006-84a9-fdeea9dd060c"/><h3 id="23f5b2cc-075b-8046-9be4-f2decfe58ff9" class="">🧠 <strong>Process Analysis Plugins</strong></h3><table id="23f5b2cc-075b-80ce-881c-f6335bfd21b7" class="simple-table"><thead class="simple-table-header"><tr id="23f5b2cc-075b-8027-843d-c1f19925c068"><th id="nxgz" class="simple-table-header-color simple-table-header">Plugin</th><th id="BG`G" class="simple-table-header-color simple-table-header">Purpose</th><th id="xEBP" class="simple-table-header-color simple-table-header">Technique Used</th><th id="tfq[" class="simple-table-header-color simple-table-header">Pros</th><th id="Yrcn" class="simple-table-header-color simple-table-header">Cons</th></tr></thead><tbody><tr id="23f5b2cc-075b-808d-8509-cca99ff277ad"><td id="nxgz" class=""><code>pslist</code></td><td id="BG`G" class="">Lists running and exited processes</td><td id="xEBP" class="">Uses doubly-linked list (<code>EPROCESS.ActiveProcessLinks</code>)</td><td id="tfq[" class="">Simple and reliable; includes exit times</td><td id="Yrcn" class="">Rootkits can <strong>unlink</strong> from list to hide</td></tr><tr id="23f5b2cc-075b-80e4-8ba4-d053742e782b"><td id="nxgz" class=""><code>psscan</code></td><td id="BG`G" class="">Scans memory for process structures (bypasses hidden processes)</td><td id="xEBP" class="">Scans memory for <code>_EPROCESS</code> structures</td><td id="tfq[" class="">Detects <strong>unlinked (hidden)</strong> processes</td><td id="Yrcn" class="">May cause <strong>false positives</strong></td></tr><tr id="23f5b2cc-075b-8001-8dca-c0f2347a8ed5"><td id="nxgz" class=""><code>pstree</code></td><td id="BG`G" class="">Shows process hierarchy (parent-child relationships)</td><td id="xEBP" class="">Same as <code>pslist</code></td><td id="tfq[" class="">Good for visualizing <strong>process lineage</strong>, useful in investigations</td><td id="Yrcn" class="">Doesn’t detect hidden/unlinked processes</td></tr></tbody></table><hr id="23f5b2cc-075b-80e2-abed-efc7ccedc941"/><h3 id="23f5b2cc-075b-8064-beca-ff49b53e75e1" class="">🌐 <strong>Network Analysis Plugin</strong></h3><table id="23f5b2cc-075b-8004-b2f3-f4295e8eea4e" class="simple-table"><thead class="simple-table-header"><tr id="23f5b2cc-075b-808e-abf5-f44a0d3d3145"><th id="zHNw" class="simple-table-header-color simple-table-header">Plugin</th><th id=":yRd" class="simple-table-header-color simple-table-header">Purpose</th><th id="WB&gt;q" class="simple-table-header-color simple-table-header">Notes</th></tr></thead><tbody><tr id="23f5b2cc-075b-8015-ab0b-ccaf34665265"><td id="zHNw" class=""><code>netstat</code></td><td id=":yRd" class="">Lists active network connections</td><td id="WB&gt;q" class="">Unstable on older Windows versions; parses memory network structures</td></tr><tr id="23f5b2cc-075b-804b-8144-e62e35a1f8bf"><td id="zHNw" class=""><strong>Alternative:</strong> <code>bulk_extractor</code></td><td id=":yRd" class="">Extracts artifacts like PCAP from memory</td><td id="WB&gt;q" class="">Useful when Volatility’s <code>netstat</code> fails or yields incomplete/unstable output</td></tr><tr id="23f5b2cc-075b-8050-a73e-c33da5c3bbb7"><td id="zHNw" class="">Install: <code>sudo apt install bulk-extractor</code></td><td id=":yRd" class="">Use it when you want to analyze full network traffic externally (e.g., in Wireshark)</td><td id="WB&gt;q" class=""></td></tr></tbody></table><hr id="23f5b2cc-075b-805f-b8db-d9bd36aef95f"/><h3 id="23f5b2cc-075b-8061-880d-c45a7f630eab" class="">🧩 <strong>DLL Analysis Plugin</strong></h3><table id="23f5b2cc-075b-80ce-8a33-f109a1799ed4" class="simple-table"><thead class="simple-table-header"><tr id="23f5b2cc-075b-800e-a788-e76510c4b884"><th id="`zEf" class="simple-table-header-color simple-table-header">Plugin</th><th id="M=kP" class="simple-table-header-color simple-table-header">Purpose</th><th id="ZZd:" class="simple-table-header-color simple-table-header">Usefulness</th></tr></thead><tbody><tr id="23f5b2cc-075b-8027-aafc-eb47e4b01b07"><td id="`zEf" class=""><code>dlllist</code></td><td id="M=kP" class="">Lists loaded DLLs per process</td><td id="ZZd:" class="">Helps detect <strong>suspicious or injected DLLs</strong> (e.g., malware indicators)</td></tr></tbody></table><hr id="23f5b2cc-075b-80bc-ae74-f5c4baba0934"/><h3 id="23f5b2cc-075b-8070-a768-dcc61a75e61c" class="">📌 Syntax Cheat Sheet</h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="23f5b2cc-075b-8061-bba7-eb5125d5c559" class="code code-wrap"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">python3 vol.py -f &lt;memory_file&gt; windows.pslist       # Basic process listing
+python3 vol.py -f &lt;memory_file&gt; windows.psscan       # Hidden process detection
+python3 vol.py -f &lt;memory_file&gt; windows.pstree       # Process tree hierarchy
+python3 vol.py -f &lt;memory_file&gt; windows.netstat      # Network connections
+python3 vol.py -f &lt;memory_file&gt; windows.dlllist      # DLLs loaded per process
+</code></pre><hr id="23f5b2cc-075b-80fe-bce5-cb27e8ce8fae"/><p id="23f5b2cc-075b-808d-bc6f-d687052f9f9b" class="">
+</p><figure id="23f5b2cc-075b-802f-919d-e08b947deb7e" class="image"><a href="93824373-CD12-4FD6-8CC4-3ACC2F39B87F.png"><img style="width:710px" src="93824373-CD12-4FD6-8CC4-3ACC2F39B87F.png"/></a></figure><p id="23f5b2cc-075b-8063-9e5f-f380f3dcf160" class="">
+</p><hr id="23f5b2cc-075b-80ff-891a-e6e47c399876"/><h3 id="23f5b2cc-075b-8010-977f-d150c315076d" class="">🕵️‍♂️ <strong>Volatility Malware Hunting Essentials</strong></h3><h3 id="23f5b2cc-075b-80a0-93b5-eae10ccd9166" class="">🔍 <strong>1. malfind</strong> – <em>Detect Code Injection in Memory</em></h3><ul id="23f5b2cc-075b-80f5-95ad-f81679aaddc4" class="bulleted-list"><li style="list-style-type:disc"><strong>Purpose</strong>: Finds injected code in process memory.</li></ul><ul id="23f5b2cc-075b-80b7-840c-e31f0728a6d8" class="bulleted-list"><li style="list-style-type:disc"><strong>Detection Method</strong>:<ul id="23f5b2cc-075b-8049-a4d8-ec2b5cffa60a" class="bulleted-list"><li style="list-style-type:circle">Scans memory regions that are:<ul id="23f5b2cc-075b-808d-9978-d9eb39c4e61b" class="bulleted-list"><li style="list-style-type:square"><strong>Executable</strong> (e.g., RWE or RX permissions)</li></ul><ul id="23f5b2cc-075b-8006-a1d7-c7f51402145e" class="bulleted-list"><li style="list-style-type:square"><strong>Not backed by a file</strong> (fileless malware)</li></ul></li></ul></li></ul><ul id="23f5b2cc-075b-806f-a5d7-cbedb2174d47" class="bulleted-list"><li style="list-style-type:disc"><strong>Output</strong>:<ul id="23f5b2cc-075b-803f-afe5-cae81cc2443c" class="bulleted-list"><li style="list-style-type:circle">Process name &amp; PID</li></ul><ul id="23f5b2cc-075b-8049-a0ae-f5cb090dac16" class="bulleted-list"><li style="list-style-type:circle">Offset address</li></ul><ul id="23f5b2cc-075b-80a9-b12c-cdb22ec1a238" class="bulleted-list"><li style="list-style-type:circle">Memory region’s:<ul id="23f5b2cc-075b-805f-8817-f65b7e1ce38c" class="bulleted-list"><li style="list-style-type:square">Hex dump</li></ul><ul id="23f5b2cc-075b-80af-9bcd-cb1cefe1dff7" class="bulleted-list"><li style="list-style-type:square">ASCII view</li></ul><ul id="23f5b2cc-075b-800d-854a-e3dc1dac5c65" class="bulleted-list"><li style="list-style-type:square">Disassembly (code instructions)</li></ul></li></ul></li></ul><ul id="23f5b2cc-075b-8019-8c9e-f1311a1e7f47" class="bulleted-list"><li style="list-style-type:disc"><strong>Indicators</strong>:<ul id="23f5b2cc-075b-805f-bffc-e9b239314d31" class="bulleted-list"><li style="list-style-type:circle">Presence of <code>MZ</code> header → possibly PE file</li></ul><ul id="23f5b2cc-075b-80b8-83f4-c9f076ace020" class="bulleted-list"><li style="list-style-type:circle">Shellcode patterns → needs deeper analysis</li></ul></li></ul><ul id="23f5b2cc-075b-8043-be80-cdf4f8425670" class="bulleted-list"><li style="list-style-type:disc"><strong>Syntax</strong>:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="23f5b2cc-075b-802b-bd63-e2642db33465" class="code code-wrap"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">python3 vol.py -f &lt;file&gt; windows.malfind
+</code></pre></li></ul><hr id="23f5b2cc-075b-806c-a641-f96600185e5a"/><h3 id="23f5b2cc-075b-80e3-886f-d2e384a15cc5" class="">🧬 <strong>2. yarascan</strong> – <em>Search Memory Using YARA Rules</em></h3><ul id="23f5b2cc-075b-8086-b842-c95fa91696b6" class="bulleted-list"><li style="list-style-type:disc"><strong>Purpose</strong>: Scan memory for known malicious patterns or behaviors.</li></ul><ul id="23f5b2cc-075b-80ee-a1f7-e13ca0bd4e2b" class="bulleted-list"><li style="list-style-type:disc"><strong>How</strong>: Uses <strong>YARA rules</strong> (either from a <code>.yar</code> file or inline) to look for:<ul id="23f5b2cc-075b-809d-a17e-e654b1224637" class="bulleted-list"><li style="list-style-type:circle">Suspicious strings</li></ul><ul id="23f5b2cc-075b-8085-a675-f07f53be869c" class="bulleted-list"><li style="list-style-type:circle">Malware signatures</li></ul><ul id="23f5b2cc-075b-802b-b696-f0ed187fa2a3" class="bulleted-list"><li style="list-style-type:circle">Behavioral indicators</li></ul></li></ul><ul id="23f5b2cc-075b-807e-97c9-ead33211f2de" class="bulleted-list"><li style="list-style-type:disc"><strong>Syntax</strong>:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="23f5b2cc-075b-8079-b1c2-c0d8d1b0e8e8" class="code code-wrap"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">python3 vol.py -f &lt;file&gt; windows.yarascan --yara-rules path/to/rules.yar
+</code></pre></li></ul><hr id="23f5b2cc-075b-8089-864f-d50736655a30"/><h3 id="23f5b2cc-075b-80cd-b259-ec45245ff685" class="">🧠 <strong>Prerequisite Knowledge</strong></h3><p id="23f5b2cc-075b-8082-afa6-d50bed684b43" class="">Before diving deep into these plugins, it&#x27;s important to understand:</p><ul id="23f5b2cc-075b-80d8-8236-c36c25044dc3" class="bulleted-list"><li style="list-style-type:disc">How <strong>code injection</strong> works (DLL injection, shellcode, PE injection)</li></ul><ul id="23f5b2cc-075b-80b3-90bd-e8573aec91f2" class="bulleted-list"><li style="list-style-type:disc"><strong>Evasion techniques</strong> (e.g., unlinking processes, reflective loading)</li></ul><ul id="23f5b2cc-075b-80ef-94ee-cda40d413ce3" class="bulleted-list"><li style="list-style-type:disc">What “normal” memory behavior looks like, so you can detect anomalies</li></ul><hr id="23f5b2cc-075b-80fe-803d-da78de935c7e"/><h3 id="23f5b2cc-075b-8042-bc3b-da147b6ac5f1" class="">✅ Next Step</h3><p id="23f5b2cc-075b-8064-adc3-faa243619105" class="">The next section will likely introduce more <strong>hunting plugins</strong>, possibly for:</p><ul id="23f5b2cc-075b-805f-aecf-de8198f3d6e5" class="bulleted-list"><li style="list-style-type:disc">Registry artifacts</li></ul><ul id="23f5b2cc-075b-80fd-af2e-c68c1042478a" class="bulleted-list"><li style="list-style-type:disc">Service enumeration</li></ul><ul id="23f5b2cc-075b-80da-b52f-c1171d869ba4" class="bulleted-list"><li style="list-style-type:disc">Handle inspection</li></ul><ul id="23f5b2cc-075b-80f4-8b81-fc880b886b2d" class="bulleted-list"><li style="list-style-type:disc">Network analysis</li></ul><p id="23f5b2cc-075b-80a2-bba4-def8e47ec304" class="">
+</p><figure id="23f5b2cc-075b-8054-9680-fbf07b0a811b" class="image"><a href="B50CF3E3-9C67-4B52-96B7-A550A9080A96.png"><img style="width:710px" src="B50CF3E3-9C67-4B52-96B7-A550A9080A96.png"/></a></figure><p id="23f5b2cc-075b-80ee-9c6f-d2052b18d7dc" class="">
+</p><hr id="23f5b2cc-075b-8042-9130-ce8c0a14c8b3"/><h2 id="23f5b2cc-075b-8037-9e46-f6227c591b22" class="">🧠 <strong>Advanced Memory Forensics in Volatility</strong></h2><p id="23f5b2cc-075b-80a0-b9a9-ca84d8d2bd34" class="">When facing <strong>stealthy or advanced malware (especially rootkits)</strong>, traditional process/network/dll listing isn&#x27;t always enough. These threats may <strong>hook into system internals</strong>, hide <strong>drivers</strong>, or manipulate <strong>kernel structures</strong> to evade detection.</p><hr id="23f5b2cc-075b-8009-911e-f80514ef953a"/><h3 id="23f5b2cc-075b-80d8-a293-e3ae3fdbafab" class="">🔗 <strong>1. SSDT Hook Detection – </strong><code><strong>ssdt</strong></code><strong> Plugin</strong></h3><ul id="23f5b2cc-075b-80b8-99b8-eec3860c708e" class="bulleted-list"><li style="list-style-type:disc"><strong>What is SSDT?</strong><p id="23f5b2cc-075b-806c-b8f6-f2a69ec4546f" class="">The <strong>System Service Descriptor Table</strong> is used by the Windows kernel to resolve system calls.</p></li></ul><ul id="23f5b2cc-075b-8016-925d-e8f6b1bf0fc8" class="bulleted-list"><li style="list-style-type:disc"><strong>Hooking Technique</strong>:<p id="23f5b2cc-075b-802e-a192-ce939809cafa" class="">Malware modifies SSDT entries to redirect kernel functions to malicious code.</p></li></ul><ul id="23f5b2cc-075b-8096-ba91-e9596bc11053" class="bulleted-list"><li style="list-style-type:disc"><strong>Use this to detect</strong>:<p id="23f5b2cc-075b-8035-99db-e5d70c3b1bbc" class=""><strong>Inline hooks or function pointer redirection</strong> in system services.</p></li></ul><ul id="23f5b2cc-075b-8035-b46f-f9cf4ecd48a8" class="bulleted-list"><li style="list-style-type:disc"><strong>Note</strong>: Legit programs may also hook SSDT; not all results are malicious.</li></ul><ul id="23f5b2cc-075b-8001-90c4-f8354d4cb903" class="bulleted-list"><li style="list-style-type:disc"><strong>Best used when</strong>: You already have indicators of compromise.</li></ul><ul id="23f5b2cc-075b-80fc-8d40-effaf5b34248" class="bulleted-list"><li style="list-style-type:disc"><strong>Command</strong>:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="23f5b2cc-075b-807b-a387-c0b7a55ddde1" class="code code-wrap"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">python3 vol.py -f &lt;file&gt; windows.ssdt
+</code></pre></li></ul><hr id="23f5b2cc-075b-8029-8088-cecd63140c27"/><h3 id="23f5b2cc-075b-8068-9072-d9f736817231" class="">🚚 <strong>2. Kernel Module &amp; Driver Detection</strong></h3><h3 id="23f5b2cc-075b-8075-be50-ef2779cfdded" class="">📄 <code>modules</code> Plugin</h3><ul id="23f5b2cc-075b-8056-8a0a-d889d157e7a5" class="bulleted-list"><li style="list-style-type:disc"><strong>Purpose</strong>: Lists all <strong>loaded kernel modules</strong> (e.g., drivers like <code>.sys</code> files).</li></ul><ul id="23f5b2cc-075b-8098-b614-c1d96d50044b" class="bulleted-list"><li style="list-style-type:disc"><strong>Use case</strong>: Spot malicious drivers pretending to be legitimate ones.</li></ul><ul id="23f5b2cc-075b-8091-b670-e2d4db3c2439" class="bulleted-list"><li style="list-style-type:disc"><strong>Limitation</strong>: If a driver is hidden or unloaded, it may not show up.</li></ul><ul id="23f5b2cc-075b-80f3-869b-e47131c0c248" class="bulleted-list"><li style="list-style-type:disc"><strong>Best used when</strong>: You have a filename or signature to look for.</li></ul><ul id="23f5b2cc-075b-807e-81d5-e58f25cdbdfb" class="bulleted-list"><li style="list-style-type:disc"><strong>Command</strong>:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="23f5b2cc-075b-80fe-a53e-d925dffe05e5" class="code code-wrap"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">python3 vol.py -f &lt;file&gt; windows.modules
+</code></pre></li></ul><hr id="23f5b2cc-075b-80c7-b6e5-d99761d12fce"/><h3 id="23f5b2cc-075b-8014-b1c7-f10d87029982" class="">🔍 <code>driverscan</code> Plugin</h3><ul id="23f5b2cc-075b-8081-b0ed-e51770b9f108" class="bulleted-list"><li style="list-style-type:disc"><strong>Purpose</strong>: Actively scans for <strong>driver objects in memory</strong>.</li></ul><ul id="23f5b2cc-075b-800f-859a-ca17858691b1" class="bulleted-list"><li style="list-style-type:disc"><strong>Use case</strong>: Useful if <code>modules</code> misses something due to hiding/unlinking.</li></ul><ul id="23f5b2cc-075b-80c1-91ce-cbf78ce535d6" class="bulleted-list"><li style="list-style-type:disc"><strong>Limitation</strong>: Might produce false positives or no results if kernel is clean.</li></ul><ul id="23f5b2cc-075b-806d-aab3-e9fdd3429c0c" class="bulleted-list"><li style="list-style-type:disc"><strong>Command</strong>:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="23f5b2cc-075b-800b-92b7-fcc4d130381a" class="code code-wrap"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">python3 vol.py -f &lt;file&gt; windows.driverscan
+</code></pre></li></ul><hr id="23f5b2cc-075b-806e-9a24-e8f6a610258b"/><h3 id="23f5b2cc-075b-80d8-8d1a-d5f0e39bf58a" class="">🔬 <strong>Other Advanced Plugins You Might Explore</strong></h3><table id="23f5b2cc-075b-8087-8f5a-f90a8429f41c" class="simple-table"><thead class="simple-table-header"><tr id="23f5b2cc-075b-80e1-99e6-dc2d97433e1e"><th id="TfT?" class="simple-table-header-color simple-table-header">Plugin</th><th id="f{IF" class="simple-table-header-color simple-table-header">Purpose</th></tr></thead><tbody><tr id="23f5b2cc-075b-80be-952b-f45ce547de6f"><td id="TfT?" class=""><code>modscan</code></td><td id="f{IF" class="">Scans memory for module structures (even unlinked ones)</td></tr><tr id="23f5b2cc-075b-80b0-afdd-e0101f751b7d"><td id="TfT?" class=""><code>driverirp</code></td><td id="f{IF" class="">Lists IRP (I/O request packet) hooks in drivers</td></tr><tr id="23f5b2cc-075b-80bc-8b05-c3e789c67f2a"><td id="TfT?" class=""><code>callbacks</code></td><td id="f{IF" class="">Detects callback hooks (common in rootkits &amp; AVs)</td></tr><tr id="23f5b2cc-075b-804e-96a5-fe88de06a6f3"><td id="TfT?" class=""><code>idt</code></td><td id="f{IF" class="">Dumps Interrupt Descriptor Table (used in hooking)</td></tr><tr id="23f5b2cc-075b-804b-a0f8-da6b3e7b1264"><td id="TfT?" class=""><code>apihooks</code></td><td id="f{IF" class="">Detects API-level hooking (especially inline hooks)</td></tr><tr id="23f5b2cc-075b-8098-ac0a-d3adb4eb31b9"><td id="TfT?" class=""><code>moddump</code></td><td id="f{IF" class="">Dumps kernel modules to disk for analysis</td></tr><tr id="23f5b2cc-075b-80d6-9b37-d3388fbebca0"><td id="TfT?" class=""><code>handles</code></td><td id="f{IF" class="">Inspects open handles (can reveal malware artifacts hidden)</td></tr></tbody></table><p id="23f5b2cc-075b-80bf-8a31-fba474dea687" class="">📝 <strong>Note</strong>: Some are Volatility2-only or require <strong>third-party plugins</strong>.</p><hr id="23f5b2cc-075b-8060-adb0-e3c209baba41"/><h2 id="23f5b2cc-075b-8000-abf2-ef71ea2cc76d" class="">🧪 Investigation Workflow (With <code>.raw</code> or <code>.vmem</code> files)</h2><p id="23f5b2cc-075b-80f6-a194-de3ca4a8a22a" class="">Assuming you’re analyzing <code>Investigation-2.raw</code>:</p><ol type="1" id="23f5b2cc-075b-8081-97af-d7d09dd948c4" class="numbered-list" start="1"><li><strong>Get System Info</strong>:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="23f5b2cc-075b-808e-924b-f68a539f629a" class="code code-wrap"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">python3 vol.py -f Investigation-2.raw windows.info
+</code></pre></li></ol><ol type="1" id="23f5b2cc-075b-80a7-bbcc-f3fa830882fb" class="numbered-list" start="2"><li><strong>List and Analyze Processes</strong>:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="23f5b2cc-075b-8067-959c-e7130d77759e" class="code code-wrap"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">python3 vol.py -f Investigation-2.raw windows.pslist
+python3 vol.py -f Investigation-2.raw windows.pstree
+python3 vol.py -f Investigation-2.raw windows.psscan
+</code></pre></li></ol><ol type="1" id="23f5b2cc-075b-8077-aec9-f4d176d1afef" class="numbered-list" start="3"><li><strong>Check for Code Injection</strong>:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="23f5b2cc-075b-80dc-a213-d3240dd7df4d" class="code code-wrap"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">python3 vol.py -f Investigation-2.raw windows.malfind
+</code></pre></li></ol><ol type="1" id="23f5b2cc-075b-8024-9e13-e06f47be55b4" class="numbered-list" start="4"><li><strong>Dump DLLs &amp; Network</strong>:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="23f5b2cc-075b-8054-a683-d83247788345" class="code code-wrap"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">python3 vol.py -f Investigation-2.raw windows.dlllist
+python3 vol.py -f Investigation-2.raw windows.netstat
+</code></pre></li></ol><ol type="1" id="23f5b2cc-075b-8067-b08b-f617adb98b7a" class="numbered-list" start="5"><li><strong>Advanced Malware Hunting</strong>:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="23f5b2cc-075b-8094-80ec-cc7a8758cc8c" class="code code-wrap"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">python3 vol.py -f Investigation-2.raw windows.ssdt
+python3 vol.py -f Investigation-2.raw windows.modules
+python3 vol.py -f Investigation-2.raw windows.driverscan
+python3 vol.py -f Investigation-2.raw windows.yarascan --yara-rules myrules.yar
+</code></pre></li></ol><hr id="23f5b2cc-075b-801c-a152-ded426277231"/><h3 id="23f5b2cc-075b-80f5-abd5-de15ccee7414" class="">✅ Final Tip:</h3><p id="23f5b2cc-075b-806f-a24f-d13cc9e7ae72" class="">Start with <strong>basic process and injection checks</strong>, then <strong>move to advanced plugins</strong> if you suspect rootkit-level tampering or stealthy malware.</p><p id="23f5b2cc-075b-80cd-aaca-d6e21519d3ef" class="">
+</p><h2 id="23f5b2cc-075b-80fd-a151-fff772c2cb25" class="">SCENARIOS</h2><h3 id="23f5b2cc-075b-80c5-96f6-e004f6782699" class="">Case 001 - BOB! THIS ISN&#x27;T A HORSE!</h3><p id="23f5b2cc-075b-809a-ab00-dd0e3e01f977" class="">Your SOC has informed you that they have gathered a memory dump from a quarantined endpoint thought to have been compromised by a banking trojan masquerading as an Adobe document. Your job is to use your knowledge of threat intelligence and reverse engineering to perform <br/>memory forensics on the infected host.</p><p id="23f5b2cc-075b-80f2-b539-e49bee4ec89f" class="">You have been informed of a suspicious IP in connection to the file that could be helpful. <code>41.168.5.140</code></p><p id="23f5b2cc-075b-80f4-95f4-db08b77d9769" class="">The memory file is located in <code>/Scenarios/Investigations/Investigation-1.vmem</code></p><h3 id="23f5b2cc-075b-80be-934a-f82714a87ede" class="">Case 002 - That Kind of Hurt my Feelings</h3><p id="23f5b2cc-075b-80cf-9b33-f226e49e2540" class="">You have been informed that your corporation has been hit with a chain of ransomware that has been hitting corporations internationally. Your team has already retrieved the decryption key and recovered from the attack. Still, your job is to perform post-incident analysis and identify what <br/>actors were at play and what occurred on your systems. You have been provided with a raw memory dump from your team to begin your analysis.</p><p id="23f5b2cc-075b-80d7-b762-d0939d140327" class="">
+</p><h3 id="23f5b2cc-075b-804f-9f82-f99164bd766c" class="">questions</h3><p id="23f5b2cc-075b-8033-883f-dfc559398c7b" class="">
+</p><ol type="1" id="23f5b2cc-075b-8082-8e69-db0c1d538fd8" class="numbered-list" start="1"><li>What is the build version of the host machine in Case 001?</li></ol><p id="23f5b2cc-075b-80af-9f15-dcc2b658cb2c" class=""><code>I ran vol -f Investigation-1.vmem </code><code><a href="http://windows.info/">windows.info</a></code><br/></p><figure id="23f5b2cc-075b-80a0-a490-fa8a77a0b231" class="image"><a href="D3BB35D4-6162-474A-AD7F-5C06E8146459.png"><img style="width:710px" src="D3BB35D4-6162-474A-AD7F-5C06E8146459.png"/></a></figure><ol type="1" id="23f5b2cc-075b-80ff-b8e8-ccd285437958" class="numbered-list" start="2"><li>At what time was the memory file acquired in Case 001?</li></ol><figure id="23f5b2cc-075b-8062-9cde-e2b3914217c6" class="image"><a href="D425988D-CB10-4F7F-9C35-59E6945AD639.png"><img style="width:709.9833374023438px" src="D425988D-CB10-4F7F-9C35-59E6945AD639.png"/></a></figure><ol type="1" id="23f5b2cc-075b-8056-aecb-cef526f6ecd9" class="numbered-list" start="3"><li>What process can be considered suspicious in Case 001?Note: Certain special characters may not be visible on the provided VM. When doing a copy-and-paste, it will still copy all characters.</li></ol><p id="23f5b2cc-075b-808f-9117-cfebe5c4c12d" class="">reader_sl.exe </p><figure id="23f5b2cc-075b-805c-ad68-f7e06bf6e06b" class="image"><a href="906F2757-529B-4A1A-9C52-93360AAD3881.png"><img style="width:710px" src="906F2757-529B-4A1A-9C52-93360AAD3881.png"/></a></figure><ol type="1" id="23f5b2cc-075b-80d6-b9ca-db909cb2a475" class="numbered-list" start="4"><li>What is the parent process of the suspicious process in Case 001?</li></ol><p id="23f5b2cc-075b-808a-aea5-c1c2324cd585" class="">explorer.exe<br/></p><ol type="1" id="23f5b2cc-075b-808f-9bc8-f272c1784c45" class="numbered-list" start="5"><li>What is the PID of the suspicious process in Case 001?</li></ol><p id="23f5b2cc-075b-8076-b553-fdccf5a10daf" class="">1640<br/></p><ol type="1" id="23f5b2cc-075b-80eb-bfbd-f481adda1961" class="numbered-list" start="6"><li>What is the parent process PID in Case 001?</li></ol><p id="23f5b2cc-075b-8046-9d3d-e014662ef833" class="">1484<br/></p><ol type="1" id="23f5b2cc-075b-803c-a553-d5a25cf40163" class="numbered-list" start="7"><li>What user-agent was employed by the adversary in Case 001?<br/><code>vol -f Investigation-1.vmem -o .  windows.memmap.Memmap --pid 1640 --dump </code> </li></ol><figure id="23f5b2cc-075b-8099-a7f2-ee64a5cdc0f1" class="image"><a href="94F5D220-7AE1-417D-A798-EF88420D2022.png"><img style="width:709.9833374023438px" src="94F5D220-7AE1-417D-A798-EF88420D2022.png"/></a></figure><p id="23f5b2cc-075b-8027-84f1-e67998b40622" class=""><code>strings pid.1640.dmp| grep -i &quot;user-agent&quot; </code></p><figure id="23f5b2cc-075b-809b-8577-d24f72730c8c" class="image"><a href="71122BC6-EF6D-4C0C-926E-F9A5D84E693E.png"><img style="width:709.9666748046875px" src="71122BC6-EF6D-4C0C-926E-F9A5D84E693E.png"/></a></figure><h3 id="23f5b2cc-075b-80ed-9c6f-ff60ee0c31c2" class="">What you did:</h3><ul id="23f5b2cc-075b-806b-8cb9-d6b55f4398e3" class="bulleted-list"><li style="list-style-type:disc">You ran <strong>Volatility’s process memory dumping plugin</strong> (<code>windows.memmap.Memmap</code> with <code>-dump</code>) on a <strong>specific process (by PID)</strong> inside your memory dump file.</li></ul><ul id="23f5b2cc-075b-80ab-b15a-e6b92991fd67" class="bulleted-list"><li style="list-style-type:disc">This extracted the <strong>entire memory content</strong> of that running process from the RAM image and saved it as a <code>.dmp</code> file on disk.</li></ul><ul id="23f5b2cc-075b-8093-adf9-f32d9151f2b4" class="bulleted-list"><li style="list-style-type:disc">Then, you ran the <code>strings</code> command on that <code>.dmp</code> file to <strong>extract all human-readable text</strong> inside that process’s memory.</li></ul><ul id="23f5b2cc-075b-80dc-8570-c028b2fae385" class="bulleted-list"><li style="list-style-type:disc">You filtered (<code>grep -i &quot;user-agent&quot;</code>) to find any lines containing the text “User-Agent” — a common HTTP header that identifies the client/browser to servers.</li></ul><hr id="23f5b2cc-075b-809e-8b92-e32620cf5be9"/><h3 id="23f5b2cc-075b-8089-9117-f475c49d626f" class="">Why did we do this?</h3><ul id="23f5b2cc-075b-8042-906e-ea8b4ba42002" class="bulleted-list"><li style="list-style-type:disc">The <strong>User-Agent string</strong> is usually stored in memory when a program makes HTTP requests.</li></ul><ul id="23f5b2cc-075b-80f9-96b6-c21169d8edcf" class="bulleted-list"><li style="list-style-type:disc">Malware or an attacker’s tool that communicates over HTTP will often store their User-Agent string in their process memory.</li></ul><ul id="23f5b2cc-075b-80a0-a7f2-fe900500ca6f" class="bulleted-list"><li style="list-style-type:disc">By dumping the memory of a <strong>suspicious process</strong> and scanning for User-Agent strings, you can find exactly what User-Agent the adversary used.<br/></li></ul><ol type="1" id="23f5b2cc-075b-807f-9b57-d140b59fe177" class="numbered-list" start="8"><li>Was Chase Bank one of the suspicious bank domains found in Case 001? (Y/N)<br/>I did a grep search on the dmp to look for chase.com, and found the following</li></ol><figure id="23f5b2cc-075b-8011-90a6-c664594233c2" class="image"><a href="BAAF4041-47B9-4279-A6A3-4F74F9930E1A.png"><img style="width:710px" src="BAAF4041-47B9-4279-A6A3-4F74F9930E1A.png"/></a></figure><p id="23f5b2cc-075b-80b6-a5b5-c1df8bc834fe" class="">
+</p><ol type="1" id="23f5b2cc-075b-806d-84a1-e1d1d4e17cee" class="numbered-list" start="9"><li>What suspicious process is running at PID 740 in Case 002?</li></ol><figure id="23f5b2cc-075b-8067-97d6-f4ba43cb1bfa" class="image"><a href="6A05C9A8-BA9A-40E2-9D28-1344FBA76D48.png"><img style="width:710px" src="6A05C9A8-BA9A-40E2-9D28-1344FBA76D48.png"/></a></figure><ol type="1" id="23f5b2cc-075b-80e5-b413-c53391ca69e5" class="numbered-list" start="10"><li>What is the full path of the suspicious binary in PID 740 in Case 002?</li></ol><figure id="23f5b2cc-075b-80fd-b24f-c9ab2cacf671" class="image"><a href="BEA112E5-E72D-4B9A-9028-F1F8FADE02D0.png"><img style="width:710px" src="BEA112E5-E72D-4B9A-9028-F1F8FADE02D0.png"/></a></figure><ol type="1" id="23f5b2cc-075b-8082-8836-dd354d1f614d" class="numbered-list" start="11"><li>What is the parent process of PID 740 in Case 002?</li></ol><p id="23f5b2cc-075b-8081-9e16-d76b2af60e09" class="">tasksche.exe - suspicious<br/></p><ol type="1" id="23f5b2cc-075b-802d-8694-f6c9eeee650b" class="numbered-list" start="12"><li>What is the suspicious parent process PID connected to the decryptor in Case 002?</li></ol><figure id="23f5b2cc-075b-809d-97b8-ca78da01010c" class="image"><a href="362C99EF-DB5E-4143-AF41-CD5F88C06E34.png"><img style="width:709.9833374023438px" src="362C99EF-DB5E-4143-AF41-CD5F88C06E34.png"/></a></figure><ol type="1" id="23f5b2cc-075b-8051-9ed7-eaf6a8f4937b" class="numbered-list" start="13"><li>From our current information, what malware is present on the system in Case 002?</li></ol><p id="23f5b2cc-075b-8058-8af3-cbf80fa004b7" class="">wannacry</p><ol type="1" id="23f5b2cc-075b-8043-a714-c2e3d3912956" class="numbered-list" start="14"><li>What DLL is loaded by the decryptor used for socket creation in Case 002?</li></ol><figure id="23f5b2cc-075b-8041-90a9-d8108e8f698f" class="image"><a href="9B2012BD-404A-403A-941E-B62A81768DA9.png"><img style="width:709.9666748046875px" src="9B2012BD-404A-403A-941E-B62A81768DA9.png"/></a></figure><ol type="1" id="23f5b2cc-075b-8078-ba3b-d28a7372588a" class="numbered-list" start="15"><li>What mutex can be found that is a known indicator of the malware in question in Case 002?</li></ol><p id="23f5b2cc-075b-804e-be6f-f0abbbd413f1" class=""><a href="https://cloud.google.com/blog/topics/threat-intelligence/wannacry-malware-profile/">https://cloud.google.com/blog/topics/threat-intelligence/wannacry-malware-profile/</a></p><figure id="23f5b2cc-075b-8032-beac-cb6575d41915" class="image"><a href="0DFFAF9F-BE00-42B2-AB77-095987AAC69A.png"><img style="width:420px" src="0DFFAF9F-BE00-42B2-AB77-095987AAC69A.png"/></a></figure><figure id="23f5b2cc-075b-80b2-b1ff-c8f8b294a093" class="image"><a href="5267F59D-E748-486C-974E-E0864F9BC7B1.png"><img style="width:709.9833374023438px" src="5267F59D-E748-486C-974E-E0864F9BC7B1.png"/></a></figure><ol type="1" id="23f5b2cc-075b-8086-8b65-faa5fa8e980b" class="numbered-list" start="16"><li>What plugin could be used to identify all files loaded from the malware working directory in Case 002?</li></ol><figure id="23f5b2cc-075b-80bc-bd16-eff1ef1039c9" class="image"><a href="FAB33A44-9FA4-4C0A-98A6-D3BB51F46C08.png"><img style="width:480px" src="FAB33A44-9FA4-4C0A-98A6-D3BB51F46C08.png"/></a></figure><figure id="23f5b2cc-075b-8025-8ce7-f6f72968b014"><div class="source">https://github.com/volatilityfoundation/volatility</div></figure><p id="23f5b2cc-075b-800e-a730-ef6af3ddb5e5" class="">windows.filescan</p><p id="23f5b2cc-075b-80f3-bb80-e201ac127955" class="">We have only covered a very thin layer of memory forensics that can go much deeper when analyzing the Windows, Mac, and Linux architecture. If you&#x27;re looking for a deep dive into memory forensics, I would suggest reading: The Art of Memory Forensics.</p><p id="23f5b2cc-075b-805e-be27-ff4174e021a8" class="">There are also a number of wikis and various community resources that<br/> can be used for more information about Volatility techniques found <br/>below.</p><ul id="23f5b2cc-075b-80ea-a5f6-de6dd368bda6" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/volatilityfoundation/volatility/wiki">https://github.com/volatilityfoundation/volatility/wiki</a></li></ul><ul id="23f5b2cc-075b-8081-9a81-d58a8dece132" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/volatilityfoundation/volatility/wiki/Volatility-Documentation-Projec">https://github.com/volatilityfoundation/volatility/wiki/Volatility-Documentation-Projec</a></li></ul><ul id="23f5b2cc-075b-8049-b84c-dfe43f78220d" class="bulleted-list"><li style="list-style-type:disc"><a href="https://digital-forensics.sans.org/media/Poster-2015-Memory-Forensics.pdf">https://digital-forensics.sans.org/media/Poster-2015-Memory-Forensics.pdf</a></li></ul><ul id="23f5b2cc-075b-80ba-92c3-c58eb980992c" class="bulleted-list"><li style="list-style-type:disc"><a href="https://eforensicsmag.com/finding-advanced-malware-using-volatility/">https://eforensicsmag.com/finding-advanced-malware-using-volatility/</a></li></ul><p id="23f5b2cc-075b-80fa-846d-d0c30865a5fb" class="">From this room, as you continue on the SOC Level 1 path, more rooms will contain memory forensics challenges.</p><figure id="23f5b2cc-075b-809e-a195-dd0b7ab8ddd7" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/5e73cca6ec4fcf1309f2df86/room-content/312000b05cf82687a675497d5b8cb84d.png"><img style="width:288px" src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5e73cca6ec4fcf1309f2df86/room-content/312000b05cf82687a675497d5b8cb84d.png"/></a></figure></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

@@ -1,0 +1,693 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Sysinternals</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2315b2cc-075b-803e-bad8-e730c08a27bf" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/e77773e1fbbd8448764b7597a226f675.png"/></div><h1 class="page-title">Sysinternals</h1><p class="page-description"></p></header><div class="page-body"><p id="2315b2cc-075b-8059-ae72-f2967c28544e" class="">The Sysinternals tools is a compilation of over 70+ Windows-based <br/>tools. Each of the tools falls into one of the following categories:</p><ul id="2315b2cc-075b-80e9-bdf7-f0d1ec4bcbc2" class="bulleted-list"><li style="list-style-type:disc">File and Disk Utilities</li></ul><ul id="2315b2cc-075b-80a0-a403-e968ae4586b7" class="bulleted-list"><li style="list-style-type:disc">Networking Utilities</li></ul><ul id="2315b2cc-075b-80c5-94fd-cf060a8768a2" class="bulleted-list"><li style="list-style-type:disc">Process Utilities</li></ul><ul id="2315b2cc-075b-8086-ae11-cb02e05bf479" class="bulleted-list"><li style="list-style-type:disc">Security Utilities</li></ul><ul id="2315b2cc-075b-8063-87ba-de964ae7dce0" class="bulleted-list"><li style="list-style-type:disc">System Information</li></ul><ul id="2315b2cc-075b-80e6-89c0-ef6a9db37250" class="bulleted-list"><li style="list-style-type:disc">Miscellaneous</li></ul><figure class="block-color-pink callout" style="white-space:pre-wrap;display:flex" id="2315b2cc-075b-80ae-9bc9-fe648f8ffa9b"><div style="font-size:1.5em"><span class="icon">🦐</span></div><div style="width:100%"><p id="2315b2cc-075b-808c-9e30-cf42c724b255" class=""> <a href="https://docs.microsoft.com/en-us/sysinternals/downloads/">https://docs.microsoft.com/en-us/sysinternals/downloads/</a></p></div></figure><figure class="block-color-pink callout" style="white-space:pre-wrap;display:flex" id="2315b2cc-075b-80ae-af06-c1bdad766c35"><div style="font-size:1.5em"><span class="icon">🦐</span></div><div style="width:100%"><p id="2315b2cc-075b-8028-8d41-c7bfc23e0d51" class=""><a href="https://live.sysinternals.com/">https://live.sysinternals.com/</a></p></div></figure><p id="2315b2cc-075b-809b-ae7a-f77a34c0db1b" class=""><a href="https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite">https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite</a></p><p id="2315b2cc-075b-801f-bb4b-c69169bc9a6f" class="">
+</p><h2 id="2315b2cc-075b-80da-8244-f72958f9fdeb" class="">Streams</h2><p id="2315b2cc-075b-8035-a597-c0bac5df0940" class="">notepad file.txt:EXAMPLE</p><p id="2315b2cc-075b-8009-ae7c-d9c5fa44d55a" class="">Streams is used to expose hidden data in alternate data streams in NTFS filesystem.</p><figure id="2315b2cc-075b-80a3-8fee-ece903784e7b" class="image"><a href="image%20225.png"><img style="width:578px" src="image%20225.png"/></a></figure><p id="2315b2cc-075b-8067-9a7f-f86c9c3481eb" class="">this file.txt is empty, but when i get its ads name</p><figure id="2315b2cc-075b-80d3-bbb1-fcd1d6da49a1" class="image"><a href="image%20226.png"><img style="width:578px" src="image%20226.png"/></a></figure><p id="2315b2cc-075b-8036-9804-df09f3e71251" class="">then use it to open notepad, I can see the hidden data.</p><p id="2315b2cc-075b-8034-b0f7-db540982aa16" class=""><code>C:\Users\Administrator\Desktop&gt;notepad file.txt:ads.txt</code></p><figure id="2315b2cc-075b-80cb-aec2-db1ed5428093" class="image"><a href="image%20227.png"><img style="width:578px" src="image%20227.png"/></a></figure><p id="2315b2cc-075b-804e-a0cf-ff8f098388d8" class="">
+</p><p id="2315b2cc-075b-80d2-a9ef-fb82b6d868d6" class="">
+</p><h2 id="2315b2cc-075b-8097-883a-e1e48d76757e" class="">TCPView</h2><p id="2315b2cc-075b-80e9-b7ac-d9b34a3071fb" class="">
+</p><p id="2315b2cc-075b-8008-a421-fc0c51b90f41" class="">Before TCPView, there is a similiar tool in windows called Resource Monitor</p><figure id="2315b2cc-075b-80e7-8436-c67e2df80f15" class="image"><a href="image%20228.png"><img style="width:578px" src="image%20228.png"/></a></figure><p id="2315b2cc-075b-8095-8db6-e9c85f57475b" class="">
+</p><p id="2315b2cc-075b-807b-8e03-d5d385f8b78f" class="">Now TCPview,</p><p id="2315b2cc-075b-8026-b028-dff6527149b8" class="">The below image shows the default view for TCPView.</p><figure id="2315b2cc-075b-80f2-af6f-f5ed5ac39c32" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/5d7ca65aecf1a0c012d6d23750060fbc.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/5d7ca65aecf1a0c012d6d23750060fbc.png"/></a></figure><p id="2315b2cc-075b-80c1-b96d-c56080480d65" class="">We can apply additional filtering by turning off TCP v4, TCP v6, UDP v4, and UDP<br/> v6 at the top toolbar, depending on which protocols we want to display.<br/> Moreover, we can click on the green flag to use the States Filter.</p><figure id="2315b2cc-075b-8051-b9aa-dc7b3f100c4a" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/4bb2034c4b680cd72bffe9c157559dc6.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/4bb2034c4b680cd72bffe9c157559dc6.png"/></a></figure><p id="2315b2cc-075b-8052-8ef5-e6a1e07a37c8" class="">Clicking the green flag opens the<br/>    <strong>States Filter</strong>, which provides an extensive list of options to<br/> select which connection states we want to display. Most of the <br/>connection states available apply only to TCP connections. (UDP, being a connectionless protocol, cannot offer this flexibility in filtering.)</p><figure id="2315b2cc-075b-80c9-8075-dd43a6b361df" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/f3b84d1fad77178fd98aed060bd9369d.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/f3b84d1fad77178fd98aed060bd9369d.png"/></a></figure><p id="2315b2cc-075b-8073-abc4-d867738a99b4" class="">The list below shows all TCP v4 and TCP v6 connections in any state except in the &quot;Listen&quot; state. For instance, we notice that we have one TCP connection in an<br/>    <em>Established</em> state and another connection in a <em>Close Wait</em> state.</p><p id="2315b2cc-075b-80fe-af81-f009873a287a" class="">In the below image, I unselected Listen in the Connection States from the States Filter and turned off UDP v4 and UDP v6 from the top toolbar.</p><figure id="2315b2cc-075b-8033-9928-db6bc9107fab" class="image"><a href="https://assets.tryhackme.com/additional/sysinternals/tcpview1.png"><img style="width:700px" src="https://assets.tryhackme.com/additional/sysinternals/tcpview1.png"/></a></figure><p id="2315b2cc-075b-807b-b7c0-f3c91b448e52" class="">Now the output only displays processes with an established outbound connection.</p><p id="2315b2cc-075b-8048-9b32-e7bf0faf9162" class="">
+</p><h2 id="2315b2cc-075b-80c2-83a4-e2753f29a322" class=""><strong>Autoruns</strong></h2><p id="2315b2cc-075b-8086-b727-f70a746ab8ff" class="">&quot;This utility, which has the most comprehensive knowledge of <br/>auto-starting locations of any startup monitor, shows you what programs <br/>are configured to run during system bootup or login, and when you start <br/>various built-in Windows applications like Internet Explorer, Explorer <br/>and media players. These programs and drivers include ones in your <br/>startup folder, Run, RunOnce, and other Registry keys.<br/>    <strong>Autoruns</strong> reports Explorer shell extensions, toolbars, browser<br/> helper objects, Winlogon notifications, auto-start services, and much <br/>more.<br/>    <span style="border-bottom:0.05em solid">Autoruns goes way beyond other autostart utilities.</span>&quot; (official definition)</p><p id="2315b2cc-075b-8061-89fd-d5828250acde" class=""><strong>Note</strong>: This is a good tool to search for any malicious entries created in the local machine to establish <strong>Persistence</strong>.</p><p id="2315b2cc-075b-8090-a23c-d84d86390134" class="">Launch Autoruns.</p><figure id="2315b2cc-075b-80d5-ac3d-c8356c3d5d53" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/fbecf1fad44c2d53a07ef911b2803ff3.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/fbecf1fad44c2d53a07ef911b2803ff3.png"/></a></figure><p id="2315b2cc-075b-804e-a8ed-f991807a051b" class="">Below is a snapshot of Autoruns, showing the first couple of items from the <strong>Everything</strong> tab. Normally there are a lot of entries within this tab.</p><figure id="2315b2cc-075b-8064-8295-cb642deccfbd" class="image"><a href="https://assets.tryhackme.com/additional/sysinternals/autoruns.png"><img style="width:700px" src="https://assets.tryhackme.com/additional/sysinternals/autoruns.png"/></a></figure><p id="2315b2cc-075b-801d-9885-f9a4604ad075" class="">Notice all the tabs within the application. Click on each tab to inspect the items associated with each.</p><p id="2315b2cc-075b-8075-8071-f8b4e22e5244" class="">The below image is a snapshot of the <strong>Image Hijacks</strong> tab. (<span style="border-bottom:0.05em solid">At this time there is only 1 item listed</span>)</p><figure id="2315b2cc-075b-80ee-ab2d-eb58e92670e3" class="image"><a href="https://assets.tryhackme.com/additional/sysinternals/autoruns-image-hijacks.png"><img style="width:700px" src="https://assets.tryhackme.com/additional/sysinternals/autoruns-image-hijacks.png"/></a></figure><h2 id="2315b2cc-075b-806c-9b7b-eb5818d3e55e" class=""><strong>ProcDump</strong></h2><p id="2315b2cc-075b-8063-a9e3-cda4c7e2614c" class="">&quot;<strong>ProcDump</strong> is a command-line utility whose primary purpose is monitoring an application for CPU<br/> spikes and generating crash dumps during a spike that an administrator <br/>or developer can use to determine the cause of the spike.&quot; (official definition)</p><figure id="2315b2cc-075b-80a9-9713-dbeaf0116b68" class="image"><a href="https://assets.tryhackme.com/additional/sysinternals/procdump.png"><img style="width:365px" src="https://assets.tryhackme.com/additional/sysinternals/procdump.png"/></a></figure><p id="2315b2cc-075b-80d0-a0da-e9b4a7510909" class="">Alternatively, you can use <strong>Process Explorer</strong> to do the same.</p><p id="2315b2cc-075b-80f1-9150-e21d6f5f0157" class="">Right-click on the process to create a <strong>Minidump</strong> or <strong>Full Dump</strong> of the process.</p><figure id="2315b2cc-075b-8083-bb86-c9e7b60fa453" class="image"><a href="https://assets.tryhackme.com/additional/sysinternals/procexp-create-dump.png"><img style="width:365px" src="https://assets.tryhackme.com/additional/sysinternals/procexp-create-dump.png"/></a></figure><p id="2315b2cc-075b-80b1-a8cf-eba3b2c0e302" class="">Please refer to the examples listed on the ProcDump<br/>    <a href="https://docs.microsoft.com/en-us/sysinternals/downloads/procdump">page</a> to learn about all the available options with running this tool.</p><h2 id="2315b2cc-075b-8082-84db-c8325e277425" class=""><strong>Process Explorer</strong></h2><p id="2315b2cc-075b-80c2-a955-d754295e3fd5" class="">&quot;The<br/>    <strong>Process Explorer</strong> display consists of two sub-windows. The top<br/> window always shows a list of the currently active processes, including<br/> the names of their owning accounts, whereas the information displayed <br/>in the bottom window depends on the mode that Process Explorer is in: if<br/> it is in handle mode you&#x27;ll see the handles that the process selected <br/>in the top window has opened; if Process Explorer is in DLL mode you&#x27;ll see the DLLs and memory-mapped files that the process has loaded.&quot; (official definition)</p><figure id="2315b2cc-075b-8008-8fe1-cac2cc77af77" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/a54e7e284895eee1443651a53b30aad9.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/a54e7e284895eee1443651a53b30aad9.png"/></a></figure><p id="2315b2cc-075b-8068-af12-fc0f146388f1" class="">This tool was touched on slightly within the <strong>Core Windows Processes</strong> room. <strong>Process Hacker</strong><br/> was intentionally used in that room to broaden your exposure to various<br/> tools that essentially perform the same tasks with subtle differences.</p><p id="2315b2cc-075b-80c0-952a-ebbe1faeb3af" class="">Since much of the basic foundational information was discussed in the <strong>Core Windows Processes</strong> room, Process Explorer will be briefly touched.</p><p id="2315b2cc-075b-8032-9ce4-f2439718de5c" class="">In the following images, let&#x27;s look at svchost.exe PID 3636 more closely.</p><figure id="2315b2cc-075b-804d-831c-e9cff45d75b6" class="image"><a href="https://assets.tryhackme.com/additional/sysinternals/procexp-svchost.png"><img style="width:700px" src="https://assets.tryhackme.com/additional/sysinternals/procexp-svchost.png"/></a></figure><figure id="2315b2cc-075b-80a8-ac3c-f3353afd87a8" class="image"><a href="https://assets.tryhackme.com/additional/sysinternals/procexp-svchost-services.png"><img style="width:700px" src="https://assets.tryhackme.com/additional/sysinternals/procexp-svchost-services.png"/></a></figure><p id="2315b2cc-075b-807a-a254-f11e668db37d" class="">This process is associated with the WebClient service that is needed to connect to live.sysinternals.com (WebDAV).</p><p id="2315b2cc-075b-802c-9621-efe75c6c423e" class="">There should be web traffic listed in the TCP/IP tab.</p><figure id="2315b2cc-075b-80bb-86ac-ecb666ad5f20" class="image"><a href="https://assets.tryhackme.com/additional/sysinternals/procexp-svchost-tcpip.png"><img style="width:700px" src="https://assets.tryhackme.com/additional/sysinternals/procexp-svchost-tcpip.png"/></a></figure><p id="2315b2cc-075b-80f7-9d17-d192de7be64f" class="">Ideally, it would be wise to check if that IP is what we assume it is.</p><p id="2315b2cc-075b-80e9-b641-df31dcadce59" class="">Various online tools can be utilized to verify the authenticity of an IP address. For this demonstration, I&#x27;ll use<br/>    <strong>Talos Reputation Center</strong>.</p><figure id="2315b2cc-075b-8084-9199-c7750e566636" class="image"><a href="https://assets.tryhackme.com/additional/sysinternals/procexp-svchost-tcpip-2.png"><img style="width:365px" src="https://assets.tryhackme.com/additional/sysinternals/procexp-svchost-tcpip-2.png"/></a></figure><p id="2315b2cc-075b-804a-af9e-e304b008face" class=""><a href="https://talosintelligence.com/reputation_center/lookup?search=52.154.170.73">https://talosintelligence.com/reputation_center/lookup?search=52.154.170.73</a></p><p id="2315b2cc-075b-8024-a850-cb43f9b92a90" class="">As mentioned in the<br/>    <strong>ProcExp</strong> description, we can see open handles associated with the process within the bottom window.</p><figure id="2315b2cc-075b-80de-a768-db5f3f8bfe2c" class="image"><a href="https://assets.tryhackme.com/additional/sysinternals/procexp-svchost-handle.png"><img style="width:365px" src="https://assets.tryhackme.com/additional/sysinternals/procexp-svchost-handle.png"/></a></figure><p id="2315b2cc-075b-80c6-93d7-f44d5e85788b" class="">Listed as an open handle is the connection to the remote WebDAV folder.</p><p id="2315b2cc-075b-8090-aaea-d94235e9c3c7" class="">There is an option within ProcExp to<br/>    <strong>Verify Signatures</strong>. Once enabled, it shows up as a column within the Process view.</p><figure id="2315b2cc-075b-80a6-aad6-f3cc9639a69f" class="image"><a href="https://assets.tryhackme.com/additional/sysinternals/procexp-verify-sig.png"><img style="width:238.99658203125px" src="https://assets.tryhackme.com/additional/sysinternals/procexp-verify-sig.png"/></a></figure><p id="2315b2cc-075b-80e4-80e1-ce503d74f810" class="">Other options to note include <strong>Run at Logon</strong> and <strong>Replace Task Manager</strong>.</p><p id="2315b2cc-075b-8000-aa99-c8272ffd2567" class="">You may have noticed that some of the processes within Process Explorer have different colors. Those colors have meaning.</p><p id="2315b2cc-075b-8012-8e04-ce9ff93a4c13" class="">Below is a snippet from MalwareBytes explaining what each of those colors means.</p><figure id="2315b2cc-075b-80d7-b428-dde7fda250b9" class="image"><a href="https://assets.tryhackme.com/additional/sysinternals/procexp-colors.png"><img style="width:365px" src="https://assets.tryhackme.com/additional/sysinternals/procexp-colors.png"/></a></figure><h2 id="2315b2cc-075b-80b0-ba97-f8f5632a37f9" class=""><strong>Process Monitor</strong></h2><p id="2315b2cc-075b-8008-983a-f6f897ddbdba" class="">&quot;Process Monitor is an advanced monitoring tool for Windows that shows real-time file system,<br/> Registry and process/thread activity. It combines the features of two <br/>legacy Sysinternals utilities, Filemon and Regmon, and adds an extensive<br/> list of enhancements including rich and non-destructive filtering, <br/>comprehensive event properties such as session IDs<br/> and user names, reliable process information, full thread stacks with <br/>integrated symbol support for each operation, simultaneous logging to a <br/>file, and much more. Its uniquely powerful features will make Process <br/>Monitor a core utility in your system troubleshooting and malware <br/>hunting toolkit.&quot; (<strong>official definition</strong>)</p><p id="2315b2cc-075b-80d7-aa9b-fb85578c6214" class="">Launch ProcMon.</p><figure id="2315b2cc-075b-803b-91f7-ce8e4bde0810" class="image"><a href="https://assets.tryhackme.com/additional/sysinternals/procmon0.png"><img style="width:213.98800659179688px" src="https://assets.tryhackme.com/additional/sysinternals/procmon0.png"/></a></figure><p id="2315b2cc-075b-8005-9a0e-ca23a58436c0" class="">In the below snapshot, I set a filter to capture all the events related to PID<br/> 3888, notepad.exe. You can see some of the file operations that were <br/>captured and the file path or registry path/key the action occurred on, <br/>and the operation result.</p><figure id="2315b2cc-075b-80ee-ab46-d298073f3593" class="image"><a href="https://assets.tryhackme.com/additional/sysinternals/procmon.png"><img style="width:700px" src="https://assets.tryhackme.com/additional/sysinternals/procmon.png"/></a></figure><p id="2315b2cc-075b-804c-a203-c3c130e3cd18" class="">ProcMon will capture thousands upon thousands of events occurring within the operating system.</p><p id="2315b2cc-075b-80f5-b64a-e2a14e075c70" class="">The option to capture events can be toggled on and off.</p><figure id="2315b2cc-075b-8023-80e2-d5224a1116db" class="image"><a href="https://assets.tryhackme.com/additional/sysinternals/procmon3.png"><img style="width:289.9914245605469px" src="https://assets.tryhackme.com/additional/sysinternals/procmon3.png"/></a></figure><p id="2315b2cc-075b-8069-90a6-c8fd329feecd" class="">In this ProcMon example, the session captured events only for a few <br/>seconds. Look at how many events were captured in that short space of <br/>time!</p><figure id="2315b2cc-075b-8013-801c-f1dd6bccd383" class="image"><a href="https://assets.tryhackme.com/additional/sysinternals/procmon2.png"><img style="width:365px" src="https://assets.tryhackme.com/additional/sysinternals/procmon2.png"/></a></figure><p id="2315b2cc-075b-8023-919c-ee57bba902b1" class="">To use ProcMon effectively you <strong><span style="border-bottom:0.05em solid">must</span></strong> use the Filter and <strong><span style="border-bottom:0.05em solid">must</span></strong> configure it properly.</p><figure id="2315b2cc-075b-8005-a7c5-d907f5dd0909" class="image"><a href="https://assets.tryhackme.com/additional/sysinternals/procmon4.png"><img style="width:365px" src="https://assets.tryhackme.com/additional/sysinternals/procmon4.png"/></a></figure><p id="2315b2cc-075b-8053-b13e-ce2d454e6425" class="">In the above image, a filter was already set to capture events associated with<br/>    <strong>PID</strong> 3888. Alternatively, a filter could have been set to capture events with the<br/>    <strong>Process Name</strong> = notepad.exe.</p><p id="2315b2cc-075b-807a-8d4b-cededf821ff6" class=""><a href="https://adamtheautomator.com/procmon/">Here</a> is a useful guide on configuring ProcMon.</p><p id="2315b2cc-075b-80ef-b6e0-f77c247b0f7c" class=""><strong>Note</strong>: To fully understand the output from some of these tools you need to understand some Windows concepts, such as <a href="https://docs.microsoft.com/en-us/windows/win32/procthread/about-processes-and-threads">Processes and Threads</a> and <a href="https://docs.microsoft.com/en-us/windows/win32/apiindex/windows-api-list">Windows API</a> calls.</p><h2 id="2315b2cc-075b-804c-a2b4-f222361c3309" class=""><strong>PsExec</strong></h2><p id="2315b2cc-075b-80d5-acc7-eafcb877c8d4" class="">&quot;<strong>PsExec</strong> is a light-weight telnet-replacement that lets you <br/>execute processes on other systems, complete with full interactivity for<br/> console applications, without having to manually install client <br/>software. PsExec&#x27;s most powerful uses include launching interactive <br/>command-prompts on remote systems and remote-enabling tools like <br/>IpConfig that otherwise do not have the ability to show information <br/>about remote systems.&quot; (official definition)</p><figure id="2315b2cc-075b-80a0-8e97-cb8489c9c6ee" class="image"><a href="https://assets.tryhackme.com/additional/sysinternals/psexec.png"><img style="width:365px" src="https://assets.tryhackme.com/additional/sysinternals/psexec.png"/></a></figure><p id="2315b2cc-075b-80a2-8bc9-cd627fe2f357" class="">PsExec is another tool that is utilized by adversaries. This tool is associated with MITRE techniques<br/>    <a href="https://attack.mitre.org/techniques/T1570">T1570</a> (<strong>Lateral Tool Transfer</strong>),<br/>    <a href="https://attack.mitre.org/techniques/T1021/002">T1021.002</a> (<strong>Remote Services: SMB/Windows Admin Shares</strong>), and<br/>    <a href="https://attack.mitre.org/techniques/T1569/002">T1569.002</a> (<strong>System Services: Service Execution</strong>). It&#x27;s MITRE ID is<br/>    <a href="https://attack.mitre.org/software/S0029/">S0029</a>.</p><p id="2315b2cc-075b-8000-937d-f8b22638f87e" class="">You can review this tool more in-depth by visiting its Sysinternals PsExec<br/>    <a href="https://docs.microsoft.com/en-us/sysinternals/downloads/psexec">page</a>. You can also check out this resource<br/>    <a href="https://adamtheautomator.com/psexec-ultimate-guide/">page</a>.</p><p id="2315b2cc-075b-80bd-9066-fe064fe04125" class="">Other tools fall under the Process Utilities category. I encourage you to explore these tools at your own leisure.</p><p id="2315b2cc-075b-8095-a864-daf8149f73a2" class="">Link: <a href="https://docs.microsoft.com/en-us/sysinternals/downloads/process-utilities">https://docs.microsoft.com/en-us/sysinternals/downloads/process-utilities</a></p><p id="2315b2cc-075b-80e8-bf70-c66c6d062b84" class="">
+</p><h2 id="2315b2cc-075b-8063-9e03-edaaf126d8a5" class=""><strong>Sysmon</strong></h2><p id="2315b2cc-075b-8093-9c55-e5f7e186fa3f" class="">&quot;System Monitor (Sysmon)<br/> is a Windows system service and device driver that, once installed on a<br/> system, remains resident across system reboots to monitor and log <br/>system activity to the Windows event log. It provides detailed <br/>information about process creations, network connections, and changes to<br/> file creation time. By collecting the events it generates using Windows<br/> Event Collection or SIEM<br/> agents and subsequently analyzing them, you can identify malicious or <br/>anomalous activity and understand how intruders and malware operate on <br/>your network.&quot; (<strong>official definition</strong>)</p><p id="2315b2cc-075b-805f-baf4-e7ef1b08072c" class="">Sysmon is a comprehensive tool, and it can&#x27;t be summarized in just one section.</p><p id="2315b2cc-075b-80c8-945b-fe1faeddff6f" class="">Check out the Sysmon<br/>    <a href="https://tryhackme.com/room/sysmon">room</a> to further learn what Sysmon is and how to use it.</p><figure id="2315b2cc-075b-80d2-8ec6-fb3bc2cd0725" class="image"><a href="https://assets.tryhackme.com/additional/sysinternals/sysmon.png"><img style="width:365px" src="https://assets.tryhackme.com/additional/sysinternals/sysmon.png"/></a></figure><p id="2315b2cc-075b-8014-bfa4-d71d7a24f316" class="">Other tools fall under the Security Utilities category. I encourage you to explore these tools at your own leisure.</p><p id="2315b2cc-075b-80d1-aeff-fbae4a32b037" class="">Link: <a href="https://docs.microsoft.com/en-us/sysinternals/downloads/security-utilities">https://docs.microsoft.com/en-us/sysinternals/downloads/security-utilities</a></p><p id="2315b2cc-075b-80f3-93a6-fffc260ea3e9" class="">
+</p><h2 id="2315b2cc-075b-8070-894d-da05aea43c82" class=""><strong>WinObj</strong></h2><p id="2315b2cc-075b-8006-8d78-c53660da4fb7" class="">&quot;<strong>WinObj</strong> is a 32-bit Windows NT program that uses the native Windows NT API (provided by NTDLL.DLL) to access and display information on the NT Object Manager&#x27;s name space.&quot; (<strong>official definition</strong>)</p><p id="2315b2cc-075b-8050-9fb3-f0100f3d7567" class="">To showcase this tool, let&#x27;s look into the concept of <strong>Session 0</strong> and <strong>Session 1 </strong>that was mentioned in the Core Windows Processes room.</p><p id="2315b2cc-075b-801f-a4b6-eba0760e9405" class="">Remember that Session 0 is the OS<br/> session and Session 1 is the User session. Also recall that there will <br/>be at least 2 csrss.exe processes running, one for each session. <strong>Note Session 1 will be for the first user logged into the system</strong>.</p><p id="2315b2cc-075b-80dc-9628-ea8f10f6f89d" class="">Launch WinObj.</p><figure id="2315b2cc-075b-8007-a88b-f523e11658a1" class="image"><a href="https://assets.tryhackme.com/additional/sysinternals/winobj.png"><img style="width:201.998291015625px" src="https://assets.tryhackme.com/additional/sysinternals/winobj.png"/></a></figure><p id="2315b2cc-075b-80ff-b6c1-eb74ea03a5b0" class="">The below image shows the default view for WinObj.</p><figure id="2315b2cc-075b-8042-b665-f23ab0b24339" class="image"><a href="https://assets.tryhackme.com/additional/sysinternals/winobj1.png"><img style="width:700px" src="https://assets.tryhackme.com/additional/sysinternals/winobj1.png"/></a></figure><p id="2315b2cc-075b-80cd-ac91-c151143cfabd" class="">Within Session 0, under <code>DosDevices</code>, there is an entry for the network drive I mounted in my local machine.</p><figure id="2315b2cc-075b-8053-89aa-f1a84ed107c9" class="image"><a href="https://assets.tryhackme.com/additional/sysinternals/winobj5.png"><img style="width:700px" src="https://assets.tryhackme.com/additional/sysinternals/winobj5.png"/></a></figure><p id="2315b2cc-075b-8064-9207-f60ef1daa44c" class="">Let&#x27;s look at <code>WindowStations</code> value for Session 1.</p><figure id="2315b2cc-075b-8061-a133-f35049278d8d" class="image"><a href="https://assets.tryhackme.com/additional/sysinternals/winobj3.png"><img style="width:700px" src="https://assets.tryhackme.com/additional/sysinternals/winobj3.png"/></a></figure><p id="2315b2cc-075b-8068-bb3b-cf12e8c8b05c" class="">Let&#x27;s compare this information with Process Explorer. The below image is for <strong>csrss.exe</strong>, which was launched along with <strong>winlogon.exe</strong> by <strong>smss.exe</strong>.</p><figure id="2315b2cc-075b-8042-997a-f021a7c012da" class="image"><a href="https://assets.tryhackme.com/additional/sysinternals/winobj4.png"><img style="width:365px" src="https://assets.tryhackme.com/additional/sysinternals/winobj4.png"/></a></figure><p id="2315b2cc-075b-80c2-b845-cf22ebe69621" class=""><strong>Note</strong>: This is a high-level exposure for this tool.</p><p id="2315b2cc-075b-8009-bc0c-f50da3e9919b" class="">Other tools fall under the<br/>    <strong>System </strong>Information category. I encourage you to explore these tools at your own leisure.</p><p id="2315b2cc-075b-80e8-a883-e4647e0b213c" class="">Link: <a href="https://docs.microsoft.com/en-us/sysinternals/downloads/system-information">https://docs.microsoft.com/en-us/sysinternals/downloads/system-information</a></p><p id="2315b2cc-075b-8021-9ac4-f667f1d4b27c" class="">
+</p><h2 id="2315b2cc-075b-80f8-a2b2-edce48208cd3" class=""><strong>BgInfo</strong></h2><p id="2315b2cc-075b-803c-a062-fa3e5eb3360a" class="">&quot;It automatically displays relevant information about a Windows <br/>computer on the desktop&#x27;s background, such as the computer name, IP <br/>address, service pack version, and more.&quot; (<strong>official definition</strong>)</p><figure id="2315b2cc-075b-80fb-a1d8-db363cb4b587" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/8d542be16612d607bad0a89d03038f63.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/8d542be16612d607bad0a89d03038f63.png"/></a></figure><p id="2315b2cc-075b-80a2-b964-e5948dae1074" class="">This is a handy utility if you manage multiple machines. This tool, <br/>or similar tools, are typically utilized on servers. When a user RDPs <br/>into a server, the system information is displayed on the wallpaper to <br/>provide quick information about the server, such as the server&#x27;s name.</p><figure id="2315b2cc-075b-80ba-988b-e6c5f0e2f004" class="image"><a href="https://assets.tryhackme.com/additional/sysinternals/bginfo.png"><img style="width:700px" src="https://assets.tryhackme.com/additional/sysinternals/bginfo.png"/></a></figure><p id="2315b2cc-075b-8006-8cc1-e3e26e45f510" class="">Refer to the Sysinternals BgInfo<br/>    <a href="https://docs.microsoft.com/en-us/sysinternals/downloads/bginfo">page</a> for more information on installation and usage.</p><p id="2315b2cc-075b-802f-bee7-c6bc46b3c257" class=""><strong>RegJump</strong></p><p id="2315b2cc-075b-805c-874c-eea768b984ed" class="">&quot;This little command-line applet takes a registry path and makes <br/>Regedit open to that path. It accepts root keys in standard (e.g. <br/>HKEY_LOCAL_MACHINE) and abbreviated form (e.g. HKLM).&quot; (official definition)</p><p id="2315b2cc-075b-808b-aeb8-e416e0a065aa" class="">When navigating through the registry using the Registry Editor, one must manually drill down to the key you wish to inspect.</p><figure id="2315b2cc-075b-8075-977a-d7a3367bf270" class="image"><a href="https://assets.tryhackme.com/additional/sysinternals/registry-editor.png"><img style="width:365px" src="https://assets.tryhackme.com/additional/sysinternals/registry-editor.png"/></a></figure><p id="2315b2cc-075b-809f-84be-c4b5df617840" class="">There are multiple ways to query the Windows Registry without using the Registry Editor, such as via the command line (<code>reg query</code>) and PowerShell (<code>Get-Item</code>/<code>Get-ItemProperty</code>).</p><p id="2315b2cc-075b-805d-9c57-cf383c3fa436" class="">Using Regjump will open the Registry Editor and automatically open <br/>the editor directly at the path, so one doesn&#x27;t need to navigate it <br/>manually.</p><figure id="2315b2cc-075b-804a-946c-e817c6420141" class="image"><a href="https://assets.tryhackme.com/additional/sysinternals/regjump0.png"><img style="width:365px" src="https://assets.tryhackme.com/additional/sysinternals/regjump0.png"/></a></figure><figure id="2315b2cc-075b-80cf-9808-dc90bd70f0d5" class="image"><a href="https://assets.tryhackme.com/additional/sysinternals/regjump2.png"><img style="width:700px" src="https://assets.tryhackme.com/additional/sysinternals/regjump2.png"/></a></figure><h2 id="2315b2cc-075b-8004-a9d6-f9ec32fe6a39" class=""><strong>Strings</strong></h2><p id="2315b2cc-075b-800f-914d-e306a836e20f" class="">&quot;Strings just scans the file you pass it for UNICODE (or ASCII) <br/>strings of a default length of 3 or more UNICODE (or ASCII) characters. <br/>Note that it works under Windows 95 as well.&quot; (official definition)</p><p id="2315b2cc-075b-807f-bbf4-d15075a54b63" class="">This is the tool that was used on Day 21 of AoC2 to inspect a mysterious binary.</p><p id="2315b2cc-075b-8053-8cbf-deef1e37b39b" class="">The example below <strong>strings</strong> is used to search within the ZoomIt binary for any string containing the word &#x27;zoom&#x27;.</p><figure id="2315b2cc-075b-8049-8632-c30652e26b38" class="image"><a href="https://assets.tryhackme.com/additional/sysinternals/strings.png"><img style="width:365px" src="https://assets.tryhackme.com/additional/sysinternals/strings.png"/></a></figure><p id="2315b2cc-075b-800b-b1d8-d622ff4ce3d5" class="">Other tools fall under the<br/>    <strong>Miscellaneous</strong> category. I encourage you to explore these tools at your own leisure.</p><p id="2315b2cc-075b-8052-87e0-f2508cfcf102" class="">Link: <a href="https://docs.microsoft.com/en-us/sysinternals/downloads/system-information">https://docs.microsoft.com/en-us/sysinternals/downloads/misc-utilities</a></p><p id="2315b2cc-075b-809c-a135-e4b5574c4e60" class="">
+</p><p id="2315b2cc-075b-8063-a920-d5ff550c1ef2" class="">
+</p><h2 id="2315b2cc-075b-807f-9b6a-d0ba5a0988e9" class="">Conclusion</h2><p id="2315b2cc-075b-809d-adb4-c53623614f5c" class="">
+</p><p id="2315b2cc-075b-80fc-914d-d8cdd9396f89" class="">When you read the Sysinternals <br/>documentation, it might hint these tools are for troubleshooting <br/>purposes only, but that is not entirely the case.</p><p id="2315b2cc-075b-80ce-a707-e2384476e1f5" class="">You should know or be familiar with the Sysinternals tools whether you&#x27;re a Desktop Engineer, Systems Analyst, or Security Engineer.</p><p id="2315b2cc-075b-80b9-9309-ddc83c170d11" class=""><strong><span style="border-bottom:0.05em solid">Real-world scenario</span></strong>: As a security engineer, I had to <br/>work with vendors to troubleshoot why an agent wasn&#x27;t responding on an <br/>endpoint—the tools used were<br/>    <strong>ProcExp</strong>, <strong>ProcMon</strong>, and <strong>ProcDump</strong>.</p><ul id="2315b2cc-075b-80a2-b1d2-d034dccbdc17" class="bulleted-list"><li style="list-style-type:disc">ProcExp = to inspect the agent process, its properties, and associated threads and handles.</li></ul><ul id="2315b2cc-075b-808c-90dd-d19dc1030a3c" class="bulleted-list"><li style="list-style-type:disc">ProcMon = to investigate if there were any indicators on why the agent was not operating as it should.</li></ul><ul id="2315b2cc-075b-8058-b1c3-c9d4892749bc" class="bulleted-list"><li style="list-style-type:disc">ProcDump = to create a dump of the agent process to send to the vendor for further analysis.</li></ul><p id="2315b2cc-075b-8031-99d8-ea9563f59ff8" class="">And guess what? Asking questions about Sysinternals became part of the interview questions when hiring additional staff.</p><p id="2315b2cc-075b-80df-9149-dfb02c4b97c2" class="">Remember, red teamers and adversaries even use these tools.</p><p id="2315b2cc-075b-80fa-9f02-ed43922cc940" class="">Below are some additional links to further your knowledge on how to <br/>use these tools as a Security Analyst, Security Engineer, or even an <br/>Incident Responder:</p><ul id="2315b2cc-075b-8022-9120-d8c4bf573b9c" class="bulleted-list"><li style="list-style-type:disc">Mark&#x27;s Blog - <a href="https://docs.microsoft.com/en-us/archive/blogs/markrussinovich/">https://docs.microsoft.com/en-us/archive/blogs/markrussinovich/</a></li></ul><ul id="2315b2cc-075b-80f1-bd33-e9322e829f8a" class="bulleted-list"><li style="list-style-type:disc">Windows Blog Archive - <a href="https://techcommunity.microsoft.com/t5/windows-blog-archive/bg-p/Windows-Blog-Archive/label-name/Mark%20Russinovich">https://techcommunity.microsoft.com/t5/windows-blog-archive/bg-p/Windows-Blog-Archive/label-name/Mark%20Russinovich</a></li></ul><ul id="2315b2cc-075b-8079-8ce3-c35aadfae973" class="bulleted-list"><li style="list-style-type:disc">License to Kill: Malware Hunting with Sysinternals Tools - <a href="https://www.youtube.com/watch?v=A_TPZxuTzBU">https://www.youtube.com/watch?v=A_TPZxuTzBU</a></li></ul><ul id="2315b2cc-075b-808e-b39e-f8eb67af3fb6" class="bulleted-list"><li style="list-style-type:disc">Malware Hunting with Mark Russinovich and the Sysinternals Tools - <a href="https://www.youtube.com/watch?v=vW8eAqZyWeo">https://www.youtube.com/watch?v=vW8eAqZyWeo</a></li></ul><p id="2315b2cc-075b-8078-89e1-cd78f9a1cc82" class=""><strong>Note</strong>: Some of the videos/blogs are a bit outdated, but <br/>they&#x27;re still good to review as it showcases how to use these tools <br/>extensively. This will build your foundation on the tools covered, along<br/> with the tools that weren&#x27;t covered in this room.</p><p id="2315b2cc-075b-8059-bffc-e0dfb5e33e93" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

@@ -1,0 +1,797 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>YARA</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2285b2cc-075b-809b-9ccb-e5b059fba498" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🧶</span></div><h1 class="page-title">YARA</h1><p class="page-description"></p></header><div class="page-body"><p id="2285b2cc-075b-800a-ab83-cab55ab53b72" class="">yet another ridiculous acronym.</p><hr id="2285b2cc-075b-80c4-896b-edf9735232b1"/><h2 id="2285b2cc-075b-809c-92d9-d8381e1dc18e" class="">🧠 What is YARA?</h2><p id="2285b2cc-075b-80e4-aed0-c8a8e10c6cb0" class=""><strong>YARA</strong> is a tool that helps you <strong>identify and classify malware (or suspicious files)</strong> based on <strong>patterns</strong>.</p><p id="2285b2cc-075b-807c-8ed7-d32176654c9c" class="">Think of it like a <strong>custom search engine for threats</strong>. You write rules that describe what malicious files “look like,” and YARA finds files that match those rules.</p><hr id="2285b2cc-075b-8059-836a-f8093b048bc5"/><h2 id="2285b2cc-075b-80e8-b962-daa0966c8cd5" class="">🧩 How does YARA work?</h2><p id="2285b2cc-075b-8099-9bb4-c8825dd9bea2" class="">YARA uses <strong>rules</strong> that you create. Each rule looks for <strong>specific patterns</strong>, such as:</p><ul id="2285b2cc-075b-80c9-9d93-d54cb20d4dd0" class="bulleted-list"><li style="list-style-type:disc">A text string (e.g., <code>&quot;This program cannot be run in DOS mode&quot;</code>)</li></ul><ul id="2285b2cc-075b-801d-b4d5-f0d6e661393f" class="bulleted-list"><li style="list-style-type:disc">A hex pattern (e.g., <code>6A 40 68 ?? ?? ?? ??</code>)</li></ul><ul id="2285b2cc-075b-8070-a99a-d134c16798f5" class="bulleted-list"><li style="list-style-type:disc">A file size limit</li></ul><ul id="2285b2cc-075b-80ea-a956-e728129ce785" class="bulleted-list"><li style="list-style-type:disc">A filename or extension</li></ul><ul id="2285b2cc-075b-8096-80db-c686c5ed36b1" class="bulleted-list"><li style="list-style-type:disc">A combination of strings and conditions</li></ul><hr id="2285b2cc-075b-80d0-a9fa-f6b07b5eb2c2"/><h2 id="2285b2cc-075b-80cd-a738-e899a19ac882" class="">🧷 YARA Rule Structure (Human-Friendly Version)</h2><p id="2285b2cc-075b-8070-a8e6-f8687212be73" class="">Here&#x27;s a super basic YARA rule:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2285b2cc-075b-80f9-a993-dde796a1eac2" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">rule Detect_HelloWorld
+{
+    strings:
+        $a = &quot;Hello, world!&quot;
+    condition:
+        $a
+}
+</code></pre><h3 id="2285b2cc-075b-8088-ba34-f47ded95acbb" class="">🔍 What it means:</h3><ul id="2285b2cc-075b-80bf-84b9-fd467ff0a075" class="bulleted-list"><li style="list-style-type:disc"><code>rule Detect_HelloWorld</code> → Name of the rule</li></ul><ul id="2285b2cc-075b-8025-ad37-fc8da00dcdff" class="bulleted-list"><li style="list-style-type:disc"><code>strings:</code> → What to search for (here: a string called <code>$a</code>)</li></ul><ul id="2285b2cc-075b-80f8-a08a-e97d171d3820" class="bulleted-list"><li style="list-style-type:disc"><code>condition:</code> → When this rule triggers (in this case, if <code>$a</code> is found)</li></ul><p id="2285b2cc-075b-8069-87d7-cc12719376e0" class="">So this rule flags <strong>any file that contains the string &quot;Hello, world!&quot;</strong></p><hr id="2285b2cc-075b-80dd-929a-fe828846c37d"/><h2 id="2285b2cc-075b-80e0-8293-e277f904c4a1" class="">🧠 Real-World Analogy:</h2><p id="2285b2cc-075b-8000-aebb-d1acf1d73839" class="">Imagine you’re hunting malware that always:</p><ul id="2285b2cc-075b-8010-96b0-dabe634b2f3a" class="bulleted-list"><li style="list-style-type:disc">Has the string <code>&quot;malicious.exe&quot;</code></li></ul><ul id="2285b2cc-075b-80ca-bf17-f529fbb06377" class="bulleted-list"><li style="list-style-type:disc">Contains certain byte patterns in its binary</li></ul><ul id="2285b2cc-075b-801f-a6c6-d725946fff1d" class="bulleted-list"><li style="list-style-type:disc">Is between 100 KB and 500 KB in size</li></ul><p id="2285b2cc-075b-8000-81aa-e35f2db7bdb0" class="">You can write a YARA rule to <strong>automatically detect files like this</strong>.</p><hr id="2285b2cc-075b-80d0-9b28-e66f3fd6e12d"/><h2 id="2285b2cc-075b-80f7-8d6e-fabc1ebddd1b" class="">🔐 Why YARA is powerful for security people:</h2><ul id="2285b2cc-075b-8085-8d02-e333f252f7ab" class="bulleted-list"><li style="list-style-type:disc">📌 <strong>Threat hunters</strong> use it to scan endpoints and servers for known malware patterns.</li></ul><ul id="2285b2cc-075b-801e-a0fd-eecd50becd9a" class="bulleted-list"><li style="list-style-type:disc">🧪 <strong>Malware analysts</strong> use it to label and classify samples.</li></ul><ul id="2285b2cc-075b-8046-8464-e6318e082016" class="bulleted-list"><li style="list-style-type:disc">🧰 <strong>SOC teams</strong> can integrate it into antivirus engines, EDRs, or sandboxes.</li></ul><ul id="2285b2cc-075b-8025-8628-c82e4a9833f8" class="bulleted-list"><li style="list-style-type:disc">🔍 <strong>Digital forensics</strong> teams use it to scan entire disk images quickly.</li></ul><hr id="2285b2cc-075b-80a0-900e-f476201cf649"/><h2 id="2285b2cc-075b-807c-9167-d93922309c80" class="">📂 How to run it (basic usage in Ubuntu):</h2><ol type="1" id="2285b2cc-075b-806f-8c3e-de59d1f83e17" class="numbered-list" start="1"><li><strong>Install YARA</strong>:</li></ol><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2285b2cc-075b-80e3-b0c5-d80a00e86c3f" class="code code-wrap"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">sudo apt install yara
+</code></pre><ol type="1" id="2285b2cc-075b-8092-b322-e3d198b152d2" class="numbered-list" start="1"><li><strong>Create a rule file</strong> (e.g., <code>myrule.yar</code>):</li></ol><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2285b2cc-075b-8013-b987-e3d57c571737" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">rule Example
+{
+    strings:
+        $mal = &quot;evilpayload&quot;
+    condition:
+        $mal
+}
+</code></pre><ol type="1" id="2285b2cc-075b-80a9-872a-c41b2d3c4209" class="numbered-list" start="1"><li><strong>Run YARA on a file</strong>:</li></ol><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2285b2cc-075b-8099-9460-d6e98d8c96c1" class="code code-wrap"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">yara myrule.yar suspiciousfile.exe
+</code></pre><p id="2285b2cc-075b-8010-b751-f76a17d52596" class="">If the file matches, YARA prints:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2285b2cc-075b-80b7-92de-f47dc2b2f9c2" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">Example suspiciousfile.exe
+</code></pre><hr id="2285b2cc-075b-808b-8c3e-d7484624d099"/><h2 id="2285b2cc-075b-805f-9544-c62953c0ba5e" class="">🧠 Summary</h2><table id="2285b2cc-075b-80b7-8492-c414ab9e38cc" class="simple-table"><thead class="simple-table-header"><tr id="2285b2cc-075b-809e-ae1f-f6cdda407f67"><th id="|fE_" class="simple-table-header-color simple-table-header">Feature</th><th id="Os[W" class="simple-table-header-color simple-table-header">What it means</th></tr></thead><tbody><tr id="2285b2cc-075b-8054-893c-d2d359f2d91e"><td id="|fE_" class=""><strong>YARA</strong></td><td id="Os[W" class="">A pattern-matching tool for malware detection</td></tr><tr id="2285b2cc-075b-8075-bd00-c2fc9a5859c2"><td id="|fE_" class=""><strong>Rules</strong></td><td id="Os[W" class="">Written in a readable format to define what to look for</td></tr><tr id="2285b2cc-075b-80c2-9647-de24f2edcb21"><td id="|fE_" class=""><strong>Used by</strong></td><td id="Os[W" class="">Malware analysts, threat hunters, forensic teams</td></tr><tr id="2285b2cc-075b-8060-a7bb-fe93246f2d43"><td id="|fE_" class=""><strong>Looks for</strong></td><td id="Os[W" class="">Strings, hex patterns, file size, behavior, etc.</td></tr><tr id="2285b2cc-075b-80f7-9260-ebaa98374f7d"><td id="|fE_" class=""><strong>Goal</strong></td><td id="Os[W" class="">Quickly identify known or related malware and suspicious files</td></tr></tbody></table><hr id="2285b2cc-075b-80e3-970e-cbcf1063d3db"/><p id="2285b2cc-075b-8068-b08a-c65dc8f3f249" class="">First sample YARA rule</p><p id="2285b2cc-075b-800b-8941-c3c1b0b62f85" class="">
+</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2285b2cc-075b-80fa-8ba7-f5ea0f5f4242" class="code code-wrap"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all">cmnatic@thm-yara:~$ yara myfirstrule.yar somefile
+examplerule somefile
+cmnatic@thm-yara:~$ cat myfirstrule.yar
+rule examplerule {
+condition: true
+}
+cmnatic@thm-yara:~$</code></pre><p id="2285b2cc-075b-80f3-a841-f9ca4a680f94" class="">
+</p><h3 id="2285b2cc-075b-809c-9591-e69503f37bff" class="">🖥️ The command  ran:</h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2285b2cc-075b-8094-8248-ef0a4540913f" class="code code-wrap"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">bas
+yara myfirstrule.yar somefile
+
+</code></pre><ul id="2285b2cc-075b-80fc-af2a-daf71d79fa85" class="bulleted-list"><li style="list-style-type:disc"><code>yara</code> — runs the YARA engine</li></ul><ul id="2285b2cc-075b-8008-ad29-edf067154236" class="bulleted-list"><li style="list-style-type:disc"><code>myfirstrule.yar</code> — the file containing your YARA rule</li></ul><ul id="2285b2cc-075b-803b-8903-c61436f964f6" class="bulleted-list"><li style="list-style-type:disc"><code>somefile</code> — the file you are scanning with that rule</li></ul><hr id="2285b2cc-075b-8079-ba58-dc68516814c6"/><h3 id="2285b2cc-075b-8083-8053-c2d43925ba93" class="">📄 Your YARA rule (from <code>myfirstrule.yar</code>):</h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2285b2cc-075b-80ad-b922-cc7ab567c477" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">
+
+rule examplerule {
+    condition: true
+}
+
+</code></pre><p id="2285b2cc-075b-800e-842c-c3c01d9d73a3" class="">This is the <strong>simplest possible YARA rule</strong>.</p><hr id="2285b2cc-075b-807f-9e62-c5d145d91cc7"/><h3 id="2285b2cc-075b-80e3-b2fa-c5438ca8d501" class="">🔍 What it means:</h3><ul id="2285b2cc-075b-804d-b504-fafaeccf1732" class="bulleted-list"><li style="list-style-type:disc"><code>rule examplerule</code>: You are defining a rule named <strong>&quot;examplerule&quot;</strong>.</li></ul><ul id="2285b2cc-075b-80ea-95d1-ecda5d723dcc" class="bulleted-list"><li style="list-style-type:disc"><code>condition: true</code>: The rule always matches <strong>every file</strong>, because the condition is always true (no string or pattern needed).</li></ul><p id="2285b2cc-075b-8072-8b16-d44346707fb8" class="">So no matter what file you scan, this rule will always say:</p><p id="2285b2cc-075b-80d9-81fd-cfadd56b63e9" class="">➡️ <strong>“examplerule matched this file”</strong></p><hr id="2285b2cc-075b-8062-9fa1-f642e632fbb0"/><h3 id="2285b2cc-075b-8004-8ae5-c9d8b0eb679c" class="">✅ The output you saw:</h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2285b2cc-075b-802f-93d0-deec13066722" class="code code-wrap"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">bash
+
+examplerule somefile
+
+</code></pre><p id="2285b2cc-075b-807c-8a47-f288b6d41459" class="">Means:</p><ul id="2285b2cc-075b-80e2-85ac-d0ea2c7c6f71" class="bulleted-list"><li style="list-style-type:disc">Your rule <code>examplerule</code> <strong>matched</strong></li></ul><ul id="2285b2cc-075b-8092-a216-f7061fb5fcc7" class="bulleted-list"><li style="list-style-type:disc">The file named <code>somefile</code></li></ul><p id="2285b2cc-075b-80aa-8e7f-e5936936862b" class="">Which makes sense because your rule&#x27;s condition is <code>true</code> — it <strong>always matches everything</strong>.</p><hr id="2285b2cc-075b-80ca-addb-df7de7cbf2d7"/><h3 id="2285b2cc-075b-80e8-80bb-e92df8682654" class="">🎓 Why use <code>condition: true</code>?</h3><p id="2285b2cc-075b-80b3-a8b4-e88992ee38df" class="">It’s commonly used:</p><ul id="2285b2cc-075b-8070-87d6-f2970dce914f" class="bulleted-list"><li style="list-style-type:disc">To <strong>test your YARA setup</strong></li></ul><ul id="2285b2cc-075b-801a-8d5f-cf8cd53f9083" class="bulleted-list"><li style="list-style-type:disc">As a <strong>placeholder</strong> while you’re building a more complex rule</li></ul><p id="2285b2cc-075b-8052-9b46-f519565c8d0a" class=""><a href="https://yara.readthedocs.io/en/stable/writingrules.html">https://yara.readthedocs.io/en/stable/writingrules.html</a></p><figure id="2285b2cc-075b-80cf-a1f1-f624fceea923" class="image"><a href="image%2068.png"><img style="width:709.9811401367188px" src="image%2068.png"/></a></figure><p id="2285b2cc-075b-80dc-80b5-ebadce7b5617" class=""><a href="https://pypi.org/project/pefile/">https://pypi.org/project/pefile/</a></p><p id="2285b2cc-075b-809b-93ef-e6760212d569" class=""><a href="https://github.com/cuckoosandbox/cuckoo">https://github.com/cuckoosandbox/cuckoo</a></p><p id="2285b2cc-075b-80a8-9728-ffa9e0f76239" class=""><a href="https://github.com/InQuest/awesome-yara">https://github.com/InQuest/awesome-yara</a></p><p id="2285b2cc-075b-80c8-acc2-ed8052ceb2e5" class="">
+</p><h1 id="2285b2cc-075b-80b7-9307-fc45535be43f" class="">Other tools and Yara<strong>﻿<br/>﻿<br/>Yara Tools</strong></h1><p id="2285b2cc-075b-804d-842f-e9e4f5a39cc5" class="">Knowing how to create custom Yara rules is useful, but luckily you don&#x27;t have to create many rules from scratch to begin using Yara to search for evil. There are plenty of GitHub <a href="https://github.com/InQuest/awesome-yara">resources</a> and open-source tools (along with commercial products) that can be utilized to leverage Yara in hunt operations and/or incident response engagements.</p><h1 id="2285b2cc-075b-80e8-a672-d0bbd1b7927b" class="">LOKI (What, not who, is Loki?)</h1><p id="2285b2cc-075b-8030-a152-ee323e1ba334" class="">LOKI is a free open-source IOC (<em>Indicator of Compromise</em>) scanner created/written by Florian Roth.</p><p id="2285b2cc-075b-80c2-b5f8-ea95ba7acaec" class="">Based on the GitHub page, detection is based on 4 methods:</p><ol type="1" id="2285b2cc-075b-8004-8ebf-c96ab41e1d00" class="numbered-list" start="1"><li>File Name IOC Check</li></ol><ol type="1" id="2285b2cc-075b-803e-a755-f5d063c99d2a" class="numbered-list" start="2"><li>Yara Rule Check<strong> (we are here)</strong></li></ol><ol type="1" id="2285b2cc-075b-802d-8ea4-fb1e6cce844d" class="numbered-list" start="3"><li>Hash Check</li></ol><ol type="1" id="2285b2cc-075b-8066-9a85-fdfeb6a94f7f" class="numbered-list" start="4"><li>C2 Back Connect Check</li></ol><p id="2285b2cc-075b-8056-8dce-ed8e3824db82" class="">There are additional checks that LOKI can be used for. For a full rundown, please reference the <a href="https://github.com/Neo23x0/Loki/blob/master/README.md">GitHub readme</a>.</p><p id="2285b2cc-075b-80d4-b9cf-d162f4632884" class="">LOKI can be used on both Windows and Linux systems and can be downloaded <a href="https://github.com/Neo23x0/Loki/releases">here</a>.</p><p id="2285b2cc-075b-80c5-b992-d0acb74706a0" class=""><em>Please note that you are not expected to use this tool in this room.</em></p><p id="2285b2cc-075b-8057-9650-f8f9f4d6ce21" class="">Displaying Loki&#x27;s help menu</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2285b2cc-075b-8037-9a3d-e50ac42b280a" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">cmnatic@thm:~/Loki$ python3 loki.py -husage: loki.py [-h] [-p path] [-s kilobyte] [-l log-file] [-r remote-loghost]
+               [-t remote-syslog-port] [-a alert-level] [-w warning-level]
+               [-n notice-level] [--allhds] [--alldrives] [--printall]
+               [--allreasons] [--noprocscan] [--nofilescan] [--vulnchecks]
+               [--nolevcheck] [--scriptanalysis] [--rootkit] [--noindicator]
+               [--dontwait] [--intense] [--csv] [--onlyrelevant] [--nolog]
+               [--update] [--debug] [--maxworkingset MAXWORKINGSET]
+               [--syslogtcp] [--logfolder log-folder] [--nopesieve]
+               [--pesieveshellc] [--python PYTHON] [--nolisten]
+               [--excludeprocess EXCLUDEPROCESS] [--force]
+
+Loki - Simple IOC Scanner
+
+optional arguments:
+  -h, --help            show this help message and exit</code></pre><p id="2285b2cc-075b-80b9-bb0b-e22ffc2f8385" class=""><strong>THOR<br/> <br/>(<br/>superhero named programs for a superhero blue teamer)</strong></p><p id="2285b2cc-075b-8084-bc9c-c60e7077417f" class="">THOR <em>Lite</em> is Florian&#x27;s newest multi-platform IOC AND YARA scanner. There are precompiled versions for Windows, Linux, and macOS. A nice feature with THOR Lite is its scan throttling to limit exhausting CPU resources. For more information and/or to download the binary, start <a href="https://www.nextron-systems.com/thor-lite/">here</a>. You need to subscribe to their mailing list to obtain a copy of the binary. <strong>Note that THOR is geared towards corporate customers</strong>. THOR Lite is the free version.</p><p id="2285b2cc-075b-80a8-9d88-d0a483268244" class=""><em>Please note that you are not expected to use this tool in this room.</em></p><p id="2285b2cc-075b-8006-a909-daaa3068c7f5" class="">Displaying Thor Lite&#x27;s help menu</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2285b2cc-075b-8089-b092-d5a698ad51c8" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">cmnatic@thm:~$ ./thor-lite-linux-64 -hThor Lite
+APT Scanner
+Version 10.7.3 (2022-07-27 07:33:47)
+cc) Nextron Systems GmbH
+Lite Version
+
+&gt; Scan Options
+  -t, --template string      Process default scan parameters from this YAML file
+  -p, --path strings         Scan a specific file path. Define multiple paths by specifying this option multiple times. Append &#x27;:NOWALK&#x27; to the path for non-recursive scanning (default: only the system drive) (default [])
+      --allhds               (Windows Only) Scan all local hard drives (default: only the system drive)
+      --max_file_size uint   Max. file size to check (larger files are ignored). Increasing this limit will also increase memory usage of THOR. (default 30MB)
+
+&gt; Scan Modes
+      --quick     Activate a number of flags to speed up the scan at cost of some detection.
+                  This is equivalent to: --noeventlog --nofirewall --noprofiles --nowebdirscan --nologscan --noevtx --nohotfixes --nomft --lookback 3 --lookback-modules filescan</code></pre><h1 id="2285b2cc-075b-80f6-9faf-daeee51be1b7" class="">FENRIR (naming convention still mythical themed)</h1><p id="2285b2cc-075b-807f-8b91-f622a7df0d56" class="">This is the 3rd <a href="https://github.com/Neo23x0/Fenrir">tool</a> created by Neo23x0 (Florian Roth). You guessed it; the previous 2 are named above. The updated version was created to address the issue from its predecessors, where requirements must be met for them to function. Fenrir is a bash script; it will run on any system capable of running bash (nowadays even Windows).</p><p id="2285b2cc-075b-80d0-b40b-e4d42e07bf1d" class=""><em>Please note that you are not expected to use this tool in this room.</em></p><p id="2285b2cc-075b-80e9-b3ee-ee75e83f437f" class="">Running Fenrir</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2285b2cc-075b-8072-ae6d-c6b4477e5c33" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">cmnatic@thm-yara:~/tools$ ./fenrir.sh##############################################################
+    ____             _
+   / __/__ ___  ____(_)___
+  / _// -_) _ \/ __/ / __/
+ /_/  \__/_//_/_/ /_/_/
+ v0.9.0-log4shell
+
+ Simple Bash IOC Checker
+ Florian Roth, Dec 2021
+##############################################################</code></pre><p id="2285b2cc-075b-80ad-9e09-c4819d3c5e13" class=""><strong>YAYA (</strong><em>Yet Another Yara Automaton</em><strong>)</strong></p><p id="2285b2cc-075b-80c9-8bab-d7f425739a6d" class="">YAYA was created by the <a href="https://www.eff.org/deeplinks/2020/09/introducing-yaya-new-threat-hunting-tool-eff-threat-lab">EFF</a> (<em>Electronic Frontier Foundation</em>) and released in September 2020. Based on their website, &quot;<em>YAYA is a new open-source tool to help researchers manage multiple YARA rule repositories. YAYA starts by importing a set of high-quality YARA rules and then lets researchers add their own rules, disable specific rulesets, and run scans of files.</em>&quot;</p><p id="2285b2cc-075b-8088-ab86-eda65b873b0d" class="">Note: Currently, YAYA will only run on Linux systems.</p><p id="2285b2cc-075b-80a6-a3b9-fa4c59154bae" class="">Running YAYA</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2285b2cc-075b-80a1-a42a-ff9f162f5955" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">cmnatic@thm-yara:~/tools$ yayaYAYA - Yet Another Yara Automaton
+Usage:
+yaya [-h]
+    -h print this help screen
+Commands:
+   update - update rulesets
+   edit - ban or remove rulesets
+   add - add a custom ruleset, located at
+   scan - perform a yara scan on the directory at</code></pre><p id="2285b2cc-075b-80e6-a3a7-ed703a1e7bc8" class="">
+</p><h1 id="2285b2cc-075b-80b9-a566-df20023ffa61" class=""><strong>Using LOKI</strong></h1><figure id="2285b2cc-075b-800e-b003-e7ddf40f8758" class="image"><a href="0AED23E0-8475-4242-BCCC-74801657EB2B.png"><img style="width:709.9811401367188px" src="0AED23E0-8475-4242-BCCC-74801657EB2B.png"/></a></figure><p id="2285b2cc-075b-808f-8f3d-e6bd01c203bb" class=""><code>python </code><code><a href="http://loki.py">loki.py</a></code><code> suspiciousfile.xyz</code></p><figure id="2285b2cc-075b-8081-9f9d-feb39cbd2103" class="image"><a href="8E8D9F1A-6B12-4D28-9657-08200DB63E21.png"><img style="width:709.9811401367188px" src="8E8D9F1A-6B12-4D28-9657-08200DB63E21.png"/></a></figure><p id="2285b2cc-075b-806a-be75-c0c4c2556167" class="">Here we are using Loki and Yara rules to scan for </p><ul id="2285b2cc-075b-809d-934a-d1b99c919a25" class="bulleted-list"><li style="list-style-type:disc">Web shells</li></ul><ul id="2285b2cc-075b-8087-900b-c2f958578688" class="bulleted-list"><li style="list-style-type:disc">Malware</li></ul><ul id="2285b2cc-075b-80ae-92a8-dfa361eade5d" class="bulleted-list"><li style="list-style-type:disc">Known bad hashes</li></ul><ul id="2285b2cc-075b-800c-9549-d5540447f56f" class="bulleted-list"><li style="list-style-type:disc">YARA rule matches</li></ul><ul id="2285b2cc-075b-80ad-98c5-ca9d60b07a00" class="bulleted-list"><li style="list-style-type:disc">Suspicious behavior</li></ul><h3 id="2285b2cc-075b-8069-9825-f2a6f7baffe7" class="">🧠 Intelligence Sources Loaded</h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2285b2cc-075b-8067-bfa9-de0271abb170" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">csharp
+
+[INFO] File Name Characteristics initialized with 2841 regex patterns
+[INFO] C2 server indicators initialized with 1541 elements
+[INFO] Malicious MD5 Hashes initialized with 19034 hashes
+...
+[INFO] Initialized 653 Yara rules
+
+</code></pre><p id="2285b2cc-075b-8069-9e47-c08a28b139f5" class="">Loki loaded:</p><ul id="2285b2cc-075b-8043-a947-d61de99d32e3" class="bulleted-list"><li style="list-style-type:disc">Thousands of regexes to detect suspicious filenames</li></ul><ul id="2285b2cc-075b-8063-8d2c-c1054ec4989d" class="bulleted-list"><li style="list-style-type:disc">C2 domains</li></ul><ul id="2285b2cc-075b-80c7-9357-c5960cf3119b" class="bulleted-list"><li style="list-style-type:disc">Known malicious hashes</li></ul><ul id="2285b2cc-075b-80a6-a26b-e85254e343c2" class="bulleted-list"><li style="list-style-type:disc"><strong>653 YARA rules</strong> to match behavior/payloads</li></ul><h3 id="2285b2cc-075b-800a-a337-c0287dba5e8b" class="">⚠️ Suspicious File Found!</h3><h3 id="2285b2cc-075b-80a9-98b4-c3966ae6e239" class="">File: <code>ind3x.php</code></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2285b2cc-075b-8030-b717-c5ef0e9356fd" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">yaml
+
+FILE: ./ind3x.php
+SCORE: 70
+TYPE: PHP
+...
+Yara Rule MATCH: webshell_metaslsoft
+DESCRIPTION: Web Shell - file metaslsoft.php
+
+</code></pre><p id="2285b2cc-075b-80d1-85fd-c191066b7910" class="">This is <strong>very important</strong>:</p><ul id="2285b2cc-075b-80cf-9777-c429f9834bbc" class="bulleted-list"><li style="list-style-type:disc"><code>ind3x.php</code> looks like a <strong>web shell</strong> (malicious script uploaded to control a web server)</li></ul><ul id="2285b2cc-075b-80bb-bd94-c9bad27e9981" class="bulleted-list"><li style="list-style-type:disc">Matched the YARA rule: <code>webshell_metaslsoft</code></li></ul><ul id="2285b2cc-075b-8004-a5ce-d1a8631524ba" class="bulleted-list"><li style="list-style-type:disc">Score: <code>70</code> (Higher = more suspicious)</li></ul><ul id="2285b2cc-075b-805b-bdfe-c0d18775b23f" class="bulleted-list"><li style="list-style-type:disc">File is a <strong>PHP file</strong> that contains suspicious code:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2285b2cc-075b-8035-9cd5-c84af7074bdd" class="code code-wrap"><code class="language-PHP" style="white-space:pre-wrap;word-break:break-all">php
+
+&lt;?php /* b374k 2.2
+
+</code></pre><p id="2285b2cc-075b-8022-be35-dbb3a8d011cc" class="">That’s a known signature for the <strong>b374k web shell</strong>, a real-world malicious PHP shell used by attackers.</p></li></ul><hr id="2285b2cc-075b-8074-aa60-fcd5072f0316"/><h3 id="2285b2cc-075b-80f0-8389-c2a71070dd95" class="">📊 Final Report Summary</h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2285b2cc-075b-8044-961d-fb06fb6e7cd0" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">css
+
+[RESULT] Suspicious objects detected!
+[RESULT] Loki recommends a deeper analysis...
+
+</code></pre><ul id="2285b2cc-075b-80f4-b1f9-ec83d9ea7dc5" class="bulleted-list"><li style="list-style-type:disc"><strong>1 suspicious file found</strong> (<code>ind3x.php</code>)</li></ul><ul id="2285b2cc-075b-80f1-b71a-e865cfc5ef7c" class="bulleted-list"><li style="list-style-type:disc"><strong>No confirmed malware alerts</strong>, but <strong>YARA matched</strong> a known web shell pattern.</li></ul><ul id="2285b2cc-075b-8022-9017-fdc8ad740be5" class="bulleted-list"><li style="list-style-type:disc">Loki recommends <strong>manual inspection</strong> or deeper analysis (e.g., using a sandbox, static code review).</li></ul><figure id="2285b2cc-075b-80c6-8b7c-e346c8c4657f" class="image"><a href="D6D9F736-EB82-46E4-8D80-082C9B0BB660.png"><img style="width:709.9811401367188px" src="D6D9F736-EB82-46E4-8D80-082C9B0BB660.png"/></a></figure><p id="2285b2cc-075b-80ac-a5f5-c467a5aa1651" class="">file 1 was suspicious from the loki scanner output</p><p id="2285b2cc-075b-8071-9fa7-ff8f8fa082bc" class="">the matched yara rule was present in </p><figure id="2285b2cc-075b-8074-a687-fec8ac124906" class="image"><a href="21CAFC3F-3306-41E1-B646-07F52167CED4.png"><img style="width:709.90234375px" src="21CAFC3F-3306-41E1-B646-07F52167CED4.png"/></a></figure><p id="2285b2cc-075b-8035-9432-f896db3e29c6" class="">classification is pretty obvious from the macth - web shell</p><p id="2285b2cc-075b-80cd-a162-ebeaeb8fb4cb" class="">matched string name is in the matches key which is ‘Str1”</p><figure id="2285b2cc-075b-80b2-a29c-ed1705581bf4" class="image"><a href="05FBF986-61F4-48F4-927B-7ECA9F568D1D.png"><img style="width:709.76611328125px" src="05FBF986-61F4-48F4-927B-7ECA9F568D1D.png"/></a></figure><p id="2285b2cc-075b-8057-a178-ff7f006cd1ac" class="">the name and version is visible in first byte</p><figure id="2285b2cc-075b-8025-8ad6-d4eab6f95add" class="image"><a href="327F4EAA-9C5C-4889-9CC0-9573F88C7005.png"><img style="width:709.7208251953125px" src="327F4EAA-9C5C-4889-9CC0-9573F88C7005.png"/></a></figure><p id="2285b2cc-075b-8013-94ff-cdb0b2bb6536" class="">how many strings matched Yara rule ?  1</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2285b2cc-075b-80ae-805b-d1ffb951992f" class="code code-wrap"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all">awk &#x27;/rule webshell_metaslsoft/,/condition/&#x27; thor-webshells.yar | grep &#x27;^\s*\$&#x27; | wc -l</code></pre><figure id="2285b2cc-075b-8033-bdb5-fbcbb4466fd3" class="image"><a href="C8660871-B6A9-499D-A883-F45D873971FD.png"><img style="width:709.9585571289062px" src="C8660871-B6A9-499D-A883-F45D873971FD.png"/></a></figure><p id="2285b2cc-075b-80ce-8054-e632edbb77ae" class="">The scanner returned file 2 as benign with no findings,</p><figure id="2285b2cc-075b-80f8-bde8-de55d3cda9e0" class="image"><a href="9487F86B-F9FB-471E-A73B-E4A5A1EF3798.png"><img style="width:709.9699096679688px" src="9487F86B-F9FB-471E-A73B-E4A5A1EF3798.png"/></a></figure><p id="2285b2cc-075b-8073-a3dd-f0014b5f7020" class="">when inspecting file 2, it was found to be a web shell with the name and version as below.</p><figure id="2285b2cc-075b-807d-baa4-fd3437ea77f0" class="image"><a href="11CC834E-81A5-47C5-968A-CA671C355559.png"><img style="width:509.9660949707031px" src="11CC834E-81A5-47C5-968A-CA671C355559.png"/></a></figure><p id="2285b2cc-075b-80d9-b95f-c9dc5ebee984" class="">
+</p><h2 id="2285b2cc-075b-8052-afdc-d315145837cc" class="">Creating Yara rules with yarGen</h2><p id="2285b2cc-075b-8002-80e3-f6bd7421da39" class="">Since the file2 was returned as non malicious but it really is, we need to create or modify the rule to make it detect the next time.</p><p id="2285b2cc-075b-80c1-bb14-ccd5f2a8fa53" class="">the file is too huge to go through one by one </p><figure id="2285b2cc-075b-80da-bca9-cfaaf00167cd" class="image"><a href="51B1315E-F0F8-42E5-BE16-71FF2BB75469.png"><img style="width:709.9699096679688px" src="51B1315E-F0F8-42E5-BE16-71FF2BB75469.png"/></a></figure><p id="2285b2cc-075b-80b1-a17a-c37114e9adfa" class="">Luckily, we can use <a href="https://github.com/Neo23x0/yarGen">yarGen</a> (yes, another tool created by Florian Roth) to aid us with this task.</p><p id="2285b2cc-075b-802f-bd92-cf0d0e176e2f" class="">What is yarGen? yarGen is a generator for YARA rules.</p><p id="2285b2cc-075b-8044-ae05-db6d17f708ec" class="">From the README - &quot;<em>The main principle is the creation of yara rules from strings found in malware files while removing all strings that also appear in goodware files. Therefore yarGen includes a big goodware strings and opcode database as ZIP archives that have to be extracted before the first use</em>.&quot;</p><p id="2285b2cc-075b-80c6-9a1d-d701c339020e" class="">To use yarGen to generate a Yara rule for file 2, you can run the following command:</p><p id="2285b2cc-075b-80fc-9487-e7aba2622eb6" class=""><code>python3 yarGen.py -m /home/cmnatic/suspicious-files/file2 --excludegood -o /home/cmnatic/suspicious-files/file2.yar</code></p><ul id="2285b2cc-075b-80a4-a5e7-dbba0e8294e4" class="bulleted-list"><li style="list-style-type:disc"><code>m</code> is the path to the files you want to generate rules for</li></ul><ul id="2285b2cc-075b-802f-ae2c-f8fc224b1116" class="bulleted-list"><li style="list-style-type:disc"><code>-excludegood</code> force to exclude all goodware strings (<em>these are strings found in legitimate software and can increase false positives</em>)</li></ul><ul id="2285b2cc-075b-80f6-96dc-fca76eb1ccb1" class="bulleted-list"><li style="list-style-type:disc"><code>o</code> location &amp; name you want to output the Yara rule</li></ul><figure id="2285b2cc-075b-8096-be1e-ec7436e019db" class="image"><a href="DC8F25C0-5F7E-4125-B970-BF157314C634.png"><img style="width:709.947265625px" src="DC8F25C0-5F7E-4125-B970-BF157314C634.png"/></a></figure><p id="2285b2cc-075b-8077-a32f-e9ed1c3170e3" class="">From within the root of the suspicious files directory, what command would you run to test Yara and your Yara rule against file 2?</p><p id="2285b2cc-075b-8034-b11b-e574f4a02961" class="">So the new yara rule is store in the suspicious file folder named file2.yar, so i use the command<br/><code>yara file2.yar file2/1ndex.php</code></p><p id="2285b2cc-075b-80b4-a5d0-eff3528f6bc9" class="">means calling yara tool, mentioning file2.yar as the rule and file2/index.php as the file path</p><p id="2285b2cc-075b-809d-9d42-fa223b426952" class="">
+</p><p id="2285b2cc-075b-80bb-9a71-f8d8523503b2" class="">Now i copy the file to the Loki rule set, then i run loki and see if its picking it up or not.</p><figure id="2285b2cc-075b-8022-96b3-c9a864ac9a44" class="image"><a href="image%2069.png"><img style="width:709.8226928710938px" src="image%2069.png"/></a></figure><p id="2285b2cc-075b-809b-80fe-e0e2e04622b4" class="">
+</p><p id="2285b2cc-075b-80d3-a366-d7dfb05e3d0d" class="">I ran loki now with the new rule set</p><figure id="2285b2cc-075b-80d3-867a-d5c517efce14" class="image"><a href="22558A36-CE08-4B3D-AAF8-BB0F935EA28F.png"><img style="width:709.947265625px" src="22558A36-CE08-4B3D-AAF8-BB0F935EA28F.png"/></a></figure><figure id="2285b2cc-075b-8053-8166-ddaa777b9f48" class="image"><a href="0D9BF1C3-8D7C-4C61-9A9C-49F9C5C96C13.png"><img style="width:709.9699096679688px" src="0D9BF1C3-8D7C-4C61-9A9C-49F9C5C96C13.png"/></a></figure><p id="2285b2cc-075b-8017-98c4-de7980696463" class="">this time, loki found it suspicious</p><p id="2285b2cc-075b-8066-a025-fb36e48fe483" class="">the variable for the string that matched is Zepto</p><p id="2285b2cc-075b-80d1-8ac7-e92be42da5eb" class="">
+</p><p id="2285b2cc-075b-803c-92cc-e492291a8e9d" class="">Inspect the Yara rule, how many strings were generated?</p><p id="2285b2cc-075b-80a4-8f7b-cf29eac90388" class="">I nano into the new signature file, and counted there are 20 strings that are for matching.</p><figure id="2285b2cc-075b-800c-9e10-c975866d032e" class="image"><a href="1C337927-63D4-420D-8D65-AD8A5EB4E17F.png"><img style="width:709.9699096679688px" src="1C337927-63D4-420D-8D65-AD8A5EB4E17F.png"/></a></figure><p id="2285b2cc-075b-80ee-9df8-f17946bc5178" class="">One of the conditions to match on the Yara rule specifies file size. The file has to be less than what amount?</p><p id="2285b2cc-075b-801f-bb24-ca13147b3bff" class="">Its clear in the above screenshot that the condition on filezie is less than 7KB</p><p id="2285b2cc-075b-80b7-b42e-cb8c123eff84" class="">
+</p><h1 id="2285b2cc-075b-80f9-8587-cc6f29f31d12" class="">VALHALLA</h1><p id="2285b2cc-075b-8004-9702-ed3f0b90ca2e" class=""><strong>Valhalla</strong> is an online Yara feed created and hosted by <a href="https://www.nextron-systems.com/valhalla/">Nextron-Systems</a> (erm, Florian Roth)<br/><br/><a href="https://valhalla.nextron-systems.com/">https://valhalla.nextron-systems.com/</a></p><p id="2285b2cc-075b-80d0-b092-dee22fd93222" class="">Enter the SHA256 hash of file 1 into Valhalla. Is this file attributed to an APT group? (Yay/Nay)</p><figure id="2285b2cc-075b-8085-a844-cae7db2bd4fa" class="image"><a href="532DA78A-5F40-433D-89AF-4301415DE3D6.png"><img style="width:709.9585571289062px" src="532DA78A-5F40-433D-89AF-4301415DE3D6.png"/></a></figure><p id="2285b2cc-075b-80f8-a41f-f2b20a43451c" class="">Do the same for file 2. What is the name of the first Yara rule to detect file 2?</p><figure id="2285b2cc-075b-801c-a13f-e17a14223259" class="image"><a href="image%2070.png"><img style="width:709.947265625px" src="image%2070.png"/></a></figure><p id="2285b2cc-075b-803a-83bb-e376ad68193d" class="">Examine the information for file 2 from Virus Total (VT). The Yara Signature Match is from what scanner?</p><figure id="2285b2cc-075b-80d0-9758-c5516a4bc962" class="image"><a href="image%2071.png"><img style="width:709.9585571289062px" src="image%2071.png"/></a></figure><p id="2285b2cc-075b-8097-9e0c-d54f6607db72" class="">What JavaScript library is used by file 2?</p><figure id="2285b2cc-075b-80a5-8934-d0b84ee3138f" class="image"><a href="08eeb987-ae89-4767-ae8f-37fb6f0571d1.png"><img style="width:709.96875px" src="08eeb987-ae89-4767-ae8f-37fb6f0571d1.png"/></a></figure><p id="2285b2cc-075b-803e-917c-d15831fe5008" class="">from the valhalla website, there is a link to the github repo of the web shell -<a href="https://github.com/b374k/b374k">https://github.com/b374k/b374k</a></p><p id="2285b2cc-075b-8004-8673-fc549d981422" class="">Is this Yara rule in the default Yara file Loki uses to detect these type of hack tools?</p><p id="2285b2cc-075b-805e-bc75-f1911b62a1c0" class="">For the last time, head back to the Valhalla site. Highlight and copy (ctrl + c) the rule name that we have been looking at.</p><figure id="2285b2cc-075b-8014-8c0d-f82130af1175" class="image"><a href="https://miro.medium.com/v2/resize:fit:1031/1*1mCwdW8YQYCityjCTfDS3Q.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1031/1*1mCwdW8YQYCityjCTfDS3Q.png"/></a></figure><p id="2285b2cc-075b-8013-8e3c-c44b8fcc03bd" class="">Going back to the terminal, let’s see if we can find this Yara rule in our Loki directory. We can do this with, ls /home/cmnatic/tools/Loki/signature-base/yara/ | grep “Webshell_b374k_rule1”.</p><figure id="2285b2cc-075b-80bb-80d6-eaaf9bc14f0c" class="image"><a href="https://miro.medium.com/v2/resize:fit:1031/1*CSRPrvk6huWcfs97Eoj5uQ.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1031/1*CSRPrvk6huWcfs97Eoj5uQ.png"/></a></figure><p id="2285b2cc-075b-802c-a690-c87cd0787216" class="">Nothing comes back so, NO.</p><p id="2285b2cc-075b-806e-8dae-ecf868b33da4" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

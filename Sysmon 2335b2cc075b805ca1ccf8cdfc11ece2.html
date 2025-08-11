@@ -1,0 +1,806 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Sysmon</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2335b2cc-075b-805c-a1cc-f8cdfc11ece2" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/8978e8897b612ee0be15e66be5f83803.png"/></div><h1 class="page-title"><strong>Sysmon</strong></h1><p class="page-description"></p></header><div class="page-body"><p id="2335b2cc-075b-8090-80c5-f21a2b99a40f" class="">Sysmon, a tool used to monitor and log events on Windows, is commonly used by enterprises as part of their monitoring and logging solutions. Part of the Windows Sysinternals package, Sysmon is similar to Windows Event Logs with further detail and granular control.</p><p id="2335b2cc-075b-8051-b063-ea5adbe5fece" class=""><br/>This room uses a modified version of the <a href="https://tryhackme.com/room/blue">Blue</a> and <a href="https://tryhackme.com/room/ice">Ice</a> boxes, as well as Sysmon logs from the Hololive network lab.<br/></p><hr id="2335b2cc-075b-80f3-a999-fa426afa0677"/><h3 id="2335b2cc-075b-801f-beb8-ec2df95e1cd1" class=""><strong>Sysmon Overview (Microsoft Docs)</strong></h3><p id="2335b2cc-075b-8080-9112-d4f6c421df4c" class=""><strong>Sysmon (System Monitor)</strong> is a Windows service and driver that logs detailed system activity to the Windows event log and remains active across reboots. It captures data such as:</p><ul id="2335b2cc-075b-80ff-9541-f6baf667d7d7" class="bulleted-list"><li style="list-style-type:disc"><strong>Process creations</strong></li></ul><ul id="2335b2cc-075b-80e6-927c-d07233f6ac82" class="bulleted-list"><li style="list-style-type:disc"><strong>Network connections</strong></li></ul><ul id="2335b2cc-075b-8026-a1c1-ca59a02e0389" class="bulleted-list"><li style="list-style-type:disc"><strong>File creation timestamp changes</strong></li></ul><p id="2335b2cc-075b-8084-9136-ecd9770b007e" class="">These logs can be collected via <strong>Windows Event Collection</strong> or <strong>SIEM agents</strong> for threat detection and forensic analysis.</p><p id="2335b2cc-075b-806d-bb3e-fed22722da69" class="">Sysmon starts <strong>early during boot</strong>, making it ideal for monitoring system-level activity. Events are stored at:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2335b2cc-075b-80dd-b3a4-cc330d27c0ca" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">Applications and Services Logs → Microsoft → Windows → Sysmon → Operational
+</code></pre><hr id="2335b2cc-075b-8081-a6b4-e590a1436e74"/><h3 id="2335b2cc-075b-80fc-b865-df6893988140" class=""><strong>Sysmon Configuration Overview</strong></h3><p id="2335b2cc-075b-8046-b9f5-eb8a1b14bfa3" class="">Sysmon uses a <strong>configuration file</strong> to define how to monitor and log events. You can:</p><ul id="2335b2cc-075b-80cb-be29-febdae7ea15a" class="bulleted-list"><li style="list-style-type:disc"><strong>Create your own config</strong></li></ul><ul id="2335b2cc-075b-80db-a869-d75c195ff436" class="bulleted-list"><li style="list-style-type:disc">Use community configs like <strong>SwiftOnSecurity’s Sysmon-Config</strong> (anomaly-focused)</li></ul><ul id="2335b2cc-075b-80af-a54c-f361c02e553c" class="bulleted-list"><li style="list-style-type:disc">Or <strong>ION-Storm’s</strong> config (more inclusive rule set)</li></ul><p id="2335b2cc-075b-8042-987b-f977fd2952ff" class="">📝 <strong>Best practice</strong>: Exclude common/legitimate events to reduce noise. However, some configs prefer to <strong>include anomalies</strong> for a proactive approach. Config preferences can vary between SOC teams.</p><p id="2335b2cc-075b-80ca-89fb-eab9be683c44" class="">Sysmon supports <strong>29 Event IDs</strong>, but this summary focuses on the key ones:</p><hr id="2335b2cc-075b-8047-b718-edca8a104c5a"/><h3 id="2335b2cc-075b-802b-991c-d6d45a708d06" class=""><strong>Key Sysmon Event IDs</strong></h3><h3 id="2335b2cc-075b-807e-9844-e7e2dd3f3896" class=""><strong>Event ID 1 – Process Creation</strong></h3><p id="2335b2cc-075b-80ad-82b0-d4009d4d4ac1" class="">Logs process launches. Useful for spotting suspicious names or typosquatting.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2335b2cc-075b-80f4-9355-d767aa814d2f" class="code code-wrap"><code class="language-Markdown" style="white-space:pre-wrap;word-break:break-all">&lt;RuleGroup name=&quot;&quot; groupRelation=&quot;or&quot;&gt;
+	&lt;ProcessCreate onmatch=&quot;exclude&quot;&gt;
+	 	&lt;CommandLine condition=&quot;is&quot;&gt;C:\Windows\system32\svchost.exe -k appmodel -p -s camsvc&lt;/CommandLine&gt;
+	&lt;/ProcessCreate&gt;
+&lt;/RuleGroup&gt;</code></pre><ul id="2335b2cc-075b-80c9-8aa7-db9965da93fb" class="bulleted-list"><li style="list-style-type:disc">Tags: <code>&lt;CommandLine&gt;</code>, <code>&lt;Image&gt;</code></li></ul><ul id="2335b2cc-075b-8032-b428-d0c37e28f796" class="bulleted-list"><li style="list-style-type:disc">Example: Exclude known safe svchost processes.</li></ul><h3 id="2335b2cc-075b-8058-8c8c-f5bd81c0c512" class=""><strong>Event ID 3 – Network Connection</strong></h3><p id="2335b2cc-075b-805e-8daa-e2e85985284e" class="">Monitors remote network connections (e.g., suspicious binaries or ports).</p><ul id="2335b2cc-075b-80c1-a6ea-d68947a57717" class="bulleted-list"><li style="list-style-type:disc">Tags: <code>&lt;Image&gt;</code>, <code>&lt;DestinationPort&gt;</code></li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2335b2cc-075b-801e-b178-f1d44a630338" class="code code-wrap"><code class="language-Markdown" style="white-space:pre-wrap;word-break:break-all">&lt;RuleGroup name=&quot;&quot; groupRelation=&quot;or&quot;&gt;
+	&lt;NetworkConnect onmatch=&quot;include&quot;&gt;
+	 	&lt;Image condition=&quot;image&quot;&gt;nmap.exe&lt;/Image&gt;
+	 	&lt;DestinationPort name=&quot;Alert,Metasploit&quot; condition=&quot;is&quot;&gt;4444&lt;/DestinationPort&gt;
+	&lt;/NetworkConnect&gt;
+&lt;/RuleGroup&gt;</code></pre><ul id="2335b2cc-075b-80c4-b7d5-ff595bff36fc" class="bulleted-list"><li style="list-style-type:disc">Example: Include <code>nmap.exe</code> or connections to port <code>4444</code> (Metasploit).</li></ul><h3 id="2335b2cc-075b-807a-a2f3-ea0ff9104c42" class=""><strong>Event ID 7 – Image Loaded</strong></h3><p id="2335b2cc-075b-805d-aac9-e9dd141db955" class="">Tracks DLLs loaded into processes; useful for detecting <strong>DLL Injection</strong>/<strong>Hijacking</strong>.</p><ul id="2335b2cc-075b-801c-b426-c82cffc92568" class="bulleted-list"><li style="list-style-type:disc">⚠️ Can cause <strong>high system load</strong>.</li></ul><ul id="2335b2cc-075b-801a-a5d2-d788f9cb4d7e" class="bulleted-list"><li style="list-style-type:disc">Tags: <code>&lt;ImageLoaded&gt;</code>, <code>&lt;Signed&gt;</code>, <code>&lt;Image&gt;</code>, <code>&lt;Signature&gt;</code></li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2335b2cc-075b-80b7-863d-fe68b08f11f3" class="code code-wrap"><code class="language-Markdown" style="white-space:pre-wrap;word-break:break-all">&lt;RuleGroup name=&quot;&quot; groupRelation=&quot;or&quot;&gt;
+	&lt;ImageLoad onmatch=&quot;include&quot;&gt;
+	 	&lt;ImageLoaded condition=&quot;contains&quot;&gt;\Temp\&lt;/ImageLoaded&gt;
+	&lt;/ImageLoad&gt;
+&lt;/RuleGroup&gt;</code></pre><ul id="2335b2cc-075b-80d3-a4af-d57790449a51" class="bulleted-list"><li style="list-style-type:disc">Example: Include DLLs from suspicious folders like <code>\Temp\</code>.</li></ul><h3 id="2335b2cc-075b-8024-8e60-fffc7373ae4b" class=""><strong>Event ID 8 – CreateRemoteThread</strong></h3><p id="2335b2cc-075b-80ce-a49c-d5bd1f57ba58" class="">Detects code injection via remote threads (used by malware).</p><ul id="2335b2cc-075b-807e-9162-e9de8eb5a762" class="bulleted-list"><li style="list-style-type:disc">Tags: <code>&lt;SourceImage&gt;</code>, <code>&lt;TargetImage&gt;</code>, <code>&lt;StartAddress&gt;</code>, <code>&lt;StartFunction&gt;</code></li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2335b2cc-075b-80ee-8b6a-daf1055d3386" class="code code-wrap"><code class="language-Markdown" style="white-space:pre-wrap;word-break:break-all">&lt;RuleGroup name=&quot;&quot; groupRelation=&quot;or&quot;&gt;
+	&lt;CreateRemoteThread onmatch=&quot;include&quot;&gt;
+	 	&lt;StartAddress name=&quot;Alert,Cobalt Strike&quot;  condition=&quot;end with&quot;&gt;0B80&lt;/StartAddress&gt;
+	 	&lt;SourceImage condition=&quot;contains&quot;&gt;\&lt;/SourceImage&gt;
+	&lt;/CreateRemoteThread&gt;
+&lt;/RuleGroup&gt;</code></pre><ul id="2335b2cc-075b-80ef-908c-d10d9ea5117b" class="bulleted-list"><li style="list-style-type:disc">Example: Monitor memory address patterns (e.g., for Cobalt Strike).</li></ul><h3 id="2335b2cc-075b-8093-9ec5-fb6baae13a21" class=""><strong>Event ID 11 – File Created</strong></h3><p id="2335b2cc-075b-80d1-892e-f82f1aecfa2b" class="">Logs file creations/overwrites, helpful for spotting malware or ransomware.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2335b2cc-075b-8098-8e3b-fce203311d3f" class="code code-wrap"><code class="language-Markdown" style="white-space:pre-wrap;word-break:break-all">&lt;RuleGroup name=&quot;&quot; groupRelation=&quot;or&quot;&gt;
+	&lt;FileCreate onmatch=&quot;include&quot;&gt;
+&lt;TargetFilename name=&quot;Alert,Ransomware&quot; condition=&quot;contains&quot;&gt;HELP_TO_SAVE_FILES&lt;/TargetFilename&gt;
+	&lt;/FileCreate&gt;
+&lt;/RuleGroup&gt;</code></pre><ul id="2335b2cc-075b-8072-a597-d216b89d63a8" class="bulleted-list"><li style="list-style-type:disc">Tag: <code>&lt;TargetFilename&gt;</code></li></ul><ul id="2335b2cc-075b-80c7-905d-e6261fa2d0f6" class="bulleted-list"><li style="list-style-type:disc">Example: Look for filenames like <code>HELP_TO_SAVE_FILES</code>.</li></ul><h3 id="2335b2cc-075b-800a-8abe-f9eeadab1f45" class=""><strong>Event IDs 12, 13, 14 – Registry Events</strong></h3><p id="2335b2cc-075b-80f4-a16e-fd535ff73712" class="">Tracks changes to registry keys, commonly used for persistence or credential theft.</p><ul id="2335b2cc-075b-8072-a0c7-c509e9d83625" class="bulleted-list"><li style="list-style-type:disc">Tag: <code>&lt;TargetObject&gt;</code></li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2335b2cc-075b-803f-9eb1-dbb05b26e495" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">&lt;RuleGroup name=&quot;&quot; groupRelation=&quot;or&quot;&gt;
+	&lt;RegistryEvent onmatch=&quot;include&quot;&gt;
+	 	&lt;TargetObject name=&quot;T1484&quot; condition=&quot;contains&quot;&gt;Windows\System\Scripts&lt;/TargetObject&gt;
+	&lt;/RegistryEvent&gt;
+&lt;/RuleGroup&gt;</code></pre><ul id="2335b2cc-075b-80ae-a46d-e59713e31774" class="bulleted-list"><li style="list-style-type:disc">Example: Monitor changes in <code>Windows\System\Scripts</code>.</li></ul><h3 id="2335b2cc-075b-80e9-b155-c1379076dd4f" class=""><strong>Event ID 15 – FileCreateStreamHash</strong></h3><p id="2335b2cc-075b-8053-ac0b-c2441df78ab5" class="">Monitors files created in <strong>Alternate Data Streams</strong> (used to hide malware).</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2335b2cc-075b-8053-8d16-ee180107c1d5" class="code code-wrap"><code class="language-Markdown" style="white-space:pre-wrap;word-break:break-all">&lt;RuleGroup name=&quot;&quot; groupRelation=&quot;or&quot;&gt;
+	&lt;FileCreateStreamHash onmatch=&quot;include&quot;&gt;
+	 	&lt;TargetFilename condition=&quot;end with&quot;&gt;.hta&lt;/TargetFilename&gt;
+	&lt;/FileCreateStreamHash&gt;
+&lt;/RuleGroup&gt;</code></pre><ul id="2335b2cc-075b-80e0-950c-f2c8970d6709" class="bulleted-list"><li style="list-style-type:disc">Tag: <code>&lt;TargetFilename&gt;</code></li></ul><ul id="2335b2cc-075b-8030-badb-e01baf21b1de" class="bulleted-list"><li style="list-style-type:disc">Example: Include files ending with <code>.hta</code>.</li></ul><h3 id="2335b2cc-075b-80e1-9ab7-d5565eb82c1f" class=""><strong>Event ID 22 – DNS Query</strong></h3><p id="2335b2cc-075b-80a7-bc07-e38e688e45bb" class="">Logs all DNS queries for anomaly detection.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2335b2cc-075b-802f-98ac-c4bf23f0a208" class="code code-wrap"><code class="language-Markdown" style="white-space:pre-wrap;word-break:break-all">&lt;RuleGroup name=&quot;&quot; groupRelation=&quot;or&quot;&gt;
+	&lt;DnsQuery onmatch=&quot;exclude&quot;&gt;
+	 	&lt;QueryName condition=&quot;end with&quot;&gt;.microsoft.com&lt;/QueryName&gt;
+	&lt;/DnsQuery&gt;
+&lt;/RuleGroup&gt;</code></pre><ul id="2335b2cc-075b-8065-88e9-f6b3d529d70d" class="bulleted-list"><li style="list-style-type:disc">Tag: <code>&lt;QueryName&gt;</code></li></ul><ul id="2335b2cc-075b-80b2-bdae-d620f7dd1030" class="bulleted-list"><li style="list-style-type:disc">Example: Exclude common queries like <code>.microsoft.com</code> to reduce noise.</li></ul><hr id="2335b2cc-075b-801b-b98a-c6a60fdf4e4e"/><h3 id="2335b2cc-075b-803c-9eea-e75f5dcd6b42" class=""><strong>Final Notes</strong></h3><ul id="2335b2cc-075b-8069-9715-e3076187c8c7" class="bulleted-list"><li style="list-style-type:disc">You can <strong>customize config files</strong> with XML rules using <code>include</code> or <code>exclude</code>.</li></ul><ul id="2335b2cc-075b-8079-9d89-c909ef4b4d34" class="bulleted-list"><li style="list-style-type:disc">This lab focuses on <strong>endpoint-level event analysis</strong> via <strong>Event Viewer</strong>, not SIEM integration.</li></ul><ul id="2335b2cc-075b-80c2-8056-c306ce41d5c9" class="bulleted-list"><li style="list-style-type:disc"><strong>SwiftOnSecurity</strong> and <strong>ION-Storm</strong> configs are used for this module, but you can use or tweak your own.</li></ul><hr id="2335b2cc-075b-8094-bb34-e0d68880290c"/><p id="2335b2cc-075b-8026-a33c-d29442801608" class="">
+</p><h2 id="2335b2cc-075b-805f-a600-decd677525f5" class="">Starting Sysmon with confguration</h2><figure id="2335b2cc-075b-80fa-939a-d86345b0f2a9" class="image"><a href="image%20243.png"><img style="width:578px" src="image%20243.png"/></a></figure><p id="2335b2cc-075b-805c-b5d3-e4a97183d95e" class="">
+</p><p id="2335b2cc-075b-80c0-92fc-eb98183a690f" class="">The sysmon logs can be found in <em><code>Applications and Services Logs/Microsoft/Windows/Sysmon/Operational</code></em></p><figure id="2335b2cc-075b-8073-a515-f0fb058c0d15" class="image"><a href="image%20244.png"><img style="width:578px" src="image%20244.png"/></a></figure><p id="2335b2cc-075b-80b3-8cef-e553db321b70" class="">
+</p><h2 id="2335b2cc-075b-8033-b5d4-f755597fb3d9" class="">Activities</h2><h2 id="2335b2cc-075b-8082-aeea-cf65611c6856" class="">Cutting out the Noise</h2><h1 id="2335b2cc-075b-8023-bea9-ec37caa00197" class="">Filtering Events with Event Viewer</h1><p id="2335b2cc-075b-8086-9ecd-c5dc58feebad" class="">Event Viewer might not the best for <br/>filtering events and out-of-the-box offers limited control over logs. <br/>The main filter you will be using with Event Viewer is by filtering the <code>EventID</code> and keywords. You can also choose to filter by writing XML but this is a tedious process that doesn&#x27;t scale well.</p><p id="2335b2cc-075b-805e-9084-f26926cb9aec" class="">To open the filter menu select <code>Filter Current Log</code> from the Actions menu.</p><figure id="2335b2cc-075b-80f8-8ca1-eb9600049fbd" class="image"><a href="https://i.imgur.com/deaX35W.png"><img style="width:291.998291015625px" src="https://i.imgur.com/deaX35W.png"/></a></figure><p id="2335b2cc-075b-80d9-b1c7-ebba9ced9d7f" class="">If you have successfully opened the filter menu it should look like the menu below.</p><figure id="2335b2cc-075b-8090-bd86-f7966c6c87dd" class="image"><a href="https://i.imgur.com/lJxPHBM.png"><img style="width:540.9906005859375px" src="https://i.imgur.com/lJxPHBM.png"/></a></figure><p id="2335b2cc-075b-8066-b481-cafb8225967d" class="">From this menu, we can add any filters or categories that we want.</p><h1 id="2335b2cc-075b-8006-8e00-e61194446209" class="">Filtering Events with PowerShell</h1><figure id="2335b2cc-075b-80b0-a3ab-ffd6c0ba3c33"><div class="source"><a href="https://www.notion.soundefined"></a></div></figure><p id="2335b2cc-075b-805d-9188-d4e1658bdfcc" class="">To view and filter events with PowerShell we will be using <code>Get-WinEvent</code> along with <code>XPath</code> queries. We can use any XPath queries that can be found in the XML view of events. We will be using <code>wevutil.exe</code> to<br/> view events once filtered. The command line is typically used over the <br/>Event Viewer GUI as it allows for further granular control and filtering<br/> whereas the GUI does not. For more information about using <code>Get-WinEvent</code>and <code>wevutil.exe</code> check out the <a href="https://tryhackme.com/room/windowseventlogs">Windows Event Log </a>room.</p><p id="2335b2cc-075b-80d2-8847-fc0cc892e3b3" class="">For this room, we will only be going over a<br/> few basic filters as the Windows Event Log room already extensively <br/>covers this topic.</p><p id="2335b2cc-075b-8097-9db8-f3d096825a02" class="">Filter by Event ID: <code>*/System/EventID=&lt;ID&gt;</code></p><p id="2335b2cc-075b-8038-8e01-c5df24d99013" class="">Filter by XML Attribute/Name: <code>*/EventData/Data[@Name=&quot;&lt;XML Attribute/Name&gt;&quot;]</code></p><p id="2335b2cc-075b-80a3-a55a-dbffc98ee3c8" class="">Filter by Event Data: <code>*/EventData/Data=&lt;Data&gt;</code></p><p id="2335b2cc-075b-80bd-b393-c3a070f95b61" class="">We can put these filters together with <br/>various attributes and data to get the most control out of our logs. <br/>Look below for an example of using <code>Get-WinEvent</code> to look for network connections coming from port 4444.</p><p id="2335b2cc-075b-8099-8a5c-d6220c5d5bc2" class=""><code>Get-WinEvent -Path &lt;Path to <br/>Log&gt; -FilterXPath &#x27;*/System/EventID=3 and <br/>*/EventData/Data[@Name=&quot;DestinationPort&quot;] and */EventData/Data=4444&#x27;</code></p><p id="2335b2cc-075b-809f-9405-d681046fbff9" class="">Filtering Events</p><figure id="2335b2cc-075b-8011-a689-fba7179b66e7"><div class="source"><a href="https://www.notion.soundefined"></a></div></figure><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2335b2cc-075b-8010-9699-efcf2e468d8a" class="code code-wrap"><code class="language-PowerShell" style="white-space:pre-wrap;word-break:break-all">PS C:\Users\THM-Analyst&gt; Get-WinEvent -Path C:\Users\THM-Analyst\Desktop\Scenarios\Practice\Hunting_Metasploit.evtx -FilterXPath &#x27;*/System/EventID=3 and */EventData/Data[@Name=&quot;DestinationPort&quot;] and */EventData/Data=4444&#x27;
+
+
+   ProviderName: Microsoft-Windows-Sysmon
+
+TimeCreated                     Id LevelDisplayName Message
+-----------                     -- ---------------- -------
+1/5/2021 2:21:32 AM              3 Information      Network connection detected:...</code></pre><p id="2335b2cc-075b-8025-b9ba-f8267446dab5" class="">
+</p><ol type="1" id="2335b2cc-075b-8016-9503-d3252b842886" class="numbered-list" start="1"><li>How many event ID 3 events are in C:\Users\THMAnalyst\Desktop\Scenarios\Practice\Filtering.evtx?</li></ol><p id="2335b2cc-075b-8077-8a95-cb480cf77b79" class="">i added a filter to the event viewer and fitered to get the answer</p><figure id="2335b2cc-075b-8070-b238-f71726556223" class="image"><a href="image%20245.png"><img style="width:710px" src="image%20245.png"/></a></figure><p id="2335b2cc-075b-80ea-ab5d-ea3672cc7dce" class="">
+</p><ol type="1" id="2335b2cc-075b-80f3-b450-f8050f6f97cd" class="numbered-list" start="2"><li>What is the UTC time of the first network event in the same logfile? Note that UTC time is shown only in the &quot;Details&quot; tab.</li></ol><figure id="2335b2cc-075b-80e2-ac76-e77f0cee1109" class="image"><a href="image%20246.png"><img style="width:710px" src="image%20246.png"/></a></figure><p id="2335b2cc-075b-8084-b98b-c786c4ee08e9" class="">
+</p><p id="2335b2cc-075b-80ed-9316-f3a06b12eef8" class="">or we can use a query as such</p><p id="2335b2cc-075b-808f-9c11-eadd78f023b9" class=""><code>Get-WinEvent -Path .\Filtering.evtx | Sort-Object TimeCreated | Select-Object -First 1 | Format-List *</code></p><ul id="2335b2cc-075b-8038-86cc-d4722b739be2" class="bulleted-list"><li style="list-style-type:disc"><code>Path &quot;C:\Path\To\Your.evtx&quot;</code>: Specifies the EVTX file you want to read.</li></ul><ul id="2335b2cc-075b-807b-9d14-d14aa959959b" class="bulleted-list"><li style="list-style-type:disc"><code>Sort-Object TimeCreated</code>: Sorts the events in ascending order (oldest first).</li></ul><ul id="2335b2cc-075b-80db-b6d4-f74ae1b082f7" class="bulleted-list"><li style="list-style-type:disc"><code>Select-Object -First 1</code>: Gets the first (oldest) event.</li></ul><ul id="2335b2cc-075b-80d9-bd5d-f2e5f06da07a" class="bulleted-list"><li style="list-style-type:disc"><code>Format-List *</code>: Displays all properties of the event in detail.</li></ul><figure id="2335b2cc-075b-80a8-8473-f1da901c3902" class="image"><a href="image%20247.png"><img style="width:710px" src="image%20247.png"/></a></figure><p id="2335b2cc-075b-8045-bcc5-c0820ab21621" class="">
+</p><h2 id="2335b2cc-075b-80f6-b244-dde7e6f540a4" class=""><strong>Hunting Metasploit</strong></h2><figure id="2335b2cc-075b-8076-8a86-cdfc34bffce9"><div class="source"><a href="Hunting_Metasploit_1609814643558.evtx">Hunting_Metasploit_1609814643558.evtx</a></div></figure><ol type="1" id="2335b2cc-075b-8024-84c9-d88f2a7dff82" class="numbered-list" start="1"><li><strong>Focus of Hunting</strong>:<ul id="2335b2cc-075b-80bc-9f64-ebfe06726726" class="bulleted-list"><li style="list-style-type:disc">Target the <strong>Meterpreter shell</strong> and its associated functionalities.</li></ul></li></ol><ol type="1" id="2335b2cc-075b-80b4-8b80-cdbdaaf14a0c" class="numbered-list" start="2"><li><strong>Network Connection Analysis</strong>:<ul id="2335b2cc-075b-8076-8c63-e2395587be9e" class="bulleted-list"><li style="list-style-type:disc">Monitor connections from <strong>suspicious ports</strong> (e.g., <strong>4444, 5555</strong>).</li></ul><ul id="2335b2cc-075b-80d4-8e7b-dbab55afa647" class="bulleted-list"><li style="list-style-type:disc"><strong>Metasploit</strong> typically uses <strong>port 4444</strong> by default.</li></ul><ul id="2335b2cc-075b-809f-b9e0-d30101ec843c" class="bulleted-list"><li style="list-style-type:disc">Investigate <strong>any connections</strong> (to known or unknown IPs).</li></ul></li></ol><ol type="1" id="2335b2cc-075b-80a7-ba08-c155b9163e61" class="numbered-list" start="3"><li><strong>Investigation Steps</strong>:<ul id="2335b2cc-075b-8086-acc6-c6a12fdbc3cf" class="bulleted-list"><li style="list-style-type:disc">Examine <strong>packet captures (PCAPs)</strong> from the log&#x27;s date for adversary details.</li></ul></li></ol><ol type="1" id="2335b2cc-075b-80bb-b825-ed3bb30e19de" class="numbered-list" start="4"><li><strong>Process Monitoring</strong>:<ul id="2335b2cc-075b-80bf-8d51-d61f8c1d3cee" class="bulleted-list"><li style="list-style-type:disc">Look for <strong>suspicious processes</strong> spawned by Meterpreter.</li></ul></li></ol><ol type="1" id="2335b2cc-075b-801a-a11e-c72b45d78a04" class="numbered-list" start="5"><li><strong>Applicability</strong>:<ul id="2335b2cc-075b-8081-a368-f48c9407a5c7" class="bulleted-list"><li style="list-style-type:disc">Similar hunting techniques can be used for other <strong>RATs (Remote Access Trojans)</strong> and <strong>C2 beacons</strong>.</li></ul></li></ol><h3 id="2335b2cc-075b-809c-9be9-cfdb884dda33" class="">Hunting Network Connections</h3><p id="2335b2cc-075b-80b9-a416-e1b971cc0219" class="">We will first be looking at a modified Ion-Security configuration to detect the creation of new network connections. The code snippet below will use event ID 3 along with the destination port to identify active connections specifically connections on port <code>4444</code> and <code>5555</code>.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2335b2cc-075b-80d2-b6f2-cad944c47bf5" class="code code-wrap"><code class="language-Markdown" style="white-space:pre-wrap;word-break:break-all">&lt;RuleGroup name=&quot;&quot; groupRelation=&quot;or&quot;&gt;
+	&lt;NetworkConnect onmatch=&quot;include&quot;&gt;
+		&lt;DestinationPort condition=&quot;is&quot;&gt;4444&lt;/DestinationPort&gt;
+		&lt;DestinationPort condition=&quot;is&quot;&gt;5555&lt;/DestinationPort&gt;
+	&lt;/NetworkConnect&gt;
+&lt;/RuleGroup&gt;</code></pre><p id="2335b2cc-075b-8096-961b-c1c7fb5a9f49" class="">basic Metasploit payload being dropped onto the machine.</p><figure id="2335b2cc-075b-801e-9362-c0558abf94f0" class="image"><a href="https://i.imgur.com/1VkrpJ3.png"><img style="width:516.998291015625px" src="https://i.imgur.com/1VkrpJ3.png"/></a></figure><p id="2335b2cc-075b-8043-9456-fda2459f9d56" class="">I was loking for suspicious events, and found a file creation event, which i chased to a shell.exe which identified as a apache.exe, then i followd it to see a connection to port 4444 opening.</p><figure id="2335b2cc-075b-8067-bf61-f5f0d15fc718" class="image"><a href="image%20248.png"><img style="width:709.9666748046875px" src="image%20248.png"/></a></figure><p id="2335b2cc-075b-80e0-ae1f-f482fcdb4c47" class="">
+</p><h2 id="2335b2cc-075b-806a-8bd8-c0cfb9b8f220" class="">MimiKatz</h2><figure id="2335b2cc-075b-80be-93e3-e3e8f6547831"><div class="source"><a href="Hunting_Mimikatz_1609818374565.evtx">Hunting_Mimikatz_1609818374565.evtx</a></div></figure><p id="2335b2cc-075b-8091-a3ea-c6e65bf612c2" class="">Detecting File Creation</p><p id="2335b2cc-075b-80a8-9fe6-d6f42de3e05b" class=""><strong>1. Basic Detection Method</strong></p><ul id="2335b2cc-075b-8086-b38a-e3ce130b4c8a" class="bulleted-list"><li style="list-style-type:disc"><strong>Look for files named &quot;Mimikatz&quot;</strong><ul id="2335b2cc-075b-80b9-a32e-dd9b69ea725e" class="bulleted-list"><li style="list-style-type:circle">Simple but effective for detecting bypassed AV.</li></ul><ul id="2335b2cc-075b-8017-9b4f-e5749cdf33b5" class="bulleted-list"><li style="list-style-type:circle">Often ineffective against advanced threats (attackers rename/obfuscate).</li></ul></li></ul><h3 id="2335b2cc-075b-8002-b3ff-cf50bdd4b34f" class=""><strong>2. Advanced Detection Preferred</strong></h3><ul id="2335b2cc-075b-802b-9a0d-d6f53abd7bd5" class="bulleted-list"><li style="list-style-type:disc"><strong>Behavioral analysis (e.g., LSASS manipulation)</strong> is more reliable.</li></ul><ul id="2335b2cc-075b-803a-b005-f31dfc4c8fb9" class="bulleted-list"><li style="list-style-type:disc">File-based detection is <strong>less common</strong> in sophisticated attacks.</li></ul><h3 id="2335b2cc-075b-80c0-b95c-eae100999770" class=""><strong>3. Example Detection Rule (YARA/Sigma-like Snippet)</strong></h3><p id="2335b2cc-075b-80c3-bd3e-c14ca96c1e8e" class="">xml</p><blockquote id="2335b2cc-075b-802e-bcdb-d0eb8d91f773" class=""><code>&lt;RuleGroup name=&quot;&quot; groupRelation=&quot;or&quot;&gt;&lt;FileCreate onmatch=&quot;include&quot;&gt;&lt;TargetFileName condition=&quot;contains&quot;&gt;mimikatz&lt;/TargetFileName&gt;&lt;/FileCreate&gt;&lt;/RuleGroup&gt;</code></blockquote><ul id="2335b2cc-075b-80cf-bb36-fc0d67961902" class="bulleted-list"><li style="list-style-type:disc">Triggers on file creation containing &quot;mimikatz&quot; in the name.</li></ul><h3 id="2335b2cc-075b-807b-8a53-fec0e9dc1399" class=""><strong>4. Limitations</strong></h3><ul id="2335b2cc-075b-80ac-a6ee-d225a6de38cf" class="bulleted-list"><li style="list-style-type:disc"><strong>No event logs analyzed</strong> for this method (too basic for most threat hunting).</li></ul><ul id="2335b2cc-075b-8048-9ac7-c2d6b3615d82" class="bulleted-list"><li style="list-style-type:disc">Best used as a <strong>supplementary</strong> (not primary) detection technique.</li></ul><h3 id="2335b2cc-075b-806c-9b41-ce2e3df3532c" class=""><strong>Key Takeaway</strong></h3><ul id="2335b2cc-075b-8037-9ef5-ef09e90e3804" class="bulleted-list"><li style="list-style-type:disc"><strong>Simple but limited</strong>—useful for catching lazy attackers.</li></ul><ul id="2335b2cc-075b-8027-9685-d10039302c85" class="bulleted-list"><li style="list-style-type:disc"><strong>Advanced threats require deeper behavioral analysis</strong> (e.g., LSASS access patterns).</li></ul><figure id="2335b2cc-075b-802d-b420-fb5a8d026e7e" class="image"><a href="image%20249.png"><img style="width:710px" src="image%20249.png"/></a></figure><figure id="2335b2cc-075b-803a-87ee-fff4e9022568" class="image"><a href="image%20250.png"><img style="width:710px" src="image%20250.png"/></a></figure><figure id="2335b2cc-075b-80be-8c73-dcc5541a97cb" class="image"><a href="image%20251.png"><img style="width:709.9833374023438px" src="image%20251.png"/></a></figure><h2 id="2335b2cc-075b-8039-beab-f3af1f8d2723" class="">Detecting LSASS Behavior with PowerShell</h2><p id="2335b2cc-075b-809f-b253-c3621502f51a" class="">To detect abnormal LSASS behavior with PowerShell we will again be using the PowerShell module <code>Get-WinEvent</code> along with <code>XPath</code> queries. We can use the same XPath queries used in the rule to filter out the other processes from <code>TargetImage</code>. If we use this alongside a well-built configuration file with a precise rule it will do a lot of the heavy lifting for us and we only need to <br/>filter a small amount.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2335b2cc-075b-8068-83d6-f8871ea54015" class="code code-wrap"><code class="language-PowerShell" style="white-space:pre-wrap;word-break:break-all">PS C:\Users\THM-Analyst&gt; Get-WinEvent -Path C:\Users\THM-Analyst\Desktop\Scenarios\Practice\Hunting_Mimikatz.evtx -FilterXPath &#x27;*/System/EventID=10 and */EventData/Data[@Name=&quot;TargetImage&quot;] and */EventData/Data=&quot;C:\Windows\system32\lsass.exe&quot;&#x27;
+
+   ProviderName: Microsoft-Windows-Sysmon
+
+TimeCreated                     Id LevelDisplayName Message
+-----------                     -- ---------------- -------
+1/5/2021 3:22:52 AM             10 Information      Process accessed:...</code></pre><p id="2335b2cc-075b-8067-b51c-e9bb59682dea" class="">
+</p><h2 id="2335b2cc-075b-80bc-a82d-eb89efd564dd" class=""><strong>Hunting Malware Overview</strong></h2><hr id="2335b2cc-075b-8070-a624-c4f8067b21ba"/><h2 id="2335b2cc-075b-80cc-a1f5-f6a8cd12b7f3" class="">🐀 <strong>Hunting RATs and Backdoors – Summary</strong></h2><h3 id="2335b2cc-075b-8074-adb5-cc2df6131ee5" class="">🔍 <strong>What Are We Detecting?</strong></h3><table id="2335b2cc-075b-8015-bcf8-c1a8b85c80c5" class="simple-table"><thead class="simple-table-header"><tr id="2335b2cc-075b-804e-917d-d84699fdcb50"><th id="clp=" class="simple-table-header-color simple-table-header"><strong>Type</strong></th><th id="SxSc" class="simple-table-header-color simple-table-header"><strong>Description</strong></th></tr></thead><tbody><tr id="2335b2cc-075b-80de-b2fb-ec46e68dde61"><td id="clp=" class=""><strong>RAT (Remote Access Trojan)</strong></td><td id="SxSc" class="">Malware that provides full remote access to a victim machine. Often includes evasion features and a GUI admin panel.</td></tr><tr id="2335b2cc-075b-80d7-8b44-f90e87cf04b3"><td id="clp=" class=""><strong>Backdoor</strong></td><td id="SxSc" class="">Hidden access method for remote control. May persist after cleanup or reboot.</td></tr></tbody></table><p id="2335b2cc-075b-8086-a7d9-e6ae0efad68a" class=""><strong>Examples:</strong></p><ul id="2335b2cc-075b-8004-bca7-ef658cc8b937" class="bulleted-list"><li style="list-style-type:disc"><strong>Xeexe</strong></li></ul><ul id="2335b2cc-075b-80a2-87ea-e5b384fc2cd1" class="bulleted-list"><li style="list-style-type:disc"><strong>Quasar</strong></li></ul><hr id="2335b2cc-075b-80df-8d9d-e4e683209570"/><h3 id="2335b2cc-075b-8055-9c09-c46162e30787" class="">🧠 <strong>Hunting Strategy: Hypothesis-Based Hunting</strong></h3><ul id="2335b2cc-075b-8062-b43a-e614d6da08f8" class="bulleted-list"><li style="list-style-type:disc"><strong>Definition</strong>: Creating assumptions about attacker behavior and testing them with data.</li></ul><ul id="2335b2cc-075b-805c-bdd2-d85322a8ae3d" class="bulleted-list"><li style="list-style-type:disc"><strong>Goal</strong>: Detect malicious behavior by <strong>analyzing network connections</strong>, ports, or processes.</li></ul><p id="2335b2cc-075b-804e-a18a-e4adc6d5e35e" class="">
+</p><figure id="2335b2cc-075b-80e5-91d0-d67c1cafa57f" class="image"><a href="h7NcexZ.png"><img style="width:534.9828491210938px" src="h7NcexZ.png"/></a></figure><hr id="2335b2cc-075b-80bb-8591-f13a1b4c5aa9"/><h3 id="2335b2cc-075b-801c-9e09-da5968710de1" class="">⚙️ <strong>Detection via Config File (Sysmon Style)</strong></h3><p id="2335b2cc-075b-8070-a74b-e3023feac485" class="">We&#x27;re detecting <strong>unusual ports</strong> associated with RATs or C2 activity.</p><h3 id="2335b2cc-075b-809d-8110-ed9dd2901453" class="">🔐 Sample XML Config Snippet:</h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2335b2cc-075b-80a8-a562-da7ab081ef4f" class="code code-wrap"><code class="language-XML" style="white-space:pre-wrap;word-break:break-all">&lt;RuleGroup name=&quot;&quot; groupRelation=&quot;or&quot;&gt;
+  &lt;NetworkConnect onmatch=&quot;include&quot;&gt;
+    &lt;DestinationPort condition=&quot;is&quot;&gt;1034&lt;/DestinationPort&gt;
+    &lt;DestinationPort condition=&quot;is&quot;&gt;1604&lt;/DestinationPort&gt;
+  &lt;/NetworkConnect&gt;
+  &lt;NetworkConnect onmatch=&quot;exclude&quot;&gt;
+    &lt;Image condition=&quot;image&quot;&gt;OneDrive.exe&lt;/Image&gt;
+  &lt;/NetworkConnect&gt;
+&lt;/RuleGroup&gt;
+</code></pre><hr id="2335b2cc-075b-8048-8e81-f67662e75065"/><h3 id="2335b2cc-075b-8096-86a4-d112dd3506be" class="">🛠️ <strong>What This Config Does:</strong></h3><table id="2335b2cc-075b-801c-9bc2-efc2122ebcab" class="simple-table"><thead class="simple-table-header"><tr id="2335b2cc-075b-804d-8f6a-e3fb5b2aeec5"><th id="WlAR" class="simple-table-header-color simple-table-header"><strong>Action</strong></th><th id="H~Xu" class="simple-table-header-color simple-table-header"><strong>Detail</strong></th></tr></thead><tbody><tr id="2335b2cc-075b-80b5-8f4e-ed6b27380817"><td id="WlAR" class=""><code>include</code> rule</td><td id="H~Xu" class="">Logs any connection to ports <strong>1034</strong> or <strong>1604</strong>.</td></tr><tr id="2335b2cc-075b-808f-ac31-e19348ad6cd9"><td id="WlAR" class=""><code>exclude</code> rule</td><td id="H~Xu" class="">Ignores logs if the connection is made by <strong>OneDrive.exe</strong> (to reduce noise).</td></tr></tbody></table><hr id="2335b2cc-075b-80ad-9a44-f19f45bac69e"/><h3 id="2335b2cc-075b-804a-b3e7-d1d750c65449" class="">⚠️ <strong>Caution in Real Environments</strong></h3><table id="2335b2cc-075b-80f9-afa2-dd2d539f0eef" class="simple-table"><thead class="simple-table-header"><tr id="2335b2cc-075b-80ba-a520-d065fd8b96aa"><th id=":[~F" class="simple-table-header-color simple-table-header"><strong>Problem</strong></th><th id="we?B" class="simple-table-header-color simple-table-header"><strong>Why It’s Risky</strong></th></tr></thead><tbody><tr id="2335b2cc-075b-8049-9bf8-ddb8ff9ed466"><td id=":[~F" class="">Excluding Port 53 (DNS) blindly</td><td id="we?B" class="">Some malware now uses <strong>DNS (port 53)</strong> as a <strong>C2 channel</strong>, so ignoring it may miss threats.</td></tr></tbody></table><hr id="2335b2cc-075b-80d8-a09d-c332ecc111e9"/><h3 id="2335b2cc-075b-80e8-95eb-ef51499e75c7" class="">📘 <strong>MITRE ATT&amp;CK Framework Reference</strong></h3><ul id="2335b2cc-075b-804e-881c-fbf738729794" class="bulleted-list"><li style="list-style-type:disc">Visit <strong><a href="https://attack.mitre.org/software/">https://attack.mitre.org/software/</a></strong> to learn about real malware tools, TTPs (Tactics, Techniques, Procedures), and mappings to known groups.</li></ul><ul id="2335b2cc-075b-8005-8458-e64a669643d1" class="bulleted-list"><li style="list-style-type:disc">Great for building <strong>threat-informed detection rules</strong>.</li></ul><hr id="2335b2cc-075b-80e3-9b4f-da9934a50e0a"/><h3 id="2335b2cc-075b-80a9-858e-de020bdb93c8" class="">✅ <strong>Key Takeaways:</strong></h3><ul id="2335b2cc-075b-808d-9440-db7bb51c8c10" class="bulleted-list"><li style="list-style-type:disc">Detect malware like RATs by <strong>monitoring suspicious ports</strong>.</li></ul><ul id="2335b2cc-075b-8045-83c7-d353028729f7" class="bulleted-list"><li style="list-style-type:disc">Use <strong>config files</strong> for structured, rule-based detection.</li></ul><ul id="2335b2cc-075b-80d8-a3f3-efadc8ebd4a2" class="bulleted-list"><li style="list-style-type:disc">Always <strong>validate and customize configs</strong> — don’t use them blindly.</li></ul><ul id="2335b2cc-075b-80ec-b4eb-ee56f19c0054" class="bulleted-list"><li style="list-style-type:disc">Combine logs with <strong>packet captures</strong>, behavioral detection, and endpoint logging for better results.</li></ul><hr id="2335b2cc-075b-80d7-9cad-d695c3183256"/><h3 id="2335b2cc-075b-806d-95b1-fb16d746438e" class="">Hunting for Common Back Connect Ports with PowerShell</h3><p id="2335b2cc-075b-8068-9a3f-e449482c6541" class="">Just like previous sections when using PowerShell we will again be using the PowerShell module <code>Get-WinEvent</code> along with <code>XPath</code> queries to filter our events and gain granular control over our logs. We will need to filter on the <code>NetworkConnect</code> event ID and the <code>DestinationPort</code><br/> data attribute. If you&#x27;re using a good configuration file with a <br/>reliable set of rules it will do a majority of the heavy lifting and <br/>filtering to what you want should be easy.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2335b2cc-075b-804e-af05-e5e6e8b3d3cf" class="code code-wrap"><code class="language-PowerShell" style="white-space:pre-wrap;word-break:break-all">PS C:\Users\THM-Analyst&gt; Get-WinEvent -Path C:\Users\THM-Analyst\Desktop\Scenarios\Practice\Hunting_Rats.evtx -FilterXPath &#x27;*/System/EventID=3 and */EventData/Data[@Name=&quot;DestinationPort&quot;] and */EventData/Data=8080&#x27;
+
+   ProviderName: Microsoft-Windows-Sysmon
+
+TimeCreated                     Id LevelDisplayName Message
+-----------                     -- ---------------- -------
+1/5/2021 4:44:35 AM              3 Information      Network connection detected:...
+1/5/2021 4:44:31 AM              3 Information      Network connection detected:...
+1/5/2021 4:44:27 AM              3 Information      Network connection detected:...
+1/5/2021 4:44:24 AM              3 Information      Network connection detected:...
+1/5/2021 4:44:20 AM              3 Information      Network connection detected:...</code></pre><p id="2335b2cc-075b-8094-9907-c3d9acacaa72" class="">
+</p><h2 id="2335b2cc-075b-8003-97c8-d52c81f79e5b" class="">Hunting Persistenc</h2><hr id="2335b2cc-075b-80f0-8a16-c59f2ccdbfdb"/><h2 id="2335b2cc-075b-807a-b58a-c324ece05773" class="">🔄 <strong>Persistence Overview</strong></h2><h3 id="2335b2cc-075b-80e7-9735-f7c6d0f88d95" class="">🧠 <strong>What is Persistence?</strong></h3><p id="2335b2cc-075b-80ba-ade1-ec8dc6784ae0" class="">Persistence lets attackers maintain access <strong>after reboot/logoff</strong>. If they don’t persist, they lose their access after shutdown.</p><hr id="2335b2cc-075b-806d-9f0c-d5a4a3440c98"/><h2 id="2335b2cc-075b-80af-ac77-e7cc52868e74" class="">🔍 <strong>Focus: Startup Folder &amp; Registry Persistence</strong></h2><h3 id="2335b2cc-075b-8031-bbb2-f916353aab3a" class="">📁 <strong>Startup Folder Technique</strong></h3><p id="2335b2cc-075b-8013-a7c9-e9bff33b819d" class="">Attackers place <strong>scripts or executables</strong> in:</p><ul id="2335b2cc-075b-80eb-9702-efaf0dc8010a" class="bulleted-list"><li style="list-style-type:disc"><code>C:\Users\&lt;User&gt;\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\</code></li></ul><ul id="2335b2cc-075b-80cf-9008-da0c2362b48d" class="bulleted-list"><li style="list-style-type:disc"><code>C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup\</code></li></ul><p id="2335b2cc-075b-8070-b25d-ccda6dc69491" class="">These run <strong>automatically</strong> when a user logs in.</p><hr id="2335b2cc-075b-80c9-871b-c6bf7b750f76"/><h2 id="2335b2cc-075b-804e-8443-fa9cc3532418" class="">🧰 <strong>Sysmon Detection</strong></h2><h3 id="2335b2cc-075b-80e1-9f10-f22f5be49498" class="">🧾 <strong>Sysmon Rule Snippet (SwiftOnSecurity)</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2335b2cc-075b-8063-bbad-cac5cfbeaaa5" class="code code-wrap"><code class="language-XML" style="white-space:pre-wrap;word-break:break-all">&lt;RuleGroup name=&quot;&quot; groupRelation=&quot;or&quot;&gt;
+  &lt;FileCreate onmatch=&quot;include&quot;&gt;
+    &lt;TargetFilename name=&quot;T1023&quot; condition=&quot;contains&quot;&gt;\Start Menu&lt;/TargetFilename&gt;
+    &lt;TargetFilename name=&quot;T1165&quot; condition=&quot;contains&quot;&gt;\Startup\&lt;/TargetFilename&gt;
+  &lt;/FileCreate&gt;
+&lt;/RuleGroup&gt;
+</code></pre><h3 id="2335b2cc-075b-80cf-a334-df7e2005b9d7" class="">🧪 What it does:</h3><table id="2335b2cc-075b-8000-94cc-fe160bde9b32" class="simple-table"><thead class="simple-table-header"><tr id="2335b2cc-075b-8069-a1cf-e5a0c85a2a58"><th id="pHbJ" class="simple-table-header-color simple-table-header"><strong>Field</strong></th><th id="Ro=X" class="simple-table-header-color simple-table-header"><strong>Explanation</strong></th></tr></thead><tbody><tr id="2335b2cc-075b-8097-bb04-da263a657936"><td id="pHbJ" class=""><code>&lt;FileCreate&gt;</code></td><td id="Ro=X" class="">Monitors when files are created</td></tr><tr id="2335b2cc-075b-80b2-a76b-c0b690e99ae5"><td id="pHbJ" class=""><code>\Start Menu</code></td><td id="Ro=X" class="">Detects suspicious additions in the Start Menu</td></tr><tr id="2335b2cc-075b-8006-ab10-c4db08f0c883"><td id="pHbJ" class=""><code>\Startup\</code></td><td id="Ro=X" class="">Detects auto-start file drops in Startup folder</td></tr><tr id="2335b2cc-075b-80ed-bc55-ffe91f50680f"><td id="pHbJ" class=""><code>T1023</code>, <code>T1165</code></td><td id="Ro=X" class="">MITRE Technique references (see below)</td></tr></tbody></table><hr id="2335b2cc-075b-8024-b443-dda70dc77cae"/><h2 id="2335b2cc-075b-8080-891a-f6a66a5c7cc7" class="">🎯 <strong>MITRE ATT&amp;CK Techniques</strong></h2><table id="2335b2cc-075b-80a6-ac19-f47f42cdbc76" class="simple-table"><thead class="simple-table-header"><tr id="2335b2cc-075b-80ca-bb08-d9aedcb6cdd4"><th id="x|MU" class="simple-table-header-color simple-table-header"><strong>Technique</strong></th><th id="QJ&gt;D" class="simple-table-header-color simple-table-header"><strong>ID</strong></th><th id="|lrG" class="simple-table-header-color simple-table-header"><strong>Description</strong></th></tr></thead><tbody><tr id="2335b2cc-075b-802e-bc35-fbdff550bb02"><td id="x|MU" class=""><strong>Startup Items</strong></td><td id="QJ&gt;D" class="">T1547.001</td><td id="|lrG" class="">Persistence via Startup folder</td></tr><tr id="2335b2cc-075b-8046-b3a2-d310014dc2ac"><td id="x|MU" class=""><strong>Registry Run Keys</strong></td><td id="QJ&gt;D" class="">T1547.001</td><td id="|lrG" class="">Persistence via Registry keys</td></tr><tr id="2335b2cc-075b-802d-91c3-ea660680df15"><td id="x|MU" class=""><strong>Login Items (macOS)</strong></td><td id="QJ&gt;D" class="">T1547.015</td><td id="|lrG" class="">For cross-reference on other OS</td></tr></tbody></table><p id="2335b2cc-075b-8000-84a5-f5e48b2c08c0" class="">👉 Learn more: <a href="https://attack.mitre.org/techniques/T1547/">MITRE T1547</a></p><hr id="2335b2cc-075b-8088-a5fa-e73c9d4212b4"/><h2 id="2335b2cc-075b-8004-98f8-f64edb7e6fc9" class="">🔎 <strong>How to Hunt These Events in Sysmon Logs</strong></h2><p id="2335b2cc-075b-80c2-889e-ce25cdf8821a" class="">Look for:</p><ul id="2335b2cc-075b-80a3-8c6c-e590fc31ef36" class="bulleted-list"><li style="list-style-type:disc">Event ID <strong>11</strong> (FileCreate)</li></ul><ul id="2335b2cc-075b-8090-bcba-eb2903d3c2bf" class="bulleted-list"><li style="list-style-type:disc">File paths containing:<ul id="2335b2cc-075b-804e-80c4-ce5434c9efe7" class="bulleted-list"><li style="list-style-type:circle"><code>\Startup\</code></li></ul><ul id="2335b2cc-075b-807f-be42-f68e181fbbcd" class="bulleted-list"><li style="list-style-type:circle"><code>\Start Menu\</code></li></ul></li></ul><ul id="2335b2cc-075b-80af-9b93-d5124b3271da" class="bulleted-list"><li style="list-style-type:disc">Associated processes (e.g., unknown EXEs, renamed PowerShell)</li></ul><hr id="2335b2cc-075b-8058-8b94-f4551bf0b583"/><h2 id="2335b2cc-075b-80af-893d-f7ab645ce8e9" class="">✅ <strong>Key Points</strong></h2><ul id="2335b2cc-075b-80a4-baec-c0863c07c1f7" class="bulleted-list"><li style="list-style-type:disc">Attackers abuse the <strong>Startup folder</strong> for easy persistence.</li></ul><ul id="2335b2cc-075b-80e9-8242-d1797bcf4c41" class="bulleted-list"><li style="list-style-type:disc">Monitor <strong>file creation</strong> in those folders with Sysmon (ID 11).</li></ul><ul id="2335b2cc-075b-80bf-92a4-ee6bebd1096d" class="bulleted-list"><li style="list-style-type:disc">Use MITRE mapping to guide hunting (e.g., T1547.001).</li></ul><ul id="2335b2cc-075b-8022-aba7-db93770d03c1" class="bulleted-list"><li style="list-style-type:disc">Avoid alert fatigue by excluding benign apps or known good paths (e.g., OneDrive, Chrome).</li></ul><hr id="2335b2cc-075b-8050-bd23-ff2bf9612b9d"/><p id="2335b2cc-075b-8091-8651-c0eff18ca1af" class="">
+</p><p id="2335b2cc-075b-8012-a5ce-d27e693afae8" class="">a live attack on the machine that involves persistence by adding a malicious EXE into the Startup folder.</p><figure id="2335b2cc-075b-8003-b163-feb2a7a67238"><div class="source"><a href="Persistence_Events_1608591416249.zip">Persistence Events_1608591416249.zip</a></div></figure><figure id="2335b2cc-075b-807a-95c8-d8760b3ce325" class="image"><a href="cQNpkWR.png"><img style="width:710px" src="cQNpkWR.png"/></a></figure><p id="2335b2cc-075b-8014-b2e5-c6e09ba69ec6" class="">
+</p><h1 id="2335b2cc-075b-8015-b3eb-f4fac35edaa1" class="">Hunting Registry Key Persistence</h1><p id="2335b2cc-075b-80a9-9eb3-f186c81587c9" class="">We will again be looking at another SwiftOnSecurity detection this time <br/>for a registry modification that adjusts that places a script inside <code>CurrentVersion\Windows\Run</code> and other registry locations. For more information about this technique check out MITRE ATT&amp;CK <a href="https://attack.mitre.org/techniques/T1112/">T1112</a>.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2335b2cc-075b-805c-bb13-d6ad1f26fd39" class="code code-wrap"><code class="language-Markdown" style="white-space:pre-wrap;word-break:break-all">&lt;RuleGroup name=&quot;&quot; groupRelation=&quot;or&quot;&gt;
+	&lt;RegistryEvent onmatch=&quot;include&quot;&gt;
+		&lt;TargetObject name=&quot;T1060,RunKey&quot; condition=&quot;contains&quot;&gt;CurrentVersion\Run&lt;/TargetObject&gt;
+		&lt;TargetObject name=&quot;T1484&quot; condition=&quot;contains&quot;&gt;Group Policy\Scripts&lt;/TargetObject&gt;
+		&lt;TargetObject name=&quot;T1060&quot; condition=&quot;contains&quot;&gt;CurrentVersion\Windows\Run&lt;/TargetObject&gt;
+	&lt;/RegistryEvent&gt;
+&lt;/RuleGroup&gt;</code></pre><p id="2335b2cc-075b-8003-83fe-d11fff0ee8e1" class="">Open <code>C:\Users\THM-Analyst\Desktop\Scenarios\Practice\T1060.evtx</code> in Event Viewer to view an attack where the registry was modified to gain persistence.</p><figure id="2335b2cc-075b-802d-8f9f-db367a12e3c1" class="image"><a href="https://i.imgur.com/NkvJNew.png"><img style="width:693.988037109375px" src="https://i.imgur.com/NkvJNew.png"/></a></figure><p id="2335b2cc-075b-80d9-98fa-db7b640143d9" class="">When looking at the event logs we see that the registry was modified and malicious.exe was added to <code>HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run\Persistence</code> We also see that the exe can be found at <code>%windir%\System32\malicious.exe</code></p><p id="2335b2cc-075b-8084-a421-e4d1f504b7a1" class="">Just like the startup technique, we can filter by the <code>RuleName T1060</code> to make finding the anomaly easier.</p><p id="2335b2cc-075b-80ea-9e3e-d54794c9a511" class="">If we wanted to investigate this anomaly we would need to look at the <br/>registry as well as the file location itself. Below is the registry area<br/> where the malicious registry key was placed.</p><figure id="2335b2cc-075b-8061-b107-c320855719ce" class="image"><a href="https://i.imgur.com/d6hLTud.png"><img style="width:700px" src="https://i.imgur.com/d6hLTud.png"/></a></figure><p id="2335b2cc-075b-8011-b630-ef46a9628138" class="">
+</p><h2 id="2335b2cc-075b-80a0-b692-da663ce163af" class="">Detecting Evasion Techniques</h2><figure id="2335b2cc-075b-80ee-ab71-d1ebfbb9e8ad"><div class="source"><a href="Detection_Evasion_Events_1610224477951.zip">Detection Evasion Events_1610224477951.zip</a></div></figure><h3 id="2335b2cc-075b-80c4-805d-c7a9b567c2ad" class="">Evasion Techniques Overview</h3><p id="2335b2cc-075b-80c4-a2a3-f114fe397ef5" class="">There are a number of evasion techniques used by malware authors to <br/>evade both anti-virus and detections. Some examples of evasion <br/>techniques are Alternate Data Streams, Injections, Masquerading, <br/>Packing/Compression, Recompiling, Obfuscation, Anti-Reversing <br/>Techniques. In this task, we will be focusing on Alternate Data Streams <br/>and Injections. Alternate Data Streams are used by malware to hide its <br/>files from normal inspection by saving the file in a different stream <br/>apart from <code>$DATA</code>. Sysmon<br/> comes with an event ID to detect newly created and accessed streams <br/>allowing us to quickly detect and hunt malware that uses ADS. Injection <br/>techniques come in many different types: Thread Hijacking, PE Injection, DLL Injection, and more. In this room, we will be focusing on DLL Injection and backdooring DLLs. This is done by taking an already used DLL that is used by an application and overwriting or including your malicious code within the DLL.</p><p id="2335b2cc-075b-8030-9fce-f181d209e643" class="">For more information about this technique check out MITRE ATT&amp;CK <a href="https://attack.mitre.org/techniques/T1564/004/">T1564</a> and <a href="https://attack.mitre.org/techniques/T1055/">T1055</a>.</p><p id="2335b2cc-075b-8099-9361-deedb308dbc0" class="">You can download the event logs used in this room from this task or <br/>you can open them in the Practice folder on the provided machine.</p><h1 id="2335b2cc-075b-8089-893a-dead675fbf08" class="">Hunting Alternate Data Streams</h1><p id="2335b2cc-075b-80dd-9c69-f4add5077cd4" class="">The first technique we will be looking at is hiding files using <br/>alternate data streams using Event ID 15. Event ID 15 will hash and log <br/>any NTFS Streams that are included within the Sysmon<br/> configuration file. This will allow us to hunt for malware that evades <br/>detections using ADS. To aid in hunting ADS we will be using the <br/>SwiftOnSecurity Sysmon configuration file. The code snippet below will hunt for files in the <code>Temp</code> and <code>Downloads</code> folder as well as <code>.hta</code> and <code>.bat</code> extension.</p><p id="2335b2cc-075b-806c-8bfd-c996773d2242" class=""><code>&lt;RuleGroup name=&quot;&quot; groupRelation=&quot;or&quot;&gt;	&lt;FileCreateStreamHash onmatch=&quot;include&quot;&gt;		&lt;TargetFilename condition=&quot;contains&quot;&gt;Downloads&lt;/TargetFilename&gt;		&lt;TargetFilename condition=&quot;contains&quot;&gt;Temp\7z&lt;/TargetFilename&gt;		&lt;TargetFilename condition=&quot;ends with&quot;&gt;.hta&lt;/TargetFilename&gt;		&lt;TargetFilename condition=&quot;ends with&quot;&gt;.bat&lt;/TargetFilename&gt;	&lt;/FileCreateStreamHash&gt;&lt;/RuleGroup&gt;</code></p><p id="2335b2cc-075b-808a-bda0-c47c785d6b1e" class="">Open <code>C:\Users\THM-Analyst\Desktop\Scenarios\Practice\Hunting_ADS.evtx</code> in Event Viewer to view hidden files using an alternate data stream.</p><figure id="2335b2cc-075b-80b5-a7b2-f19ccb12033f" class="image"><a href="https://i.imgur.com/kuQrOwh.png"><img style="width:645.9906005859375px" src="https://i.imgur.com/kuQrOwh.png"/></a></figure><p id="2335b2cc-075b-80e1-826a-ddf46e1429ea" class="">Listing Data Streams</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2335b2cc-075b-80ef-aaa8-eaeb4e729572" class="code code-wrap"><code class="language-PowerShell" style="white-space:pre-wrap;word-break:break-all">C:\\Users\\THM-Threat&gt;dir /r
+ Volume in drive C has no label.
+ Volume Serial Number is C0C4-7EC1
+
+ Directory of C:\\Users\\THM-Threat
+
+10/23/2022  02:56 AM    &lt;DIR&gt;          .
+10/23/2022  02:56 AM    &lt;DIR&gt;          ..
+01/02/2021  12:43 AM    &lt;DIR&gt;          3D Objects
+01/02/2021  12:43 AM    &lt;DIR&gt;          Contacts
+01/05/2021  11:53 PM    &lt;DIR&gt;          Desktop
+01/02/2021  12:43 AM    &lt;DIR&gt;          Documents
+01/10/2021  12:11 AM    &lt;DIR&gt;          Downloads
+01/02/2021  12:43 AM    &lt;DIR&gt;          Favorites
+01/02/2021  12:43 AM    &lt;DIR&gt;          Links
+01/02/2021  12:43 AM    &lt;DIR&gt;          Music
+10/23/2022  02:56 AM                 0 not_malicious.txt
+                                    13 not_malicious.txt:malicious.txt:$DATA</code></pre><p id="2335b2cc-075b-80d6-95ef-cbf17d05ee1e" class="">As you can see the event will show us the location of the file name <br/>as well as the contents of the file this will be useful if an <br/>investigation is necessary.</p><h1 id="2335b2cc-075b-80a4-81ec-e50e89de958b" class="">Detecting Remote Threads</h1><p id="2335b2cc-075b-801b-8a16-f77713d60ca7" class="">Adversaries also commonly use remote threads to evade detections in <br/>combination with other techniques. Remote threads are created using the <br/>Windows API <code>CreateRemoteThread</code> and can be accessed using <code>OpenThread</code> and <code>ResumeThread</code>. This is used in multiple evasion techniques including DLL Injection, Thread Hijacking, and Process Hollowing. We will be using the Sysmon<br/> event ID 8 from the SwiftOnSecurity configuration file. The code <br/>snippet below from the rule will exclude common remote threads without <br/>including any specific attributes this allows for a more open and <br/>precise event rule.</p><p id="2335b2cc-075b-80cf-84db-c0918d141a23" class=""><code>&lt;RuleGroup name=&quot;&quot; groupRelation=&quot;or&quot;&gt;	&lt;CreateRemoteThread onmatch=&quot;exclude&quot;&gt;		&lt;SourceImage condition=&quot;is&quot;&gt;C:\Windows\system32\svchost.exe&lt;/SourceImage&gt;		&lt;TargetImage condition=&quot;is&quot;&gt;C:\Program Files (x86)\Google\Chrome\Application\chrome.exe&lt;/TargetImage&gt;	&lt;/CreateRemoteThread&gt;&lt;/RuleGroup&gt;</code></p><p id="2335b2cc-075b-801a-b9c5-f15c03a063e5" class="">Open <code>C:\Users\THM-Analyst\Desktop\Scenarios\Practice\Detecting_RemoteThreads.evtx</code> in Event Viewer to observe a Process Hollowing attack that abuses the notepad.exe process.</p><figure id="2335b2cc-075b-8034-917f-dfd7cae93065" class="image"><a href="https://i.imgur.com/R2cRHqa.png"><img style="width:637.9888916015625px" src="https://i.imgur.com/R2cRHqa.png"/></a></figure><p id="2335b2cc-075b-80b5-90a0-f50e0ea43ce7" class="">As you can see in the above image powershell.exe is creating a remote thread and accessing notepad.exe. This is obviously a PoC and could in theory execute any other kind of executable or DLL. The specific technique used in this example is called Reflective PE Injection.</p><h3 id="2335b2cc-075b-80f8-8096-d08324af1166" class="">Detecting Evasion Techniques with PowerShell</h3><p id="2335b2cc-075b-801c-8441-f7a4de208007" class="">We have already gone through a majority of the syntax required to use PowerShell with events. Like previous tasks, we will be using <code>Get-WinEvent</code> along with the <code>XPath</code><br/> to filter and search for files that use an alternate data stream or <br/>create a remote thread. In both of the events, we will only need to <br/>filter by the <code>EventID</code> because the rule used within the configuration file is already doing a majority of the heavy lifting.</p><p id="2335b2cc-075b-80f0-99c3-fd50ba1342c8" class="">Detecting Remote Thread Creation</p><p id="2335b2cc-075b-801b-9a9c-f737d769cde5" class="">Syntax: <code>Get-WinEvent -Path &lt;Path to Log&gt; -FilterXPath &#x27;*/System/EventID=8&#x27;</code></p><p id="2335b2cc-075b-8078-8ffa-f31c924868b1" class="">Detecting Remote Threads</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2335b2cc-075b-8036-87ae-c0fdf68179c3" class="code code-wrap"><code class="language-PowerShell" style="white-space:pre-wrap;word-break:break-all">PS C:\Users\THM-Analyst&gt; Get-WinEvent -Path C:\Users\THM-Analyst\Desktop\Scenarios\Practice\Detecting_RemoteThreads.evtx -FilterXPath &#x27;*/System/EventID=8&#x27;
+
+   ProviderName: Microsoft-Windows-Sysmon
+
+TimeCreated                     Id LevelDisplayName Message
+-----------                     -- ---------------- -------
+7/3/2019 8:39:30 PM              8 Information      CreateRemoteThread detected:...
+7/3/2019 8:39:30 PM              8 Information      CreateRemoteThread detected:...
+7/3/2019 8:39:30 PM              8 Information      CreateRemoteThread detected:...
+7/3/2019 8:39:30 PM              8 Information      CreateRemoteThread detected:...
+7/3/2019 8:39:30 PM              8 Information      CreateRemoteThread detected:...</code></pre><p id="2335b2cc-075b-80b5-86ad-c19d94082453" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

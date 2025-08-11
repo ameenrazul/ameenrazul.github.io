@@ -1,0 +1,688 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Redline</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="23c5b2cc-075b-80eb-83a2-e3c68d97759b" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/235b72310de986c8c5185959c47f38dc.jpeg"/></div><h1 class="page-title">Redline</h1><p class="page-description"></p></header><div class="page-body"><p id="23c5b2cc-075b-802e-8b27-f2280a95932c" class="">Redline, a tool by FireEye, is designed to help security analysts and incident responders quickly assess potentially compromised endpoints. While powerful tools like Volatility offer deep memory analysis, they can be time-consuming. Redline provides a faster, high-level overview  of Windows, Linux, or macOS systems.</p><p id="23c5b2cc-075b-8014-95cd-dd7dc34e9d26" class=""><strong>Key Features of Redline:</strong></p><ul id="23c5b2cc-075b-8001-8245-e91f5ea51998" class="bulleted-list"><li style="list-style-type:disc">Collects registry data (Windows only)</li></ul><ul id="23c5b2cc-075b-8093-9f94-fa38e83a81b9" class="bulleted-list"><li style="list-style-type:disc">Gathers running processes</li></ul><ul id="23c5b2cc-075b-808e-bff4-e3bae322990f" class="bulleted-list"><li style="list-style-type:disc">Captures memory images (pre-Windows 10)</li></ul><ul id="23c5b2cc-075b-808f-9897-f8284f8b7fa2" class="bulleted-list"><li style="list-style-type:disc">Retrieves browser history</li></ul><ul id="23c5b2cc-075b-8081-bf9b-ed22424feb6b" class="bulleted-list"><li style="list-style-type:disc">Detects suspicious strings</li></ul><ul id="23c5b2cc-075b-80fd-a03a-e544ebca0f40" class="bulleted-list"><li style="list-style-type:disc">Offers a user-friendly graphical interface for analysis</li></ul><p id="23c5b2cc-075b-803f-8efc-db0a7829a9eb" class="">Let&#x27;s move to the Data Collection stage. There are three ways or options to collect data using Redline:</p><figure id="23c5b2cc-075b-802f-a345-c2642154892c" class="image"><a href="https://assets.tryhackme.com/additional/redline101/capture2.png"><img style="width:565.9991455078125px" src="https://assets.tryhackme.com/additional/redline101/capture2.png"/></a></figure><p id="23c5b2cc-075b-8053-8e26-e6eb57e69642" class="">Redline offers three types of collectors to gather data from endpoints:</p><ol type="1" id="23c5b2cc-075b-807d-9962-d7735564e449" class="numbered-list" start="1"><li><strong>Standard Collector</strong><ul id="23c5b2cc-075b-80aa-bc75-f683e067eba3" class="bulleted-list"><li style="list-style-type:disc"><strong>Purpose</strong>: Gathers minimal but essential data for quick analysis</li></ul><ul id="23c5b2cc-075b-80c5-b98c-c39034b4457c" class="bulleted-list"><li style="list-style-type:disc"><strong>Use Case</strong>: Preferred for triage and rapid assessment</li></ul><ul id="23c5b2cc-075b-8021-aa85-da3dcd4a0bf7" class="bulleted-list"><li style="list-style-type:disc"><strong>Duration</strong>: Fastest option — only takes a few minutes</li></ul></li></ol><ol type="1" id="23c5b2cc-075b-8033-9212-c95a003df56a" class="numbered-list" start="2"><li><strong>Comprehensive Collector</strong><ul id="23c5b2cc-075b-8019-9316-fa7f143ee55d" class="bulleted-list"><li style="list-style-type:disc"><strong>Purpose</strong>: Gathers a full range of data from the system for in-depth analysis</li></ul><ul id="23c5b2cc-075b-80e2-8731-e5461cf877b7" class="bulleted-list"><li style="list-style-type:disc"><strong>Use Case</strong>: Chosen when a thorough investigation is needed</li></ul><ul id="23c5b2cc-075b-80f3-b4f0-d55cdd7f5546" class="bulleted-list"><li style="list-style-type:disc"><strong>Duration</strong>: Time-consuming — can take an hour or more</li></ul></li></ol><ol type="1" id="23c5b2cc-075b-8089-a81b-f3da30ff1f06" class="numbered-list" start="3"><li><strong>IOC Search Collector (Windows only)</strong><ul id="23c5b2cc-075b-80f8-8750-c5e333368a98" class="bulleted-list"><li style="list-style-type:disc"><strong>Purpose</strong>: Collects data matching known Indicators of Compromise (IOCs)</li></ul><ul id="23c5b2cc-075b-8059-bbf8-d1524df03f5b" class="bulleted-list"><li style="list-style-type:disc"><strong>Use Case</strong>: Used when you have predefined IOCs via the <a href="https://fireeye.market/apps/S7cWpi9W">IOC Editor</a>, often sourced from threat intel or prior analysis</li></ul><ul id="23c5b2cc-075b-80fc-be56-fedd0bac354e" class="bulleted-list"><li style="list-style-type:disc"><strong>Requirement</strong>: IOC Editor must be used to define and import IOCs before scanning</li></ul></li></ol><p id="23c5b2cc-075b-8098-b4d5-f8b8136c807a" class="">Each method serves a different need, from rapid response to full forensic investigation.</p><p id="23c5b2cc-075b-8038-8226-eac422932ad6" class="">Let&#x27;s dive into some details:</p><p id="23c5b2cc-075b-8019-9837-e5f1a4681852" class="">Memory:</p><figure id="23c5b2cc-075b-80ad-a036-f8f97829414c" class="image"><a href="https://assets.tryhackme.com/additional/redline101/memoryyy.png"><img style="width:700px" src="https://assets.tryhackme.com/additional/redline101/memoryyy.png"/></a></figure><p id="23c5b2cc-075b-801f-b678-cc78f1c7299b" class="">You can configure the script to collect memory data such as process listings, drivers enumeration (Windows hosts only), and hook detection  (versions before Windows 10).</p><p id="23c5b2cc-075b-80ba-95db-f52506949997" class=""><strong>Note</strong>: For this exercise, uncheck <strong>Hook Detection </strong>and make sure <strong>Aquire Memory Image </strong>is also unchecked.</p><p id="23c5b2cc-075b-8055-a48c-cd2fc4c46e2a" class="">Be sure to make changes to the settings in each tab as necessary to mirror the settings illustrated in the task content.</p><p id="23c5b2cc-075b-80b6-9ce8-e26d1ca25681" class="">Disk:</p><p id="23c5b2cc-075b-8077-9570-e3db95db7228" class="">This is where you can collect the data on Disks partitions and Volumes along with File Enumeration.</p><figure id="23c5b2cc-075b-80bc-8840-e0f4188e5be9" class="image"><a href="https://assets.tryhackme.com/additional/redline101/diskkk.png"><img style="width:700px" src="https://assets.tryhackme.com/additional/redline101/diskkk.png"/></a></figure><p id="23c5b2cc-075b-80b9-ac5d-daaed5cb18f7" class="">System:</p><p id="23c5b2cc-075b-8052-af8d-f51db69ba3ac" class="">The system will provide you with machine information:</p><ul id="23c5b2cc-075b-8078-b78f-dfc035f4c0d0" class="bulleted-list"><li style="list-style-type:disc">Machine and operating system (OS) information</li></ul><ul id="23c5b2cc-075b-80ed-9004-c17c1afa6b4a" class="bulleted-list"><li style="list-style-type:disc">Analyze system restore points (Windows versions before 10 only)</li></ul><ul id="23c5b2cc-075b-80d1-bb7e-f0175694fd0e" class="bulleted-list"><li style="list-style-type:disc">Enumerate the registry hives (Windows only)</li></ul><ul id="23c5b2cc-075b-8009-b765-fccf9887d374" class="bulleted-list"><li style="list-style-type:disc">Obtain user accounts (Windows and OS X only)</li></ul><ul id="23c5b2cc-075b-8006-9a87-dbb2eb2bd31d" class="bulleted-list"><li style="list-style-type:disc">Obtain groups (OS X only)</li></ul><ul id="23c5b2cc-075b-8096-81b3-d67480fde694" class="bulleted-list"><li style="list-style-type:disc">Obtain the prefetch cache (Windows only)</li></ul><figure id="23c5b2cc-075b-804b-ab48-c6ed47d5c9f2" class="image"><a href="https://assets.tryhackme.com/additional/redline101/systemm.png"><img style="width:639.9957275390625px" src="https://assets.tryhackme.com/additional/redline101/systemm.png"/></a></figure><p id="23c5b2cc-075b-8022-b982-c096532c84ac" class="">Network:</p><p id="23c5b2cc-075b-8078-b01d-f0c0077256ce" class="">Network Options supports Windows, OS X, and Linux platforms. You can configure the script to collect network information and browser history, which is essential when investigating the browser activities, including malicious file downloads and inbound/outbound connections.</p><figure id="23c5b2cc-075b-80a1-8b37-c134b6f0f222" class="image"><a href="https://assets.tryhackme.com/additional/redline101/networkkk.png"><img style="width:700px" src="https://assets.tryhackme.com/additional/redline101/networkkk.png"/></a></figure><p id="23c5b2cc-075b-80de-9c72-cc0399bd4145" class="">Other:</p><figure id="23c5b2cc-075b-80ed-85eb-eb17ef4b473b" class="image"><a href="https://assets.tryhackme.com/additional/redline101/other.png"><img style="width:700px" src="https://assets.tryhackme.com/additional/redline101/other.png"/></a></figure><p id="23c5b2cc-075b-80a1-8e9d-d150b4506427" class=""><strong>Summary of Redline Analysis View:</strong></p><p id="23c5b2cc-075b-80e3-8cc0-e860f215065c" class="">When data is imported into <strong>Redline</strong>, the left panel shows various <strong>Analysis Data</strong> categories, helping analysts investigate a potentially compromised system.</p><h3 id="23c5b2cc-075b-8059-92b4-ea439f5838bc" class="">🔍 Key Analysis Sections:</h3><ul id="23c5b2cc-075b-80a3-828a-f42df53efd97" class="bulleted-list"><li style="list-style-type:disc"><strong>System Information</strong><p id="23c5b2cc-075b-80de-a81e-dfadfa375565" class="">Displays machine details including BIOS (Windows only), OS, and user accounts.</p></li></ul><ul id="23c5b2cc-075b-80a1-9453-c2dd987eb696" class="bulleted-list"><li style="list-style-type:disc"><strong>Processes</strong><p id="23c5b2cc-075b-808e-9f3a-c406d05d706e" class="">Includes attributes like process name, PID, path, arguments, parent process, and user. Expanding a process shows:</p><ul id="23c5b2cc-075b-80ec-aac3-faadbb3c58df" class="bulleted-list"><li style="list-style-type:circle"><strong>Handles</strong>: Links between processes and system resources (e.g., files, registry).</li></ul><ul id="23c5b2cc-075b-80e7-ad3c-d3390facbe69" class="bulleted-list"><li style="list-style-type:circle"><strong>Memory Sections</strong>: Unsigned memory sections can indicate malicious DLLs.</li></ul><ul id="23c5b2cc-075b-8002-a6ae-e01f0f5f3d99" class="bulleted-list"><li style="list-style-type:circle"><strong>Strings</strong>: Captured in-memory strings for each process.</li></ul><ul id="23c5b2cc-075b-80cc-a972-f1c5947151e4" class="bulleted-list"><li style="list-style-type:circle"><strong>Ports</strong>: Reveals network activity—look for unusual outbound connections, especially from system processes (e.g., <em>explorer.exe</em> with network activity is suspicious).</li></ul></li></ul><h3 id="23c5b2cc-075b-802c-9363-d61bed12ee3d" class="">🛠 Other Important Sections:</h3><ul id="23c5b2cc-075b-800a-abdd-effe8c27660f" class="bulleted-list"><li style="list-style-type:disc"><strong>Registry</strong>: Can reveal persistence mechanisms and configuration changes.</li></ul><ul id="23c5b2cc-075b-800c-8542-c13bbc2727eb" class="bulleted-list"><li style="list-style-type:disc"><strong>Windows Services</strong>: Threat actors may install malicious services.</li></ul><ul id="23c5b2cc-075b-8036-a2e6-dcde324c86e7" class="bulleted-list"><li style="list-style-type:disc"><strong>Tasks</strong>: Scheduled tasks are often used for persistence.</li></ul><ul id="23c5b2cc-075b-8012-8045-d5385dee1a56" class="bulleted-list"><li style="list-style-type:disc"><strong>Event Logs</strong>: Look for PowerShell activity, logon/logoff events, user creation, etc.</li></ul><ul id="23c5b2cc-075b-8090-9480-f10539122b29" class="bulleted-list"><li style="list-style-type:disc"><strong>File Download History</strong>: Shows downloaded payloads or tools.</li></ul><ul id="23c5b2cc-075b-80d9-ae04-f74d5a9d9ed6" class="bulleted-list"><li style="list-style-type:disc">File System</li></ul><ul id="23c5b2cc-075b-8062-8377-f28e198b2757" class="bulleted-list"><li style="list-style-type:disc">ARP and Route Entries</li></ul><ul id="23c5b2cc-075b-80eb-9b46-d8405af96e7c" class="bulleted-list"><li style="list-style-type:disc">Browser URL History</li></ul><h3 id="23c5b2cc-075b-8092-8d16-ea07567f33e3" class="">📅 Timeline View:</h3><ul id="23c5b2cc-075b-80ba-88a8-ea94832686d1" class="bulleted-list"><li style="list-style-type:disc">Tracks file and process activity (create, modify, access, change)</li></ul><ul id="23c5b2cc-075b-8040-8553-f70998f3003f" class="bulleted-list"><li style="list-style-type:disc">Helps reconstruct the attacker’s steps and the timing of compromise/escalation activities.</li></ul><p id="23c5b2cc-075b-80f6-8b08-e0f4da52a100" class="">This structured view helps quickly spot indicators of compromise and understand attack flow.</p><p id="23c5b2cc-075b-80d7-bcea-db5d207eb386" class="">If you know when the host compromise or suspicious activity occurred, you can use  TimeWrinkles™  to filter out the timeline to only the events that took place around that time.</p><figure id="23c5b2cc-075b-80e0-8857-c8ea20f4d65d" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/5de58e2bfac4a912bcc7a3e9/room-content/0d3564554dec83b1e948cf2e78a41b26.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5de58e2bfac4a912bcc7a3e9/room-content/0d3564554dec83b1e948cf2e78a41b26.png"/></a></figure><p id="23c5b2cc-075b-802d-93dd-f4ae8d9c6825" class="">TimeCrunches™  helps to reduce the excessive amount of data that is not relevant in the table view. A TimeCrunch will hide the same types of events that occurred within the same minute you specified.</p><figure id="23c5b2cc-075b-802e-ba16-e90e4b894836" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/5de58e2bfac4a912bcc7a3e9/room-content/e38cdd16a6b56e484a6d9a4549c7348b.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5de58e2bfac4a912bcc7a3e9/room-content/e38cdd16a6b56e484a6d9a4549c7348b.png"/></a></figure><figure id="23c5b2cc-075b-809e-825d-f466995bfdef" class="image"><a href="https://i.ibb.co/RTc3t0z/timeline2.png"><img src="https://i.ibb.co/RTc3t0z/timeline2.png"/></a></figure><p id="23c5b2cc-075b-8075-b2be-c2d227070a69" class="">You can find out more about each type of data analysis using the Redline User Guide:  <a href="https://fireeye.market/assets/apps/211364/documents/877936_en.pdf">https://fireeye.market/assets/apps/211364/documents/877936_en.pdf </a>.</p><p id="23c5b2cc-075b-8041-8cc3-c3637fc0bd29" class="">
+</p><p id="23c5b2cc-075b-8073-b841-d177b8d26c1c" class="">Task 4 Standard Collector Analysis</p><p id="23c5b2cc-075b-80d7-89e4-cdf0a5fdd879" class="">1: Provide the Operating System detected for the workstation.</p><p id="23c5b2cc-075b-8018-bdca-e38161355f8e" class="">I was still in System Informations section. I looked around and saw the Operation System.</p><p id="23c5b2cc-075b-8083-b8d3-e8040ccd539d" class="">
+</p><figure id="23c5b2cc-075b-80a7-adff-f0aa4586fecd" class="image"><a href="https://miro.medium.com/v2/resize:fit:850/1*mqMdLBuG6-U_nRKbMAHMOA.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:850/1*mqMdLBuG6-U_nRKbMAHMOA.png"/></a></figure><p id="23c5b2cc-075b-80fd-bb59-f07d7649e135" class="">Answer: Windows Server 2019 Standard 17763</p><p id="23c5b2cc-075b-8003-a57a-c78f041472c5" class="">2: What is the suspicious scheduled task that got created on the victim’s computer?</p><p id="23c5b2cc-075b-80e2-aa5a-cf3fc9036df4" class="">I was looking for any hints of tasks. I saw the Task section on the left. I saw a funny looking comment on the right side which seemed like the answer.</p><p id="23c5b2cc-075b-8022-acb7-d9f20388fa1b" class="">
+</p><figure id="23c5b2cc-075b-8058-915a-caf7df02cd81" class="image"><a href="https://miro.medium.com/v2/resize:fit:850/1*31xQH3GGYsaqdJNn11lpRA.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:850/1*31xQH3GGYsaqdJNn11lpRA.png"/></a></figure><p id="23c5b2cc-075b-801d-94e2-cbea75c111d7" class="">Answer: MSOfficeUpdateFa.ke</p><p id="23c5b2cc-075b-8053-8e14-ce4b3a2c5b15" class="">3: Find the message that the intruder left for you in the task.</p><p id="23c5b2cc-075b-806e-a05f-c7253de55688" class="">Admittedly, I tried looking for the file but had no luck. Decided to try to put in the comment as the answer, and I guess that was the answer!</p><p id="23c5b2cc-075b-8093-9c50-f75c3abbcbb0" class="">Answer: THM-p3R5IStENCe-m3Chani$m</p><p id="23c5b2cc-075b-80eb-8baa-c785069847bf" class="">4: There is a new System Event ID created by an intruder with the source name “THM-Redline-User” and the Type “ERROR”. Find the Event ID #.</p><p id="23c5b2cc-075b-80a9-80ef-e93d5030d3af" class="">I went to “Event Logs” section on the left. I saw a search bar at the top so I decided to enter “THM-Redline-User” in hopes of finding a match, and we did! Look at EID for Event ID.</p><p id="23c5b2cc-075b-80ec-b932-d9501567a93b" class="">
+</p><figure id="23c5b2cc-075b-808d-be88-d4d7eb0eb202" class="image"><a href="https://miro.medium.com/v2/resize:fit:1215/1*YUzT4hhZAcFzXVqGFz1vzA.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1215/1*YUzT4hhZAcFzXVqGFz1vzA.png"/></a></figure><p id="23c5b2cc-075b-8069-81da-d50cbd7a9b7e" class="">Answer: 546</p><p id="23c5b2cc-075b-807e-aad3-e357b65af9bb" class="">5: Provide the message for the Event ID.</p><p id="23c5b2cc-075b-8004-8442-f3e06ce510f7" class="">I double clicked the log and it provides you all the information for that one entry. Now I simply copied the message and pasted into THM.</p><figure id="23c5b2cc-075b-801c-baf6-f3217ef3d3f5" class="image"><a href="https://miro.medium.com/v2/resize:fit:613/1*QoF58gnK3EQvDsd-PXB78g.png"><img style="width:504.9957275390625px" src="https://miro.medium.com/v2/resize:fit:613/1*QoF58gnK3EQvDsd-PXB78g.png"/></a></figure><p id="23c5b2cc-075b-8064-ad1e-d7e7c9fefe29" class="">Answer: Someone cracked my password. Now I need to rename my puppy-++-</p><p id="23c5b2cc-075b-8082-b5f8-e835b5c83b04" class="">6: It looks like the intruder downloaded a file containing the flag for Question 8. Provide the full URL of the website.</p><p id="23c5b2cc-075b-80b3-9bd4-f7eb9ffe3c31" class="">I went to “File Download History” on the left and saw a few files were downloaded. I saw a filename called “flag.txt” which seems odd (For screenshot purposes, I did extend File Name column so it can be seen in the screenshot).</p><p id="23c5b2cc-075b-807c-ad82-e8559bbbb36d" class="">
+</p><figure id="23c5b2cc-075b-8073-9733-f3da70d0434d" class="image"><a href="https://miro.medium.com/v2/resize:fit:1215/1*xmQH_Vndyk5grYLu2m69lg.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1215/1*xmQH_Vndyk5grYLu2m69lg.png"/></a></figure><p id="23c5b2cc-075b-80ca-8096-f56637c7fcae" class="">Answer: https://wormhole.app/download-stream/gI9vQtChjyYAmZ8Ody0Au</p><p id="23c5b2cc-075b-8097-a039-fedd38d7daf5" class="">7: Provide the full path to where the file was downloaded to including the filename.</p><p id="23c5b2cc-075b-8061-a8b4-ea22e0fda045" class="">I double clicked on the entry to see the detailed view. You can see the full path it is located at. Remember that the answer wants the filename too!</p><figure id="23c5b2cc-075b-80e1-9e3a-d349fdaa1565" class="image"><a href="https://miro.medium.com/v2/resize:fit:573/1*KElaKKKmMfaiU2tvCcqgNA.png"><img style="width:471.9983215332031px" src="https://miro.medium.com/v2/resize:fit:573/1*KElaKKKmMfaiU2tvCcqgNA.png"/></a></figure><p id="23c5b2cc-075b-80cb-84ce-e8c654cb8c65" class="">Answer: C:\Program Files (x86)\Windows Mail\SomeMailFolder\flag.txt</p><p id="23c5b2cc-075b-8044-9d53-cd80641aaa26" class="">8: Provide the message the intruder left for you in the file.</p><p id="23c5b2cc-075b-80b9-b09b-c8e133a3005b" class="">Now just navigate to the file in file explorer.</p><figure id="23c5b2cc-075b-8079-bbf7-ec1588722988" class="image"><a href="https://miro.medium.com/v2/resize:fit:792/1*Ib2jSqk6RL3XK5RzOGDujg.png"><img style="width:651.998291015625px" src="https://miro.medium.com/v2/resize:fit:792/1*Ib2jSqk6RL3XK5RzOGDujg.png"/></a></figure><p id="23c5b2cc-075b-8052-a1bc-fa2a97d8bd66" class="">Answer: THM{600D-C@7cH-My-FR1EnD}</p><p id="23c5b2cc-075b-803f-a5c0-d461e139b81f" class="">
+</p><h3 id="23c5b2cc-075b-8096-885c-d40ff0c862e0" class="">🛡️ IOC Search Collector &amp; IOC Editor – Summary</h3><ul id="23c5b2cc-075b-80d3-9b2f-d78ce4485e10" class="bulleted-list"><li style="list-style-type:disc"><strong>IOC Overview</strong>:<br/>Indicators of Compromise (IOCs) are digital clues signaling a system or network may be compromised. Examples include:<ul id="23c5b2cc-075b-8017-b685-f8c73abbbc02" class="bulleted-list"><li style="list-style-type:circle">Hashes (MD5, SHA1, SHA256)</li></ul><ul id="23c5b2cc-075b-801b-ac2d-f84e3fe2ac0a" class="bulleted-list"><li style="list-style-type:circle">IP addresses</li></ul><ul id="23c5b2cc-075b-8036-ada8-ed03a3eadb60" class="bulleted-list"><li style="list-style-type:circle">C2 domains</li></ul><ul id="23c5b2cc-075b-80bd-8930-dea0dd2c4014" class="bulleted-list"><li style="list-style-type:circle">File metadata (size, name, path)</li></ul><ul id="23c5b2cc-075b-8051-870a-dfd543f892c2" class="bulleted-list"><li style="list-style-type:circle">Registry keys</li></ul></li></ul><ul id="23c5b2cc-075b-808f-bc19-d4c2aa1a150d" class="bulleted-list"><li style="list-style-type:disc"><strong>IOC Search Collector</strong>:<br/>A tool used in data collection tasks to detect and investigate potential threats by scanning systems for IOCs.</li></ul><ul id="23c5b2cc-075b-804b-bb01-fcbac7ba6654" class="bulleted-list"><li style="list-style-type:disc"><strong>IOC Editor (by FireEye)</strong>:<ul id="23c5b2cc-075b-80ad-8395-f1bf0bf85825" class="bulleted-list"><li style="list-style-type:circle">Used to create and edit IOC files.</li></ul><ul id="23c5b2cc-075b-8012-9d6a-d2661f03bbdb" class="bulleted-list"><li style="list-style-type:circle">Guide available: IOC Editor User Guide</li></ul><ul id="23c5b2cc-075b-803f-aac9-d16d78c42546" class="bulleted-list"><li style="list-style-type:circle">Officially supports Windows 7 (same OS in attached VM).</li></ul><ul id="23c5b2cc-075b-8025-9640-df4c5b541e42" class="bulleted-list"><li style="list-style-type:circle">For Windows 10: try <strong>OpenIOC Editor</strong> instead.</li></ul></li></ul><ul id="23c5b2cc-075b-8000-a0b5-df4b84cb4c3e" class="bulleted-list"><li style="list-style-type:disc"><strong>Tips for Usage</strong>:<ul id="23c5b2cc-075b-80be-880c-f09ef8de6f0a" class="bulleted-list"><li style="list-style-type:circle">Close Redline before using IOC Editor to free system resources.</li></ul><ul id="23c5b2cc-075b-806a-b6d0-e142fec399e8" class="bulleted-list"><li style="list-style-type:circle">IOC files can be saved as text, modified, and shared with InfoSec professionals.</li></ul></li></ul><p id="23c5b2cc-075b-80f9-946f-dff2acd7a9f4" class="">
+</p><p id="23c5b2cc-075b-808e-8658-c6545ea8a7e7" class="">Before proceeding,  create the directory which will store the IOC file (IOC Directory).</p><p id="23c5b2cc-075b-8082-a20f-c96bb93f173d" class="">Next, create the IOC file.</p><figure id="23c5b2cc-075b-800c-98bf-cdbe404014db" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/5de58e2bfac4a912bcc7a3e9/room-content/b26d9e80ac55821643531c3a0436f633.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5de58e2bfac4a912bcc7a3e9/room-content/b26d9e80ac55821643531c3a0436f633.png"/></a></figure><p id="23c5b2cc-075b-80b2-a482-ca5a3962d80c" class=""><strong>Keylogger indicators in IOC Editor </strong>:</p><figure id="23c5b2cc-075b-800f-8532-c238ba3b3385" class="image"><a href="https://i.ibb.co/02VS0M6/keylogger2.png"><img src="https://i.ibb.co/02VS0M6/keylogger2.png"/></a></figure><p id="23c5b2cc-075b-8071-8da3-f006ea23b7e3" class="">A brief explanation of the above image:</p><ul id="23c5b2cc-075b-8059-bee1-da364bc14331" class="bulleted-list"><li style="list-style-type:disc">The <strong>Name </strong>of the IOC file is Keylogger, Keylogger.ioc. (this field you can edit)</li></ul><ul id="23c5b2cc-075b-8077-b8fe-ea39d70d0dd8" class="bulleted-list"><li style="list-style-type:disc">The <strong>Author </strong>is RussianPanda. (this field you can edit)</li></ul><ul id="23c5b2cc-075b-806d-9f09-d2d0b0120231" class="bulleted-list"><li style="list-style-type:disc"><strong>GUID </strong>, <strong>Created </strong>, and <strong>Modified </strong> are fields you can <strong>NOT </strong> edit, and IOC Editor populates the information.</li></ul><ul id="23c5b2cc-075b-80b4-b4cc-ef302184cc57" class="bulleted-list"><li style="list-style-type:disc">Under <strong>Description </strong>, you can add a summary explaining the purpose of the IOC file.</li></ul><p id="23c5b2cc-075b-80c6-b48d-d4ba83ecfb14" class="">The actual IOCs will be added under, you guessed it, <strong>Add </strong>.</p><p id="23c5b2cc-075b-8065-b42d-d5e131fc1a6e" class="">Here are the values from the image above:</p><ul id="23c5b2cc-075b-8004-a3f2-c81af1caf7c6" class="bulleted-list"><li style="list-style-type:disc"><strong>File Strings </strong><code>psylog.exe</code></li></ul><ul id="23c5b2cc-075b-8004-8246-da9978e79606" class="bulleted-list"><li style="list-style-type:disc"><strong>File Strings </strong><code>RIDEV_INPUTSINK</code></li></ul><ul id="23c5b2cc-075b-8000-9f74-fc46bb4b9a29" class="bulleted-list"><li style="list-style-type:disc"><strong>File MD5 </strong><code>791ca706b285b9ae3192a33128e4ecbb</code></li></ul><ul id="23c5b2cc-075b-801a-8b3b-db9717e87db2" class="bulleted-list"><li style="list-style-type:disc"><strong>File Size </strong><code>35400</code></li></ul><p id="23c5b2cc-075b-806f-8f19-ffb9ad0a6ce0" class="">Refer to the gif below to get an idea of adding specific IOCs to the IOC file.</p><figure id="23c5b2cc-075b-803c-aa9e-da573aec2bd3" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/5de58e2bfac4a912bcc7a3e9/room-content/01db4361981d214c2692aa10d59961d1.gif"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5de58e2bfac4a912bcc7a3e9/room-content/01db4361981d214c2692aa10d59961d1.gif"/></a></figure><p id="23c5b2cc-075b-8080-8947-fe7f5be15cc4" class="">Once you select an item you can enter the value for the item directly.</p><figure id="23c5b2cc-075b-8038-8c87-cff594261751" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/5de58e2bfac4a912bcc7a3e9/room-content/81e9ffdb97a2ce98e8b9cec57a2be261.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5de58e2bfac4a912bcc7a3e9/room-content/81e9ffdb97a2ce98e8b9cec57a2be261.png"/></a></figure><p id="23c5b2cc-075b-8099-91ce-fef90c5ecb7b" class="">You can also add it within the <strong>Properties </strong>.</p><p id="23c5b2cc-075b-8072-a8ee-c774876fbcb7" class="">All the fields are read-only except for <strong>Content </strong>and <strong>Comment </strong>. To add a value to the item enter it under <strong>Content </strong>.</p><figure id="23c5b2cc-075b-808f-90fa-f50be27e4939" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/5de58e2bfac4a912bcc7a3e9/room-content/5a0e549950f7ca673699d51a2ff14bc9.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5de58e2bfac4a912bcc7a3e9/room-content/5a0e549950f7ca673699d51a2ff14bc9.png"/></a></figure><p id="23c5b2cc-075b-803e-8913-cbf88479396d" class="">Once you enter the value click Save to save it.</p><figure id="23c5b2cc-075b-8076-a254-ce3fc67a757c" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/5de58e2bfac4a912bcc7a3e9/room-content/9d95abf1f3d62f3fe7d2eb6352b86235.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5de58e2bfac4a912bcc7a3e9/room-content/9d95abf1f3d62f3fe7d2eb6352b86235.png"/></a></figure><p id="23c5b2cc-075b-80cb-964d-fba49794b9f7" class=""><strong>Note </strong>: You can right-click on an item for additional options. See below.</p><figure id="23c5b2cc-075b-80b3-8c54-c1affc29523b" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/5de58e2bfac4a912bcc7a3e9/room-content/f5173beaf331e84b7672daf6be726092.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5de58e2bfac4a912bcc7a3e9/room-content/f5173beaf331e84b7672daf6be726092.png"/></a></figure><p id="23c5b2cc-075b-80b3-90ab-db6461f33857" class="">We&#x27;ll leave that for you to explore on your own.</p><p id="23c5b2cc-075b-802c-ada8-ea7473ccbe08" class="">Now that we&#x27;ve created and saved the IOC file, let&#x27;s move on and go back to the <strong>IOC Search Collector </strong>in the <strong>Redline </strong>tool.</p><p id="23c5b2cc-075b-803e-83b3-f238f78699de" class=""><strong>Note </strong>: If you closed Redline now is the time to relaunch the application. You can close IOC Editor, again, to free up system resources.</p><p id="23c5b2cc-075b-802d-a6ba-d7d03913832f" class=""><strong>IOC Search Collector</strong></p><p id="23c5b2cc-075b-80a0-8eab-cfbed2495717" class="">will ignore the data that doesn&#x27;t match an IOC you have gathered. Although, you can always choose to collect additional data. As the Redline User Guide states, the quality of the IOC analysis will depend on the data you have available in the analysis session.</p><figure id="23c5b2cc-075b-8089-93f5-c96059862901" class="image"><a href="https://i.ibb.co/SwvyRyq/ioc.png"><img style="width:256.9940185546875px" src="https://i.ibb.co/SwvyRyq/ioc.png"/></a></figure><p id="23c5b2cc-075b-80a5-92b9-fcd5cb92bde5" class="">To create an IOC Search Collector, click &quot;Browse...&quot; and choose the location of the .ioc file. Redline will automatically detect the .ioc file and place it in the Indicators section, as shown below.</p><p id="23c5b2cc-075b-8084-a406-d91f434210bb" class=""><strong>IOC Search Collector </strong>:</p><figure id="23c5b2cc-075b-80a2-8909-c9bfd1dc7d81" class="image"><a href="https://i.ibb.co/2S2t1sB/keylogger.png"><img src="https://i.ibb.co/2S2t1sB/keylogger.png"/></a></figure><p id="23c5b2cc-075b-80f7-88be-f12e8c9b8619" class=""><strong>Unsupported Search Terms: </strong>These terms will not show any successful hits in Redline, which means Redline doesn&#x27;t recognize specific search terms.</p><p id="23c5b2cc-075b-805d-9d15-ec3797d3ebb1" class=""><strong>Supported Search Terms: </strong>The terms that Redline will recognize and search for.</p><p id="23c5b2cc-075b-8046-84c3-dee9db4691d5" class="">After you are finished reviewing the configured IOCs, click &quot;Next&quot;. Now click on &quot;Edit your script&quot; to configure what data will be collected for the analysis. For this example, Keylogger file IOC Search, the following parameters were selected.</p><figure id="23c5b2cc-075b-8029-9e72-da07e3e5052e" class="image"><a href="https://i.ibb.co/g7JkhPr/keylogger3.png"><img src="https://i.ibb.co/g7JkhPr/keylogger3.png"/></a></figure><p id="23c5b2cc-075b-80ee-8ba7-fb1e9b3cf772" class=""><strong>Note </strong>: When you configure your own IOC Search, you will choose different settings for your script compared to the settings above.</p><p id="23c5b2cc-075b-80a1-b9d7-ca8141bbd670" class="">When done editing the script, click &quot;OK&quot;.</p><p id="23c5b2cc-075b-80b2-a3d1-f847ddb46b54" class="">In the &quot;Save Your Collector To&quot; section, click &quot;Browse&quot; and choose an empty folder where your analysis file will be saved along with the  <strong>RunRedlineAudit.bat </strong>file.</p><p id="23c5b2cc-075b-80ce-8190-c2b20c7527c7" class="">After executing the .bat file in the same manner as before, let&#x27;s now wait for the analysis to finish.</p><p id="23c5b2cc-075b-8019-b6a8-d59f72bf2dbc" class="">After the analysis is finished, you will see the .mans file (AnalysisSession1 in our example). Double-click the file to open it in Redline.</p><figure id="23c5b2cc-075b-803a-9fad-d22d2916f49b" class="image"><a href="https://i.ibb.co/xhJwX1f/analysis.png"><img style="width:700px" src="https://i.ibb.co/xhJwX1f/analysis.png"/></a></figure><p id="23c5b2cc-075b-8077-92f7-ec186c9b8fb9" class="">If Redline fails to generate the IOC Report automatically, you can manually generate it by clicking &quot;Create a New IOC Report&quot; and importing your .ioc file.</p><p id="23c5b2cc-075b-8068-9217-ff11b9e87000" class="">When the report generation completes, you should see the &quot;Hits&quot;. You can expand the list by clicking on the entries in each row.</p><figure id="23c5b2cc-075b-8010-b84e-ef3264c079c4" class="image"><a href="https://i.ibb.co/bvVVdj5/keyllogger4.png"><img src="https://i.ibb.co/bvVVdj5/keyllogger4.png"/></a></figure><p id="23c5b2cc-075b-80e4-a622-c75a6dacabbe" class="">From the screenshot, you can see that there was one hit on &quot;chrome.dll&quot;, this is a false positive. Let&#x27;s review  the details below.</p><figure id="23c5b2cc-075b-8071-9300-e8fde093b0f6" class="image"><a href="https://i.ibb.co/d0RCvdH/hits2.png"><img style="width:399.9957275390625px" src="https://i.ibb.co/d0RCvdH/hits2.png"/></a></figure><p id="23c5b2cc-075b-8044-af9f-e86e10ab2a56" class="">As you can see, the DLL file matched with the string &quot;RIDEV_INPUTSINK&quot; that we had in our .ioc file. It&#x27;s important to gather granulated and accurate artifacts to add to your IOC file to avoid false positives.</p><p id="23c5b2cc-075b-80fb-980d-e97ade82f67c" class="">The screenshot below is of a file with the most amount of &quot;Hits&quot;, which means it is most likely the file we are looking for.</p><figure id="23c5b2cc-075b-803c-afb3-eccb693af32e" class="image"><a href="https://i.ibb.co/tzvyS6w/hits3.png"><img src="https://i.ibb.co/tzvyS6w/hits3.png"/></a></figure><p id="23e5b2cc-075b-80f1-89e2-f6ea66b5b819" class="">
+</p><h2 id="23e5b2cc-075b-80a3-b1b0-e2806e8d3104" class="">IOC Search Collector Analysis</h2><p id="23e5b2cc-075b-8026-8dbc-de1156a35bbd" class="">1: What is the actual filename of the Keylogger?</p><p id="23e5b2cc-075b-80e5-bce3-fd86abc07dff" class="">This can be found in the last screenshot provided in the reading for this task.</p><p id="23e5b2cc-075b-80ff-b833-e61cedf0dfd0" class="">Answer: psylog.exe</p><p id="23e5b2cc-075b-8059-991a-efe07951cd60" class="">2: What filename is the file masquerading as?</p><p id="23e5b2cc-075b-8081-ab72-dac39cac0cee" class="">This can be found in the last screenshot provided in the reading for this task.</p><p id="23e5b2cc-075b-8079-a4f1-c82deca0596e" class="">Answer: THM1768.exe</p><p id="23e5b2cc-075b-804f-aa6d-cb1b4c9c1d34" class="">3: Who is the owner of the file?</p><h2 id="23e5b2cc-075b-8030-839e-cdc73295d86b" class="">Get Toumo’s stories in your inbox</h2><p id="23e5b2cc-075b-80c7-9b05-ca42ccdc7407" class="">Join Medium for free to get updates from this writer.</p><p id="23e5b2cc-075b-801e-b7eb-e2dc0da01156" class="">This can be found in the last screenshot provided in the reading for this task.</p><p id="23e5b2cc-075b-8001-8243-d2654022f779" class="">Answer: WIN-2DET5DP0NPT\charles</p><p id="23e5b2cc-075b-8013-9c85-ec4c40958e01" class="">4: What is the file size in bytes?</p><p id="23e5b2cc-075b-80c5-a524-f9924ea63fc8" class="">This can be found in the last screenshot provided in the reading for this task.</p><p id="23e5b2cc-075b-80de-b39b-d8af2e7ffe54" class="">Answer: 35400</p><p id="23e5b2cc-075b-805a-9c4f-c2dde20165a5" class="">5: Provide the full path of where the .ioc file was placed after the Redline analysis, include the .ioc filename as well</p><p id="23e5b2cc-075b-8050-80f9-dcd928f74c69" class="">This can be found in the <strong>3rd to the last</strong> screenshot provided in the reading for this task.</p><p id="23e5b2cc-075b-806b-aa1d-d5b38e9d1620" class="">Answer: C:\Users\charles\Desktop\Keylogger-IOCSearch\IOCs\keylogger.ioc</p><p id="23e5b2cc-075b-8085-826d-e33c80b30479" class="">Task 6 IOC Search Collector Analysis</p><p id="23e5b2cc-075b-803c-ad55-e0f05c7bb8fc" class="">1: Provide the path of the file that matched all the artifacts along with the filename.</p><p id="23e5b2cc-075b-809b-b9a0-faa7981f405a" class="">I<br/> navigated to the folder that has the existing analysis that we are <br/>going to use. Double click on that and wait for it to load. Just a bit <br/>of heads up, loading the existing analysis file takes a really long <br/>time. It took me 15–20 minutes.</p><figure id="23e5b2cc-075b-80a9-bb38-dcee9a9b44b3" class="image"><a href="https://miro.medium.com/v2/resize:fit:1070/1*qAGF3JqFefcfuQH3ogsAlg.png"><img style="width:641.98974609375px" src="https://miro.medium.com/v2/resize:fit:1070/1*qAGF3JqFefcfuQH3ogsAlg.png"/></a></figure><p id="23e5b2cc-075b-8035-8403-f94f2105c85e" class="">While<br/> the analysis is loading, I created a new IOC according to the new <br/>parameters. The instructions were covered in the reading in the previous<br/> task so I will not be going over how it is done.</p><p id="23e5b2cc-075b-809e-82de-e498d856c4a4" class="">Zoom image will be displayed</p><figure id="23e5b2cc-075b-80b0-bc95-ff101083f124" class="image"><a href="https://miro.medium.com/v2/resize:fit:1167/1*pm2SULrdEGrcFUL5ojqgRA.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1167/1*pm2SULrdEGrcFUL5ojqgRA.png"/></a></figure><p id="23e5b2cc-075b-8052-997a-efbdc5fa6743" class="">When<br/> the analysis is loaded, and you have created your new IOC file, we will<br/> go back to the analysis. At the bottom left, click on IOC Reports and <br/>then Create a New IOC Report.</p><p id="23e5b2cc-075b-802b-9e1e-f2fe2f1652d9" class="">Zoom image will be displayed</p><figure id="23e5b2cc-075b-80fe-9492-dae5bb35abc5" class="image"><a href="https://miro.medium.com/v2/resize:fit:1167/1*GUbpUAO1V-ylKOCuV4E4PQ.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1167/1*GUbpUAO1V-ylKOCuV4E4PQ.png"/></a></figure><p id="23e5b2cc-075b-80dc-9c56-d7993063e809" class="">Load the IOC folder that has the IOC file inside.</p><figure id="23e5b2cc-075b-80ee-b43f-c69ab4de309e" class="image"><a href="https://miro.medium.com/v2/resize:fit:1118/1*k1Udxd_P_F5-oNQYKTKyUg.png"><img style="width:670.9992065429688px" src="https://miro.medium.com/v2/resize:fit:1118/1*k1Udxd_P_F5-oNQYKTKyUg.png"/></a></figure><p id="23e5b2cc-075b-8094-a295-e2e71a83a253" class="">Make sure the IOC file is loaded with a checkmark. I named mine “Task 6” for Task 6.</p><p id="23e5b2cc-075b-8011-9542-e1cfa890b2a5" class="">Zoom image will be displayed</p><figure id="23e5b2cc-075b-807b-936e-cc60ac647212" class="image"><a href="https://miro.medium.com/v2/resize:fit:1167/1*olf8vTFsLOVnII7wsWgIKg.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1167/1*olf8vTFsLOVnII7wsWgIKg.png"/></a></figure><p id="23e5b2cc-075b-8035-8d89-c5339182b96f" class="">Now<br/> click on OK and wait for the report to generate. It might take another <br/>5–10 minutes. Once it finishes loading, click on the generated report <br/>and then click on your IOC file name. My IOC File name was “Task 6” so <br/>that’s why “Task 6” shows up.</p><p id="23e5b2cc-075b-8016-ac30-c6c594c71b31" class="">Zoom image will be displayed</p><figure id="23e5b2cc-075b-8032-a740-d01fd145508c" class="image"><a href="https://miro.medium.com/v2/resize:fit:1167/1*l1Fz7IbLmcdZQsCF404tPg.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1167/1*l1Fz7IbLmcdZQsCF404tPg.png"/></a></figure><p id="23e5b2cc-075b-8033-ae93-c8b18d2266ef" class="">After that, click on View Hits and all the information we need should load.</p><p id="23e5b2cc-075b-80ea-9f76-d020dcd3c7cf" class="">Zoom image will be displayed</p><figure id="23e5b2cc-075b-80d0-bfbd-db390c3252ea" class="image"><a href="https://miro.medium.com/v2/resize:fit:1167/1*1LHT4ppg82WgeJMberu3WA.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1167/1*1LHT4ppg82WgeJMberu3WA.png"/></a></figure><p id="23e5b2cc-075b-8095-80ac-ce256bd5eea2" class="">Answer: C:\Users\Administrator\AppData\Local\Temp\8eJv8w2id6IqN85dfC.exe</p><p id="23e5b2cc-075b-8078-8752-db9d678ac844" class="">2: Provide the path where the file is located without including the filename.</p><p id="23e5b2cc-075b-8036-a47a-c3d1fcce760c" class="">Just remove the file name from the above answer.</p><p id="23e5b2cc-075b-8039-b451-cad2dc7ec700" class="">Answer: C:\Users\Administrator\AppData\Local\Temp</p><p id="23e5b2cc-075b-807b-b255-caf5d19ea590" class="">3: Who is the owner of the file?</p><p id="23e5b2cc-075b-80de-870f-f5a11d77f104" class="">Look for owner column.</p><p id="23e5b2cc-075b-800c-9103-cf39646beb21" class="">3: BUILTIN\Administrators</p><p id="23e5b2cc-075b-8020-9b02-e7111f2932d1" class="">4: Provide the subsystem for the file.</p><p id="23e5b2cc-075b-80e3-b7d3-fa6e5f5ec28d" class="">For this one, click on Details tab on the right. If nothing loads, click the information icon next to the hit.</p><figure id="23e5b2cc-075b-80ce-8dfb-ce1e3a21cdec" class="image"><a href="https://miro.medium.com/v2/resize:fit:72/1*VTkqCDKMCwao01JuHfakjw.png"><img style="width:42.993141174316406px" src="https://miro.medium.com/v2/resize:fit:72/1*VTkqCDKMCwao01JuHfakjw.png"/></a></figure><figure id="23e5b2cc-075b-8025-be8b-f48d6b1fc31c" class="image"><a href="https://miro.medium.com/v2/resize:fit:672/1*OhZB8jQD4JpIMTKucEO_Bg.png"><img style="width:402.9931640625px" src="https://miro.medium.com/v2/resize:fit:672/1*OhZB8jQD4JpIMTKucEO_Bg.png"/></a></figure><p id="23e5b2cc-075b-802e-8ecc-c332832a8fd0" class="">We will be presented with more details, one of them will tell us the Subsystem.</p><figure id="23e5b2cc-075b-80b4-9551-cef7dbd71746" class="image"><a href="https://miro.medium.com/v2/resize:fit:938/1*nWU-MVqa-aaw_CLrtizNvw.png"><img style="width:562.9888916015625px" src="https://miro.medium.com/v2/resize:fit:938/1*nWU-MVqa-aaw_CLrtizNvw.png"/></a></figure><p id="23e5b2cc-075b-8057-8fa6-dc656a76df3e" class="">Answer: Windows_CUI</p><p id="23e5b2cc-075b-8033-9c9b-f0b4062a516c" class="">5: Provide the Device Path where the file is located.</p><p id="23e5b2cc-075b-80b3-b221-f0f74c2cfa24" class="">Continue looking at Details to find this.</p><p id="23e5b2cc-075b-80dc-be18-eac01d3ad97e" class="">Answer: \Device\HarddiskVolume2</p><p id="23e5b2cc-075b-8006-8de9-c73434fe61a3" class="">6: Provide the hash (SHA-256) for the file.</p><p id="23e5b2cc-075b-8040-a8db-e152bf7ae4e8" class="">Well, we weren’t given the SHA256, but I used the MD5 hash and searched it up on <a href="https://www.virustotal.com/gui/home/upload">VirusTotal</a>. Go to the Details tab and you’ll find the hashes!</p><figure id="23e5b2cc-075b-80cc-b843-e8c60fed633a" class="image"><a href="https://miro.medium.com/v2/resize:fit:975/1*5MKISyyrfNtz6-kd1TwYqg.png"><img style="width:584.9871826171875px" src="https://miro.medium.com/v2/resize:fit:975/1*5MKISyyrfNtz6-kd1TwYqg.png"/></a></figure><p id="23e5b2cc-075b-80ed-97ac-fc40f746e0e6" class="">Answer:</p><p id="23e5b2cc-075b-80bb-a667-c640e8eb1790" class="">57492d33b7c0755bb411b22d2dfdfdf088cbbfcd010e30dd8d425d5fe66adff4</p><p id="23e5b2cc-075b-8031-888c-cf9dc3866fdc" class="">7: The attacker managed to masquerade the real filename. Can you find it having the hash in your arsenal?</p><p id="23e5b2cc-075b-8085-ba26-f64bc5f6f36c" class="">In the same Details tab, I just scrolled down to look for common names. I tried this list.</p><figure id="23e5b2cc-075b-800e-84c2-f6d9d6228506" class="image"><a href="https://miro.medium.com/v2/resize:fit:905/1*qdyJA9N0U5ZcfcPyrS6-jg.png"><img style="width:542.9974365234375px" src="https://miro.medium.com/v2/resize:fit:905/1*qdyJA9N0U5ZcfcPyrS6-jg.png"/></a></figure><p id="23e5b2cc-075b-80ae-872f-dcb44a5b61d8" class="">Answer: psexec.exe</p><h2 id="23e5b2cc-075b-80d1-8dfc-c97814b7e43d" class="">Task 7 Endpoint Investigation</h2><p id="23e5b2cc-075b-8066-9f58-dd09d5a2c5ec" class="">1: Can you identify the product name of the machine?</p><p id="23e5b2cc-075b-809a-8826-f94e29f389fd" class="">Now<br/> load the Analysis file that’s found in the Endpoint Investigation <br/>folder that is located on the Desktop. Once that is loaded, head over <br/>the “System Information” on the left side and look for anything that <br/>mentions product names.</p><p id="23e5b2cc-075b-80eb-8623-c98f5e5c0302" class="">Zoom image will be displayed</p><figure id="23e5b2cc-075b-801a-b756-f01089e1d205" class="image"><a href="https://miro.medium.com/v2/resize:fit:1667/1*v7PqEKYq-MrQsBzUG_Rp4Q.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1667/1*v7PqEKYq-MrQsBzUG_Rp4Q.png"/></a></figure><p id="23e5b2cc-075b-8064-a35a-f29c8928be18" class="">Answer: Windows 7 Home Basic</p><p id="23e5b2cc-075b-80e9-8d7a-e7fb3ccf6576" class="">2: Can you find the name of the note left on the Desktop for the “Charles”?</p><p id="23e5b2cc-075b-8025-b8e6-fd9046d50b7c" class="">I<br/> looked around File Downloaded History but found nothing. I decided to <br/>look at his Desktop instead. To do that, I went to File System at the <br/>left hand side, from there I expanded the menu until I got to his <br/>desktop. I then found a weird .txt file name. Double click it to get <br/>more details, and it’ll help with copying the answer.</p><p id="23e5b2cc-075b-8072-b3ac-cab080c84462" class="">Zoom image will be displayed</p><figure id="23e5b2cc-075b-808f-b9bd-db2630fb0bf0" class="image"><a href="https://miro.medium.com/v2/resize:fit:1667/1*gUtpVhHZB86xjFCEFyCSpA.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1667/1*gUtpVhHZB86xjFCEFyCSpA.png"/></a></figure><p id="23e5b2cc-075b-8091-9394-cc7966e67fb4" class="">Answer: _R_E_A_D___T_H_I_S___AJYG1O_.txt</p><p id="23e5b2cc-075b-8068-9dcf-cc08848dc44e" class="">3: Find the Windows Defender service; what is the name of its service DLL?</p><p id="23e5b2cc-075b-801e-ade1-e97654542bbb" class="">Similarly,<br/> I checked the Windows Services tab first, and searched for “Windows <br/>Defender” and got one result. Double clicking it will help us find the <br/>answer.</p><p id="23e5b2cc-075b-8080-81b3-f0c19068e8d7" class="">Zoom image will be displayed</p><figure id="23e5b2cc-075b-8032-a7ed-f8fc7ca62365" class="image"><a href="https://miro.medium.com/v2/resize:fit:1667/1*XUSN4InQGvNYlzTWF8ww3Q.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1667/1*XUSN4InQGvNYlzTWF8ww3Q.png"/></a></figure><p id="23e5b2cc-075b-803d-b32b-dedb955a8f22" class="">Answer: MpSvc.dll</p><p id="23e5b2cc-075b-80ea-98aa-c59276b75777" class="">4: The user manually downloaded a zip file from the web. Can you find the filename?</p><p id="23e5b2cc-075b-808b-a852-fefd9ce67653" class="">I<br/> checked the File Downloaded History tab on the left side and used the <br/>search function. Unfortunately, it didn’t give me anything. I then just <br/>organized the list by “Download Type” column and I found the Manual <br/>download entry. It was after the fact that I found out I was searching <br/>for .zip in “Target Directory” column.</p><p id="23e5b2cc-075b-809a-b6ff-e88d22cacf52" class="">Zoom image will be displayed</p><figure id="23e5b2cc-075b-80ed-8148-dab1b86d18e6" class="image"><a href="https://miro.medium.com/v2/resize:fit:1667/1*PLfMNaq99Nifw2wHztQKeg.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1667/1*PLfMNaq99Nifw2wHztQKeg.png"/></a></figure><p id="23e5b2cc-075b-803a-869a-d51f23730e6d" class="">Answer: eb5489216d4361f9e3650e6a6332f7ee21b0bc9f3f3a4018c69733949be1d481.zip</p><p id="23e5b2cc-075b-8016-bad1-f93cd1245678" class="">5: Provide the filename of the malicious executable that got dropped on the user’s Desktop.</p><p id="23e5b2cc-075b-8019-85fa-e7aebf7707df" class="">I went back to check the desktop and I did find an .exe file.</p><figure id="23e5b2cc-075b-80c1-939c-e03af875e4dc" class="image"><a href="https://miro.medium.com/v2/resize:fit:1018/1*ll3-BwR3I1hOhzLEVKoZ-w.png"><img style="width:610.9991455078125px" src="https://miro.medium.com/v2/resize:fit:1018/1*ll3-BwR3I1hOhzLEVKoZ-w.png"/></a></figure><p id="23e5b2cc-075b-802a-8683-faa71b155ce9" class="">Answer: Endermanch@Cerber5.exe</p><p id="23e5b2cc-075b-806d-bb62-d964547febd6" class="">6: Provide the MD5 hash for the dropped malicious executable.</p><p id="23e5b2cc-075b-8007-a0db-ce28754e62f8" class="">I went back to File Download History to grab the URL and I posted it in VirusTotal but I found nothing.</p><p id="23e5b2cc-075b-809a-ab77-c0ff4413c002" class="">Afterwards, I grabbed the .zip file name and searched it on VirusTotal. It looked promising but led me nowhere.</p><p id="23e5b2cc-075b-8022-bfdd-f2922c2f89aa" class="">I<br/> then looked in couple of tabs, one of them was “Timeline.” I saw that <br/>it had MD5 in some of the results, which seemed promising. I searched <br/>for the .exe file and found a result. I double clicked on it to open the<br/> detailed view and copied the MD5 hash. Looks like I found it!</p><p id="23e5b2cc-075b-803a-ba9f-f9674f9ca4cc" class="">Zoom image will be displayed</p><figure id="23e5b2cc-075b-808a-8c53-e7f45f3ef095" class="image"><a href="https://miro.medium.com/v2/resize:fit:1667/1*OAkHYUQB3F7V3PJ3DKylig.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1667/1*OAkHYUQB3F7V3PJ3DKylig.png"/></a></figure><p id="23e5b2cc-075b-807d-bc25-e8df45166db3" class="">Answer: fe1bc60a95b2c2d77cd5d232296a7fa4</p><p id="23e5b2cc-075b-8042-b766-fcf4f81d104a" class="">7: What is the name of the ransomware?</p><p id="23e5b2cc-075b-802c-93d9-c60902f7b751" class="">I<br/> posted the hash into VirusTotal. I went to Details tab and then look at<br/> the names. I saw Cerber pop up often and I just decided to Google what <br/>it was. Looks like it’s a ransomware.</p><figure id="23e5b2cc-075b-804d-b26e-f5f19da1d956" class="image"><a href="https://miro.medium.com/v2/resize:fit:668/1*ZznfCen_hI2UFiELM83xLQ.png"><img style="width:400.9991760253906px" src="https://miro.medium.com/v2/resize:fit:668/1*ZznfCen_hI2UFiELM83xLQ.png"/></a></figure><p id="23e5b2cc-075b-8086-8924-ff2b7d9c3bc0" class="">Answer: Cerber</p><p id="23e5b2cc-075b-8003-9bc0-cc7bddbc95c2" class=""><strong>Thoughts:</strong></p><p id="23e5b2cc-075b-80fe-832c-d00cadb345b0" class="">This<br/> room gave me a lot of frustration, mainly due to the extremely long <br/>waiting time when I was loading the analysis, or even just opening the <br/>application. I think I struggled more with how slow the machine was than<br/> the challenge / hands-on itself. The challenge was actually fun, and I <br/>really enjoy digging around stuff. I feel like the entire SOC Level 1 <br/>module has started making me use VirusTotal and <a href="https://www.whois.com/">Whois</a><br/> to dig further into what the file is or where it redirects to. I don’t <br/>know how it is in an enterprise setting, but this way of thinking seems <br/>beneficial as I continue to analyze and dig for answers.</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

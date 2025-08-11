@@ -1,0 +1,728 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>WAZUH</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2345b2cc-075b-8056-ad4b-cbcac6b492ed" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/dab38a8c03e9e6ba3232ded19228f037.jpeg"/></div><h1 class="page-title">WAZUH</h1><p class="page-description"></p></header><div class="page-body"><p id="2345b2cc-075b-80b5-b6b4-e9d7c98493e8" class=""><a href="https://wazuh.com/">Wazuh</a> is an open-source, freely available and extensive EDR solution. It can be used in all scales of environments. Wazuh operates on a management and agent module. Simply, a device is dedicated to running Wazuh named a manager, where Wazuh operates on a management and agent model where the manager is responsible for managing agents installed on the devices you’d like to monitor<br/><br/></p><figure id="2345b2cc-075b-8009-ba9c-e8a205b4b120" class="image"><a href="image%20256.png"><img style="width:400.9862976074219px" src="image%20256.png"/></a></figure><p id="2345b2cc-075b-804a-9587-df51028b4943" class="">Devices that record the events and processes of a system are called agents. Agents monitor the processes and events that take place on the device, such as authentication and user management. Agents will offload these logs to a designated collector for processing, such as Wazuh.</p><p id="2345b2cc-075b-8054-87e6-eb454485653d" class="">In order for Wazuh to be populated, agents need to be installed onto devices to log such events. Wazuh can guide you through the agent deployment process provided you fill out some pre-requisites such as::</p><ul id="2345b2cc-075b-80fd-b95e-e91c5279e95e" class="bulleted-list"><li style="list-style-type:disc">Operating System</li></ul><ul id="2345b2cc-075b-8063-8af2-f76d93e85ec6" class="bulleted-list"><li style="list-style-type:disc">The address of the Wazuh server that the agent should send logs to (this can be a DNS entry or an IP address)</li></ul><ul id="2345b2cc-075b-8003-9afb-c8c2a49d8d2d" class="bulleted-list"><li style="list-style-type:disc">What group the agent will be under - you can sort agents into groups within Wazuh if you wish</li></ul><p id="2345b2cc-075b-8050-bb62-d1542dc638d6" class="">
+</p><h2 id="2345b2cc-075b-8065-8d09-d8be284f88bd" class="">Wazuh Vulnerability Assessment &amp; Security Events</h2><p id="2345b2cc-075b-807a-8bd5-d79b40454590" class="">Wazuh’s Vulnerability Assessment module is a powerful tool that can be used to periodically scan an agent&#x27;s operating system for installed applications and their version numbers.</p><p id="2345b2cc-075b-80bb-860b-fe470b0d3101" class="">Once this information has been gathered, it is sent back to the Wazuh server and compared against a database of CVEs to discover potential vulnerabilities. For example, the agent in the screenshot below has a version of Vim that is vulnerable to <strong>CVE-2019-12735</strong>.</p><figure id="2345b2cc-075b-809a-8968-f3eb4ec014a3" class="image"><a href="image%20257.png"><img style="width:685.9734497070312px" src="image%20257.png"/></a></figure><p id="2345b2cc-075b-803c-a2c7-c10d61bfa00e" class="">
+</p><p id="2345b2cc-075b-80d5-a4b2-f9bc99377b12" class="">Wazuh events based on agents</p><figure id="2345b2cc-075b-8047-a057-f476efda8047" class="image"><a href="9B46F961-B6F6-4191-A28F-608BAA6ED7FC.png"><img style="width:685.9734497070312px" src="9B46F961-B6F6-4191-A28F-608BAA6ED7FC.png"/></a></figure><p id="2345b2cc-075b-8060-9db7-c6b9fbf1631f" class="">
+</p><h2 id="2345b2cc-075b-80df-93f0-fa71c52bdc24" class="">Monitoring Logons with Wazuh</h2><p id="2345b2cc-075b-801e-8b61-e66539e234a9" class="">Wazuh&#x27;s security event monitor is capable to actively record both successful and unsuccessful authentication attempts. The rule with an id of 5710 detects attempted connections that are unsuccessful for the SSH protocol. </p><figure id="2345b2cc-075b-80f0-8951-c35fc5b74dac" class="image"><a href="image%20258.png"><img style="width:685.986328125px" src="image%20258.png"/></a></figure><p id="2345b2cc-075b-8009-b209-ef18395319a8" class="">The alert was created because someone tried to log onto the agent &quot;<strong>ip-10-10-73- 118</strong>&quot; with the user &quot;<strong>cmnatic</strong>&quot; which does not exist. I have summarized this alert into the table below:</p><table id="2345b2cc-075b-8044-becc-f058e8c7aab2" class="simple-table"><tbody><tr id="2345b2cc-075b-80c4-a5ae-c6f4b3b0c5c4"><td id="o_c[" class=""><strong>Field</strong></td><td id="pUIz" class=""><strong>Value</strong></td><td id="ndXI" class="" style="width:309.00001525878906px"><strong>Description</strong></td></tr><tr id="2345b2cc-075b-8058-acc4-c380df53820d"><td id="o_c[" class="">agent.ip</td><td id="pUIz" class="">10.10.73.118</td><td id="ndXI" class="" style="width:309.00001525878906px">This is the IP address of the agent that the alert was triggered on.</td></tr><tr id="2345b2cc-075b-80e4-9d51-c2d1b00be20d"><td id="o_c[" class="">agent.name</td><td id="pUIz" class="">ip-10-10-73-118</td><td id="ndXI" class="" style="width:309.00001525878906px">This is the hostname of the agent that the alert was triggered on.</td></tr><tr id="2345b2cc-075b-8082-9971-cd3e2b0643f6"><td id="o_c[" class="">rule.description</td><td id="pUIz" class="">sshd: Attempt to login using a non-existent user</td><td id="ndXI" class="" style="width:309.00001525878906px">This field is a brief description of what the event is alerting to.</td></tr><tr id="2345b2cc-075b-804e-8caf-f380a1ea2df2"><td id="o_c[" class="">rule.mitre.technique</td><td id="pUIz" class="">Brute-Force</td><td id="ndXI" class="" style="width:309.00001525878906px">This field explains the MITRE technique that the alert pertains to.</td></tr><tr id="2345b2cc-075b-8030-aeab-f761de902956"><td id="o_c[" class="">rule.mitre.id</td><td id="pUIz" class="">T1110</td><td id="ndXI" class="" style="width:309.00001525878906px">This field is the MITRE ID of the alert</td></tr><tr id="2345b2cc-075b-809b-b8ee-c695dcf81424"><td id="o_c[" class="">rule.id</td><td id="pUIz" class="">5710</td><td id="ndXI" class="" style="width:309.00001525878906px">This field is the ID assigned to the alert by Wazuh&#x27;s ruleset</td></tr><tr id="2345b2cc-075b-8046-bd9c-e9bc1f48856a"><td id="o_c[" class="">location</td><td id="pUIz" class="">/var/log/auth.log</td><td id="ndXI" class="" style="width:309.00001525878906px">This field is the location of the file that the alert was generated from on the agent. In this example, it is the</td></tr></tbody></table><p id="2345b2cc-075b-8024-8929-f10e502045cf" class="">For reference, this alert is stored in a specific file on the Wazuh management server: <code>/var/ossec/logs/alerts/alerts.log</code>. We can use a command such as grep or nano to search through this file on the management server manually.</p><p id="2345b2cc-075b-8074-af39-ff151d72c26f" class="">Viewing theWazuhlogon alert log for a login session (su) on the root account by the ubuntu user</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2345b2cc-075b-8097-bf30-e95868562345" class="code code-wrap"><code class="language-Markdown" style="white-space:pre-wrap;word-break:break-all">ubuntu@wazuh-server:~$ sudo less /var/ossec/logs/alerts/alerts.log** Alert 1634284538.566764: - pam,syslog,authentication_success,pci_dss_10.2.5,gpg13_7.8,gpg13_7.9,gdpr_IV_32.2,hipaa_164.312.b,ni&gt;
+2021 Oct 15 07:55:38 ip-10-10-218-190-&gt;/var/log/auth.log
+Rule: 5501 (level 3) -&gt; &#x27;PAM: Login session opened.&#x27;
+User: root
+Oct 15 07:55:37 ip-10-10-218-190 sudo: pam_unix(sudo:session): session opened for user root by ubuntu(uid=0)
+uid: 0</code></pre><p id="2345b2cc-075b-801a-8fa2-e6339c4d7d8f" class="">
+</p><h2 id="2345b2cc-075b-8039-8eee-e310be4856b3" class="">Collecting Windows Logs with Wazuh</h2><p id="2345b2cc-075b-8042-b88f-d9b5ae54b8c4" class="">All sorts of actions and events are captured and recorded on a Windows operating system. This includes authentication attempts, networking connections, files that were accessed, and the behaviours of applications and services. This information is stored in the Windows event log using a tool called Sysmon.</p><p id="2345b2cc-075b-8006-a5e3-c573a13877bc" class="">We can use the Wazuh agent to aggregate these events recorded by <em>Sysmon </em>for processing to the Wazuh manager. Now, we will need to configure both the Wazuh agent and the Sysmon application.  Sysmon uses rules that are made in XML formatting to be triggered. For example, in the XML snippet below, we are telling Sysmon to monitor for the event of the powershell.exe process starting.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2345b2cc-075b-8049-8267-e6fdf11d7b53" class="code code-wrap"><code class="language-Markdown" style="white-space:pre-wrap;word-break:break-all"> Sysmon schemaversion=&quot;3.30&quot; 
+         HashAlgorithms md5 /HashAlgorithms 
+  EventFiltering 
+  !--SYSMON EVENT ID 1 : PROCESS CREATION-- 
+  ProcessCreate onmatch=&quot;include&quot; 
+  Image condition=&quot;contains&quot; powershell.exe /Image 
+  /ProcessCreate 
+  !--SYSMON EVENT ID 2 : FILE CREATION TIME RETROACTIVELY CHANGED IN THE FILESYSTEM-- 
+  FileCreateTime onmatch=&quot;include&quot;  /FileCreateTime 
+  !--SYSMON EVENT ID 3 : NETWORK CONNECTION INITIATED-- 
+  NetworkConnect onmatch=&quot;include&quot;  /NetworkConnect 
+  !--SYSMON EVENT ID 4 : RESERVED FOR SYSMON STATUS MESSAGES, THIS LINE IS INCLUDED FOR DOCUMENTATION PURPOSES ONLY-- 
+  !--SYSMON EVENT ID 5 : PROCESS ENDED-- 
+  ProcessTerminate onmatch=&quot;include&quot;  /ProcessTerminate 
+  !--SYSMON EVENT ID 6 : DRIVER LOADED INTO KERNEL-- 
+  DriverLoad onmatch=&quot;include&quot;  /DriverLoad  
+  !--SYSMON EVENT ID 7 : DLL (IMAGE) LOADED BY PROCESS-- 
+  ImageLoad onmatch=&quot;include&quot;  /ImageLoad 
+  !--SYSMON EVENT ID 8 : REMOTE THREAD CREATED-- 
+  CreateRemoteThread onmatch=&quot;include&quot;  /CreateRemoteThread 
+  !--SYSMON EVENT ID 9 : RAW DISK ACCESS-- 
+  RawAccessRead onmatch=&quot;include&quot;  /RawAccessRead  
+  !--SYSMON EVENT ID 10 : INTER-PROCESS ACCESS-- 
+  ProcessAccess onmatch=&quot;include&quot;  /ProcessAccess 
+  !--SYSMON EVENT ID 11 : FILE CREATED-- 
+  FileCreate onmatch=&quot;include&quot;  /FileCreate 
+  !--SYSMON EVENT ID 12 &amp; 13 &amp; 14 : REGISTRY MODIFICATION-- 
+  RegistryEvent onmatch=&quot;include&quot;  /RegistryEvent 
+  !--SYSMON EVENT ID 15 : ALTERNATE DATA STREAM CREATED-- 
+  FileCreateStreamHash onmatch=&quot;include&quot;  /FileCreateStreamHash  
+  PipeEvent onmatch=&quot;include&quot;  /PipeEvent 
+  /EventFiltering 
+ /Sysmon </code></pre><figure id="2345b2cc-075b-80af-89a6-d1e1903887b5" class="image"><a href="92741F3B-97A8-4DF4-B1A0-75CEA7A1BEA2.png"><img style="width:685.9605712890625px" src="92741F3B-97A8-4DF4-B1A0-75CEA7A1BEA2.png"/></a></figure><p id="2345b2cc-075b-80a2-97c9-fb0a4466931a" class="">
+</p><h2 id="2345b2cc-075b-8016-95ac-dcfe9503adc2" class="">Collecting Linux Logs with Wazuh</h2><p id="2345b2cc-075b-80d4-92ad-c3e402764362" class="">Capturing logs from a Linux agent is a simple process similar to capturing events from a Windows agent. We will be using Wazuh’s log collector service to create an entry on the agent to instruct what logs should be sent to the Wazuh management server.</p><p id="2345b2cc-075b-8097-aa2e-dc980ba17fee" class="">For example, in this task, we will be monitoring the logs of an Apache2 web server. To begin, let’s configure the log collector service on a Linux server running the Wazuh agent.</p><p id="2345b2cc-075b-8011-8fa5-c16a344d152b" class="">Wazuh comes with many rules that enable Wazuh to analyze log files and can be found in <code>/var/ossec/ruleset/rules</code>. Some common applications include:</p><ul id="2345b2cc-075b-80a1-986b-d1db81cdc1b5" class="bulleted-list"><li style="list-style-type:disc">Docker</li></ul><ul id="2345b2cc-075b-8059-9bdf-d36dd4fc29bc" class="bulleted-list"><li style="list-style-type:disc">FTP</li></ul><ul id="2345b2cc-075b-80a2-8fb1-ea6686a03307" class="bulleted-list"><li style="list-style-type:disc">WordPress</li></ul><ul id="2345b2cc-075b-8069-8244-c82799cc8925" class="bulleted-list"><li style="list-style-type:disc">SQL Server</li></ul><ul id="2345b2cc-075b-8035-a561-d6285ff2e859" class="bulleted-list"><li style="list-style-type:disc">MongoDB</li></ul><ul id="2345b2cc-075b-8076-ac4e-fc31a1dff4aa" class="bulleted-list"><li style="list-style-type:disc">Firewalld</li></ul><ul id="2345b2cc-075b-80cf-9dd0-c8c6561a37b9" class="bulleted-list"><li style="list-style-type:disc">And many, many more (approximately 900).</li></ul><p id="2345b2cc-075b-8074-a2c4-e517020ef910" class="">However, you can always make your own rules. In this task, Wazuh will digest <em>Apache2</em> logs using the <code>0250-apache_rules.xml</code> ruleset.</p><p id="2345b2cc-075b-80fc-aea5-d27f7c35e79b" class="">This ruleset can analyze apache2 logs for warnings and error messages like so: We will need to insert this into the Wazuh’s agent that is sending logs to the Wazuh management servers configuration file located in <code>/var/ossec/etc/ossec.conf</code>:</p><p id="2345b2cc-075b-8013-be6e-e89c7b4633c4" class="">Apache2 Log Analysis</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2345b2cc-075b-80a5-83be-ee4bce305b96" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">  &lt;!-- Apache2 Log Analysis --&gt;
+  &lt;localfile&gt;
+    &lt;location&gt;/var/log/example.log&lt;/location&gt;
+    &lt;log_format&gt;syslog&lt;/log_format&gt;
+  &lt;/localfile&gt;</code></pre><p id="2345b2cc-075b-804b-9be0-ca2fb2f64f48" class="">We will now need to restart the Linux agent running the Apache2 service.</p><p id="2345b2cc-075b-8009-8ec9-d5cf52dfd0c8" class="">
+</p><p id="2345b2cc-075b-8096-83da-f30339f4ee1b" class="">WAZUH API</p><figure id="2345b2cc-075b-802e-a643-df3ee1938978" class="image"><a href="6E4DF230-7BBE-47AE-8905-03992FE76AC4.png"><img style="width:685.986328125px" src="6E4DF230-7BBE-47AE-8905-03992FE76AC4.png"/></a></figure><p id="2345b2cc-075b-807c-ad3d-d120b7cb9062" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

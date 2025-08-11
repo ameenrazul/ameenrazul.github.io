@@ -1,0 +1,688 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>KAPE</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="23e5b2cc-075b-8059-97bf-c9bc9dbfcfa6" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/54fa695b6a8fb47c3e91adf4a5594a81.png"/></div><h1 class="page-title">KAPE</h1><p class="page-description"></p></header><div class="page-body"><h2 id="23e5b2cc-075b-8078-8e73-cc75160fd567" class=""><strong>Revisiting Windows Forensics</strong></h2><p id="23e5b2cc-075b-8044-b361-dc980b598bd7" class="">In the <a href="https://tryhackme.com/room/windowsforensics1">Windows Forensics 1</a> and <a href="https://tryhackme.com/room/windowsforensics2">Windows Forensics 2</a> rooms, we learned about the different artifacts which store information about a user&#x27;s activity on a system. We also learned where those artifacts are located and how they can be accessed and interpreted. However, we did all that manually. In many cases, a forensic investigator doesn&#x27;t have the luxury to perform manual analysis, which can be time-consuming. In such scenarios, it is helpful to have some tools help in automating the evidence collection, sanitization, and processing part.</p><h2 id="23e5b2cc-075b-80c3-85a3-e3fc0e63927c" class=""><strong>Learning Objectives:</strong></h2><p id="23e5b2cc-075b-8068-b031-fad7b80b61d8" class="">In this room, we will:</p><ul id="23e5b2cc-075b-8004-b2c5-cc129812a27c" class="bulleted-list"><li style="list-style-type:disc">Learn about KAPE</li></ul><ul id="23e5b2cc-075b-8034-8ec4-f00e1bf0be18" class="bulleted-list"><li style="list-style-type:disc">How KAPE works</li></ul><ul id="23e5b2cc-075b-80cb-b2b9-ddd81269c870" class="bulleted-list"><li style="list-style-type:disc">The different targets and modules used by KAPE</li></ul><ul id="23e5b2cc-075b-80e5-8a5b-f98ef6e86aa2" class="bulleted-list"><li style="list-style-type:disc">Collection and analysis of forensic data using KAPE</li></ul><h2 id="23e5b2cc-075b-8054-9665-e26c93dd7b72" class=""><strong>Introduction to KAPE:</strong></h2><p id="23e5b2cc-075b-80dd-a643-f8062f63fe86" class="">Kroll Artifact Parser and Extractor (KAPE)<br/> parses and extracts Windows forensics artifacts. It is a tool that can <br/>significantly reduce the time needed to respond to an incident by <br/>providing forensic artifacts from a live system or a storage device much<br/> earlier than the imaging process completes.</p><p id="23e5b2cc-075b-8023-bebc-c1527fb279ec" class="">KAPE <br/>serves two primary purposes, 1) collect files and 2) process the <br/>collected files as per the provided options. For achieving these <br/>purposes, KAPE<br/> uses the concept of targets and modules. Targets can be defined as the <br/>forensic artifacts that need to be collected. Modules are programs that <br/>process the collected artifacts and extract information from them. We <br/>will learn about them in the upcoming tasks.</p><h2 id="23e5b2cc-075b-807d-a989-cadfdeb5069e" class=""><strong>How it works</strong></h2><p id="23e5b2cc-075b-8076-b09e-e1dd94c48bbe" class="">KAPE is extensible and highly configurable. In essence, the KAPE binary ﻿ collects files and processes them as per the provided configuration.</p><p id="23e5b2cc-075b-8023-96f0-cfa18a4a6d4a" class="">The collection of files (targets) KAPE<br/> adds the files to a queue and copies them in two passes. In the first <br/>pass, it copies the files that it can. This works for files that the OS has not locked. The rest<br/> of the files are passed to a secondary queue. The secondary queue is <br/>processed using a different technique that uses raw disk reads to bypass<br/> the OS <br/>locks and copy the files. The copied files are saved with original <br/>timestamps and metadata and stored in a similar directory structure.</p><p id="23e5b2cc-075b-80cf-8e02-d863c690c30e" class="">Once the data is collected, KAPE<br/> can process it using modules. The modules can be independent binaries <br/>that run on the collected data and process them to extract information. <br/>For example, KAPE<br/> will collect and copy the Prefetch file to our target destination <br/>during the target collection. Running a Prefetch Parser (PECmd) module <br/>on this target will extract the prefetch file and save it in a CSV <br/>file.</p><figure id="23e5b2cc-075b-80b0-ac95-e925ad1b001d" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/61306d87a330ed00419e22e7/room-content/d1489a8062d714fa227dd3382dfd15d1.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/61306d87a330ed00419e22e7/room-content/d1489a8062d714fa227dd3382dfd15d1.png"/></a></figure><p id="23e5b2cc-075b-80f4-a9d6-f7bcf0034e63" class="">As the above image shows, KAPE can extract targets from a Live system, a mounted image, or the <a href="https://www.f-response.com/">F-response</a> utility. KAPE<br/> does not need to be installed. It is portable and can be used from <br/>network locations or USB drives. To proceed further, click the Start <br/>Machine button on the top-right corner to start the attached VM in split-screen mode. Alternatively, you can log in to the machine using the following credentials:</p><p id="23e5b2cc-075b-80a1-af5b-fe0c13ff9f56" class=""><strong>Username</strong>: thm-4n6</p><p id="23e5b2cc-075b-8007-9020-c10e179fddb4" class=""><strong>Password</strong>: 123</p><p id="23e5b2cc-075b-8038-869d-f27358b99fad" class="">In the attached VM, you will find KAPE on the Desktop in the folder titled KAPE.In this folder, you will find the following files and directories:</p><figure id="23e5b2cc-075b-801c-8df2-c3fc7b6468e3" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/61306d87a330ed00419e22e7/room-content/e56dffdd3de51e8dbc5647270901b603.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/61306d87a330ed00419e22e7/room-content/e56dffdd3de51e8dbc5647270901b603.png"/></a></figure><p id="23e5b2cc-075b-8004-bb0d-c1ed066bd8de" class="">You can see two binaries in this directory, kape.exe and gkape.exe. The first is the CLI version of KAPE, and the second is a GUI version (symbolized by the &#x27;g&#x27; prefix).</p><p id="23e5b2cc-075b-8052-bf64-f9027cb93233" class="">gkape.settings stores the default settings of the GUI version.</p><p id="23e5b2cc-075b-809f-bf98-ec76f3cf4264" class="">Get-KAPEUpdate.ps1, as the name suggests, is a Powershell script that checks and downloads updates.</p><p id="23e5b2cc-075b-80d1-abe9-e43bd638f259" class="">ChangeLog.txt and Documentation are self-explanatory. We will explore Targets and Modules in the following tasks</p><p id="23e5b2cc-075b-808a-94a4-f40321e43712" class="">
+</p><h2 id="23e5b2cc-075b-80a8-9379-f29d04cd41a4" class="">Target Options</h2><p id="23e5b2cc-075b-805b-a65c-cafd394c664e" class="">
+</p><p id="23e5b2cc-075b-8066-a643-e67e4aa68461" class="">In KAPE&#x27;s lexicon, <code>Targets</code> are the artifacts that need to be collected from a system or image and copied to our provided destination. For example, as we learned in the <br/>last room, Windows Prefetch is a forensic artifact for evidence of execution so that we can create a <code>Target</code> for it. Similarly, we can also create <code>Targets</code> for the registry hives. In short, <code>Targets</code> copy files from one place to another.</p><p id="23e5b2cc-075b-804c-9cf6-cc7a120de785" class="">When we open the <code>Targets</code> directory of KAPE, this is what we will see:</p><figure id="23e5b2cc-075b-8014-ac12-d6ab9d13cd01" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/61306d87a330ed00419e22e7/room-content/3902f2f2088969b01e9672553f48c9e4.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/61306d87a330ed00419e22e7/room-content/3902f2f2088969b01e9672553f48c9e4.png"/></a></figure><p id="23e5b2cc-075b-80e5-be8d-fd4af7f37559" class="">The last four files at the bottom are guides and templates to create <code>Targets</code> and <code>Compound Targets</code> of our own. We will discuss <code>Compound Targets</code> later in this task. As you can see, the targets are grouped into different directories. Let&#x27;s check out the <code>Windows</code> directory to see what we have:</p><figure id="23e5b2cc-075b-8052-9614-f71615f899da" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/61306d87a330ed00419e22e7/room-content/20d9d19240bcaeb95b55ad2efb105c1c.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/61306d87a330ed00419e22e7/room-content/20d9d19240bcaeb95b55ad2efb105c1c.png"/></a></figure><p id="23e5b2cc-075b-80b6-91c0-ef77718a7f84" class="">We can see different .tkape extension files. This is how a <code>Target</code> is defined for KAPE. A TKAPE file contains information about the <br/>artifact that we want to collect, such as the path, category, and file <br/>masks to collect. As an example, below is how the Prefetch <code>Target</code> is defined.</p><figure id="23e5b2cc-075b-8045-8382-e05d94a4de35" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/61306d87a330ed00419e22e7/room-content/92dce7807d9ea37f6f5e1e62f271275b.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/61306d87a330ed00419e22e7/room-content/92dce7807d9ea37f6f5e1e62f271275b.png"/></a></figure><p id="23e5b2cc-075b-808c-ac50-f0b2df64ac49" class="">This TKAPE file tells KAPE to collect files with the file mask <code>*.pf</code> from the path <code>C:\Windows\prefetch</code> and <code>C:\Windows.old\prefetch</code>.</p><p id="23e5b2cc-075b-8021-b327-cf3c401bfca7" class="">Notice that we have the <code>C:\Windows.old</code> path listed here <br/>as well. This path contains files retained after Windows has updated to a<br/> new version. For forensic analysis, we can also find interesting <br/>historical artifacts from this directory.</p><h2 id="23e5b2cc-075b-80cb-85b9-dcca96a4ea94" class=""><strong>Compound Targets:</strong></h2><p id="23e5b2cc-075b-803f-812c-c417dd269826" class="">KAPE also supports <code>Compound Targets</code>. These are <code>Targets</code><br/> that are compounds of multiple other targets. As mentioned in the <br/>previous tasks, KAPE is often used for quick triage collection and <br/>analysis. The purpose of KAPE will not be fulfilled if we have to <br/>collect each artifact individually. Therefore, <code>Compound Targets</code> help us collect multiple targets by giving a single command. Examples of <code>Compound Targets</code> include <code>!BasicCollection</code>, <code>!SANS_triage</code> and <code>KAPEtriage</code>. We can view the <code>Compound Targets</code> on the path <code>KAPE\Targets\Compound</code>. The following image shows what a <code>Compound Target</code> for evidence of execution looks like:</p><figure id="23e5b2cc-075b-8059-8659-cfe91ec40998" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/61306d87a330ed00419e22e7/room-content/76260284a8d68c7d38126a7237e9c16a.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/61306d87a330ed00419e22e7/room-content/76260284a8d68c7d38126a7237e9c16a.png"/></a></figure><p id="23e5b2cc-075b-801d-9c0a-c34c4bb080b8" class="">The above <code>Compound Target</code> will collect evidence of execution from Prefetch, RecentFileCache, AmCache, and Syscache <code>Targets</code>.</p><h2 id="23e5b2cc-075b-8056-8dbb-f4635626caef" class=""><strong>!Disabled</strong></h2><p id="23e5b2cc-075b-802a-aee7-d1e2e1a12665" class="">This directory contains <code>Targets</code> that you want to keep in the KAPE instance, but you don&#x27;t want them to appear in the active Targets list.</p><h2 id="23e5b2cc-075b-809b-9b24-e4bb2826dea9" class=""><strong>!Local</strong></h2><p id="23e5b2cc-075b-80fa-a5c3-f2a356f2026e" class="">If you have created some <code>Targets</code> that you don&#x27;t want to sync with the KAPE Github repository, you can place them in this directory. These can be <code>Targets</code> that are specific to your environment. Similarly, anything not present in the Github repository when we update KAPE will be moved to the <code>!Local</code> directory.</p><h2 id="23e5b2cc-075b-803e-9f5f-edb33bb56469" class="">Modules<br/></h2><p id="23e5b2cc-075b-80c0-97d4-eba6ab239ba1" class=""><code>Modules</code>, in KAPE&#x27;s lexicon, run specific tools against the provided set of files. Their <br/>goal is not to copy files from one place to another but rather run some command and store the output. Generally, the output is in the form of CSV or TXT files.</p><p id="23e5b2cc-075b-809b-b6d9-ed492a802618" class="">This is what the <code>Modules</code> directory looks like in KAPE:</p><figure id="23e5b2cc-075b-80f0-90f0-e0749226d178" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/61306d87a330ed00419e22e7/room-content/e4dbd842fa5b548ac8fade7b94ab0c8a.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/61306d87a330ed00419e22e7/room-content/e4dbd842fa5b548ac8fade7b94ab0c8a.png"/></a></figure><p id="23e5b2cc-075b-80f8-8d59-f045a7242621" class="">Similar to the previous task, we see guides and templates for creating <code>Modules</code> and <code>Compound Modules</code>. We also see the <code>!Disabled</code>, <code>!Local</code> and <code>Compound</code> directories, which are similar to what we saw in the previous task. We will not discuss these again, as we discussed them in the last task. We see that most of the <code>Modules</code> are grouped together in different directories. One thing we find different is the <code>bin</code> directory. We will discuss that in a bit. For now, let&#x27;s open the Windows directory and see what we have there:</p><figure id="23e5b2cc-075b-80b2-8d2e-f5bc291984e1" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/61306d87a330ed00419e22e7/room-content/9a9760a2f1004e74b23294681f7bfdef.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/61306d87a330ed00419e22e7/room-content/9a9760a2f1004e74b23294681f7bfdef.png"/></a></figure><p id="23e5b2cc-075b-805f-8e5e-e6026997169c" class="">Here we see files with the <code>.mkape</code> extension. These are understood as <code>Modules</code> by KAPE. Let&#x27;s open an MKAPE file and see how it is structured. The following image shows the Windows_IPConfig MKAPE file.</p><figure id="23e5b2cc-075b-8040-a6e3-e74d079c3e41" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/61306d87a330ed00419e22e7/room-content/15bfb563be1d5bf1e988ab3e7486b58e.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/61306d87a330ed00419e22e7/room-content/15bfb563be1d5bf1e988ab3e7486b58e.png"/></a></figure><p id="23e5b2cc-075b-806e-bfe9-e02ca7f983fb" class="">Notice that the MKAPE file tells KAPE about the executable that has to be run, the command line parameters of the executable file, the output export format, and the filename to export to. But what if the executable that we want to run is not present on the system? This brings us to the <code>bin</code> directory.</p><h2 id="23e5b2cc-075b-803d-b138-edf342fe870c" class=""><strong>The bin directory:</strong></h2><p id="23e5b2cc-075b-80e5-bc30-ec7eeed26a7e" class="">The <code>bin</code> directory contains executables that we want to run on the system but are not natively present on most systems. KAPE will run executables either from the <code>bin</code> directory or the complete path. An example of files to be kept in the <code>bin</code> directory are Eric Zimmerman&#x27;s tools, which are generally not present on a Windows system. We used them extensively in the Windows Forensics rooms.</p><figure id="23e5b2cc-075b-808c-832c-f19af6bd55b6" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/61306d87a330ed00419e22e7/room-content/a3547f25552d5d440d4f85022b53bc01.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/61306d87a330ed00419e22e7/room-content/a3547f25552d5d440d4f85022b53bc01.png"/></a></figure><p id="23e5b2cc-075b-8003-af38-d6d5652357f8" class="">Notice that most of the binaries present here are from Eric Zimmerman&#x27;s Tools.</p><p id="23e5b2cc-075b-804e-a17a-fd339101656e" class="">
+</p><h2 id="23e5b2cc-075b-80ed-b1db-c86eb3e71592" class="">KAPE GUI</h2><p id="23e5b2cc-075b-80e0-a554-ea09e7d84c43" class=""><br/>Now that we have learned about the different components of KAPE let&#x27;s take it for a test drive. In the attached VM, double-click to open the gkape.exe file. You will see the following Window:</p><figure id="23e5b2cc-075b-803b-8650-ef97ca13f65b" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/61306d87a330ed00419e22e7/room-content/6af6adcb6ce48c0dd32aec787206e20d.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/61306d87a330ed00419e22e7/room-content/6af6adcb6ce48c0dd32aec787206e20d.png"/></a></figure><p id="23e5b2cc-075b-80fa-beed-ccb6b16fcf66" class=""><strong>Tip: </strong>If the Window is not correctly visible in the <br/>split-screen, you can open it in a full browser tab by clicking this <br/>button. Also try maximizing the gkape.exe window or remove maximizing to<br/> be able to view all options.</p><figure id="23e5b2cc-075b-802c-a708-c53144bda481" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/61306d87a330ed00419e22e7/room-content/af1a133b7384aac273451343dadc032d.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/61306d87a330ed00419e22e7/room-content/af1a133b7384aac273451343dadc032d.png"/></a></figure><p id="23e5b2cc-075b-8074-b0c1-ce37b4e240af" class="">Here you can see that there are different options, but most are disabled. To collect <code>Targets</code> We will go ahead by enabling the <code>Use Target Options</code> checkbox. This will enable the options present in the left half of the Window:</p><figure id="23e5b2cc-075b-80e5-aa85-f754767ca05c" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/5e9c5d0148cf664325c8a075/room-content/5e9c5d0148cf664325c8a075-1719406320965"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5e9c5d0148cf664325c8a075/room-content/5e9c5d0148cf664325c8a075-1719406320965"/></a></figure><p id="23e5b2cc-075b-8066-a126-e961a32a2d09" class="">If we want to perform forensics on the same machine on which KAPE is running, we will provide <code>C:\</code><br/> for the Target source. We can select the target destination of our <br/>choice. All the triage files will be copied to the Target destination <br/>that we provide.</p><figure id="23e5b2cc-075b-80ca-a58a-e716869d2879" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/61306d87a330ed00419e22e7/room-content/f4a865927aef7b0fa4668f13ef8f9cfa.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/61306d87a330ed00419e22e7/room-content/f4a865927aef7b0fa4668f13ef8f9cfa.png"/></a></figure><p id="23e5b2cc-075b-80b4-8a41-c059fd6fefee" class="">Here, the <code>Flush</code><br/> checkbox will delete all the contents of the Target destination, so we <br/>have to be careful when using that. We have disabled the <code>Flush</code> checkbox so that it does not delete data already present in the directories. <code>Add %d</code> will append date info to the directory name where the collected data is saved. Similarly, <code>Add %m</code><br/> will append machine info to the Target destination directory. We can <br/>select our desired Target from the list shown above. The Search bar <br/>helps us search for the names of the desired Targets quickly.</p><figure id="23e5b2cc-075b-80ca-a7cf-f98287604802" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/61306d87a330ed00419e22e7/room-content/a513c60028421e8fd103a161e1492e0a.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/61306d87a330ed00419e22e7/room-content/a513c60028421e8fd103a161e1492e0a.png"/></a></figure><p id="23e5b2cc-075b-80c9-8855-d607634d7a74" class="">We can select if we want to process Volume Shadow Copies by enabling <code>Process VSCs</code>. We can select the <code>transfer</code> checkbox if we want to transfer the collected artifacts through an SFTP server or an S3 bucket.<br/> For transfer, the files must be enclosed in a container, which can be <br/>Zip, VHD, or VHDX. Similarly, we can provide exclusions based on SHA-1, <br/>and KAPE will not copy the excluded files. When enclosing in a <br/>container, we will need to give a <code>Base name</code> that will be used for all the created files. It is not required if we are not transferring files or enclosing them in a container.</p><figure id="23e5b2cc-075b-80d8-837f-e13bac5e9daf" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/61306d87a330ed00419e22e7/room-content/22a7063c7c3bb75bc2ddaede7fcf9f57.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/61306d87a330ed00419e22e7/room-content/22a7063c7c3bb75bc2ddaede7fcf9f57.png"/></a></figure><p id="23e5b2cc-075b-8061-a149-e7b694a687d3" class="">In the <code>Current command line</code> tab,<br/> we can see the command line options being added or removed while <br/>configuring the UI. This Window will show more options in the command <br/>line as we add options. Please note that the destination path in your <br/>case will be different from the one shown in the image. Notice the <code>--tflush</code> flag here. It means that when this command line was created, the <code>Flush</code> checkbox was still checked.</p><figure id="23e5b2cc-075b-80c9-aea0-e8009be03434" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/61306d87a330ed00419e22e7/room-content/fd514feceacfd972097ef26b5ac433ed.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/61306d87a330ed00419e22e7/room-content/fd514feceacfd972097ef26b5ac433ed.png"/></a></figure><p id="23e5b2cc-075b-80ce-aaf4-da8ee35af87a" class="">By checking the Use Module Options checkbox, the right side of the KAPE Window will also be enabled.</p><figure id="23e5b2cc-075b-8051-8b7a-c6bd99341cf4" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/61306d87a330ed00419e22e7/room-content/811ceeea4083ab70546d89f5ecfc2f6f.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/61306d87a330ed00419e22e7/room-content/811ceeea4083ab70546d89f5ecfc2f6f.png"/></a></figure><p id="23e5b2cc-075b-80d9-9a15-d066c1ff85b3" class="">When<br/> using both Target and Module Options, providing Module Source is not <br/>required. The selected Modules will use the Target destination as the <br/>source.</p><figure id="23e5b2cc-075b-80ad-8e0c-ce51159bdfb4" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/61306d87a330ed00419e22e7/room-content/8807a5d8eaf027af5f6e0a174e8079d3.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/61306d87a330ed00419e22e7/room-content/8807a5d8eaf027af5f6e0a174e8079d3.png"/></a></figure><p id="23e5b2cc-075b-805c-90fd-cc9ac70d22bb" class="">The rest of the options for Modules are similar to the ones for Targets, so we won&#x27;t go into details for them.</p><p id="23e5b2cc-075b-80c1-ad9e-ea1db3e96f5c" class="">Below<br/> you will see what the configuration looks like when we have KAPE all <br/>set up for collecting Targets and processing them using Modules.</p><figure id="23e5b2cc-075b-8064-8590-fbd9d3a425a9" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/61306d87a330ed00419e22e7/room-content/d4e260cbc96fd497859c9133cdb345a8.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/61306d87a330ed00419e22e7/room-content/d4e260cbc96fd497859c9133cdb345a8.png"/></a></figure><p id="23e5b2cc-075b-8083-8aa8-c6ad919d4520" class="">We have selected the <code>KapeTriage</code> compound Target and <code>!EZParser</code> Compound Module. The command line below shows the CLI command that will be run. The <code>Execute!</code> button in the bottom right corner will execute the command. The <code>Disable flush warnings</code> checkbox underneath it will not warn us when we are using the <code>Flush</code> flags. When we press <code>Execute!</code> We will see a command line window open and show us the logs as KAPE performs its tasks. It will take a few minutes to execute since it will be collecting all the data and then running the module processes on it. Once it completes, it will show us the total execution time, and we can press any key to terminate the command window.</p><p id="23e5b2cc-075b-80ef-9f9a-c7242b16c67e" class="">
+</p><hr id="23e5b2cc-075b-806a-9b18-e8e85ced21eb"/><h3 id="23e5b2cc-075b-80c7-8d2a-f4afdc43a4a9" class=""><strong>KAPE: Command-Line Interface (CLI) Overview</strong></h3><ul id="23e5b2cc-075b-8089-b0da-f93c4e46885e" class="bulleted-list"><li style="list-style-type:disc"><strong>Primary Usage</strong>: Although KAPE has a GUI (<code>gkape.exe</code>), it is fundamentally a <strong>command-line tool</strong>.</li></ul><ul id="23e5b2cc-075b-80f1-817f-cff4d98b693d" class="bulleted-list"><li style="list-style-type:disc"><strong>Switches</strong>: Running <code>kape.exe</code> in PowerShell shows available switches.</li></ul><hr id="23e5b2cc-075b-8034-90d2-fec419133852"/><h3 id="23e5b2cc-075b-8050-b94c-d1d600a8fa50" class=""><strong>Essential CLI Switches</strong></h3><h3 id="23e5b2cc-075b-8099-adc3-e82992212197" class=""><strong>For Target Collection:</strong></h3><ul id="23e5b2cc-075b-8036-ba07-e37fd9cc7ce1" class="bulleted-list"><li style="list-style-type:disc"><code>-tsource</code> → Source path (e.g., <code>C:</code>)</li></ul><ul id="23e5b2cc-075b-808c-99ec-c2c8a4e81f58" class="bulleted-list"><li style="list-style-type:disc"><code>-target</code> → Target name (e.g., <code>KapeTriage</code>)</li></ul><ul id="23e5b2cc-075b-80b8-b640-f96976a59eb1" class="bulleted-list"><li style="list-style-type:disc"><code>-tdest</code> → Destination for collected files</li></ul><h3 id="23e5b2cc-075b-8072-8937-d3af4485de7a" class=""><strong>For Module Processing:</strong></h3><ul id="23e5b2cc-075b-802b-8ef9-d8d5d08b6d47" class="bulleted-list"><li style="list-style-type:disc"><code>-module</code> → Module name (e.g., <code>!EZParser</code>)</li></ul><ul id="23e5b2cc-075b-80bf-bbc5-fd375c305d50" class="bulleted-list"><li style="list-style-type:disc"><code>-mdest</code> → Output directory for module results</li></ul><h3 id="23e5b2cc-075b-80c7-9a30-e21849610efe" class=""><strong>Optional:</strong></h3><ul id="23e5b2cc-075b-8086-9d25-ed17106d1d4d" class="bulleted-list"><li style="list-style-type:disc"><code>-tflush</code> → Flush target destination before collecting</li></ul><ul id="23e5b2cc-075b-80af-a542-e9672511a78e" class="bulleted-list"><li style="list-style-type:disc"><code>-msource</code> → Optional module source path (can default to <code>-tdest</code>)</li></ul><hr id="23e5b2cc-075b-801b-b666-f4b11eae95ae"/><h3 id="23e5b2cc-075b-808e-90cf-c54eb18ba085" class=""><strong>Sample Full Command:</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="23e5b2cc-075b-808b-b12e-e0887cff31cf" class="code code-wrap"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">kape.exe --tsource C: --target KapeTriage --tdest C:\Users\thm-4n6\Desktop\Target --mdest C:\Users\thm-4n6\Desktop\module --module !EZParser
+</code></pre><ul id="23e5b2cc-075b-8029-9dff-cedd15a1b932" class="bulleted-list"><li style="list-style-type:disc"><strong>Purpose</strong>: Collects triage data and processes it using <code>!EZParser</code>.</li></ul><blockquote id="23e5b2cc-075b-8035-9e18-ff9ed2f285f5" class="">Note: Must be run in an elevated (Admin) PowerShell session.</blockquote><hr id="23e5b2cc-075b-803f-b1da-f2ae5a5f3da1"/><h3 id="23e5b2cc-075b-8068-b799-ca2ad8ee485d" class=""><strong>Batch Mode (_kape.cli)</strong></h3><ul id="23e5b2cc-075b-8098-95fa-f4cb05e8d547" class="bulleted-list"><li style="list-style-type:disc">Allows <strong>automating KAPE</strong> execution by saving the command in a <code>_kape.cli</code> file in the same folder as <code>kape.exe</code>.</li></ul><ul id="23e5b2cc-075b-80bd-9d89-def3d36418d6" class="bulleted-list"><li style="list-style-type:disc">On launch, KAPE auto-executes the contents of <code>_kape.cli</code>.</li></ul><h3 id="23e5b2cc-075b-8093-8dbb-facedd59f2a7" class=""><strong>Example </strong><code><strong>_kape.cli</strong></code><strong> File Content:</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="23e5b2cc-075b-80ac-bd25-dfd62a64b51c" class="code code-wrap"><code class="language-Objective-C" style="white-space:pre-wrap;word-break:break-all">--tsource C: --target KapeTriage --tdest C:\Users\thm-4n6\Desktop\Target --mdest C:\Users\thm-4n6\Desktop\module --module !EZParser
+</code></pre><ul id="23e5b2cc-075b-809f-a529-e1291a578a99" class="bulleted-list"><li style="list-style-type:disc">Helpful for <strong>non-technical users</strong>—just right-click and run <code>kape.exe</code> as admin.</li></ul><hr id="23e5b2cc-075b-80da-860d-c9424a5f2873"/><p id="23e5b2cc-075b-8001-a5ce-d15bbf8e54aa" class="">Run the command <code>kape.exe</code> in an elevated shell. Take a look at the different switches and variables. What variable adds the collection timestamp to the target <br/>destination?</p><figure id="23e5b2cc-075b-8018-9645-ef1486cd0170" class="image"><a href="E5B1B480-F690-4173-97E2-62B80572ECCC.png"><img style="width:514.952880859375px" src="E5B1B480-F690-4173-97E2-62B80572ECCC.png"/></a></figure><p id="23e5b2cc-075b-8043-a069-c601d81f1f83" class="">What variable adds the machine information to the target destination?</p><figure id="23e5b2cc-075b-808c-93f8-fd6d7b1b926f" class="image"><a href="E5B1B480-F690-4173-97E2-62B80572ECCC%201.png"><img style="width:514.952880859375px" src="E5B1B480-F690-4173-97E2-62B80572ECCC%201.png"/></a></figure><p id="23e5b2cc-075b-80d7-a05b-db35fb208630" class="">Which switch can be used to show debug information during processing?</p><figure id="23e5b2cc-075b-80df-954e-eb7ce39e1e61" class="image"><a href="9A494D3D-A996-412E-A777-84929264AFA7.png"><img style="width:619.9500122070312px" src="9A494D3D-A996-412E-A777-84929264AFA7.png"/></a></figure><p id="23e5b2cc-075b-80b5-a65c-d9d266e5a426" class="">Which switch is used to list all targets available?</p><figure id="23e5b2cc-075b-805b-8f63-edcf0d1772cc" class="image"><a href="CF840F1E-772B-4998-ADA6-8B1BE97DBA21.png"><img style="width:619.9666748046875px" src="CF840F1E-772B-4998-ADA6-8B1BE97DBA21.png"/></a></figure><p id="23e5b2cc-075b-80aa-852b-e96e2170e190" class="">Which flag, when used with batch mode, will delete the _kape.cli, targets and modules files after the execution is complete?</p><figure id="23e5b2cc-075b-807b-be80-e4a17d8ded75" class="image"><a href="602A1A54-0C96-4CE4-955E-D3740D461A85.png"><img style="width:619.9666748046875px" src="602A1A54-0C96-4CE4-955E-D3740D461A85.png"/></a></figure><p id="23e5b2cc-075b-80b5-a79a-e109a99bf163" class="">
+</p><p id="23e5b2cc-075b-8099-b40b-dc80da099373" class="">Task 7 Hands-on Challenge</p><p id="23e5b2cc-075b-80a1-b959-cfc41aa072f1" class="">I checked what KapeTriage target and !EZTools module meant. KapeTriage <br/>gathers a collection of targets that are commonly used in DFIR settings, so it seems like a comprehensive selection of registry, logs, and others. !EZTools module is a collection of tools created by Zimmerman. I basically kept the settings used during practice.</p><p id="23e5b2cc-075b-802f-93fa-f5ecbbed5b1a" class="">Here is the same reference I mentioned earlier that I used. I exported as CSV so I can use EZViewer if needed.</p><p id="23e5b2cc-075b-808b-ada7-d95aeb1e4352" class="">Zoom image will be displayed</p><figure id="23e5b2cc-075b-80c4-9359-ef2eb51b91a3" class="image"><a href="https://miro.medium.com/v2/resize:fit:1667/1*0kHfk8niyGvQ2bc7dwK34g.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1667/1*0kHfk8niyGvQ2bc7dwK34g.png"/></a></figure><p id="23e5b2cc-075b-8001-b261-dc5449507469" class="">1:Two USB Mass Storage devices were attached to this Virtual Machine. One had a Serial Number 0123456789ABCDE. What is the Serial Number of the other USB Device?</p><p id="23e5b2cc-075b-8044-af9a-ca9199eea582" class="">I opened EZViewer and loaded DeviceClasses C …. System.csv. I took out my cheat sheet from Windows Forensic 1 and saw that USB/External drives <br/>are found in the System hive, so this may seem like a good choice to start.</p><figure id="23e5b2cc-075b-8046-bb77-f9965dc611a1" class="image"><a href="https://miro.medium.com/v2/resize:fit:1167/1*kGRY7bZhlOiKCdcO4YFftA.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1167/1*kGRY7bZhlOiKCdcO4YFftA.png"/></a></figure><p id="23e5b2cc-075b-805b-a509-fd6ccdc68b51" class="">I<br/> dragged and dropped the .csv file into EZViewer, extended some columns,<br/> and saw the familiar 012345 serial number in the USB section. There <br/>were only 4 USB so I entered them each to see which was correct.</p><figure id="23e5b2cc-075b-809f-825a-ec334e7edd90" class="image"><a href="https://miro.medium.com/v2/resize:fit:3143/1*5-z1omb5g2pcg3_McevhZQ.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:3143/1*5-z1omb5g2pcg3_McevhZQ.png"/></a></figure><p id="23e5b2cc-075b-806a-931b-d9bcee2b5ebe" class="">Answer: 1C6F654E59A3B0C179D366AE&amp;0</p><p id="23e5b2cc-075b-80a6-a887-f2f71e69b922" class="">2:<br/> 7zip, Google Chrome and Mozilla Firefox were installed from a Network <br/>drive location on the Virtual Machine. What was the drive letter and <br/>path of the directory from where these software were installed?</p><p id="23e5b2cc-075b-80a2-8cb0-e0030a1e2688" class="">This one I had to look for help as I was really stuck on what to do. I followed this <a href="https://www.youtube.com/watch?v=AcYNcZurEOA">video</a> for this question.</p><p id="23e5b2cc-075b-806b-9fd0-d3528e643a6f" class="">We<br/> are going to select AutomaticDestination and load it into EZViewer. <br/>This can be found in the module folder you named and then going to <br/>FileFolderAccess.</p><p id="23e5b2cc-075b-80e5-a0b5-f3fa484167f8" class="">Zoom image will be displayed</p><figure id="23e5b2cc-075b-804d-bda0-e4f58d074d59" class="image"><a href="https://miro.medium.com/v2/resize:fit:1167/1*4XDISEmQoO_QGe2WEKJwzA.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1167/1*4XDISEmQoO_QGe2WEKJwzA.png"/></a></figure><p id="23e5b2cc-075b-8032-942a-f0c1e4696a27" class="">Under<br/> the path column, there are a few network drives. The E drive seems like<br/> it’s a network drive used to download KAPE. Downloading 7zip, Google <br/>Chrome, and Mozilla Firefox does sound like a set up for a new machine.</p><figure id="23e5b2cc-075b-808c-963b-dc42dad7e521" class="image"><a href="https://miro.medium.com/v2/resize:fit:197/1*lGyeL1MlZBuV3FZ3qLFZtg.png"><img style="width:117.99314880371094px" src="https://miro.medium.com/v2/resize:fit:197/1*lGyeL1MlZBuV3FZ3qLFZtg.png"/></a></figure><p id="23e5b2cc-075b-80a7-af93-f6070957f173" class="">Answer: Z:\setups</p><p id="23e5b2cc-075b-8074-a5fd-c21d7f808ed3" class="">3: What is the execution date and time of CHROMESETUP.EXE in MM/DD/YYYY HH:MM?</p><p id="23e5b2cc-075b-80e3-86b1-f6b2b513d80c" class="">Using the hint, I looked for RecentApps in the registry.</p><p id="23e5b2cc-075b-800f-bae5-e669b5ffe39c" class="">Zoom image will be displayed</p><figure id="23e5b2cc-075b-8051-88e1-d3087b19c724" class="image"><a href="https://miro.medium.com/v2/resize:fit:1167/1*6UJRbN9MJMXT35GMPzMArg.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1167/1*6UJRbN9MJMXT35GMPzMArg.png"/></a></figure><p id="23e5b2cc-075b-8048-913f-e4e803410f05" class="">I was able to find this in EZViewer. Remember that the answer has to be in MM/DD/YYYY HH:MM format</p><p id="23e5b2cc-075b-802f-a2c1-fbe7ba7eb6c6" class="">Zoom image will be displayed</p><figure id="23e5b2cc-075b-804c-ba52-f716fb4517bb" class="image"><a href="https://miro.medium.com/v2/resize:fit:1667/1*rbhdLGIqlpQHnXteFWJFHA.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1667/1*rbhdLGIqlpQHnXteFWJFHA.png"/></a></figure><p id="23e5b2cc-075b-80f0-9e30-fffc423cfddb" class="">Answer: 11/25/2021 03:33</p><p id="23e5b2cc-075b-8094-bfa0-ebf8dcd08254" class="">4: What search query was run on the system?</p><p id="23e5b2cc-075b-80f0-9448-cc12e78110a2" class="">I<br/> used my cheat sheet again and saw that it’s in NTUSER.DAT, and that it <br/>should be either TypedPaths or WordWheelQuery. I wasn’t able to find <br/>TypedPaths but I did find the Query!</p><figure id="23e5b2cc-075b-80c1-9291-fffb3ba3c50f" class="image"><a href="https://miro.medium.com/v2/resize:fit:1158/1*U5vyClHvBEnEcEoG6a493g.png"><img style="width:694.991455078125px" src="https://miro.medium.com/v2/resize:fit:1158/1*U5vyClHvBEnEcEoG6a493g.png"/></a></figure><p id="23e5b2cc-075b-80c6-8008-efd5e6cbeffa" class="">Inside was only one result!</p><p id="23e5b2cc-075b-8066-9768-f650146f2605" class="">Zoom image will be displayed</p><figure id="23e5b2cc-075b-804e-ac78-d2a143958d77" class="image"><a href="https://miro.medium.com/v2/resize:fit:1167/1*qxkQsGwFTEBcQhW08YOG0A.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1167/1*qxkQsGwFTEBcQhW08YOG0A.png"/></a></figure><p id="23e5b2cc-075b-8050-b205-ec70eb8658a7" class="">Answer: RunWallpaperSetup.cmd</p><p id="23e5b2cc-075b-8017-9012-d15befb250d2" class="">5: When was the network named Network 3 First connected to?</p><p id="23e5b2cc-075b-807c-8f50-c4687e5bcae9" class="">The cheat sheet mentioned System hive but I couldn’t find it. I did find something with “Network” which may help.</p><figure id="23e5b2cc-075b-8075-9cb9-cbf0cc712928" class="image"><a href="https://miro.medium.com/v2/resize:fit:915/1*HYO9XA1fDZp-iZr2a4mi5A.png"><img style="width:548.9923095703125px" src="https://miro.medium.com/v2/resize:fit:915/1*HYO9XA1fDZp-iZr2a4mi5A.png"/></a></figure><p id="23e5b2cc-075b-8061-beda-fcbe1d6bae54" class="">Once inside, there were few entries. One had the name we need.</p><p id="23e5b2cc-075b-8040-abcf-fd827b04de83" class="">Zoom image will be displayed</p><figure id="23e5b2cc-075b-808b-ab9d-db6754d26aa2" class="image"><a href="https://miro.medium.com/v2/resize:fit:1667/1*c4eUGg9DiPkYqxV3cLrBOQ.png"><img style="width:700px" src="https://miro.medium.com/v2/resize:fit:1667/1*c4eUGg9DiPkYqxV3cLrBOQ.png"/></a></figure><p id="23e5b2cc-075b-8023-85a2-f2fbbdcf706c" class="">Answer: 11/30/2021 15:44</p><p id="23e5b2cc-075b-80e9-9b9f-e4313cabe02b" class="">6: KAPE was copied from a removable drive. Can you find out what was the drive letter of the drive where KAPE was copied from?</p><p id="23e5b2cc-075b-80e3-bbb9-d09c9539b7c4" class="">Well, I saw this earlier when we were looking for the Network drive location.</p><figure id="23e5b2cc-075b-8082-b5c4-c41b568087ee" class="image"><a href="https://miro.medium.com/v2/resize:fit:197/1*lGyeL1MlZBuV3FZ3qLFZtg.png"><img style="width:117.99314880371094px" src="https://miro.medium.com/v2/resize:fit:197/1*lGyeL1MlZBuV3FZ3qLFZtg.png"/></a></figure><p id="23e5b2cc-075b-80ef-a7f8-d8d6c39079b8" class="">Answer: E:</p><p id="23e5b2cc-075b-8098-b0d0-eebad7d771f7" class=""><strong>Thoughts:</strong></p><p id="23e5b2cc-075b-80cc-80b4-cf2929050ad6" class="">The processing time took incredibly long, very similar to Redline. The hands on weren’t particularly hard except for question 2. I was quite frustrated with the second question in Task 7 as there were no THM hints given. Even the cheat sheet didn’t feel very helpful for that question. I had to resort to write-ups or videos. I’m curious what the thought process of those people were when they knew where to look. Also, out of curiosity, I did look at the hint for question 6 in Task 7. It said to look at Automatic Destinations. I wonder if I could have solved question<br/> 2 if I solved question 7 first.</p><p id="23e5b2cc-075b-80cf-937a-f7182bb31522" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

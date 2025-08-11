@@ -1,0 +1,688 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>OSquery</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2345b2cc-075b-80d7-b595-c4755f8689a0" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/2d1116d536a64d634647d6efa1f2acf0.png"/></div><h1 class="page-title">OSquery</h1><p class="page-description"></p></header><div class="page-body"><p id="2345b2cc-075b-807b-9611-d0f23e4f534a" class=""><a href="https://osquery.io/">Osquery </a>is an <a href="https://github.com/osquery/osquery">open-source </a>agent created by <a href="https://engineering.fb.com/2014/10/29/security/introducing-osquery/">Facebook </a>in 2014. It converts the operating system into a relational database. It allows us to ask questions from the tables using SQL queries, like returning the list of running processes, a user account created on the host, and the process of communicating with certain suspicious domains. It is widely used by Security Analysts, Incident Responders, Threat Hunters, etc. Osquery can be installed on multiple platforms: Windows, Linux, macOS, and FreeBSD.</p><h2 id="2345b2cc-075b-800a-b538-ee4a2fb44b4d" class="">Learning Objective</h2><p id="2345b2cc-075b-8096-b7bd-ce213d769290" class="">In this introductory room, the following learning objectives are covered:</p><ul id="2345b2cc-075b-805e-afad-f90796a2ed88" class="bulleted-list"><li style="list-style-type:disc">What is Osquery, and what problem it solves?</li></ul><ul id="2345b2cc-075b-80aa-b671-e332cca3fb5d" class="bulleted-list"><li style="list-style-type:disc">Osquery in Interactive Mode</li></ul><ul id="2345b2cc-075b-80e4-b677-f10ed035d9a1" class="bulleted-list"><li style="list-style-type:disc">How to use the interactive mode of Osquery to interact with the operating system</li></ul><ul id="2345b2cc-075b-8018-b313-eca2c2e4d97a" class="bulleted-list"><li style="list-style-type:disc">How to join two tables to get a single answer</li></ul><p id="2345b2cc-075b-800f-9cf6-f8f8cadf0d80" class="">
+</p><p id="2345b2cc-075b-8058-b0b4-f7b214ba64c8" class=""><code>osqueryi</code> to bring up the console</p><p id="2345b2cc-075b-80f1-99ed-c893d9c17c48" class="">As per the documentation, meta-commands are prefixed with a <code>.</code>.</p><p id="2345b2cc-075b-801a-aa3a-e4472c31086f" class=""><code>.help</code> then to see information</p><figure id="2345b2cc-075b-8008-83f6-e940686ec240" class="image"><a href="8A514027-EB37-4381-B6F4-537E61BE7CDA.png"><img style="width:489.9828796386719px" src="8A514027-EB37-4381-B6F4-537E61BE7CDA.png"/></a></figure><p id="2345b2cc-075b-80c5-9339-ca39a8922f19" class="">
+</p><p id="2345b2cc-075b-80f5-85a9-d98ff7c89e1a" class="">To list all the available tables that can be queried, use the <code>.tables</code> meta-command.</p><p id="2345b2cc-075b-8069-a4e3-c30c3393b27a" class="">For example, if you wish to check what tables are associated with processes, you can use <code>.tables process</code></p><figure id="2345b2cc-075b-8096-b08e-fe1b91f10cd7" class="image"><a href="image%20252.png"><img style="width:482.0326232910156px" src="image%20252.png"/></a></figure><p id="2345b2cc-075b-80c9-ae2c-d3bdcfa332a4" class="">To list all the tables with the term <code>user</code> in them, we will use <code>.tables user</code> as shown below:<br/></p><figure id="2345b2cc-075b-803f-8e98-d72a083fa048" class="image"><a href="image%20253.png"><img style="width:399.94427490234375px" src="image%20253.png"/></a></figure><h3 id="2345b2cc-075b-808e-aa46-ca309778dd82" class="">Understanding the table Schema</h3><p id="2345b2cc-075b-808f-9c73-c8e890cc042c" class="">Table names are not enough to know what information it contains without actually querying it. Knowledge of columns and types (known as a <strong>schema</strong> ) for each table is also helpful.</p><p id="2345b2cc-075b-8026-b9eb-f6acbfa59fc3" class="">We can list a table&#x27;s schema with the following meta-command: <code>.schema table_name</code></p><p id="2345b2cc-075b-8096-a32c-e30a67ead660" class="">Here, we are interested in understanding the columns in the user&#x27;s table.</p><figure id="2345b2cc-075b-8026-b1ad-dd26b66dab64" class="image"><a href="52309B3B-2FFF-4A7C-A033-3C13292642E6.png"><img style="width:685.72900390625px" src="52309B3B-2FFF-4A7C-A033-3C13292642E6.png"/></a></figure><p id="2345b2cc-075b-8039-8616-fa1e933c72ab" class="">The above result provides the column names like username, description, PID followed by respective datatypes like BIGINT, TEXT, INTEGER, etc. Let us pick a few columns from this schema and use SQL query to ask osquery to display the columns from the user table using the following syntax:</p><figure id="2345b2cc-075b-80c7-b9a5-f5fb8a0fa62c" class="image"><a href="image%20254.png"><img style="width:685.9734497070312px" src="image%20254.png"/></a></figure><p id="2345b2cc-075b-8058-8ddf-e9bf6876df64" class="">
+</p><h3 id="2345b2cc-075b-8045-892b-f191084caf8f" class="">Different Display modes</h3><figure id="2345b2cc-075b-801a-8bfb-ebbb0723a612" class="image"><a href="7A442A00-3F8A-42B2-B046-78D07C202C92.png"><img style="width:545.9819946289062px" src="7A442A00-3F8A-42B2-B046-78D07C202C92.png"/></a></figure><figure id="2345b2cc-075b-809f-bc21-e1e8aefb510d" class="image"><a href="4F908ABC-CA77-4520-840E-D978D5909F11.png"><img style="width:685.9605712890625px" src="4F908ABC-CA77-4520-840E-D978D5909F11.png"/></a></figure><p id="2345b2cc-075b-8065-8994-ec678b2b866c" class="">
+</p><h3 id="2345b2cc-075b-80c3-a926-eb27bdc61938" class="">Schema Documentation</h3><p id="2345b2cc-075b-802a-a42e-e714d6436534" class=""><a href="https://osquery.io/schema/5.5.1/">https://osquery.io/schema/5.5.1/</a></p><figure id="2345b2cc-075b-804c-8387-d958e610839f" class="image"><a href="01C4DCA8-F6E5-4A7F-9B50-69682D0087C3.png"><img style="width:685.9734497070312px" src="01C4DCA8-F6E5-4A7F-9B50-69682D0087C3.png"/></a></figure><figure id="2345b2cc-075b-8048-b18c-ddd7ec532a0e" class="image"><a href="CDB1B265-2BE1-4C6A-948C-7CB786F3F756.png"><img style="width:685.986328125px" src="CDB1B265-2BE1-4C6A-948C-7CB786F3F756.png"/></a></figure><p id="2345b2cc-075b-8048-89f4-fcebd54a8f1d" class="">
+</p><h3 id="2345b2cc-075b-80f8-b212-e05d1b5add02" class="">Creating SQL queries</h3><p id="2345b2cc-075b-8095-97d2-fe233169180a" class="">The SQL language implemented in Osquery is not an entire SQL language that you might be accustomed to, but rather it&#x27;s a superset of SQLite.</p><p id="2345b2cc-075b-80d1-8a6c-dee714bd5d2e" class="">Realistically all your queries will start with a <strong>SELECT </strong>statement. This makes sense because, with Osquery, you are only querying information on an endpoint. You won&#x27;t be updating or deleting any information/data on the endpoint.</p><p id="2345b2cc-075b-808f-8dff-f31803483096" class=""><strong>The exception to the rule </strong>: Using other SQL statements, such as <strong>UPDATE </strong>and <strong>DELETE, </strong>is possible, but only if you&#x27;re creating run-time tables (views) or using an extension if the extension supports them.</p><p id="2345b2cc-075b-8014-b7b6-d4cc3f652cf0" class="">Your queries will also include a <strong>FROM </strong>clause and end with a <strong>semicolon </strong>.</p><h3 id="2345b2cc-075b-80ae-9234-dfc851653e60" class="">Exploring Installed Programs</h3><p id="2345b2cc-075b-80b0-bfa6-c21abfa8b507" class="">If you wish to retrieve all the information about the installed programs on the endpoint, first understand the table schema either using the <code>.schema programs </code>command in the interactive mode or use the documentation <a href="https://osquery.io/schema/5.5.1/#programs">here </a>.</p><p id="2345b2cc-075b-80bb-aa6f-e269d9c99e03" class=""><strong>Query: </strong><code>SELECT * FROM programs LIMIT 1;</code></p><figure id="2345b2cc-075b-80df-a2d2-c96330d97b51" class="image"><a href="9C7D2710-FF55-4F2B-81E4-71A5B06FD748.png"><img style="width:685.986328125px" src="9C7D2710-FF55-4F2B-81E4-71A5B06FD748.png"/></a></figure><p id="2345b2cc-075b-808b-af24-ca892db33756" class="">I can also select which tables to return,</p><figure id="2345b2cc-075b-8090-8333-f23c5c951996" class="image"><a href="DA87A2BA-F672-4A73-8A03-DC68413F318E.png"><img style="width:622.9503173828125px" src="DA87A2BA-F672-4A73-8A03-DC68413F318E.png"/></a></figure><h3 id="2345b2cc-075b-8032-9aff-fb4757c6f758" class="">Count</h3><p id="2345b2cc-075b-8031-9294-feed9f4a08c0" class="">To see how many programs or entries in any table are returned, we can use the <strong>count() </strong>function, as shown below:</p><p id="2345b2cc-075b-801f-b8ed-d3cc84422bc1" class=""><strong>Query </strong>: <code>SELECT count(*) from programs;</code></p><figure id="2345b2cc-075b-8013-b6a0-da0b4da3acf6" class="image"><a href="584E3FF0-0F10-4BA0-AB3D-C988360D3B60.png"><img style="width:303.97515869140625px" src="584E3FF0-0F10-4BA0-AB3D-C988360D3B60.png"/></a></figure><h3 id="2345b2cc-075b-809b-a9c8-f6136c89afee" class=""><strong>WHERE</strong></h3><p id="2345b2cc-075b-801a-8e28-cd608ce49e6d" class="">Select something and only display if the WHERE condition is met</p><figure id="2345b2cc-075b-806c-a816-d6a3d7930153" class="image"><a href="1BEE9FF2-A5A4-45C4-B124-5786AAC1312D.png"><img style="width:685.9219970703125px" src="1BEE9FF2-A5A4-45C4-B124-5786AAC1312D.png"/></a></figure><p id="2345b2cc-075b-80a0-a46b-d11091de0f44" class="">The equal sign is not the only filtering option in a <strong>WHERE </strong>clause. Below are filtering operators that can be used in a <strong>WHERE </strong>clause:</p><ul id="2345b2cc-075b-8040-83a6-eff96cbb90bc" class="bulleted-list"><li style="list-style-type:disc"><code>= </code>[equal]</li></ul><ul id="2345b2cc-075b-805e-a7a9-e7b9a538222c" class="bulleted-list"><li style="list-style-type:disc"><code>&lt;&gt; </code>[not equal]</li></ul><ul id="2345b2cc-075b-80ef-af17-fae1e92413e6" class="bulleted-list"><li style="list-style-type:disc"><code>&gt; </code>, <code>&gt;= </code>[greater than, greater than, or equal to]</li></ul><ul id="2345b2cc-075b-8033-a057-d5202fc133b2" class="bulleted-list"><li style="list-style-type:disc"><code>&lt; </code>, <code>&lt;= </code>[less than or less than or equal to]</li></ul><ul id="2345b2cc-075b-8095-852e-f3ca09f4b578" class="bulleted-list"><li style="list-style-type:disc"><code>BETWEEN </code>[between a range]</li></ul><ul id="2345b2cc-075b-80a1-b0e2-f65e7f4e58a6" class="bulleted-list"><li style="list-style-type:disc"><code>LIKE </code>[pattern wildcard searches]</li></ul><ul id="2345b2cc-075b-8064-baae-eca2218d6e3e" class="bulleted-list"><li style="list-style-type:disc"><code>% </code>[wildcard, multiple characters]</li></ul><ul id="2345b2cc-075b-80c4-9d29-e482f51f5d0f" class="bulleted-list"><li style="list-style-type:disc"><code>_ </code>[wildcard, one character]</li></ul><h3 id="2345b2cc-075b-803e-bca5-e47cfd3220ba" class="">Matching Wildcard Rules</h3><p id="2345b2cc-075b-803b-b1b9-cba125bd3635" class="">Below is a screenshot from the Osquery <a href="https://osquery.readthedocs.io/en/stable/deployment/file-integrity-monitoring/">documentation </a>showing examples of using wildcards when used in folder structures:</p><ul id="2345b2cc-075b-8012-a36f-d9c84599b862" class="bulleted-list"><li style="list-style-type:disc"><code>% </code>: Match all files and folders for one level.</li></ul><ul id="2345b2cc-075b-80f0-8bee-f7f8fe79d6a8" class="bulleted-list"><li style="list-style-type:disc"><code>%% </code>: Match all files and folders recursively.</li></ul><ul id="2345b2cc-075b-80d7-bf0c-c7ff8441bda2" class="bulleted-list"><li style="list-style-type:disc"><code>%abc </code>: Match all within-level ending in &quot;abc&quot;.</li></ul><ul id="2345b2cc-075b-8031-b723-de24aab85ccc" class="bulleted-list"><li style="list-style-type:disc"><code>abc% </code>: Match all within-level starting with &quot;abc&quot;.</li></ul><h3 id="2345b2cc-075b-8030-9457-e7f718ca60ca" class="">Matching Examples</h3><ul id="2345b2cc-075b-8047-a4c9-f286fb44ba17" class="bulleted-list"><li style="list-style-type:disc"><code>/Users/%/Library </code>: Monitor for changes to every user&#x27;s Library folder, <em>but not the contents within </em>.</li></ul><ul id="2345b2cc-075b-805b-89c8-c1fe6aaa9d63" class="bulleted-list"><li style="list-style-type:disc"><code>/Users/%/Library/ </code>: Monitor for changes to files <em>within </em>each Library folder, but not the contents of their subdirectories.</li></ul><ul id="2345b2cc-075b-80c0-b76a-f441c2c8af1b" class="bulleted-list"><li style="list-style-type:disc"><code>/Users/%/Library/% </code>: Same, changes to files within each Library folder.</li></ul><ul id="2345b2cc-075b-8045-a082-c69270c87894" class="bulleted-list"><li style="list-style-type:disc"><code>/Users/%/Library/%% </code>: Monitor changes recursively within each Library.</li></ul><ul id="2345b2cc-075b-8070-bcea-ecc479717b8e" class="bulleted-list"><li style="list-style-type:disc"><code>/bin/%sh </code>: Monitor the <code>bin </code>directory for changes ending in <code>sh </code>.</li></ul><p id="2345b2cc-075b-80e6-9cf6-cc36c26df2a3" class="">
+</p><p id="2345b2cc-075b-807b-868f-c3a7a5c38369" class=""><strong>Joining Tables using JOIN Function</strong></p><p id="2345b2cc-075b-8078-a678-d0f931114fcf" class="">Looking at both schemas, <code>uid </code>in <code>users </code>table is meant to identify the user record, and in the processes table, the column <code>uid </code>represents the user responsible for executing the particular process. We can join both tables using this <code>uid </code>field as shown below:</p><p id="2345b2cc-075b-80a9-a754-e8da093396b8" class=""><strong>Query1: </strong><code>select uid, pid, name, path from processes;</code></p><p id="2345b2cc-075b-80ad-82c2-cdc5f36fcc35" class=""><strong>Query2: </strong><code>select uid, username, description from users;</code></p><p id="2345b2cc-075b-80af-ae9b-f82b625ed99e" class=""><strong>Joined Query: </strong><code>select p.pid, p.name, p.path, u.username from processes p JOIN users u on u.uid=p.uid LIMIT 10;</code></p><figure id="2345b2cc-075b-8055-9ca3-fcfeeb21b20c" class="image"><a href="DA1ED2CB-6A5F-4177-A253-ED9E1667BEA1.png"><img style="width:685.9605712890625px" src="DA1ED2CB-6A5F-4177-A253-ED9E1667BEA1.png"/></a></figure><p id="2345b2cc-075b-809b-9b04-e22fecf17fe9" class="">
+</p><h3 id="2345b2cc-075b-803b-8397-fd48b4010be2" class="">QUESTIONS</h3><ul id="2345b2cc-075b-80e1-a4c1-e7499c9a2bcf" class="bulleted-list"><li style="list-style-type:disc">Using Osquery, how many programs are installed on this host?</li></ul><p id="2345b2cc-075b-8093-8257-c5c3a6e839fa" class="">we can use the count functions to count the total number of programs installed</p><figure id="2345b2cc-075b-8038-9eb8-d37fb5f3b170" class="image"><a href="A34678E3-DD28-44DD-A1F9-190E08068C46.png"><img style="width:301.9554138183594px" src="A34678E3-DD28-44DD-A1F9-190E08068C46.png"/></a></figure><ul id="2345b2cc-075b-808a-969e-c7907b1bcf36" class="bulleted-list"><li style="list-style-type:disc">Using Osquery, what is the description for the user James?</li></ul><p id="2345b2cc-075b-8024-a837-e235aab34827" class="">We can use the WHERE clause to get information from only the user James</p><figure id="2345b2cc-075b-80ef-be0d-d9af9f3e3c0d" class="image"><a href="B68BF895-DEE4-41AC-8CBC-0F0C7E29CF53.png"><img style="width:685.9348754882812px" src="B68BF895-DEE4-41AC-8CBC-0F0C7E29CF53.png"/></a></figure><ul id="2345b2cc-075b-801a-8ba0-ffd72f5c57b1" class="bulleted-list"><li style="list-style-type:disc">When we run the following search query, what is the full SID of the user with RID &#x27;1009&#x27; <strong>Query:</strong> select path, key, name from registry where key = &#x27;HKEY_USERS&#x27;;Submi</li></ul><figure id="2345b2cc-075b-806c-982e-dd6045ca94dd" class="image"><a href="1477F9E6-EBA7-492F-ADC8-A658666930A2.png"><img style="width:685.9734497070312px" src="1477F9E6-EBA7-492F-ADC8-A658666930A2.png"/></a></figure><ul id="2345b2cc-075b-80d0-ae2e-d1996cac38db" class="bulleted-list"><li style="list-style-type:disc">When we run the following search query, what is the Internet Explorer browser extension installed on this machine?<strong>Query:</strong> select * from ie_extensions;</li></ul><figure id="2345b2cc-075b-80fa-bb88-f280171115b1" class="image"><a href="9891F7B3-4FD7-4B97-92A7-16EE5BC3FB01.png"><img style="width:685.9091186523438px" src="9891F7B3-4FD7-4B97-92A7-16EE5BC3FB01.png"/></a></figure><ul id="2345b2cc-075b-805d-afca-d74d83f2c351" class="bulleted-list"><li style="list-style-type:disc">After running the following query, what is the full name of the program returned?<strong>Query:</strong> select name,install_location from programs where name LIKE &#x27;%wireshark%&#x27;;</li></ul><figure id="2345b2cc-075b-8009-8422-c9301eb4bc24" class="image"><a href="B15E51DE-8922-4A99-9F27-5C4D089F1888.png"><img style="width:605.9819946289062px" src="B15E51DE-8922-4A99-9F27-5C4D089F1888.png"/></a></figure><p id="2345b2cc-075b-80cf-97ea-d8ca2768d008" class="">
+</p><h3 id="2345b2cc-075b-8023-b0d2-f515963c20b8" class="">CHALLENGE QUESTIONS</h3><ol type="1" id="2345b2cc-075b-80c2-bef9-fc5671ca6d6b" class="numbered-list" start="1"><li>Which table stores the evidence of process execution in Windows OS?</li></ol><p id="2345b2cc-075b-8018-adec-f306d422668d" class="">Had to go thorugh the documentation, as the question is very vague</p><figure id="2345b2cc-075b-80e6-a8f9-dc8af1065a30" class="image"><a href="image%20255.png"><img style="width:685.9734497070312px" src="image%20255.png"/></a></figure><ol type="1" id="2345b2cc-075b-8032-b9a9-e3e36b4ddf69" class="numbered-list" start="2"><li>One of the users seems to have executed a program to remove traces from the disk; what is the name of that program?</li></ol><p id="2345b2cc-075b-8075-81c7-e34daaed7eca" class="">I did some googling and figured out i might be looking for something like a diskwipe, and also this is sepcific user aciton so i can use the above table here, </p><figure id="2345b2cc-075b-80ff-b64e-d682bc2a3c42" class="image"><a href="BEF4E5E0-DE6B-4CA0-9438-0A30E9862A05.png"><img style="width:685.9219970703125px" src="BEF4E5E0-DE6B-4CA0-9438-0A30E9862A05.png"/></a></figure><ol type="1" id="2345b2cc-075b-80fc-8798-d7727a4474b6" class="numbered-list" start="3"><li>Create a search query to identify the VPN installed on this host. What is name of the software?</li></ol><figure id="2345b2cc-075b-80a6-82dd-e662b9f01e04" class="image"><a href="36246BE7-BABE-4646-B6ED-E697B21C938D.png"><img style="width:685.9476928710938px" src="36246BE7-BABE-4646-B6ED-E697B21C938D.png"/></a></figure><ol type="1" id="2345b2cc-075b-801f-845b-c247584c9019" class="numbered-list" start="4"><li>How many services are running on this host?</li></ol><figure id="2345b2cc-075b-807d-9e5e-c1b0bc4fb126" class="image"><a href="C1E2E7F6-BC32-4FCA-B81E-FB45241E1B15.png"><img style="width:318.9622802734375px" src="C1E2E7F6-BC32-4FCA-B81E-FB45241E1B15.png"/></a></figure><ol type="1" id="2345b2cc-075b-8020-bb5e-f680ab6d8ca7" class="numbered-list" start="5"><li>A table <strong>autoexec</strong> contains the list of executables that are automatically executed on the target machine. There seems to be a batch file that runs automatically. What is the name of that batch file (with the extension .bat)?</li></ol><figure id="2345b2cc-075b-8075-becb-f17fbdc44531" class="image"><a href="BF126FC2-A18B-4295-ACB6-0530FF656666.png"><img style="width:685.9605712890625px" src="BF126FC2-A18B-4295-ACB6-0530FF656666.png"/></a></figure><ol type="1" id="2345b2cc-075b-8047-a244-df4420ccc854" class="numbered-list" start="6"><li>What is the full path of the batch file found in the above question? (Last in the List)</li></ol><figure id="2345b2cc-075b-80cf-b6ba-c9e2bfad6244" class="image"><a href="D843F95D-117C-4561-92B5-C3C5F5586FBA.png"><img style="width:685.9348754882812px" src="D843F95D-117C-4561-92B5-C3C5F5586FBA.png"/></a></figure></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

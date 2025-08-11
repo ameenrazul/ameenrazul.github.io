@@ -1,0 +1,682 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Intro to CTI</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2285b2cc-075b-80d9-b1bc-ebaf311ecfcb" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">⁉️</span></div><h1 class="page-title">Intro to CTI</h1><p class="page-description"></p></header><div class="page-body"><h1 id="2285b2cc-075b-80d6-8065-cd0ba68b5d83" class="">Learning Objectives</h1><ul id="2285b2cc-075b-802d-b0c1-f9ba39c29dcf" class="bulleted-list"><li style="list-style-type:disc">The basics of CTI and its various classifications.</li></ul><ul id="2285b2cc-075b-803f-9efd-c253609516d4" class="bulleted-list"><li style="list-style-type:disc">The lifecycle followed to deploy and use intelligence during threat investigations.</li></ul><ul id="2285b2cc-075b-80d4-8805-d35b95f9292e" class="bulleted-list"><li style="list-style-type:disc">Frameworks and standards used in distributing intelligence.</li></ul><h1 id="2285b2cc-075b-8087-9174-f471946699c4" class="">Cyber Threat Intelligence Module</h1><p id="2285b2cc-075b-8008-8ef9-e23922f6575b" class="">This is the first room in a new Cyber Threat Intelligence module. The module will also contain:</p><ul id="2285b2cc-075b-80eb-aaea-eb5488d87818" class="bulleted-list"><li style="list-style-type:disc"><a href="https://tryhackme.com/room/threatinteltools">Threat Intelligence Tools</a></li></ul><ul id="2285b2cc-075b-801c-ba5c-e0ae25001902" class="bulleted-list"><li style="list-style-type:disc"><a href="https://tryhackme.com/room/yara">YARA</a></li></ul><ul id="2285b2cc-075b-8070-98a4-d56a6bfd2c7e" class="bulleted-list"><li style="list-style-type:disc"><a href="https://tryhackme.com/room/opencti">OpenCTI</a></li></ul><ul id="2285b2cc-075b-80c1-a5fc-deea9c55cfe7" class="bulleted-list"><li style="list-style-type:disc"><a href="https://tryhackme.com/room/misp">MISP</a></li></ul><hr id="2285b2cc-075b-80d6-bae5-d93b0691ba69"/><p id="2285b2cc-075b-80a8-9ac5-db10e0437ef5" class="">
+</p><h1 id="2285b2cc-075b-8081-a19a-f88067a35634" class="">CTI</h1><p id="2285b2cc-075b-80cf-a618-ca56b53e540c" class="">Cyber Threat Intelligence (CTI) can be defined as evidence-based knowledge about adversaries, including their indicators, tactics, motivations, and actionable advice against them. These can be utilized to protect critical assets and inform cyber security teams and management business decisions.</p><blockquote id="2285b2cc-075b-808e-943a-f45d9e94abed" class="">Data: Discrete indicators associated with an adversary, such as IP addresses, URLs or hashes.</blockquote><blockquote id="2285b2cc-075b-80a6-b6b6-dfe984d81245" class="">Information: A combination of multiple data points that answer questions such as “How many times have employees accessed tryhackme.com within the month?”</blockquote><blockquote id="2285b2cc-075b-807b-a267-c3bd79a86785" class="">Intelligence: The correlation of data and information to extract patterns of actions based on contextual analysis.</blockquote><p id="2285b2cc-075b-8011-997b-f39055ee1b71" class="">The primary goal of CTI is to understand the relationship between your operational environment and your adversary and how to defend your environment against any attacks.</p><p id="2285b2cc-075b-8062-a054-f662513ac5d1" class="">Seek this goal by developing your cyber threat context by trying to answer the following questions:</p><ul id="2285b2cc-075b-806a-9616-c4712d502ad5" class="bulleted-list"><li style="list-style-type:disc">Who’s attacking you?</li></ul><ul id="2285b2cc-075b-80ef-a569-c69f593ac7db" class="bulleted-list"><li style="list-style-type:disc">What are their motivations?</li></ul><ul id="2285b2cc-075b-80d0-aba8-e4ede98b8b05" class="bulleted-list"><li style="list-style-type:disc">What are their capabilities?</li></ul><ul id="2285b2cc-075b-802a-abc9-f1c38945508d" class="bulleted-list"><li style="list-style-type:disc">What artefacts and indicators of compromise (IOCs) should you look out for?</li></ul><p id="2285b2cc-075b-8041-af8e-fba86d205a5a" class="">Threat intelligence would be gathered from different sources under the following categories:</p><ul id="2285b2cc-075b-8022-9cd2-c0b8413593b2" class="bulleted-list"><li style="list-style-type:disc"><strong>Internal:</strong><ul id="2285b2cc-075b-804d-b5d3-c70717c412c9" class="bulleted-list"><li style="list-style-type:circle">Corporate security events such as vulnerability assessments and incident response reports.</li></ul><ul id="2285b2cc-075b-80d4-bc5b-c6549d9da452" class="bulleted-list"><li style="list-style-type:circle">Cyber awareness training reports.</li></ul><ul id="2285b2cc-075b-8066-8314-c5d8312de5e1" class="bulleted-list"><li style="list-style-type:circle">System logs and events.</li></ul></li></ul><ul id="2285b2cc-075b-8022-bed8-fc0f1fb20e93" class="bulleted-list"><li style="list-style-type:disc"><strong>Community:</strong><ul id="2285b2cc-075b-8069-af83-ef2982954ec2" class="bulleted-list"><li style="list-style-type:circle">Open web forums.</li></ul><ul id="2285b2cc-075b-805f-b155-daee7f961759" class="bulleted-list"><li style="list-style-type:circle">Dark web communities for cybercriminals.</li></ul></li></ul><ul id="2285b2cc-075b-8018-a6a9-eef3772e1a20" class="bulleted-list"><li style="list-style-type:disc"><strong>External</strong><ul id="2285b2cc-075b-8050-bc14-eb6feb8c189b" class="bulleted-list"><li style="list-style-type:circle">Threat intel feeds (Commercial &amp; Open-source)</li></ul><ul id="2285b2cc-075b-80a3-9f7c-c0427f165461" class="bulleted-list"><li style="list-style-type:circle">Online marketplaces.</li></ul><ul id="2285b2cc-075b-8020-991f-fab5982f5bcd" class="bulleted-list"><li style="list-style-type:circle">Public sources include government data, publications, social media, financial and industrial assessments.</li></ul><hr id="2285b2cc-075b-8041-b5fb-e0ccf314e005"/></li></ul><h2 id="2285b2cc-075b-80aa-ad42-e8bf688b289f" class=""><strong>Threat Intelligence Classifications</strong></h2><h3 id="2285b2cc-075b-8066-903e-ceba90dfe669" class="">🔷 1. <strong>Strategic Intelligence</strong> – <em>The Big Picture</em></h3><ul id="2285b2cc-075b-805f-a544-fadcfd10bc03" class="bulleted-list"><li style="list-style-type:disc"><strong>What it is</strong>: High-level information about <strong>long-term threats</strong> and <strong>trends</strong>.</li></ul><ul id="2285b2cc-075b-809a-b6df-d7fd454b7e27" class="bulleted-list"><li style="list-style-type:disc"><strong>Who uses it</strong>: Executives, CISOs, senior managers.</li></ul><ul id="2285b2cc-075b-809e-a192-ed496d8ecbe5" class="bulleted-list"><li style="list-style-type:disc"><strong>Why it matters</strong>: Helps in <strong>business planning</strong>, budgeting, and setting company-wide security priorities.</li></ul><p id="2285b2cc-075b-80b5-956b-d2400b970e82" class="">✅ <strong>Example</strong>:</p><p id="2285b2cc-075b-80ac-882d-d65d6397ae4a" class="">A report shows ransomware attacks against healthcare are rising. A hospital’s leadership uses this intel to invest more in backups and employee training.</p><hr id="2285b2cc-075b-80eb-bd73-fcfb51d850fd"/><h3 id="2285b2cc-075b-8027-aded-d268462babf0" class="">🔷 2. <strong>Technical Intelligence</strong> – <em>The Raw Evidence</em></h3><ul id="2285b2cc-075b-80b7-a056-d9120f1ae801" class="bulleted-list"><li style="list-style-type:disc"><strong>What it is</strong>: Low-level data like <strong>IP addresses</strong>, <strong>malicious URLs</strong>, <strong>file hashes</strong>, or malware signatures.</li></ul><ul id="2285b2cc-075b-80bd-922c-f51ef7e630fd" class="bulleted-list"><li style="list-style-type:disc"><strong>Who uses it</strong>: Incident responders, SOC teams, threat hunters.</li></ul><ul id="2285b2cc-075b-803a-9be1-c65b84f4b2fb" class="bulleted-list"><li style="list-style-type:disc"><strong>Why it matters</strong>: Helps <strong>detect and block</strong> threats by updating tools like firewalls or antivirus systems.</li></ul><p id="2285b2cc-075b-8028-b89a-cb64414af6f3" class="">✅ <strong>Example</strong>:</p><p id="2285b2cc-075b-80b5-aa91-c9e7c4ed551c" class="">A list of IP addresses used in a phishing campaign is added to a firewall to block future connections.</p><hr id="2285b2cc-075b-80ad-b850-e5025a1b49ef"/><h3 id="2285b2cc-075b-80e4-841e-fc560ca6b236" class="">🔷 3. <strong>Tactical Intelligence</strong> – <em>How They Attack (TTPs)</em></h3><ul id="2285b2cc-075b-8028-baff-df84657604e0" class="bulleted-list"><li style="list-style-type:disc"><strong>What it is</strong>: Info on the <strong>techniques and tools</strong> attackers use — like phishing, privilege escalation, or lateral movement.</li></ul><ul id="2285b2cc-075b-8043-83aa-eb99e2e7d066" class="bulleted-list"><li style="list-style-type:disc"><strong>Who uses it</strong>: Blue teams, red teams, defenders.</li></ul><ul id="2285b2cc-075b-80d2-8efb-e4b973af22e2" class="bulleted-list"><li style="list-style-type:disc"><strong>Why it matters</strong>: Helps <strong>improve security controls</strong>, detection rules, and incident response playbooks.</li></ul><p id="2285b2cc-075b-808c-ada1-cc0d7b9049e5" class="">✅ <strong>Example</strong>:</p><p id="2285b2cc-075b-8045-bf90-e20bd60c55e1" class="">You learn that an attacker group commonly uses &quot;PowerShell with base64 encoding&quot; — you create a detection rule to flag that behavior.</p><hr id="2285b2cc-075b-804e-9c96-e703c428303f"/><h3 id="2285b2cc-075b-8085-a513-ca80c418f24c" class="">🔷 4. <strong>Operational Intelligence</strong> – <em>What They Want, Right Now</em></h3><ul id="2285b2cc-075b-80a9-b1ec-d7f65a6f2418" class="bulleted-list"><li style="list-style-type:disc"><strong>What it is</strong>: Info about a <strong>specific threat actor’s current plan</strong> or <strong>intent</strong> against your organization.</li></ul><ul id="2285b2cc-075b-80fb-a815-d09826a8f8ad" class="bulleted-list"><li style="list-style-type:disc"><strong>Who uses it</strong>: Threat intel analysts, security operations, investigation teams.</li></ul><ul id="2285b2cc-075b-80c1-bba7-e099f71d8e64" class="bulleted-list"><li style="list-style-type:disc"><strong>Why it matters</strong>: Helps you <strong>prioritize protection</strong> of valuable assets and respond to ongoing campaigns.</li></ul><p id="2285b2cc-075b-8068-a168-d537b4de6044" class="">✅ <strong>Example</strong>:</p><p id="2285b2cc-075b-80b6-8cfb-e8ba261152c2" class="">You receive intel that a group is targeting your company’s HR system for data theft. The team locks it down and increases monitoring.</p><table id="2285b2cc-075b-806b-8170-c6485d04342c" class="simple-table"><thead class="simple-table-header"><tr id="2285b2cc-075b-8017-9bd9-c57157dddc81"><th id="Jtr=" class="simple-table-header-color simple-table-header">Type</th><th id="OEof" class="simple-table-header-color simple-table-header">Focus</th><th id="^=BI" class="simple-table-header-color simple-table-header">Used By</th><th id="o&gt;jV" class="simple-table-header-color simple-table-header">Example</th></tr></thead><tbody><tr id="2285b2cc-075b-8040-b8c1-ea0c16d52b7e"><td id="Jtr=" class=""><strong>Strategic</strong></td><td id="OEof" class="">Trends &amp; risks</td><td id="^=BI" class="">Executives, CISOs</td><td id="o&gt;jV" class="">“Healthcare sector is a top ransomware target in 2025.”</td></tr><tr id="2285b2cc-075b-8016-9bb5-fe0134c50cb6"><td id="Jtr=" class=""><strong>Technical</strong></td><td id="OEof" class="">Indicators of attack</td><td id="^=BI" class="">SOC, IR teams</td><td id="o&gt;jV" class="">“Block IP 192.168.0.10 – it&#x27;s linked to malware.”</td></tr><tr id="2285b2cc-075b-8091-b9f4-f5b82d1e2e9f"><td id="Jtr=" class=""><strong>Tactical</strong></td><td id="OEof" class="">Attacker methods (TTPs)</td><td id="^=BI" class="">Defenders, engineers</td><td id="o&gt;jV" class="">“This threat group exploits unpatched RDP services.”</td></tr><tr id="2285b2cc-075b-8082-8201-dcee506a8741"><td id="Jtr=" class=""><strong>Operational</strong></td><td id="OEof" class="">Specific intent &amp; targets</td><td id="^=BI" class="">Analysts, responders</td><td id="o&gt;jV" class="">“APT29 is targeting your cloud infrastructure right now.”</td></tr></tbody></table><hr id="2285b2cc-075b-8055-ba12-f47a22e737cd"/><h1 id="2285b2cc-075b-801f-b379-d5feb087b0bf" class="">CTI Lifecycle</h1><figure id="2285b2cc-075b-8020-b39f-e8d2a133c2c5" class="image"><a href="image%2067.png"><img style="width:709.9705200195312px" src="image%2067.png"/></a></figure><h2 id="2285b2cc-075b-80a6-be47-f0e22f4fb223" class="">🔁 <strong>Threat Intelligence Lifecycle (6 Phases)</strong></h2><p id="2285b2cc-075b-80f1-b399-f7601fef6646" class="">Threat intelligence is not just raw data — it’s a <strong>step-by-step process</strong> that turns scattered data into <strong>useful insights</strong> to help detect, respond to, and prevent cyber threats.</p><hr id="2285b2cc-075b-8026-9fc0-e221a0e3407d"/><h3 id="2285b2cc-075b-807e-91e5-f7556955d270" class="">1️⃣ <strong>Direction</strong> – <em>What do we need to protect?</em></h3><ul id="2285b2cc-075b-808e-93cd-f16caa251dda" class="bulleted-list"><li style="list-style-type:disc"><strong>Purpose</strong>: Define your goals.</li></ul><ul id="2285b2cc-075b-80a5-a35b-ffb526560429" class="bulleted-list"><li style="list-style-type:disc"><strong>Ask</strong>: What are the <strong>critical assets</strong> (data, systems, services)? What would happen if they’re attacked?</li></ul><ul id="2285b2cc-075b-8061-93d3-d3f8911d943c" class="bulleted-list"><li style="list-style-type:disc"><strong>Plan</strong>: What intel sources, tools, and teams do you need?</li></ul><p id="2285b2cc-075b-8022-9cbf-c232b1f72e6a" class="">✅ <em>Example</em>:</p><p id="2285b2cc-075b-80d1-8c88-ccf84ee41433" class="">“We need to protect our customer database from data theft. If breached, it could cost us millions. We&#x27;ll use threat feeds and a SIEM to monitor attacks.”</p><hr id="2285b2cc-075b-800d-a35e-cf63eed9858b"/><h3 id="2285b2cc-075b-8016-ba8d-e317511e7286" class="">2️⃣ <strong>Collection</strong> – <em>Gather the data</em></h3><ul id="2285b2cc-075b-8062-859c-e6ee8d092876" class="bulleted-list"><li style="list-style-type:disc"><strong>What happens</strong>: You collect <strong>logs</strong>, <strong>threat feeds</strong>, <strong>malware samples</strong>, <strong>alerts</strong>, etc.</li></ul><ul id="2285b2cc-075b-8095-bb97-cba6b5d31adf" class="bulleted-list"><li style="list-style-type:disc"><strong>Sources</strong>: Could be internal logs, external intel feeds (commercial or open-source), forums, or dark web.</li></ul><ul id="2285b2cc-075b-805b-b6f7-cb0d918ec1af" class="bulleted-list"><li style="list-style-type:disc"><strong>Tip</strong>: Because there’s <strong>too much data</strong>, this phase is usually <strong>automated</strong>.</li></ul><p id="2285b2cc-075b-807c-998c-c571555ee4fd" class="">✅ <em>Example</em>:</p><p id="2285b2cc-075b-8024-8528-e4c0dc9c1e85" class="">You use a script to collect IP blacklists, phishing reports, and firewall logs every hour.</p><hr id="2285b2cc-075b-806a-8246-c4bc7bb4e5bf"/><h3 id="2285b2cc-075b-80c2-b76e-ebb702b05829" class="">3️⃣ <strong>Processing</strong> – <em>Clean it up and organize it</em></h3><ul id="2285b2cc-075b-805c-87b0-e11c197c0d6a" class="bulleted-list"><li style="list-style-type:disc"><strong>Goal</strong>: Convert raw data into <strong>structured</strong>, <strong>searchable</strong>, and <strong>usable</strong> formats.</li></ul><ul id="2285b2cc-075b-8052-b3c7-d5f63ad0bb4c" class="bulleted-list"><li style="list-style-type:disc"><strong>Tools</strong>: SIEMs, log parsers, dashboards.</li></ul><ul id="2285b2cc-075b-804f-9b81-eb2e5895f672" class="bulleted-list"><li style="list-style-type:disc"><strong>Why</strong>: Data may come in different formats (CSV, JSON, syslogs), and needs to be normalized.</li></ul><p id="2285b2cc-075b-8024-8323-e65c5f0565d8" class="">✅ <em>Example</em>:</p><p id="2285b2cc-075b-8059-85ea-f14aacd8014e" class="">You parse and tag firewall logs to show all blocked IPs by region and time.</p><hr id="2285b2cc-075b-80d7-8971-f15eb07569d0"/><h3 id="2285b2cc-075b-803c-b911-ff9957f38ba2" class="">4️⃣ <strong>Analysis</strong> – <em>Make sense of it</em></h3><ul id="2285b2cc-075b-80cb-9da5-caabd6932e5f" class="bulleted-list"><li style="list-style-type:disc"><strong>Goal</strong>: Turn structured data into <strong>actionable insights</strong>.</li></ul><ul id="2285b2cc-075b-8074-8307-e4f42e67dcc6" class="bulleted-list"><li style="list-style-type:disc"><strong>Analysts look for</strong>:<ul id="2285b2cc-075b-805e-af50-eff2de98edb3" class="bulleted-list"><li style="list-style-type:circle">Attack patterns or indicators (IOCs)</li></ul><ul id="2285b2cc-075b-80c9-b3e8-d4fb95798435" class="bulleted-list"><li style="list-style-type:circle">Vulnerabilities being exploited</li></ul><ul id="2285b2cc-075b-807d-b412-d9f0613147b1" class="bulleted-list"><li style="list-style-type:circle">Recommendations for defenses</li></ul></li></ul><p id="2285b2cc-075b-80f2-8cdd-d5e3abc3cf6a" class="">✅ <em>Example</em>:</p><p id="2285b2cc-075b-8045-bb95-d7d0ffeac2da" class="">After analyzing patterns, you notice repeated login attempts from a foreign IP and recommend geoblocking.</p><hr id="2285b2cc-075b-8057-84c4-fb5a3e5d1546"/><h3 id="2285b2cc-075b-801b-afba-c6c3da5ef957" class="">5️⃣ <strong>Dissemination</strong> – <em>Share intel with the right people</em></h3><ul id="2285b2cc-075b-80ef-ba0d-eb0e1336486d" class="bulleted-list"><li style="list-style-type:disc"><strong>Why it matters</strong>: Different roles need different info:<ul id="2285b2cc-075b-8087-8d0c-f1594d50ac7e" class="bulleted-list"><li style="list-style-type:circle"><strong>Executives</strong> want risk summaries and business impact.</li></ul><ul id="2285b2cc-075b-804c-98a2-efa03d952a1d" class="bulleted-list"><li style="list-style-type:circle"><strong>SOC teams</strong> want IOCs and technical response plans.</li></ul></li></ul><p id="2285b2cc-075b-80ad-af42-cd1623741269" class="">✅ <em>Example</em>:</p><p id="2285b2cc-075b-8077-87c8-fab5a987e38d" class="">You prepare a visual dashboard with malware trends for management and send IOC details to the blue team.</p><hr id="2285b2cc-075b-80fe-ad2e-cdab4fec770e"/><h3 id="2285b2cc-075b-80a1-b1f1-d779fafc86b6" class="">6️⃣ <strong>Feedback</strong> – <em>What worked? What didn’t?</em></h3><ul id="2285b2cc-075b-8040-a568-da9f58c7de40" class="bulleted-list"><li style="list-style-type:disc"><strong>Purpose</strong>: Gather input from all teams to <strong>refine and improve</strong> the entire intel process.</li></ul><ul id="2285b2cc-075b-80c1-a5de-cb434af21aaf" class="bulleted-list"><li style="list-style-type:disc"><strong>How</strong>: Ask: Did the intel help? Were the alerts useful? Did response actions work?</li></ul><p id="2285b2cc-075b-80d3-83a0-f50802a86123" class="">✅ <em>Example</em>:</p><p id="2285b2cc-075b-8076-b46d-c14277cf7207" class="">The SOC tells you the phishing domains list you provided wasn’t current. You switch to a faster source.</p><hr id="2285b2cc-075b-80fe-a6b8-f31fb9d1aadd"/><h2 id="2285b2cc-075b-8047-94b3-cc6cbc64f836" class="">🎯 Summary: Think of it as a loop</h2><table id="2285b2cc-075b-8042-9413-e7d82fbbf772" class="simple-table"><thead class="simple-table-header"><tr id="2285b2cc-075b-806f-a963-d5d8692b2b8c"><th id="B^TS" class="simple-table-header-color simple-table-header">Phase</th><th id="UEZP" class="simple-table-header-color simple-table-header">Focus</th><th id="vUQ]" class="simple-table-header-color simple-table-header">Key Outcome</th></tr></thead><tbody><tr id="2285b2cc-075b-80db-9f38-e1c0029f0a18"><td id="B^TS" class="">Direction</td><td id="UEZP" class="">Define goals</td><td id="vUQ]" class="">What to protect and why</td></tr><tr id="2285b2cc-075b-809f-bad9-cc5d6860bdc9"><td id="B^TS" class="">Collection</td><td id="UEZP" class="">Gather data</td><td id="vUQ]" class="">Get intel from many sources</td></tr><tr id="2285b2cc-075b-80c7-b778-ef583c87218b"><td id="B^TS" class="">Processing</td><td id="UEZP" class="">Clean and structure data</td><td id="vUQ]" class="">Make data usable</td></tr><tr id="2285b2cc-075b-80cf-bb1b-eb5a2251f167"><td id="B^TS" class="">Analysis</td><td id="UEZP" class="">Understand and act</td><td id="vUQ]" class="">Reveal threats, suggest defenses</td></tr><tr id="2285b2cc-075b-80ac-8f30-e95d1a72e751"><td id="B^TS" class="">Dissemination</td><td id="UEZP" class="">Share intel with right people</td><td id="vUQ]" class="">Tailored reports and actions</td></tr><tr id="2285b2cc-075b-8059-8325-d2fa2b34d268"><td id="B^TS" class="">Feedback</td><td id="UEZP" class="">Review and improve</td><td id="vUQ]" class="">Make next intel cycle better</td></tr></tbody></table><hr id="2285b2cc-075b-8075-a405-df0c4480b8e9"/><h1 id="2285b2cc-075b-80d5-a7d6-fd13852b5999" class="">CTI Standards &amp; Frameworks</h1><h3 id="2285b2cc-075b-8072-9a2e-ee7c6681236e" class=""><strong>MITRE ATT&amp;CK</strong></h3><p id="2285b2cc-075b-8010-859d-c6dbcaa0f586" class="">The <a href="https://tryhackme.com/room/mitre">ATT&amp;CK framework</a> is a knowledge base of adversary behaviour, focusing on the indicators and tactics. Security analysts can use the information to be thorough while investigating and tracking adversarial behaviour.</p><figure id="2285b2cc-075b-806b-a9e5-e89821a279c4" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/5fc2847e1bbebc03aa89fbf2/room-content/5d94b9da7f9ddc77bd46895bc1b936d8.png"><img style="width:700px" src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5fc2847e1bbebc03aa89fbf2/room-content/5d94b9da7f9ddc77bd46895bc1b936d8.png"/></a></figure><h3 id="2285b2cc-075b-806e-aebd-d20e1a2c587e" class=""><strong>TAXII</strong></h3><p id="2285b2cc-075b-80a2-ae60-d04ba1d70486" class=""><a href="https://oasis-open.github.io/cti-documentation/taxii/intro">The Trusted Automated eXchange of Indicator Information (TAXII)</a> defines protocols for securely exchanging threat intel to have near real-time detection, prevention and mitigation of threats. The protocol supports two sharing models:</p><ul id="2285b2cc-075b-80b4-bc66-c226bb7238a9" class="bulleted-list"><li style="list-style-type:disc">Collection: Threat intel is collected and hosted by a producer upon request by users using a request-response model.</li></ul><ul id="2285b2cc-075b-805e-a568-e193e03fe116" class="bulleted-list"><li style="list-style-type:disc">Channel: Threat intel is pushed to users from a central server through a publish-subscribe model.</li></ul><h3 id="2285b2cc-075b-80e2-b5e8-f4b95091fb84" class=""><strong>STIX</strong></h3><p id="2285b2cc-075b-80bf-aa5c-e2adae4a8174" class=""><a href="https://oasis-open.github.io/cti-documentation/stix/intro">Structured Threat Information Expression (STIX)</a> is a language developed for the &quot;specification, capture, characterisation and communication of standardised cyber threat information&quot;. It provides defined relationships between sets of threat info such as observables, indicators, adversary TTPs, attack campaigns, and more.</p><h3 id="2285b2cc-075b-8040-ba53-d9c49efb04a8" class=""><strong>Cyber Kill Chain</strong></h3><p id="2285b2cc-075b-8014-b3f0-f016e7cf18cc" class="">Developed by Lockheed Martin, the Cyber Kill Chain breaks down adversary actions into steps. This breakdown helps analysts and defenders identify which stage-specific activities occurred when investigating an attack. The phases defined are shown in the image below.</p><figure id="2285b2cc-075b-803b-8844-f70c3f292683" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/5fc2847e1bbebc03aa89fbf2/room-content/ef67be43aaf8073a8309df3e160c7e36.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5fc2847e1bbebc03aa89fbf2/room-content/ef67be43aaf8073a8309df3e160c7e36.png"/></a></figure><table id="2285b2cc-075b-80a2-b1b7-de819dcf8d3d" class="simple-table"><thead class="simple-table-header"><tr id="2285b2cc-075b-804a-b83b-fa79673fc730"><th id="MN&gt;_" class="simple-table-header-color simple-table-header"><strong>Technique</strong></th><th id="IWNO" class="simple-table-header-color simple-table-header"><strong>Purpose</strong></th><th id=";{C@" class="simple-table-header-color simple-table-header"><strong>Examples</strong></th></tr></thead><tbody><tr id="2285b2cc-075b-807a-a052-fe5a1041b9dd"><td id="MN&gt;_" class="">Reconnaissance</td><td id="IWNO" class="">Obtain information about the victim and the tactics used for the attack.</td><td id=";{C@" class="">Harvesting emails, OSINT, and social media, network scans</td></tr><tr id="2285b2cc-075b-8010-b7cf-f4a92f57876f"><td id="MN&gt;_" class="">Weaponisation</td><td id="IWNO" class="">Malware is engineered based on the needs and intentions of the attack.</td><td id=";{C@" class="">Exploit with a backdoor, malicious office document</td></tr><tr id="2285b2cc-075b-8076-a817-d5a6c85cf4a1"><td id="MN&gt;_" class="">Delivery</td><td id="IWNO" class="">Covers how the malware would be delivered to the victim&#x27;s system.</td><td id=";{C@" class="">Email, weblinks, USB</td></tr><tr id="2285b2cc-075b-803c-9c23-db7cb7e85ced"><td id="MN&gt;_" class="">Exploitation</td><td id="IWNO" class="">Breach the victim&#x27;s system vulnerabilities to execute code and create scheduled jobs to establish persistence.</td><td id=";{C@" class="">EternalBlue, Zero-Logon, etc.</td></tr><tr id="2285b2cc-075b-803e-81a9-e99133443690"><td id="MN&gt;_" class="">Installation</td><td id="IWNO" class="">Install malware and other tools to gain access to the victim&#x27;s system.</td><td id=";{C@" class="">Password dumping, backdoors, remote access trojans</td></tr><tr id="2285b2cc-075b-8072-a38c-c2cbe7c56319"><td id="MN&gt;_" class="">Command &amp; Control</td><td id="IWNO" class="">Remotely control the compromised system, deliver additional malware, move across valuable assets and elevate privileges.</td><td id=";{C@" class="">Empire, Cobalt Strike, etc.</td></tr><tr id="2285b2cc-075b-80a1-8938-ea94f704bdef"><td id="MN&gt;_" class="">Actions on Objectives</td><td id="IWNO" class="">Fulfil the intended goals for the attack: financial gain, corporate espionage, and data exfiltration.</td><td id=";{C@" class="">Data encryption, ransomware, public defacement</td></tr></tbody></table><p id="2285b2cc-075b-8010-aa7d-e06a25386847" class="">Over time, the kill chain has been expanded using other frameworks such as ATT&amp;CK and formulated a new Unified Kill Chain.</p><h3 id="2285b2cc-075b-8098-b28d-f7f4b3cb9903" class=""><strong>The Diamond Model</strong></h3><figure id="2285b2cc-075b-80b3-bce5-f79fde97b6fd" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/5fc2847e1bbebc03aa89fbf2/room-content/d31177261479b466ecbe964447ac4f84.svg"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5fc2847e1bbebc03aa89fbf2/room-content/d31177261479b466ecbe964447ac4f84.svg"/></a></figure><p id="2285b2cc-075b-80fc-8295-c23bceb58654" class="">The diamond model looks at intrusion analysis and tracking attack groups over time. It focuses on four key areas, each representing a different point on the diamond. These are:</p><ul id="2285b2cc-075b-8046-8f7e-e04fb7f047d5" class="bulleted-list"><li style="list-style-type:disc"><strong>Adversary: </strong>The focus here is on the threat actor behind an attack and allows analysts to identify the motive behind the attack.</li></ul><ul id="2285b2cc-075b-80ae-b3cf-feab03ae40b2" class="bulleted-list"><li style="list-style-type:disc"><strong>Victim:</strong> The opposite end of adversary looks at an individual, group or organisation affected by an attack.</li></ul><ul id="2285b2cc-075b-8082-9791-d9131f117877" class="bulleted-list"><li style="list-style-type:disc"><strong>Infrastructure: </strong>The adversaries&#x27; tools, systems, and software to conduct their attack are the main focus. Additionally, the victim&#x27;s systems would be crucial to providing information about the compromise.</li></ul><ul id="2285b2cc-075b-80c0-903d-eb90fec6e0b9" class="bulleted-list"><li style="list-style-type:disc"><strong>Capabilities:</strong> The focus here is on the adversary&#x27;s approach to reaching its goal. This looks at the means of exploitation and the TTPs implemented across the attack timeline</li></ul><p id="2285b2cc-075b-80be-a7fe-e02cf671dd9a" class="">An example of the diamond model in play would involve an adversary targeting a victim using phishing attacks to obtain sensitive information and compromise their system, as displayed on the diagram. As a threat intelligence analyst, the model allows you to pivot along its properties to produce a complete picture of an attack and correlate indicators.</p><p id="2285b2cc-075b-80fc-9f57-c3160a37ca89" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

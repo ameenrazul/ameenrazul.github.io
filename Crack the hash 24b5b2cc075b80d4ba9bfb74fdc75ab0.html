@@ -1,0 +1,681 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Crack the hash</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="24b5b2cc-075b-80d4-ba9b-fb74fdc75ab0" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/fafc074a97207f99929f2ee28bea87ac.jpeg"/></div><h1 class="page-title"><strong>Crack the hash</strong></h1><p class="page-description"></p></header><div class="page-body"><h2 id="24b5b2cc-075b-80d1-aa80-fe28d40d1b52" class="">Task 1-1: MD5 hash</h2><p id="24b5b2cc-075b-800e-80d4-d41c861c7ff7" class=""><strong>Hash: 48bb6e862e54f2a795ffc4e541caed4d</strong></p><p id="24b5b2cc-075b-80ef-9364-e9226c0a69dd" class=""><strong>Solution</strong>: This one is easy, there are two ways to crack this MD5 hash</p><p id="24b5b2cc-075b-802b-b8b0-ca23d7f58cb7" class="">Method 1: Online hash cracker</p><p id="24b5b2cc-075b-8092-9827-c9231efe1983" class="">You can visit any hash cracker site to crack the hash instantly. For example, the <a href="https://crackstation.net/">crack station</a>. Just paste the hash and crack it.</p><p id="24b5b2cc-075b-80fb-a6a6-c569652124a7" class="">Method 2: Hashcat</p><p id="24b5b2cc-075b-805e-81c3-fb483ba2e18e" class="">This method is more flexible when compared to the online hash cracker. It provides a tons of <a href="https://hashcat.net/wiki/doku.php?id=example_hashes">hash mode</a>. You can download hashcat (Window/Linux/MacOS) from this <a href="https://hashcat.net/hashcat/">website</a>.  However, you need to know some command line for terminal/CMD as the prerequisite of using this tool. On the other hand, I highly recommend launching this tool in your host computer (not on your virtual machine). This is due to cracking the hash require a large amount of processing resource and GPU is the ideal choice when compared to CPU. Also, the virtual machine cannot access GPU resource.</p><p id="24b5b2cc-075b-80bc-afd6-f9c9848af2dd" class="">For this walk-through, I’m going to use Window OS. After you have downloaded the hashcat, be sure to redirect to the path where you extract the hashcat (using  the command: cd). Also, I going to use dictionary attack for this hash crack walk-through, you can download the famous <a href="https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt">wordlist (rockyou.txt)</a>. After that, I store the rockyou.txt into the ‘Dict’ directory (the directory is inside the hashcat folder).</p><p id="24b5b2cc-075b-8015-b19f-c825ad65186d" class="">Please create a ‘Hash’ directory to store all the hashes that going to be cracked soon. For this case, i saved my hash in ‘hash.txt’.</p><figure id="24b5b2cc-075b-80c1-a6ee-c8ae448edc08" class="image"><a href="https://embeddedworld.home.blog/wp-content/uploads/2019/05/screenshot_4.png"><img style="width:700px" src="https://embeddedworld.home.blog/wp-content/uploads/2019/05/screenshot_4.png"/></a></figure><p id="24b5b2cc-075b-8047-b016-fbbb4377098c" class="">After that launch the hashcat using following command</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="24b5b2cc-075b-80f3-9368-e1eb9319bc9b" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">hashcat64.exe -D 2 -m 0 Hash/hash.txt Dict/rockyou.txt</code></pre><ul id="24b5b2cc-075b-8020-ae8c-e81a2fbed435" class="bulleted-list"><li style="list-style-type:disc">hashcat64.exe –&gt; hashcat run in 64bit</li></ul><ul id="24b5b2cc-075b-80df-843e-c2886d02c79b" class="bulleted-list"><li style="list-style-type:disc">D –&gt; choosing the processor mode (1-CPU, 2-GPU 3-FPGA)</li></ul><ul id="24b5b2cc-075b-8021-b0c8-f2545e01a8fc" class="bulleted-list"><li style="list-style-type:disc">m –&gt; Hash mode (0-MD5), please refer to <a href="https://hashcat.net/wiki/doku.php?id=example_hashes">hashcat mode</a></li></ul><p id="24b5b2cc-075b-8021-8bc6-cc134d885d9e" class="">After a few second/minute, the result shows in the terminal.</p><figure id="24b5b2cc-075b-808e-b7bb-c1398c3b36c6" class="image"><a href="https://embeddedworld.home.blog/wp-content/uploads/2019/05/screenshot_1-2.png"><img style="width:700px" src="https://embeddedworld.home.blog/wp-content/uploads/2019/05/screenshot_1-2.png"/></a></figure><p id="24b5b2cc-075b-8057-9689-df58f9a89926" class="">The terminal show the cracked hash</p><p id="24b5b2cc-075b-80a0-8496-e8f3636b0364" class=""><strong>Answer: easy</strong></p><h2 id="24b5b2cc-075b-80ec-be15-ce7ec9be4694" class="">Task 1-2: SHA1 hash</h2><p id="24b5b2cc-075b-80a1-889e-cbda8716509e" class=""><strong>Hash: CBFDAC6008F9CAB4083784CBD1874F76618D2A97</strong></p><p id="24b5b2cc-075b-8042-a86e-c1b7a95a75c7" class=""><strong>Solution</strong>: Similar to Task 1-1, but the mode is (-m 100) for hashcat</p><p id="24b5b2cc-075b-800e-873e-e255d36ad2c6" class=""><strong>Answer</strong>: password123</p><h2 id="24b5b2cc-075b-80ba-a9e4-e1d7081871a7" class="">Task 1-3: SHA256 hash</h2><p id="24b5b2cc-075b-8092-a135-ecf683a019b8" class=""><strong>Hash: 1C8BFE8F801D79745C4631D09FFF36C82AA37FC4CCE4FC946683D7B336B63032</strong></p><p id="24b5b2cc-075b-8035-8136-c299972f86d5" class=""><strong>Solution:</strong> Similar to Task 1-1, but the mode is (-m 1400) for hashcat</p><p id="24b5b2cc-075b-80d2-803e-c7755269c222" class=""><strong>Answer</strong>: letmein</p><h2 id="24b5b2cc-075b-8063-a667-c9974fe72d97" class="">Task 1-4: bcrypt-blowfish hash</h2><p id="24b5b2cc-075b-806e-afba-c53ae0944a09" class=""><strong>Hash: $2y$12$Dwt1BZj6pcyc3Dy1FWZ5ieeUznr71EeNkJkUlypTsgbX1H68wsRom</strong></p><p id="24b5b2cc-075b-8040-8c95-c5a1ef8b00d0" class=""><strong>Solution</strong>: This one is little bit tricky which is <br/>this hash cannot be cracked using online tool. That is why hashcat came <br/>in, set the mode to -m 3200</p><p id="24b5b2cc-075b-8045-ab2b-c1db7be7ff0d" class=""><strong>Answer</strong>: bleh</p><h2 id="24b5b2cc-075b-802a-ad39-dd4445f0858a" class="">Task 1-5: MD4 hash</h2><p id="24b5b2cc-075b-8038-869e-f17cd29f49dc" class=""><strong>Hash: 279412f945939ba78ce0758d3fd83daa</strong></p><p id="24b5b2cc-075b-804b-bf19-df535d95dea7" class=""><strong>Solution</strong>:  Similar to Task 1-1, but the mode is (-m 900) for hashcat</p><p id="24b5b2cc-075b-80ec-9f72-dafe9b02bbb4" class=""><strong>Answer</strong>: Eternity22</p><h2 id="24b5b2cc-075b-805d-b470-c45834af4144" class="">Task 2-1: SHA256 hash</h2><p id="24b5b2cc-075b-8072-ae63-e1fab37d70d7" class=""><strong>Hash:  F09EDCB1FCEFC6DFB23DC3505A882655FF77375ED8AA2D1C13F640FCCC2D0C85</strong></p><p id="24b5b2cc-075b-804f-9481-d48b0abc8f94" class=""><strong>Solution</strong>:  Similar to Task 1-1, but the mode is (-m 1400) for hashcat</p><p id="24b5b2cc-075b-808d-99cb-f1429ec21391" class=""><strong>Answer</strong>: paule</p><h2 id="24b5b2cc-075b-8001-b9a6-c34ba908cc7e" class="">Task 2-2: NTLM hash</h2><p id="24b5b2cc-075b-800d-bea3-c523f7376a76" class=""><strong>Hash: 1DFECA0C002AE40B8619ECF94819CC1B</strong></p><p id="24b5b2cc-075b-801d-bf6b-c2c4d9b44135" class=""><strong>Solution</strong>:  Similar to Task 1-1, but the mode is (-m 1000) for hashcat</p><p id="24b5b2cc-075b-80b5-aee2-e835a96692dd" class=""><strong>Answer</strong>: n63umy8lkf4i</p><h2 id="24b5b2cc-075b-80de-aa0e-daf9a4c8a184" class="">Task 2-3: SHA512crypt, $6$ hash</h2><p id="24b5b2cc-075b-80eb-9172-c8c40c348f24" class=""><strong>Hash:  $6$aReallyHardSalt$6WKUTqzq.UQQmrm0p/T7MPpMbGNnzXPMAXi4bJMl9be.cfi3/qxIf.hsGpS41BqMhSrHVXgMpdjS6xeKZAs02.</strong></p><p id="24b5b2cc-075b-8062-9259-e40e5251a14d" class=""><strong>Solution</strong>: This hash cannot be cracked using online <br/>tool but can be cracked using hashcat by setting the mode -m 1800. (It <br/>take some time).</p><p id="24b5b2cc-075b-80a1-98cd-f9a47d95b47d" class=""><strong>Answer</strong>: waka99</p><h2 id="24b5b2cc-075b-8012-98d4-da88af2c5470" class="">Task 2-4: SHA1 with salt hash</h2><p id="24b5b2cc-075b-80a0-af83-e5214f907cbb" class=""><strong>Hash: e5d8870e5bdd26602cab8dbe07a942c8669e56d6:tryhackme</strong></p><p id="24b5b2cc-075b-8011-87ce-f5891af206b9" class=""><strong>Solution</strong>: This hash also cannot be cracked using online tool due to the present of salt ( <strong>tryhackme</strong> ). This only can be done by using hashcat with mode -m 110.</p><p id="24b5b2cc-075b-80e1-91de-d1be5b1f5daa" class=""><strong>Answer</strong>: 481616481616</p><h2 id="24b5b2cc-075b-8064-8cc1-eb090d9c8078" class="">Identify hash</h2><p id="24b5b2cc-075b-80bf-9c04-c6f03aad9087" class="">If you were not sure what kind of hash is presented on your monitor, you can try to <a href="https://md5hashing.net/hash_type_checker">detect the hash</a>. It listed out all possible hashes.</p><h2 id="24b5b2cc-075b-809e-9a2f-dc8470ac4e9f" class="">Conclusion</h2><p id="24b5b2cc-075b-809f-b842-d635afe935b8" class="">Cracking hashes are fun</p><figure id="24b5b2cc-075b-8076-8dc7-c694adb5b09e" class="image"><a href="https://s0.wp.com/wp-content/mu-plugins/wpcom-smileys/twemoji/2/svg/1f642.svg"><img src="https://s0.wp.com/wp-content/mu-plugins/wpcom-smileys/twemoji/2/svg/1f642.svg"/></a></figure><h3 id="24b5b2cc-075b-807e-bf0e-c6b39d78505f" class="">Reference and link</h3><ul id="24b5b2cc-075b-8020-8e00-e5b918542249" class="bulleted-list"><li style="list-style-type:disc">Crack this hash –&gt; <a href="https://tryhackme.com/room/crackthehash">https://tryhackme.com/room/crackthehash</a></li></ul><ul id="24b5b2cc-075b-8069-960b-f6d2aa317c21" class="bulleted-list"><li style="list-style-type:disc">hashcat –&gt; <a href="https://hashcat.net/">https://hashcat.net</a></li></ul><ul id="24b5b2cc-075b-8086-ac9b-fdfd6a5eee3b" class="bulleted-list"><li style="list-style-type:disc">hashcat (hash list) –&gt; <a href="https://hashcat.net/wiki/doku.php?id=example_hashes">https://hashcat.net/wiki/doku.php?id=example_hashes</a></li></ul><ul id="24b5b2cc-075b-804f-91f5-ecd14af645e5" class="bulleted-list"><li style="list-style-type:disc">Hash identifier –&gt; <a href="https://md5hashing.net/hash_type_checker">https://md5hashing.net/hash_type_checker</a></li></ul><ul id="24b5b2cc-075b-804a-b9a6-db5048f5686b" class="bulleted-list"><li style="list-style-type:disc">Online hash cracker –&gt; <a href="https://crackstation.net/">https://crackstation.net/</a></li></ul><p id="24b5b2cc-075b-8050-9635-dcefa91acdf6" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

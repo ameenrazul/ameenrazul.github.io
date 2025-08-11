@@ -1,0 +1,682 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>TheHIVE</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2415b2cc-075b-80de-9ebe-f1e9542190af" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/0370cb3cf16a89c2bd9fa4297cb284b7.png"/></div><h1 class="page-title">TheHIVE</h1><p class="page-description"></p></header><div class="page-body"><p id="2415b2cc-075b-8039-895c-ed726349c371" class="">Welcome to TheHive Project Outline!</p><p id="2415b2cc-075b-803c-981a-f06d3c57d884" class="">TheHive Project is a scalable, open-source and freely available Security Incident Response Platform, designed to assist security analysts and practitioners working in SOCs, CSIRTs and CERTs to track, investigate and act upon identified security incidents in a swift and collaborative manner.</p><p id="2415b2cc-075b-8063-a45f-e9d0296d5553" class="">Security Analysts can collaborate on investigations simultaneously, ensuring real-time information pertaining to new or existing cases, tasks, observables and IOCs are available to all team members.</p><p id="2415b2cc-075b-80fe-b6f1-f4d6e8d04696" class="">More information about the project can be found on <a href="https://thehive-project.org/">https://thehive-project.org/</a> &amp; their <a href="https://github.com/TheHive-Project/TheHive">GitHub Repo</a>.</p><figure id="2415b2cc-075b-80fd-9f16-d4496a3549a1" class="image"><a href="image%20306.png"><img style="width:685.9734497070312px" src="image%20306.png"/></a></figure><h3 id="2415b2cc-075b-80ca-bf02-eb71347d9368" class="">🔍 <strong>TheHive Overview</strong></h3><p id="2415b2cc-075b-80e4-b4b0-f3918c00bed8" class=""><strong>TheHive</strong> is an open-source Security Incident Response Platform (SIRP) designed for <strong>collaborative incident response</strong>. It enables <strong>multiple analysts within an organization to work on the same case simultaneously</strong>, streamlining investigation workflows through rich integrations and features.</p><hr id="2415b2cc-075b-80bf-a92e-e92048e944ee"/><h3 id="2415b2cc-075b-804d-b08c-ea841343ac57" class="">🧰 <strong>Key Features</strong></h3><h3 id="2415b2cc-075b-8030-a648-d85a931e6f7b" class="">1. <strong>Case &amp; Task Management</strong></h3><ul id="2415b2cc-075b-80ba-b61f-ed1f0bc5a9cb" class="bulleted-list"><li style="list-style-type:disc">Investigations are organized into <strong>cases</strong>, which can be split into <strong>tasks</strong>.</li></ul><ul id="2415b2cc-075b-805d-bef5-c7e84afd132d" class="bulleted-list"><li style="list-style-type:disc">Supports <strong>templates</strong> for standardization.</li></ul><ul id="2415b2cc-075b-8097-a9ba-ed29c6018901" class="bulleted-list"><li style="list-style-type:disc">Analysts can <strong>log progress</strong>, attach evidence, use <strong>tags</strong>, and archive items.</li></ul><h3 id="2415b2cc-075b-805b-9270-f0a440ad6086" class="">2. <strong>Alert Triage</strong></h3><ul id="2415b2cc-075b-80da-9cdc-e4293edc80e5" class="bulleted-list"><li style="list-style-type:disc">Alerts can be ingested from:<ul id="2415b2cc-075b-80e5-b292-d9ad9cacda78" class="bulleted-list"><li style="list-style-type:circle"><strong>SIEM systems</strong></li></ul><ul id="2415b2cc-075b-80a9-bbbe-d8c2cdb3dc42" class="bulleted-list"><li style="list-style-type:circle"><strong>Emails</strong></li></ul><ul id="2415b2cc-075b-80e8-83af-fcf573367aa8" class="bulleted-list"><li style="list-style-type:circle"><strong>Other threat intel platforms</strong></li></ul></li></ul><ul id="2415b2cc-075b-8053-8d5e-e5c5c5fb02f6" class="bulleted-list"><li style="list-style-type:disc">Analysts review alerts to decide escalation into cases.</li></ul><h3 id="2415b2cc-075b-80f9-8d68-da542990f6bd" class="">3. <strong>Observable Enrichment (via Cortex)</strong></h3><ul id="2415b2cc-075b-8095-8930-ee5418d4107d" class="bulleted-list"><li style="list-style-type:disc">Integration with <strong>Cortex</strong>, a tool for:<ul id="2415b2cc-075b-8036-be89-ea492aca15e4" class="bulleted-list"><li style="list-style-type:circle">Automated <strong>observable analysis</strong></li></ul><ul id="2415b2cc-075b-806a-898b-e3246322469b" class="bulleted-list"><li style="list-style-type:circle"><strong>Active response</strong> capabilities</li></ul></li></ul><ul id="2415b2cc-075b-8074-844f-e302b140d13c" class="bulleted-list"><li style="list-style-type:disc">Enables enrichment of IOCs (IP, hash, domain) with threat intelligence and correlation data.</li></ul><h3 id="2415b2cc-075b-8059-9ad2-fd5ffd84cd29" class="">4. <strong>Active Response</strong></h3><ul id="2415b2cc-075b-8092-9720-d7816947a2bd" class="bulleted-list"><li style="list-style-type:disc">Use of <strong>Responders</strong> for:<ul id="2415b2cc-075b-801b-a9c1-c3cd2ed35ba1" class="bulleted-list"><li style="list-style-type:circle">Containment actions</li></ul><ul id="2415b2cc-075b-8061-86dc-c4d8707b5536" class="bulleted-list"><li style="list-style-type:circle">Notification or info-sharing</li></ul><ul id="2415b2cc-075b-80b2-9d06-cd95e5f40c5f" class="bulleted-list"><li style="list-style-type:circle">Integration with SOAR workflows</li></ul></li></ul><h3 id="2415b2cc-075b-80ff-bda8-c0fcb1fad58a" class="">5. <strong>Custom Dashboards</strong></h3><ul id="2415b2cc-075b-80e3-9684-c02374ec542f" class="bulleted-list"><li style="list-style-type:disc">Create dashboards to display:<ul id="2415b2cc-075b-803a-a88f-f501f99259ef" class="bulleted-list"><li style="list-style-type:circle">Case statistics</li></ul><ul id="2415b2cc-075b-8048-8925-df89d6b4cf93" class="bulleted-list"><li style="list-style-type:circle">Task completion rates</li></ul><ul id="2415b2cc-075b-806c-98bd-c57868a28eea" class="bulleted-list"><li style="list-style-type:circle">KPIs and metrics</li></ul></li></ul><ul id="2415b2cc-075b-80b4-8493-dab14bfb5666" class="bulleted-list"><li style="list-style-type:disc">Helps in reporting and team performance tracking.</li></ul><h3 id="2415b2cc-075b-8037-a85b-dcb2cebaa3ca" class="">6. <strong>MISP Integration</strong></h3><ul id="2415b2cc-075b-808e-90a9-dd3298f38988" class="bulleted-list"><li style="list-style-type:disc">Full integration with <strong>MISP</strong> (Malware Information Sharing Platform):<ul id="2415b2cc-075b-80ef-8476-e1cba9d560a7" class="bulleted-list"><li style="list-style-type:circle">Import <strong>IOCs</strong> from MISP into cases.</li></ul><ul id="2415b2cc-075b-8015-9739-cfb74e153e7b" class="bulleted-list"><li style="list-style-type:circle">Export discovered indicators back to MISP.</li></ul><ul id="2415b2cc-075b-8099-bd3a-c7317265d9a3" class="bulleted-list"><li style="list-style-type:circle">Sync with MISP communities for intel sharing.</li></ul></li></ul><h3 id="2415b2cc-075b-807c-9e5f-cb2af0e1d38a" class="">7. <strong>Third-Party Integrations</strong></h3><ul id="2415b2cc-075b-80da-aa0f-fe1831da0fdc" class="bulleted-list"><li style="list-style-type:disc"><strong>DigitalShadows2TH</strong> and <strong>ZeroFox2TH</strong>:<ul id="2415b2cc-075b-80bd-84ac-c2ab9e90695a" class="bulleted-list"><li style="list-style-type:circle">Feed alerts from threat intel platforms directly into TheHive.</li></ul><ul id="2415b2cc-075b-8090-b9da-db17dd9257bb" class="bulleted-list"><li style="list-style-type:circle">Use with templates or associate with existing cases.</li></ul></li></ul><hr id="2415b2cc-075b-8088-add8-d2a1e4858204"/><h3 id="2415b2cc-075b-80d2-98bd-c79a2ec04b2f" class="">🧩 <strong>Why It’s Useful</strong></h3><ul id="2415b2cc-075b-80ed-bfb8-c7066dacb9ab" class="bulleted-list"><li style="list-style-type:disc"><strong>Collaboration-first</strong> design</li></ul><ul id="2415b2cc-075b-803a-be4b-e97c5c8e7a5c" class="bulleted-list"><li style="list-style-type:disc">Enables <strong>faster, standardized, and coordinated incident response</strong></li></ul><ul id="2415b2cc-075b-801d-9b32-ed1ab5185fe5" class="bulleted-list"><li style="list-style-type:disc"><strong>Highly extensible</strong> via APIs and community-developed integrations</li></ul><p id="2415b2cc-075b-80f6-a8fd-cb474460aa60" class="">
+</p><p id="2415b2cc-075b-8086-9a0c-d78ba05bae67" class="">TheHive offers an administrator the ability to create an organisation group to identify the analysts and assign different roles based on a list of pre-configured user profiles.</p><figure id="2415b2cc-075b-8028-8c9d-f1244e8a4181" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/5fc2847e1bbebc03aa89fbf2/room-content/853ee5298bfa5e60bf2fcf8d832268ff.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5fc2847e1bbebc03aa89fbf2/room-content/853ee5298bfa5e60bf2fcf8d832268ff.png"/></a></figure><p id="2415b2cc-075b-80f1-aa45-c6d5abcec455" class="">Admin Console - Create Organisation</p><p id="2415b2cc-075b-8048-b292-c47f4ed4644d" class="">The pre-configured user profiles are:</p><ul id="2415b2cc-075b-809a-95ca-f25416277740" class="bulleted-list"><li style="list-style-type:disc"><strong>admin:</strong> full administrative permissions on the platform; can&#x27;t manage any Cases or other data related to investigations;</li></ul><ul id="2415b2cc-075b-8078-8064-fd89d81bc8b8" class="bulleted-list"><li style="list-style-type:disc"><strong>org-admin:</strong> manage users and all organisation-level configuration, can create and edit Cases, Tasks, Observables and run Analysers and Responders;</li></ul><ul id="2415b2cc-075b-8046-9521-f032b37ea2fe" class="bulleted-list"><li style="list-style-type:disc"><strong>analyst:</strong> can create and edit Cases, Tasks, Observables and run Analysers &amp; Responders;</li></ul><ul id="2415b2cc-075b-806b-a6a1-e763985230c5" class="bulleted-list"><li style="list-style-type:disc"><strong>read-only:</strong> Can only read, Cases, Tasks and Observables details;</li></ul><figure id="2415b2cc-075b-80bc-bbdf-cda706c51161" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/5fc2847e1bbebc03aa89fbf2/room-content/b38aa62d7e9b6ddb08a200987a2bb3df.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5fc2847e1bbebc03aa89fbf2/room-content/b38aa62d7e9b6ddb08a200987a2bb3df.png"/></a></figure><p id="2415b2cc-075b-805b-8594-cf712fcdcb6d" class="">Admin Console -  Add User</p><p id="2415b2cc-075b-8021-bf96-c0d1766b8872" class="">Each user profile has a pre-defined list of permissions that would allow the user to perform different tasks based on their role. When a profile has been selected, its permissions will be listed.</p><figure id="2415b2cc-075b-803e-8d3f-d59210dad12d" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/5fc2847e1bbebc03aa89fbf2/room-content/a0413ab7ab43bdb220919d7a48e4ddfe.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5fc2847e1bbebc03aa89fbf2/room-content/a0413ab7ab43bdb220919d7a48e4ddfe.png"/></a></figure><p id="2415b2cc-075b-8070-b328-c54e55cf093f" class="">The full list of permissions includes:</p><table id="2415b2cc-075b-8090-94d0-ed9104462a01" class="simple-table"><tbody><tr id="2415b2cc-075b-80a9-8765-ff02f3a4ff41"><td id="kB?h" class=""><strong>Permission</strong></td><td id="pTwS" class="" style="width:440.00001525878906px"><strong>Functions</strong></td></tr><tr id="2415b2cc-075b-8071-9d54-ec549c52f64e"><td id="kB?h" class=""><strong>manageOrganisation (1)</strong></td><td id="pTwS" class="" style="width:440.00001525878906px">Create &amp; Update an organisation</td></tr><tr id="2415b2cc-075b-802c-95e0-fa6af5de6c6a"><td id="kB?h" class=""><strong>manageConfig (1)</strong></td><td id="pTwS" class="" style="width:440.00001525878906px">Update Configuration</td></tr><tr id="2415b2cc-075b-8068-b339-fe2132c0b8bd"><td id="kB?h" class=""><strong>manageProfile (1)</strong></td><td id="pTwS" class="" style="width:440.00001525878906px">Create, update &amp; delete Profiles</td></tr><tr id="2415b2cc-075b-809f-b7c2-eb0d9732f511"><td id="kB?h" class=""><strong>manageTag (1)</strong></td><td id="pTwS" class="" style="width:440.00001525878906px">Create, update &amp; Delete Tags</td></tr><tr id="2415b2cc-075b-8020-b9fc-e0f60a4cd09e"><td id="kB?h" class=""><strong>manageCustomField (1)</strong></td><td id="pTwS" class="" style="width:440.00001525878906px">Create, update &amp; delete Custom Fields</td></tr><tr id="2415b2cc-075b-803a-9ccf-eec6d7ba89ea"><td id="kB?h" class=""><strong>manageCase</strong></td><td id="pTwS" class="" style="width:440.00001525878906px">Create, update &amp; delete Cases</td></tr><tr id="2415b2cc-075b-80e6-a878-d5ebacee9da4"><td id="kB?h" class=""><strong>manageObservable</strong></td><td id="pTwS" class="" style="width:440.00001525878906px">Create, update &amp; delete Observables</td></tr><tr id="2415b2cc-075b-8079-be92-daa11d146e5f"><td id="kB?h" class=""><strong>manageALert</strong></td><td id="pTwS" class="" style="width:440.00001525878906px">Create, update &amp; import Alerts</td></tr><tr id="2415b2cc-075b-80b7-80cd-d66833fa947c"><td id="kB?h" class=""><strong>manageUser</strong></td><td id="pTwS" class="" style="width:440.00001525878906px">Create, update &amp; delete Users</td></tr><tr id="2415b2cc-075b-8045-8b34-f8d6c79af1da"><td id="kB?h" class=""><strong>manageCaseTemplate</strong></td><td id="pTwS" class="" style="width:440.00001525878906px">Create, update &amp; delete Case templates</td></tr><tr id="2415b2cc-075b-80cd-b635-c8b38f8a2d76"><td id="kB?h" class=""><strong>manageTask</strong></td><td id="pTwS" class="" style="width:440.00001525878906px">Create, update &amp; delete Tasks</td></tr><tr id="2415b2cc-075b-80ba-b959-e61c18c51db8"><td id="kB?h" class=""><strong>manageShare</strong></td><td id="pTwS" class="" style="width:440.00001525878906px">Share case, task &amp; observable with other organisations</td></tr><tr id="2415b2cc-075b-8013-875a-df34309547d3"><td id="kB?h" class=""><strong>manageAnalyse (2)</strong></td><td id="pTwS" class="" style="width:440.00001525878906px">Execute Analyse</td></tr><tr id="2415b2cc-075b-80f4-85c6-d647d74ebc16"><td id="kB?h" class=""><strong>manageAction (2)</strong></td><td id="pTwS" class="" style="width:440.00001525878906px">Execute Actions</td></tr><tr id="2415b2cc-075b-8007-813c-e9ccee20fb70"><td id="kB?h" class=""><strong>manageAnalyserTemplate (2)</strong></td><td id="pTwS" class="" style="width:440.00001525878906px">Create, update &amp; delete Analyser Templates</td></tr></tbody></table><p id="2415b2cc-075b-800b-a48f-cea95a3b418e" class=""><em>Note that (1) Organisations, configuration, profiles and tags are global objects. The related permissions are effective only on the “admin” organisation. (2) Actions, analysis and template are available only if the Cortex connector is enabled.</em></p><p id="2415b2cc-075b-80c0-bcbd-d46a4a05d382" class="">In addition to adding new user profiles, the admin can also perform other operations such as creating case custom fields, custom observable types, custom analyser templates and importing TTPs from the MITRE ATT&amp;CK framework, as displayed in the image below.</p><figure id="2415b2cc-075b-8071-b8a5-fef766228897" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/5fc2847e1bbebc03aa89fbf2/room-content/23c56b240bbeabf412e2bb69651e9a52.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5fc2847e1bbebc03aa89fbf2/room-content/23c56b240bbeabf412e2bb69651e9a52.png"/></a></figure><p id="2415b2cc-075b-8006-b2d9-d494c1b840c7" class="">Imported list of ATT&amp;CK Patterns</p><p id="2415b2cc-075b-80f2-8ab1-eb0ea74d1c0c" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

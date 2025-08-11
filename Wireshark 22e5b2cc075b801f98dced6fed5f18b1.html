@@ -1,0 +1,718 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Wireshark</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="22e5b2cc-075b-801f-98dc-ed6fed5f18b1" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🦈</span></div><h1 class="page-title">Wireshark</h1><p class="page-description"></p></header><div class="page-body"><p id="22e5b2cc-075b-80fc-9c52-d6e927454d72" class="">Wireshark is an open-source, cross-platform network packet analyser tool capable of sniffing and investigating live traffic and inspecting packet captures (PCAP). It is commonly used as one of the best packet analysis tools.</p><p id="22e5b2cc-075b-80c7-a739-cf7984170dfe" class="">
+</p><p id="22e5b2cc-075b-80a8-aaa9-d885bacdd56b" class="">
+</p><h1 id="22e5b2cc-075b-80b6-a81c-f35eda9c843d" class=""><strong>Wireshark: Traffic Analysis</strong></h1><h2 id="22e5b2cc-075b-800e-8c05-c21a391dfaf2" class="">Nmap Scans</h2><h1 id="22e5b2cc-075b-8041-9237-f1edfea60a35" class="">Nmap Scans</h1><p id="22e5b2cc-075b-8065-8056-cb9e35ceb38b" class="">Nmap is an industry-standard tool for mapping networks, identifying live hosts and discovering the services. As it is one of the most used network scanner tools, a security analyst should identify the network patterns created with it. This section will cover identifying the most common Nmap scan types.</p><ul id="22e5b2cc-075b-80f7-8f8f-c3f9ff052472" class="bulleted-list"><li style="list-style-type:disc">TCP connect scans</li></ul><ul id="22e5b2cc-075b-80d5-a5a9-d496eaa4f891" class="bulleted-list"><li style="list-style-type:disc">SYN scans</li></ul><ul id="22e5b2cc-075b-80d6-a00d-c2ae2638b20b" class="bulleted-list"><li style="list-style-type:disc">UDP scans</li></ul><p id="22e5b2cc-075b-8066-970c-fdf18b1431fa" class="">It is essential to know how Nmap scans work to spot scan activity on the network. However, it is impossible to understand the scan details without using the correct filters. Below are the base filters to probe Nmap scan behavior on the network.</p><p id="22e5b2cc-075b-805f-be2f-d9f6eb2d2134" class=""><strong>TCP flags in a nutshell.</strong></p><table id="22e5b2cc-075b-80c0-b125-f270c542f8cd" class="simple-table"><tbody><tr id="22e5b2cc-075b-8007-950f-ef65b89f3c90"><td id="dCU^" class=""><strong>Notes</strong></td><td id="}t{D" class="" style="width:437px"><strong>Wireshark Filters</strong></td></tr><tr id="22e5b2cc-075b-80a4-8bbe-ee1df919e3c2"><td id="dCU^" class="">Global search.</td><td id="}t{D" class="" style="width:437px">• <code>tcp</code><br/>• <code>udp</code></td></tr><tr id="22e5b2cc-075b-8067-89b5-c6af8005848c"><td id="dCU^" class="">• Only SYN flag.<br/>• SYN flag is set. The rest of the bits are not important.</td><td id="}t{D" class="" style="width:437px">• <code>tcp.flags == 2</code><br/>• <code>tcp.flags.syn == 1</code></td></tr><tr id="22e5b2cc-075b-8069-a30c-f2926b318a3c"><td id="dCU^" class="">• Only ACK flag.<br/>• ACK flag is set. The rest of the bits are not important.</td><td id="}t{D" class="" style="width:437px">• <code>tcp.flags == 16</code><br/>• <code>tcp.flags.ack == 1</code></td></tr><tr id="22e5b2cc-075b-80bb-9c9a-e3314187416d"><td id="dCU^" class="">• Only SYN, ACK flags.<br/>• SYN and ACK are set. The rest of the bits are not important.</td><td id="}t{D" class="" style="width:437px">• <code>tcp.flags == 18</code><br/>• <code>(tcp.flags.syn == 1) and (tcp.flags.ack == 1)</code></td></tr><tr id="22e5b2cc-075b-8068-90d0-caccb309e584"><td id="dCU^" class="">• Only RST flag.<br/>• RST flag is set. The rest of the bits are not important.</td><td id="}t{D" class="" style="width:437px">• <code>tcp.flags == 4</code><br/>• <code>tcp.flags.reset == 1</code></td></tr><tr id="22e5b2cc-075b-8001-920b-e74f49fb354b"><td id="dCU^" class="">• Only RST, ACK flags.<br/>• RST and ACK are set. The rest of the bits are not important.</td><td id="}t{D" class="" style="width:437px">• <code>tcp.flags == 20</code><br/>• <code>(tcp.flags.reset == 1) and (tcp.flags.ack == 1)</code></td></tr><tr id="22e5b2cc-075b-803f-94f2-fb7580996494"><td id="dCU^" class="">• Only FIN flag<br/>• FIN flag is set. The rest of the bits are not important.</td><td id="}t{D" class="" style="width:437px">• <code>tcp.flags == 1</code><br/>• <code>tcp.flags.fin == 1</code></td></tr></tbody></table><h1 id="22e5b2cc-075b-8068-9c9d-f189509208d9" class="">TCP Connect Scans</h1><p id="22e5b2cc-075b-80cd-bbc0-fa6b9ab6659e" class=""><strong>TCP Connect Scan in a nutshell:</strong></p><ul id="22e5b2cc-075b-8071-9517-ec0e98abf1be" class="bulleted-list"><li style="list-style-type:disc">Relies on the three-way handshake (needs to finish the handshake process).</li></ul><ul id="22e5b2cc-075b-80ea-963c-e6c3dce4eb70" class="bulleted-list"><li style="list-style-type:disc">Usually conducted with <code>nmap -sT</code> command.</li></ul><ul id="22e5b2cc-075b-8035-a376-d2dd405c8231" class="bulleted-list"><li style="list-style-type:disc">Used by non-privileged users (only option for a non-root user).</li></ul><ul id="22e5b2cc-075b-80e4-b1b4-f80d06b18cab" class="bulleted-list"><li style="list-style-type:disc">Usually has a windows size larger than 1024 bytes as the request expects some data due to the nature of the protocol.</li></ul><table id="22e5b2cc-075b-8030-a036-f9305b6090cf" class="simple-table"><tbody><tr id="22e5b2cc-075b-80b8-ae79-c5969f924a55"><td id="NyvJ" class=""><strong>Open TCP Port</strong></td><td id="dlKb" class=""><strong>Open TCP Port</strong></td><td id="s~FN" class=""><strong>Closed TCP Port</strong></td></tr><tr id="22e5b2cc-075b-8010-ab82-dd6e6320d1ab"><td id="NyvJ" class="">• SYN --&gt;<br/>• &lt;-- SYN, ACK<br/>• ACK --&gt;</td><td id="dlKb" class="">• SYN --&gt;<br/>• &lt;-- SYN, ACK<br/>• ACK --&gt;<br/>• RST, ACK --&gt;</td><td id="s~FN" class="">• SYN --&gt;<br/>• &lt;-- RST, ACK</td></tr></tbody></table><p id="22e5b2cc-075b-8003-a60e-d69ceb9fd4eb" class="">The images below show the three-way handshake process of the open and close TCP ports. Images and pcap samples are split to make the investigation easier and understand each case&#x27;s details.</p><p id="22e5b2cc-075b-8046-ade1-d499f05e8891" class=""><strong>Open TCP port (Connect):</strong></p><figure id="22e5b2cc-075b-8079-ab44-ff1b2984437f" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/6131132af49360005df01ae3/room-content/500bb6902ef6b2edb515bb1828088d82.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/6131132af49360005df01ae3/room-content/500bb6902ef6b2edb515bb1828088d82.png"/></a></figure><p id="22e5b2cc-075b-800b-a4c5-fe7fa4912fe0" class=""><strong>Closed TCP port (Connect):</strong></p><figure id="22e5b2cc-075b-8083-966f-c405813ebdcf" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/6131132af49360005df01ae3/room-content/c194773203502d659d72706aa93eae59.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/6131132af49360005df01ae3/room-content/c194773203502d659d72706aa93eae59.png"/></a></figure><p id="22e5b2cc-075b-808b-b203-cc5bbc850cc6" class="">The above images provide the patterns in isolated traffic. However, it is not always easy to spot the given patterns in big capture files. Therefore analysts need to use a generic filter to view the initial anomaly patterns, and then it will be easier to focus on a specific traffic point. The given filter shows the TCP Connect scan patterns in a capture file.</p><p id="22e5b2cc-075b-8086-b9a1-ff03d56184d8" class=""><code>tcp.flags.syn==1 and tcp.flags.ack==0 and tcp.window_size &gt; 1024</code></p><figure id="22e5b2cc-075b-806d-8c1c-e1642710f438" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/6131132af49360005df01ae3/room-content/7025561839f99201724629fae1274f2d.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/6131132af49360005df01ae3/room-content/7025561839f99201724629fae1274f2d.png"/></a></figure><h1 id="22e5b2cc-075b-80e3-9c5f-e7c3763cc396" class="">SYN Scans</h1><p id="22e5b2cc-075b-800a-a0d3-c9d156966e29" class="">TCP SYN Scan in a nutshell:</p><ul id="22e5b2cc-075b-808d-b143-f31c69547831" class="bulleted-list"><li style="list-style-type:disc">Doesn&#x27;t rely on the three-way handshake (no need to finish the handshake process).</li></ul><ul id="22e5b2cc-075b-80a5-8795-dc26be2b47a1" class="bulleted-list"><li style="list-style-type:disc">Usually conducted with <code>nmap -sS</code> command.</li></ul><ul id="22e5b2cc-075b-802d-b6b2-e4ab44ae2d6f" class="bulleted-list"><li style="list-style-type:disc">Used by privileged users.</li></ul><ul id="22e5b2cc-075b-803f-a782-c82d9e945fe4" class="bulleted-list"><li style="list-style-type:disc">Usually have a size less than or equal to 1024 bytes as the request is not finished and it doesn&#x27;t expect to receive data.</li></ul><table id="22e5b2cc-075b-8094-9cda-f84f123fcd40" class="simple-table"><tbody><tr id="22e5b2cc-075b-8061-b27a-fcbade482242"><td id="[BGU" class="" style="width:134px"><strong>Open TCP Port</strong></td><td id="[tvK" class=""><strong>Close TCP Port</strong></td></tr><tr id="22e5b2cc-075b-80b2-b98b-c285d21be498"><td id="[BGU" class="" style="width:134px">• SYN --&gt;<br/>• &lt;-- SYN,ACK<br/>• RST--&gt;</td><td id="[tvK" class="">• SYN --&gt;<br/>• &lt;-- RST,ACK</td></tr></tbody></table><p id="22e5b2cc-075b-804a-8755-fa34104a0c22" class=""><strong>Open TCP port (SYN):</strong></p><figure id="22e5b2cc-075b-8051-839d-df2887d25920" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/6131132af49360005df01ae3/room-content/0dbf4e7b74ad99f7060241fc37d8d570.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/6131132af49360005df01ae3/room-content/0dbf4e7b74ad99f7060241fc37d8d570.png"/></a></figure><p id="22e5b2cc-075b-8044-911b-d090be18a7b0" class=""><strong>Closed TCP port (SYN):</strong></p><figure id="22e5b2cc-075b-8076-b643-fc02802a565f" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/6131132af49360005df01ae3/room-content/488115fed65b69aa95aa2677cf2ae800.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/6131132af49360005df01ae3/room-content/488115fed65b69aa95aa2677cf2ae800.png"/></a></figure><p id="22e5b2cc-075b-8054-b85b-dba21e20a0b0" class="">The given filter shows the TCP SYN scan patterns in a capture file.</p><p id="22e5b2cc-075b-8088-89a9-f3c68f31fc36" class=""><code>tcp.flags.syn==1 and tcp.flags.ack==0 and tcp.window_size &lt;= 1024</code></p><figure id="22e5b2cc-075b-80df-ab39-e0421647882d" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/6131132af49360005df01ae3/room-content/d033bde6ee753f070678cc56665d79fa.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/6131132af49360005df01ae3/room-content/d033bde6ee753f070678cc56665d79fa.png"/></a></figure><h1 id="22e5b2cc-075b-803d-9103-cac9af3b0fd5" class="">UDP Scans</h1><p id="22e5b2cc-075b-80c8-80c2-fef98c4b7f20" class="">UDP Scan in a nutshell:</p><ul id="22e5b2cc-075b-80c7-ab36-c21c29e9ef77" class="bulleted-list"><li style="list-style-type:disc">Doesn&#x27;t require a handshake process</li></ul><ul id="22e5b2cc-075b-8052-b804-f5befe7e83cf" class="bulleted-list"><li style="list-style-type:disc">No prompt for open ports</li></ul><ul id="22e5b2cc-075b-80e3-a9e4-f6714bfaa0f6" class="bulleted-list"><li style="list-style-type:disc">ICMP error message for close ports</li></ul><ul id="22e5b2cc-075b-8050-8a34-e4ea0cca4337" class="bulleted-list"><li style="list-style-type:disc">Usually conducted with <code>nmap -sU</code> command.</li></ul><table id="22e5b2cc-075b-80ff-ac7a-c2ed1dc24707" class="simple-table"><tbody><tr id="22e5b2cc-075b-8051-a4a2-f93905c6f005"><td id="FD=B" class="">Open UDP Port</td><td id="VL_m" class="">Closed UDP Port</td></tr><tr id="22e5b2cc-075b-804b-9c4d-c5c92fcc8541"><td id="FD=B" class="">• UDP packet --&gt;</td><td id="VL_m" class="">• UDP packet --&gt;<br/>• ICMP Type 3, Code 3 message. (Destination unreachable, port unreachable)</td></tr></tbody></table><p id="22e5b2cc-075b-80eb-998e-c44f26ef04c5" class=""><strong>Closed (port no 69) and open (port no 68) UDP ports:</strong></p><figure id="22e5b2cc-075b-807c-a00d-c7887ec0e975" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/6131132af49360005df01ae3/room-content/bb88ee3b05687c6ece165ab7e9fe12bf.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/6131132af49360005df01ae3/room-content/bb88ee3b05687c6ece165ab7e9fe12bf.png"/></a></figure><p id="22e5b2cc-075b-8072-9e85-fd0b65254452" class="">The above image shows that the closed port returns an ICMP error packet. No further information is provided about the error at first glance, so how can an analyst decide where this error message belongs? The ICMP error message uses the original request as encapsulated data to show the source/reason of the packet. Once you expand the ICMP section in the packet details pane, you will see the encapsulated data and the original request, as shown in the below image.</p><figure id="22e5b2cc-075b-805d-94ab-ea68429f27d2" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/6131132af49360005df01ae3/room-content/0e63fe522554f08810d7d60b8a331ae7.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/6131132af49360005df01ae3/room-content/0e63fe522554f08810d7d60b8a331ae7.png"/></a></figure><p id="22e5b2cc-075b-803c-a3d7-dbe494e6d9ad" class="">The given filter shows the UDP scan patterns in a capture file.</p><p id="22e5b2cc-075b-8070-82b9-d683ac83bd1a" class=""><code>icmp.type==3 and icmp.code==3</code></p><figure id="22e5b2cc-075b-80de-9385-d0bb9501e373" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/6131132af49360005df01ae3/room-content/626988e40598f6190c81f59ab3ff813c.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/6131132af49360005df01ae3/room-content/626988e40598f6190c81f59ab3ff813c.png"/></a></figure><p id="22e5b2cc-075b-80b1-b627-d708298af3bc" class="">
+</p><p id="22e5b2cc-075b-80c9-b59c-c8ac1b095c9a" class="">
+</p><h3 id="22e5b2cc-075b-8090-8898-ed659b7be169" class="">Questions<br/><br/></h3><ol type="1" id="22e5b2cc-075b-80a6-a6fe-cc47332a5605" class="numbered-list" start="1"><li>What is the total number of the &quot;TCP Connect&quot; scans?</li></ol><p id="22e5b2cc-075b-804a-94f8-e4f567c59e8a" class="">As mentioned before, tcp connect scans have a syn flag and ack flags, plus window size greter than 1024, so we use these as filters and see how many packets we see, just by seeing SYN flag with a 1024 so we know its complete</p><figure id="22e5b2cc-075b-80d5-87e9-da051d5157c7" class="image"><a href="9FB40C5D-0893-45B5-A507-90A830971E8A.png"><img style="width:709.4339599609375px" src="9FB40C5D-0893-45B5-A507-90A830971E8A.png"/></a></figure><p id="22e5b2cc-075b-80fa-bb8d-e26ae3a89b37" class="">
+</p><ol type="1" id="22e5b2cc-075b-80c8-8ee7-e7a107ae0f9c" class="numbered-list" start="2"><li>Which scan type is used to scan the TCP port 80?</li></ol><figure id="22e5b2cc-075b-80a8-a997-f3c46ae113ca" class="image"><a href="ACD18E1F-D29B-4FEC-BEE2-C47FF09ECE2D.png"><img style="width:709.3773803710938px" src="ACD18E1F-D29B-4FEC-BEE2-C47FF09ECE2D.png"/></a></figure><ol type="1" id="22e5b2cc-075b-80f8-84b6-dc2ba6aa8e84" class="numbered-list" start="3"><li>How many &quot;UDP close port&quot; messages are there?</li></ol><p id="22e5b2cc-075b-804f-9c55-e5c5614d3919" class="">We know that udp port unreachable is closed, so the filter typ3 works</p><figure id="22e5b2cc-075b-8077-83a0-d090026759f2" class="image"><a href="5DE56E73-EA83-4563-87B1-BA4DB03D996B.png"><img style="width:709.4151000976562px" src="5DE56E73-EA83-4563-87B1-BA4DB03D996B.png"/></a></figure><ol type="1" id="22e5b2cc-075b-8089-92f4-d6c06e80d16b" class="numbered-list" start="4"><li>Which UDP port in the 55-70 port range is open?</li></ol><p id="22e5b2cc-075b-8027-a9ca-ee8db90592f8" class="">by using the filter and looking at the closed one, we can see taht only 68 is open.</p><figure id="22e5b2cc-075b-806a-9042-e15eb09ec290" class="image"><a href="image%20205.png"><img style="width:709.4528198242188px" src="image%20205.png"/></a></figure><p id="22e5b2cc-075b-80a8-8e4e-c7f292687e4e" class="">
+</p><p id="22e5b2cc-075b-80e4-8615-c5fdfbe02a30" class="">
+</p><h1 id="22e5b2cc-075b-80ca-a333-f9bb9f4dae55" class=""><strong>ARP Poisoning/Spoofing (A.K.A. Man In The Middle Attack)</strong></h1><h3 id="22e5b2cc-075b-80a2-a45c-d0d35f6227d3" class="">🔍 <strong>What is ARP Spoofing?</strong></h3><ul id="22e5b2cc-075b-80b3-a02e-d692c5dd9311" class="bulleted-list"><li style="list-style-type:disc"><strong>ARP (Address Resolution Protocol)</strong> allows devices to map IP addresses to MAC addresses on a local network.</li></ul><ul id="22e5b2cc-075b-8028-b173-ec1168bc02c3" class="bulleted-list"><li style="list-style-type:disc"><strong>ARP Poisoning (or Spoofing)</strong> manipulates ARP tables by sending forged ARP packets to intercept or disrupt communication (Man-in-the-Middle or MITM).</li></ul><hr id="22e5b2cc-075b-8022-8cc2-c3a1a6ed0118"/><h3 id="22e5b2cc-075b-8061-923f-e3009bf920b5" class="">⚠️ <strong>Why It&#x27;s Dangerous</strong></h3><ul id="22e5b2cc-075b-80f6-a553-cf46695e7a90" class="bulleted-list"><li style="list-style-type:disc">ARP is <strong>not secure</strong>: no authentication, not routable, and operates only within local networks.</li></ul><ul id="22e5b2cc-075b-80ce-a2e1-c9e39e169a4e" class="bulleted-list"><li style="list-style-type:disc"><strong>Attackers can sniff or tamper with traffic</strong> by impersonating the gateway or other hosts.</li></ul><hr id="22e5b2cc-075b-8049-995d-f248f3106268"/><h3 id="22e5b2cc-075b-8092-b950-faa1d48580cb" class="">🛠️ <strong>Detection via Wireshark</strong></h3><h3 id="22e5b2cc-075b-809b-a8bf-d68494258c11" class="">✅ Normal Behavior:</h3><ul id="22e5b2cc-075b-80a7-b1f7-f608397b24c6" class="bulleted-list"><li style="list-style-type:disc">ARP Requests (Opcode 1): &quot;Who has IP X? Tell me.&quot;</li></ul><ul id="22e5b2cc-075b-8086-adf8-e1c1c480d8d2" class="bulleted-list"><li style="list-style-type:disc">ARP Replies (Opcode 2): &quot;IP X is at MAC Y.&quot;</li></ul><h3 id="22e5b2cc-075b-80cb-8076-e992fc6b7322" class="">⚠️ Suspicious Signs:</h3><ul id="22e5b2cc-075b-801c-b85c-fff63655b3cb" class="bulleted-list"><li style="list-style-type:disc"><strong>Duplicate ARP replies</strong> for the same IP from different MACs.</li></ul><ul id="22e5b2cc-075b-80f6-9fbe-e603c15946dd" class="bulleted-list"><li style="list-style-type:disc"><strong>Gratuitous ARP</strong> or unsolicited announcements.</li></ul><ul id="22e5b2cc-075b-800f-8c0c-ed8e7fb3b8b5" class="bulleted-list"><li style="list-style-type:disc"><strong>Flooding</strong>: many ARP packets from a single host.</li></ul><ul id="22e5b2cc-075b-80e8-8a77-d5818829e910" class="bulleted-list"><li style="list-style-type:disc"><strong>MAC address conflicts</strong> in the expert info tab.</li></ul><hr id="22e5b2cc-075b-808a-8c0b-ca3aa1086b6c"/><h3 id="22e5b2cc-075b-8038-a41d-c7c434d6623f" class="">🧪 <strong>Key Observations (Case Study):</strong></h3><ul id="22e5b2cc-075b-80af-9fbf-c226c1b8081b" class="bulleted-list"><li style="list-style-type:disc">Attacker MAC: <code>00:0c:29:e2:18:b4</code> (claims multiple IPs: <code>.25</code>, <code>.1</code>)</li></ul><ul id="22e5b2cc-075b-80db-8d24-f42c4db98ac3" class="bulleted-list"><li style="list-style-type:disc">Legitimate gateway: <code>50:78:b3:f3:cd:f4</code> = <code>192.168.1.1</code></li></ul><ul id="22e5b2cc-075b-80a8-88a6-fa919063d65e" class="bulleted-list"><li style="list-style-type:disc">Victim: <code>192.168.1.12</code> sending HTTP traffic</li></ul><ul id="22e5b2cc-075b-801f-87f2-d7f742a8885a" class="bulleted-list"><li style="list-style-type:disc">Attacker captures all HTTP traffic → clear MITM</li></ul><hr id="22e5b2cc-075b-8076-9bd5-f367d2aebbc4"/><h3 id="22e5b2cc-075b-8049-a118-e298bc344140" class="">📊 <strong>Detection Filters (Wireshark):</strong></h3><ul id="22e5b2cc-075b-8005-9a3a-f21542020fa8" class="bulleted-list"><li style="list-style-type:disc"><code>arp</code></li></ul><ul id="22e5b2cc-075b-8096-86e9-df217a230f20" class="bulleted-list"><li style="list-style-type:disc"><code>arp.opcode == 1</code> (requests)</li></ul><ul id="22e5b2cc-075b-809d-9468-e89e2a270be1" class="bulleted-list"><li style="list-style-type:disc"><code>arp.opcode == 2</code> (replies)</li></ul><ul id="22e5b2cc-075b-8074-a05c-cec987824ea6" class="bulleted-list"><li style="list-style-type:disc"><code>arp.dst.hw_mac == 00:00:00:00:00:00</code></li></ul><ul id="22e5b2cc-075b-800d-9857-fa7209ddb012" class="bulleted-list"><li style="list-style-type:disc"><code>arp.duplicate-address-detected</code></li></ul><ul id="22e5b2cc-075b-800c-af5a-ea9f938c556e" class="bulleted-list"><li style="list-style-type:disc"><code>((arp) &amp;&amp; (arp.opcode == 1)) &amp;&amp; (arp.src.hw_mac == [target])</code></li></ul><hr id="22e5b2cc-075b-8023-85af-c2f0e2746bbc"/><h3 id="22e5b2cc-075b-80f0-a1ff-e66fd9ba9e27" class="">🧠 <strong>Analyst Takeaway</strong></h3><ul id="22e5b2cc-075b-8029-99d3-d38bcae6856d" class="bulleted-list"><li style="list-style-type:disc">Always <strong>correlate IPs and MACs over time</strong>.</li></ul><ul id="22e5b2cc-075b-80fc-a236-df6f3fa38ba4" class="bulleted-list"><li style="list-style-type:disc">Add <strong>MAC address columns</strong> in Wireshark to detect true traffic paths.</li></ul><ul id="22e5b2cc-075b-807c-ac88-faaea76b37a9" class="bulleted-list"><li style="list-style-type:disc">Keep <strong>detailed notes</strong> while investigating.</li></ul><ul id="22e5b2cc-075b-8009-a3e9-e9037925be3e" class="bulleted-list"><li style="list-style-type:disc">Identifying MITM requires linking <strong>ARP anomalies</strong> with higher-layer protocols like HTTP.</li></ul><hr id="22e5b2cc-075b-80b6-b24c-c14a1f2a997c"/><p id="22e5b2cc-075b-8062-b142-c0153e7a46fe" class="">
+</p><table id="22e5b2cc-075b-8066-b695-fad40c2dc800" class="simple-table"><tbody><tr id="22e5b2cc-075b-80e4-a9a4-cf8946970654"><td id="hHJ}" class=""><strong>Notes</strong></td><td id="ev[_" class="" style="width:482.9906005859375px"><strong>Wireshark filter</strong></td></tr><tr id="22e5b2cc-075b-8072-8691-dce67aee9388"><td id="hHJ}" class="">Global search</td><td id="ev[_" class="" style="width:482.9906005859375px">• <code>arp</code></td></tr><tr id="22e5b2cc-075b-80e2-b5c6-dee30aae61e3"><td id="hHJ}" class="">&quot;ARP&quot; options for grabbing the low-hanging fruits:<br/>• Opcode 1: ARP requests.<br/>• Opcode 2: ARP responses.<br/>• <strong>Hunt:</strong> Arp scanning<br/>• <strong>Hunt:</strong> Possible ARP poisoning detection<br/>• <strong>Hunt:</strong> Possible ARP flooding from detection:</td><td id="ev[_" class="" style="width:482.9906005859375px">• <code>arp.opcode == 1</code><br/>• <code>arp.opcode == 2</code><br/>• <code>arp.dst.hw_mac==00:00:00:00:00:00</code><br/>• <code>arp.duplicate-address-detected or arp.duplicate-address-frame</code><br/>• <code>((arp) &amp;&amp; (arp.opcode == 1)) &amp;&amp; (arp.src.hw_mac == target-mac-address)</code></td></tr></tbody></table><table id="22e5b2cc-075b-80b3-bed2-f2de8cbdd2dc" class="simple-table"><tbody><tr id="22e5b2cc-075b-808f-b7e3-ca0a4c2e28fe"><td id="lM@U" class=""><strong>Notes</strong></td><td id="o]SX" class=""><strong>Detection Notes</strong></td><td id="tYmg" class="" style="width:238.8553466796875px"><strong>Findings</strong></td></tr><tr id="22e5b2cc-075b-80d8-b424-ecc2c85fb5b1"><td id="lM@U" class="">Possible IP address match.</td><td id="o]SX" class="">1 IP address announced from a MAC address.</td><td id="tYmg" class="" style="width:238.8553466796875px">• MAC: 00:0c:29:e2:18:b4<br/>• IP: 192.168.1.25</td></tr><tr id="22e5b2cc-075b-80f7-8090-de4fff9b7f8d"><td id="lM@U" class="">Possible ARP spoofing attempt.</td><td id="o]SX" class="">2 MAC addresses claimed the same IP address (192.168.1.1).The &quot; 192.168.1.1&quot; IP address is a possible gateway address.</td><td id="tYmg" class="" style="width:238.8553466796875px">• MAC1: 50:78:b3:f3:cd:f4<br/>• MAC 2: 00:0c:29:e2:18:b4</td></tr><tr id="22e5b2cc-075b-8014-9a74-d36b84e866ed"><td id="lM@U" class="">Possible ARP flooding attempt.</td><td id="o]SX" class="">The MAC address that ends with &quot;b4&quot; claims to have a different/new IP address.</td><td id="tYmg" class="" style="width:238.8553466796875px">• MAC: 00:0c:29:e2:18:b4<br/>• IP: 192.168.1.1</td></tr></tbody></table><table id="22e5b2cc-075b-8061-a6bc-df2ba70fd17f" class="simple-table"><tbody><tr id="22e5b2cc-075b-80d5-ba51-fd42b72fbd1b"><td id="tvXv" class="">Notes</td><td id="rmCD" class="">Detection Notes</td><td id="l`_K" class="" style="width:241.85536193847656px">Findings</td></tr><tr id="22e5b2cc-075b-80f6-8bb5-d3398e6b4ef5"><td id="tvXv" class="">Possible IP address match.</td><td id="rmCD" class="">1 IP address announced from a MAC address.</td><td id="l`_K" class="" style="width:241.85536193847656px">• MAC: 00:0c:29:e2:18:b4<br/>• IP: 192.168.1.25</td></tr><tr id="22e5b2cc-075b-80d0-8b20-f4a37141a592"><td id="tvXv" class="">Possible ARP spoofing attempt.</td><td id="rmCD" class="">2 MAC addresses claimed the same IP address (192.168.1.1).The &quot; 192.168.1.1&quot; IP address is a possible gateway address.</td><td id="l`_K" class="" style="width:241.85536193847656px">• MAC1: 50:78:b3:f3:cd:f4<br/>• MAC 2: 00:0c:29:e2:18:b4</td></tr><tr id="22e5b2cc-075b-805b-99b4-f5a2c3d0f152"><td id="tvXv" class="">Possible ARP spoofing attempt.</td><td id="rmCD" class="">The MAC address that ends with &quot;b4&quot; claims to have a different/new IP address.</td><td id="l`_K" class="" style="width:241.85536193847656px">• MAC: 00:0c:29:e2:18:b4<br/>• IP: 192.168.1.1</td></tr><tr id="22e5b2cc-075b-80f7-a5fe-c4dc247ec511"><td id="tvXv" class="">Possible ARP flooding attempt.</td><td id="rmCD" class="">The MAC address that ends with &quot;b4&quot; crafted multiple ARP requests against a range of IP addresses.</td><td id="l`_K" class="" style="width:241.85536193847656px">• MAC: 00:0c:29:e2:18:b4<br/>• IP: 192.168.1.xxx</td></tr></tbody></table><p id="22e5b2cc-075b-80ea-b1f7-e9de8740e885" class="">
+</p><ul id="22e5b2cc-075b-80c0-8831-e62a1d41359c" class="bulleted-list"><li style="list-style-type:disc">What is the number of ARP requests crafted by the attacker?</li></ul><p id="22e5b2cc-075b-8048-98b1-c250817b5772" class="">We know that the attackers IP is 192.168.1.25, so we only check for ARP resolutions from that IP<br/></p><figure id="22e5b2cc-075b-8031-a883-d8b071a70622" class="image"><a href="9219AFBB-860A-44D0-B053-AD9B0C87BE7E.png"><img style="width:709.9685668945312px" src="9219AFBB-860A-44D0-B053-AD9B0C87BE7E.png"/></a></figure><ul id="22e5b2cc-075b-8011-bd9c-f71b772776bc" class="bulleted-list"><li style="list-style-type:disc">What is the number of HTTP packets received by the attacker?</li></ul><p id="22e5b2cc-075b-8082-b355-eef1ff4c439b" class="">We know the attackers MAC address, so from there, i add the http filter and mac address to find out<br/></p><figure id="22e5b2cc-075b-8034-a827-cf4669e88952" class="image"><a href="14B499EA-62D9-4997-8920-4BC2AB02A837.png"><img style="width:709.9371337890625px" src="14B499EA-62D9-4997-8920-4BC2AB02A837.png"/></a></figure><ul id="22e5b2cc-075b-808e-ae85-dadd733adf6c" class="bulleted-list"><li style="list-style-type:disc">What is the number of sniffed username&amp;password entries?</li></ul><p id="22e5b2cc-075b-807a-aaf8-cd5dd75400d2" class="">Password is sniffed and send via POST requetss, so first I filtered based on POST requests, then checked teh HTML form and found hte key uname and pass, so i added that as filters and got the answer</p><figure id="22e5b2cc-075b-8063-8945-d98175b127cd" class="image"><a href="B00A6B68-A1CF-43EE-A53D-8182F9940242.png"><img style="width:709.8899536132812px" src="B00A6B68-A1CF-43EE-A53D-8182F9940242.png"/></a></figure><ul id="22e5b2cc-075b-8084-b955-d2650145e43d" class="bulleted-list"><li style="list-style-type:disc">What is the password of the &quot;Client986&quot;?</li></ul><p id="22e5b2cc-075b-80b2-8059-fb1b223585f5" class="">Since there wer only 6 packets, I went throught them one by one and saw the passwor din the html form</p><figure id="22e5b2cc-075b-802f-8897-ef6f489681cc" class="image"><a href="734FC55A-97F3-42CA-A895-612A14AD4B88.png"><img style="width:709.9371337890625px" src="734FC55A-97F3-42CA-A895-612A14AD4B88.png"/></a></figure><ul id="22e5b2cc-075b-80e2-bc84-f0bf411b6315" class="bulleted-list"><li style="list-style-type:disc">What is the comment provided by the &quot;Client354&quot;?</li></ul><p id="22e5b2cc-075b-8031-be79-c4ffe388d628" class="">Back to Http posts reqeusts then looked at keys again, there is a key called comment, so i searched for it and found clients comment</p><figure id="22e5b2cc-075b-8042-b9bb-d920fa25c1e9" class="image"><a href="47D493AC-D104-4465-BCED-DAFFEFE70266.png"><img style="width:709.952880859375px" src="47D493AC-D104-4465-BCED-DAFFEFE70266.png"/></a></figure><p id="22e5b2cc-075b-80e7-a1a3-ec51cecf3a67" class="">
+</p><h2 id="22e5b2cc-075b-8050-93d6-ec6bedc61999" class="">Identifying Hosts: DHCP, NetBIOS and Kerberos</h2><h1 id="22e5b2cc-075b-8011-ad71-fc8e6a4643a0" class="">Identifying Hosts</h1><p id="22e5b2cc-075b-8002-8139-ef8ee9346827" class="">When investigating a compromise or malware infection activity, a security analyst should know how to identify the hosts on the network apart from IP to MAC address match. One of the best methods is identifying the hosts and users on the network to decide the investigation&#x27;s starting point and list the hosts and users associated with the malicious traffic/activity.</p><p id="22e5b2cc-075b-805e-8a8e-d6cda88a7c29" class="">Usually, enterprise networks use a predefined pattern to name users and hosts. While this makes knowing and following the inventory easier, it has good and bad sides. The good side is that it will be easy to identify a user or host by looking at the name. The bad side is that it will be easy to clone that pattern and live in the enterprise network for adversaries. There are multiple solutions to avoid these kinds of activities, but for a security analyst, it is still essential to have host and user identification skills.</p><p id="22e5b2cc-075b-8016-a769-f54c07c14967" class="">Protocols that can be used in Host and User identification:</p><ul id="22e5b2cc-075b-80dd-a55a-e539409a5e9a" class="bulleted-list"><li style="list-style-type:disc">Dynamic Host Configuration Protocol (DHCP) traffic</li></ul><ul id="22e5b2cc-075b-8051-9bae-faf9b564a66a" class="bulleted-list"><li style="list-style-type:disc">NetBIOS (NBNS) traffic</li></ul><ul id="22e5b2cc-075b-8015-b35a-fc32643a7a4b" class="bulleted-list"><li style="list-style-type:disc">Kerberos traffic</li></ul><p id="22e5b2cc-075b-8099-ba8b-f9890dbbcbef" class=""><strong>DHCP Analysis</strong></p><p id="22e5b2cc-075b-8053-a245-d73b8fdd4ce3" class=""><strong>DHCP</strong> protocol, or <strong>D</strong>ynamic <strong>H</strong>ost <strong>C</strong>onfiguration<strong> P</strong>rotocol <strong>(DHCP), </strong>is the technology responsible for managing automatic IP address and required communication parameters assignment.</p><p id="22e5b2cc-075b-805d-a3c2-d96aad1369ba" class=""><strong>DHCP investigation in a nutshell:</strong></p><table id="22e5b2cc-075b-806e-8396-f293c31ff728" class="simple-table"><tbody><tr id="22e5b2cc-075b-80d5-b93f-de654be56b6e"><td id="}\^W" class="" style="width:383.053466796875px"><strong>Notes</strong></td><td id="NfZi" class="" style="width:321.9717102050781px"><strong>Wireshark Filter</strong></td></tr><tr id="22e5b2cc-075b-8002-ac73-cae60ece4593"><td id="}\^W" class="" style="width:383.053466796875px">Global search.</td><td id="NfZi" class="" style="width:321.9717102050781px">• <code>dhcp</code> or <code>bootp</code></td></tr><tr id="22e5b2cc-075b-8038-96a8-f983a33bab96"><td id="}\^W" class="" style="width:383.053466796875px">Filtering the proper DHCP packet options is vital to finding an event of interest. <br/>• <strong>&quot;DHCP Request&quot;</strong> packets contain the hostname information<br/>• <strong>&quot;DHCP ACK&quot;</strong> packets represent the accepted requests<br/>• <strong>&quot;DHCP NAK&quot;</strong> packets represent denied requests<br/>Due to the nature of the protocol, only &quot;Option 53&quot; ( request type) has predefined static values. You should filter the packet type first, and then you can filter the rest of the options by &quot;applying as column&quot; or use the advanced filters like &quot;contains&quot; and &quot;matches&quot;.</td><td id="NfZi" class="" style="width:321.9717102050781px">• Request: <code>dhcp.option.dhcp == 3</code><br/>• ACK: <code>dhcp.option.dhcp == 5</code><br/>• NAK: <code>dhcp.option.dhcp == 6</code></td></tr><tr id="22e5b2cc-075b-8045-a3cf-f90cf7545ba5"><td id="}\^W" class="" style="width:383.053466796875px"><strong>&quot;DHCP Request&quot;</strong> options for grabbing the low-hanging fruits:<br/>• <strong>Option 12:</strong> Hostname.<br/>• <strong>Option 50:</strong> Requested IP address.<br/>• <strong>Option 51:</strong> Requested IP lease time.<br/>• <strong>Option 61: </strong>Client&#x27;s MAC address.</td><td id="NfZi" class="" style="width:321.9717102050781px">• <code>dhcp.option.hostname contains &quot;keyword&quot;</code></td></tr><tr id="22e5b2cc-075b-8080-9841-fe6de9daba68"><td id="}\^W" class="" style="width:383.053466796875px"><strong>&quot;DHCP ACK&quot;</strong> options for grabbing the low-hanging fruits:<br/>• <strong>Option 15:</strong> Domain name.<br/>• <strong>Option 51:</strong> Assigned IP lease time.</td><td id="NfZi" class="" style="width:321.9717102050781px">• <code>dhcp.option.domain_name contains &quot;keyword&quot;</code></td></tr><tr id="22e5b2cc-075b-8087-bed4-d70c985b679f"><td id="}\^W" class="" style="width:383.053466796875px"><strong>&quot;DHCP NAK&quot;</strong> options for grabbing the low-hanging fruits:<br/>• <strong>Option 56:</strong> Message (rejection details/reason).</td><td id="NfZi" class="" style="width:321.9717102050781px">As the message could be unique according to the case/situation, It is suggested to read the message instead of filtering it. Thus, the analyst could create a more reliable hypothesis/result by understanding the event circumstances.</td></tr></tbody></table><figure id="22e5b2cc-075b-8069-928e-c6e3c3fb9e53" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/6131132af49360005df01ae3/room-content/7431eb9671e8ebb2a21d2ff9a08b2faa.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/6131132af49360005df01ae3/room-content/7431eb9671e8ebb2a21d2ff9a08b2faa.png"/></a></figure><h1 id="22e5b2cc-075b-800a-8817-fbebbbec2426" class="">NetBIOS (NBNS) Analysis</h1><p id="22e5b2cc-075b-80c3-b53f-e2e429e0f967" class=""><strong>NetBIOS</strong> or <strong>Net</strong>work <strong>B</strong>asic <strong>I</strong>nput/<strong>O</strong>utput <strong>S</strong>ystem is the technology responsible for allowing applications on different hosts to communicate with each other.</p><p id="22e5b2cc-075b-8055-b80f-c628036fa167" class=""><strong>NBNS investigation in a nutshell:</strong></p><table id="22e5b2cc-075b-8044-9eca-c7525a44940e" class="simple-table"><tbody><tr id="22e5b2cc-075b-801a-8925-e9332dddd440"><td id="GSuK" class="" style="width:371.896240234375px"><strong>Notes</strong></td><td id="YbgB" class="" style="width:338.12896728515625px"><strong>Wireshark Filter</strong></td></tr><tr id="22e5b2cc-075b-8077-a5a7-eb886c66cbb8"><td id="GSuK" class="" style="width:371.896240234375px">Global search.</td><td id="YbgB" class="" style="width:338.12896728515625px">• <code>nbns</code></td></tr><tr id="22e5b2cc-075b-80fd-a440-ecd2d92addb1"><td id="GSuK" class="" style="width:371.896240234375px">&quot;NBNS&quot; options for grabbing the low-hanging fruits:<br/>• <strong>Queries:</strong> Query details.<br/>• Query details could contain <strong>&quot;name, Time to live (TTL) and IP address details&quot;</strong></td><td id="YbgB" class="" style="width:338.12896728515625px">• <code>nbns.name contains &quot;keyword&quot;</code></td></tr></tbody></table><figure id="22e5b2cc-075b-8072-a781-fb0f15ee54ba" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/6131132af49360005df01ae3/room-content/e12db620d6127ad299059e3626f083d7.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/6131132af49360005df01ae3/room-content/e12db620d6127ad299059e3626f083d7.png"/></a></figure><h1 id="22e5b2cc-075b-80bd-937c-e8836e964b75" class="">Kerberos Analysis</h1><p id="22e5b2cc-075b-803f-a6c9-f567fee8c206" class=""><strong>Kerberos </strong>is the default authentication service for Microsoft Windows domains. It is responsible for authenticating service requests between two or more computers over the untrusted network. The ultimate aim is to prove identity securely.</p><p id="22e5b2cc-075b-8006-92ba-ddd13ac2dc00" class=""><strong>Kerberos investigation in a nutshell:</strong></p><table id="22e5b2cc-075b-80ec-a8d8-cee266aa75a4" class="simple-table"><tbody><tr id="22e5b2cc-075b-80da-b467-fcc6a121c488"><td id="MG&lt;H" class=""><strong>Notes</strong></td><td id="Sqol" class="" style="width:449.9842834472656px"><strong>Wireshark Filter</strong></td></tr><tr id="22e5b2cc-075b-808a-9477-e16621db2741"><td id="MG&lt;H" class="">Global search.</td><td id="Sqol" class="" style="width:449.9842834472656px">• <code>kerberos</code></td></tr><tr id="22e5b2cc-075b-8014-a996-d631a0904d08"><td id="MG&lt;H" class="">User account search:<br/>• <strong>CNameString: </strong>The username.<br/><strong>Note:</strong> Some packets could provide hostname information in this field. To avoid this confusion, filter the<strong> &quot;$&quot;</strong> value. The values end with <strong>&quot;$&quot;</strong> are hostnames, and the ones without it are user names.</td><td id="Sqol" class="" style="width:449.9842834472656px">• <code>kerberos.CNameString contains &quot;keyword&quot;</code> <br/>• <code>kerberos.CNameString and !(kerberos.CNameString contains &quot;$&quot; )</code></td></tr><tr id="22e5b2cc-075b-805e-84cc-f3da622ec8d8"><td id="MG&lt;H" class="">&quot;Kerberos&quot; options for grabbing the low-hanging fruits:<br/>• <strong>pvno:</strong> Protocol version.<br/>• <strong>realm:</strong> Domain name for the generated ticket.<br/>• <strong>sname:</strong> Service and domain name for the generated ticket.<br/>• <strong>addresses:</strong> Client IP address and NetBIOS name.<br/><strong>Note:</strong> the &quot;addresses&quot; information is only available in request packets.</td><td id="Sqol" class="" style="width:449.9842834472656px">• <code>kerberos.pvno == 5</code><br/>• <code>kerberos.realm contains &quot;.org&quot;</code> <br/>• <code>kerberos.SNameString == &quot;krbtg&quot;</code></td></tr></tbody></table><figure id="22e5b2cc-075b-802a-87ea-c9bc6bb91378" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/6131132af49360005df01ae3/room-content/9826985c3c3b9f582f7c7c5ed24f93d7.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/6131132af49360005df01ae3/room-content/9826985c3c3b9f582f7c7c5ed24f93d7.png"/></a></figure><p id="22e5b2cc-075b-809b-98d1-c501063ec91b" class="">
+</p><p id="22e5b2cc-075b-807c-b61d-cedfe648f6e2" class="">
+</p><h3 id="22e5b2cc-075b-801d-ae99-d98d018be345" class="">Questions</h3><ul id="22e5b2cc-075b-80cb-b09a-ef16ff42b214" class="bulleted-list"><li style="list-style-type:disc">What is the MAC address of the host &quot;Galaxy A30&quot;?</li></ul><p id="22e5b2cc-075b-8012-9348-dc9c84ca45df" class="">This informations must be in the DHCP request section and under options, I tried looking for it and found it from Option 12 Hostname, so i used that filter and used contains Galaxy to filter by Galaxy devices, and found A30,</p><figure id="22e5b2cc-075b-80fa-b0ca-f0f8f2d4d8d9" class="image"><a href="465597FD-B936-4D42-A3A7-BF94A2FB1003.png"><img style="width:709.952880859375px" src="465597FD-B936-4D42-A3A7-BF94A2FB1003.png"/></a></figure><p id="22e5b2cc-075b-8059-9a1c-fd8c4dba3563" class="">
+</p><ul id="22e5b2cc-075b-8027-93c1-fae5fd815fa4" class="bulleted-list"><li style="list-style-type:disc">How many NetBIOS registration requests does the &quot;LIVALJM&quot; workstation have?</li></ul><p id="22e5b2cc-075b-800b-9dea-ea211872aa1d" class="">Here I need to find out LIVALJM quries especially registration queries, and Registration have to be set in Opcode, then from ther ei query by name</p><figure id="22e5b2cc-075b-808d-b17e-ef4f0e873984" class="image"><a href="64F1967C-EB29-4827-AC01-2357F5C25DFE.png"><img style="width:709.9685668945312px" src="64F1967C-EB29-4827-AC01-2357F5C25DFE.png"/></a></figure><ul id="22e5b2cc-075b-80e9-8746-ce6e9dc756b6" class="bulleted-list"><li style="list-style-type:disc">Which host requested the IP address &quot;172.16.13.85&quot;?</li></ul><p id="22e5b2cc-075b-801d-aef2-c197cf7f923e" class="">first I filter by DHCP requests, then see which opcode is for requested Ip address, which is 50, then used that as a filter and added the ip in, thn i got the anser from opcode12 which is the host naem of who requested.</p><p id="22e5b2cc-075b-804b-9d83-ca503c89bc46" class=""><a href="https://www.iana.org/assignments/bootp-dhcp-parameters/bootp-dhcp-parameters.xhtml">https://www.iana.org/assignments/bootp-dhcp-parameters/bootp-dhcp-parameters.xhtml</a></p><figure id="22e5b2cc-075b-805c-9db1-f55d15799282" class="image"><a href="F370D8C5-A407-470A-BC16-6CB3A538BD2B.png"><img style="width:709.9685668945312px" src="F370D8C5-A407-470A-BC16-6CB3A538BD2B.png"/></a></figure><p id="22e5b2cc-075b-8076-b844-f656d6afa422" class="">
+</p><ul id="22e5b2cc-075b-8054-9606-d5f1233922ea" class="bulleted-list"><li style="list-style-type:disc"><strong>Use the &quot;Desktop/exercise-pcaps/dhcp-netbios-kerberos/kerberos.pcap&quot; file.</strong></li></ul><p id="22e5b2cc-075b-805c-b857-c260764b1440" class="">What is the IP address of the user &quot;u5&quot;? (Enter the address in defanged format.)</p><p id="22e5b2cc-075b-808c-a41a-ed10e7f97495" class="">From googling, I understand that the field wher username is found is <code>kerberos.CNameString</code></p><figure id="22e5b2cc-075b-8065-906f-ce1f7243cf68" class="image"><a href="0CD69EFA-0EEF-46C2-BD27-04A361D2B655.png"><img style="width:709.9685668945312px" src="0CD69EFA-0EEF-46C2-BD27-04A361D2B655.png"/></a></figure><p id="22e5b2cc-075b-8075-8cd4-d8fe02221a02" class="">
+</p><ul id="22e5b2cc-075b-8070-befa-c411dce2bdde" class="bulleted-list"><li style="list-style-type:disc">What is the hostname of the available host in the Kerberos packets?</li></ul><p id="22e5b2cc-075b-800d-94c8-d0d718ff78ea" class="">Since the values end with<strong>“$”</strong></p><p id="22e5b2cc-075b-803b-a68a-f103ded2d796" class="">are hostnames, we should look for the packet contains<strong>“$”</strong></p><p id="22e5b2cc-075b-8043-a57b-ea2dbd092a96" class="">The Filtering Code must be : <code><strong>kerberos.CNameString contains “$”</strong></code></p><figure id="22e5b2cc-075b-8070-8313-fdc029129bcd" class="image"><a href="https://hacklido.com/assets/files/2023-11-17/1700247864-292566-task-4-quest-5-answ.jpg"><img src="https://hacklido.com/assets/files/2023-11-17/1700247864-292566-task-4-quest-5-answ.jpg"/></a></figure><p id="22e5b2cc-075b-80dd-846a-c82b4ada4ae5" class="">
+</p><h1 id="22e5b2cc-075b-8096-87ee-ceb7fcff1733" class="">Tunneling Traffic: DNS and ICMP</h1><h1 id="22e5b2cc-075b-8068-a719-c241f1eb562f" class=""><strong>Tunnelling Traffic: ICMP and DNS</strong></h1><p id="22e5b2cc-075b-80b2-998c-df7929bc3799" class="">Traffic tunnelling is (also known as <strong>&quot;port forwarding&quot;</strong>) transferring the data/resources in a secure method to network segments and zones. It can be used for &quot;internet to private networks&quot; and &quot;private networks to internet&quot; flow/direction. There is an encapsulation process to hide the data, so the transferred data appear natural for the case, but it contains private data packets and transfers them to the final destination securely.</p><p id="22e5b2cc-075b-80a1-bc35-de1d0a86f2c4" class="">Tunnelling provides anonymity and traffic security. Therefore it is highly used by enterprise networks. However, as it gives a significant level of data encryption, attackers use tunnelling to bypass security perimeters using the standard and trusted protocols used in everyday traffic like ICMP and DNS. Therefore, for a security analyst, it is crucial to have the ability to spot ICMP and DNS anomalies.</p><h1 id="22e5b2cc-075b-80fa-8f01-edff69cab982" class=""><strong>ICMP Analysis</strong></h1><p id="22e5b2cc-075b-804c-a682-fb5acaaf06d2" class="">Internet Control Message Protocol (ICMP) is designed for diagnosing and reporting network communication issues. It is highly used in error reporting and testing. As it is a trusted network layer protocol, sometimes it is used for denial of service (DoS) attacks; also, adversaries use it in data exfiltration and C2 tunnelling activities.</p><p id="22e5b2cc-075b-807a-88f4-d7f7a0e71c5a" class="">ICMP analysis in a nutshell:</p><p id="22e5b2cc-075b-80df-9043-e9afbcaddbdb" class="">Usually, ICMP tunnelling attacks are anomalies appearing/starting after a malware execution or vulnerability exploitation. As the ICMP packets can transfer an additional data payload, adversaries use this section to exfiltrate data and establish a C2 connection. It could be a TCP, HTTP or SSH data. As the ICMP protocols provide a great opportunity to carry extra data, it also has disadvantages. Most enterprise networks block custom packets or require administrator privileges to create custom ICMP packets.</p><p id="22e5b2cc-075b-80f7-9cec-c61885625f33" class="">A large volume of ICMP traffic or anomalous packet sizes are indicators of ICMP tunnelling. Still, the adversaries could create custom packets that match the regular ICMP packet size (64 bytes), so it is still cumbersome to detect these tunnelling activities. However, a security analyst should know the normal and the abnormal to spot the possible anomaly and escalate it for further analysis.</p><table id="22e5b2cc-075b-8007-83a8-c48f582de0fc" class="simple-table"><tbody><tr id="22e5b2cc-075b-8042-a95c-e4a0117bb25a"><td id="UMTE" class=""><strong>Notes</strong></td><td id="Avit" class=""><strong>Wireshark filters</strong></td></tr><tr id="22e5b2cc-075b-8004-b9d9-f4d1d221c461"><td id="UMTE" class="">Global search</td><td id="Avit" class="">• <code>icmp</code></td></tr><tr id="22e5b2cc-075b-8059-a3bf-c5c57fd07cb1"><td id="UMTE" class="">&quot;ICMP&quot; options for grabbing the low-hanging fruits:<br/>• Packet length.<br/>• ICMP destination addresses.<br/>• Encapsulated protocol signs in ICMP payload.</td><td id="Avit" class="">• <code>data.len &gt; 64 and icmp</code></td></tr></tbody></table><figure id="22e5b2cc-075b-80ab-b667-f6136276aacc" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/6131132af49360005df01ae3/room-content/723f801adc6a95526c2cb39b7ddeee15.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/6131132af49360005df01ae3/room-content/723f801adc6a95526c2cb39b7ddeee15.png"/></a></figure><h1 id="22e5b2cc-075b-8050-a922-eb81e1b86427" class=""><strong>DNS Analysis</strong></h1><p id="22e5b2cc-075b-80b3-ad16-d383877072d6" class="">Domain Name System (DNS) is designed to translate/convert IP domain addresses to IP addresses. It is also known as a phonebook of the internet. As it is the essential part of web services, it is commonly used and trusted, and therefore often ignored. Due to that, adversaries use it in data exfiltration and C2 activities.</p><p id="22e5b2cc-075b-8086-8077-d7c6d5a1fa44" class=""><strong>DNS analysis in a nutshell:</strong></p><p id="22e5b2cc-075b-80cf-8ee9-d63a12b5f200" class="">Similar to ICMP tunnels, DNS attacks are anomalies appearing/starting after a malware execution or vulnerability exploitation. Adversary creates (or already has) a domain address and configures it as a C2 channel. The malware or the commands executed after exploitation sends DNS queries to the C2 server. However, these queries are longer than default DNS queries and crafted for subdomain addresses. <span style="border-bottom:0.05em solid">Unfortunately, these subdomain addresses are not actual addresses; they are encoded commands as shown below:</span></p><p id="22e5b2cc-075b-809d-9290-e307f56c5993" class=""><strong>&quot;encoded-commands.maliciousdomain.com&quot;</strong></p><p id="22e5b2cc-075b-80aa-ac55-dfd4de2e8ce3" class="">When this query is routed to the C2 server, the server sends the actual malicious commands to the host. As the DNS queries are a natural part of the networking activity, these packets have the chance of not being detected by network perimeters. A security analyst should know how to investigate the DNS packet lengths and target addresses to spot these anomalies.</p><table id="22e5b2cc-075b-8059-909f-ea0a4070e347" class="simple-table"><tbody><tr id="22e5b2cc-075b-8091-9c9e-c56102f9e89f"><td id="amSu" class=""><strong>Notes</strong></td><td id="gCjt" class=""><strong>Wireshark Filter</strong></td></tr><tr id="22e5b2cc-075b-80b7-b316-e969647c79fc"><td id="amSu" class="">Global search</td><td id="gCjt" class="">• <code>dns</code></td></tr><tr id="22e5b2cc-075b-803d-ae29-c32037ccf83f"><td id="amSu" class="">&quot;DNS&quot; options for grabbing the low-hanging fruits:<br/>• Query length.<br/>• Anomalous and non-regular names in DNS addresses.<br/>• Long DNS addresses with encoded subdomain addresses.<br/>• Known patterns like dnscat and dns2tcp.<br/>• Statistical analysis like the anomalous volume of DNS requests for a particular target.<br/><strong>!mdns: </strong>Disable local link device queries.</td><td id="gCjt" class="">• <code>dns contains &quot;dnscat&quot;</code><br/>• <code>dns.qry.name.len &gt; 15 and !mdns</code></td></tr></tbody></table><figure id="22e5b2cc-075b-807f-a435-df07b4140d52" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/6131132af49360005df01ae3/room-content/c11641f9df84faa040e2c6c11da08655.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/6131132af49360005df01ae3/room-content/c11641f9df84faa040e2c6c11da08655.png"/></a></figure><p id="22e5b2cc-075b-800d-94dd-e82eaaa20771" class="">
+</p><h3 id="22e5b2cc-075b-8009-9eec-c3b3a55fa63a" class="">Questions</h3><ol type="1" id="22e5b2cc-075b-8069-b573-c02c8d909949" class="numbered-list" start="1"><li>Investigate the anomalous packets. Which protocol is used in ICMP tunnelling?</li></ol><p id="22e5b2cc-075b-800e-93c9-e4441ac67c6e" class="">This one was hard, I didnt even knew it was possible, so i was just looking though icmp packets, and found osme very large packets and it was SSH!</p><figure id="22e5b2cc-075b-80ec-aa9e-d2746bf1b4fa" class="image"><a href="479CCE5E-6AEF-493C-9800-93DCB93F5F79.png"><img style="width:709.9371337890625px" src="479CCE5E-6AEF-493C-9800-93DCB93F5F79.png"/></a></figure><p id="22e5b2cc-075b-8024-9c86-c3cda4d3b21e" class="">
+</p><ol type="1" id="22e5b2cc-075b-80c5-bff1-d5b4efea014b" class="numbered-list" start="2"><li>Investigate the anomalous packets. What is the suspicious main domain address that receives anomalous DNS queries? (Enter the address in defanged format.)</li></ol><p id="22e5b2cc-075b-8013-8f0e-cbabafc2ecbe" class="">I added a new column for the query name, then from there while scrolling through all the queries, i found something that stood out</p><figure id="22e5b2cc-075b-8064-8336-c9b1437c24e1" class="image"><a href="7267946F-346F-461B-94A2-BD07CB5DA13B.png"><img style="width:709.9685668945312px" src="7267946F-346F-461B-94A2-BD07CB5DA13B.png"/></a></figure><figure id="22e5b2cc-075b-80fb-bc60-d7cf7af7079f" class="image"><a href="7EEE6C75-4907-42D6-96C2-E1D3A1BD1A69.png"><img style="width:709.9371337890625px" src="7EEE6C75-4907-42D6-96C2-E1D3A1BD1A69.png"/></a></figure><p id="22e5b2cc-075b-80ac-bd37-d64679e13bff" class="">then i opened that and it was indeed a exfiltration dns</p><p id="22e5b2cc-075b-80e3-b17d-c490d3c456a4" class="">
+</p><h1 id="22e5b2cc-075b-808a-9c26-ff3701ed1145" class="">Cleartext Protocol Analysis: FTP</h1><h1 id="22e5b2cc-075b-801e-99cc-c9f9de3c7dde" class="">Cleartext Protocol Analysis</h1><p id="22e5b2cc-075b-80c1-ab86-c830bacdab04" class="">Investigating cleartext protocol traces sounds easy, but when the time comes to investigate a big network trace for incident analysis and response, the game changes. Proper analysis is more than following the stream and reading the cleartext data. For a security analyst, it is important to create statistics and key results from the investigation process. As mentioned earlier at the beginning of the Wireshark room series, the analyst should have the required network knowledge and tool skills to accomplish this. Let&#x27;s simulate a cleartext protocol investigation with Wireshark!</p><h1 id="22e5b2cc-075b-80f6-91e9-cbc730c673c5" class=""><strong>FTP Analysis</strong></h1><p id="22e5b2cc-075b-8049-aba7-e24ad1e7e46f" class="">File Transfer Protocol (FTP) is designed to transfer files with ease, so it focuses on simplicity rather than security. As a result of this, using this protocol in unsecured environments could create security issues like:</p><ul id="22e5b2cc-075b-8027-bd43-e8b60f088c96" class="bulleted-list"><li style="list-style-type:disc">MITM attacks</li></ul><ul id="22e5b2cc-075b-80ce-acdc-f892a187e467" class="bulleted-list"><li style="list-style-type:disc">Credential stealing and unauthorised access</li></ul><ul id="22e5b2cc-075b-809b-99fe-f58e61fe63e1" class="bulleted-list"><li style="list-style-type:disc">Phishing</li></ul><ul id="22e5b2cc-075b-8004-a696-c4146df7f293" class="bulleted-list"><li style="list-style-type:disc">Malware planting</li></ul><ul id="22e5b2cc-075b-803d-8ac4-db9300c012dc" class="bulleted-list"><li style="list-style-type:disc">Data exfiltration</li></ul><p id="22e5b2cc-075b-80fd-bda9-c1aa91347470" class=""><strong>FTP analysis in a nutshell:</strong></p><table id="22e5b2cc-075b-80db-8de3-c3b9cb2d3505" class="simple-table"><tbody><tr id="22e5b2cc-075b-80d8-9fc3-ea2504872d87"><td id="IU:v" class=""><strong>Notes</strong></td><td id="j&lt;RW" class="" style="width:450.9842834472656px"><strong>Wireshark Filter</strong></td></tr><tr id="22e5b2cc-075b-80e9-8459-c06a68066c60"><td id="IU:v" class="">Global search</td><td id="j&lt;RW" class="" style="width:450.9842834472656px">• <code>ftp</code></td></tr><tr id="22e5b2cc-075b-806a-bd3e-f49d39351d55"><td id="IU:v" class=""><strong>&quot;FTP&quot;</strong> options for grabbing the low-hanging fruits:<br/>• <strong>x1x series:</strong> Information request responses.<br/>• <strong>x2x series: </strong>Connection messages.<br/>• <strong>x3x series:</strong> Authentication messages.<br/><strong>Note:</strong> &quot;200&quot; means command successful.</td><td id="j&lt;RW" class="" style="width:450.9842834472656px"><strong>---</strong></td></tr><tr id="22e5b2cc-075b-804b-96b6-d11ee1e0f59a"><td id="IU:v" class="">&quot;x1x&quot; series options for grabbing the low-hanging fruits:<br/>• <strong>211: </strong>System status.<br/>• <strong>212:</strong> Directory status.<br/>• <strong>213:</strong> File status</td><td id="j&lt;RW" class="" style="width:450.9842834472656px">• <code>ftp.response.code == 211</code></td></tr><tr id="22e5b2cc-075b-80e0-84c3-f19f8a99ce0a"><td id="IU:v" class="">&quot;x2x&quot; series options for grabbing the low-hanging fruits:<br/>• <strong>220:</strong> Service ready.<br/>• <strong>227:</strong> Entering passive mode.<br/>• <strong>228:</strong> Long passive mode.<br/>• <strong>229:</strong> Extended passive mode.</td><td id="j&lt;RW" class="" style="width:450.9842834472656px">• <code>ftp.response.code == 227</code></td></tr><tr id="22e5b2cc-075b-80b6-97f4-d4d2ce12011b"><td id="IU:v" class="">&quot;x3x&quot; series options for grabbing the low-hanging fruits:<br/>• <strong>230:</strong> User login.<br/>• <strong>231:</strong> User logout.<br/>• <strong>331:</strong> Valid username.<br/>• <strong>430:</strong> Invalid username or password<br/>• <strong>530:</strong> No login, invalid password.</td><td id="j&lt;RW" class="" style="width:450.9842834472656px">• <code>ftp.response.code == 230</code></td></tr><tr id="22e5b2cc-075b-8018-8f9a-cf0383c86a58"><td id="IU:v" class="">&quot;FTP&quot; commands for grabbing the low-hanging fruits:<br/>• <strong>USER:</strong> Username.<br/>• <strong>PASS: </strong>Password.<br/>• <strong>CWD:</strong> Current work directory.<br/>• <strong>LIST:</strong> List.</td><td id="j&lt;RW" class="" style="width:450.9842834472656px">• <code>ftp.request.command == &quot;USER&quot;</code><br/>• <code>ftp.request.command == &quot;PASS&quot;</code><br/>• <code>ftp.request.arg == &quot;password&quot;</code></td></tr><tr id="22e5b2cc-075b-80c7-aff4-f5770a8b41e0"><td id="IU:v" class="">Advanced usages examples for grabbing low-hanging fruits:<br/>• <strong>Bruteforce signal:</strong> List failed login attempts.<br/>• <strong>Bruteforce signal:</strong> List target username.<br/>• <strong>Password spray signal:</strong> List targets for a static password.</td><td id="j&lt;RW" class="" style="width:450.9842834472656px">• <code>ftp.response.code == 530</code><br/>• <code>(ftp.response.code == 530) and (ftp.response.arg contains &quot;username&quot;)</code><br/>• <code>(ftp.request.command == &quot;PASS&quot; ) and (ftp.request.arg == &quot;password&quot;)</code></td></tr></tbody></table><figure id="22e5b2cc-075b-8034-b05f-db3b296070ed" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/6131132af49360005df01ae3/room-content/8287adaa075c737986e04d026f137e2e.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/6131132af49360005df01ae3/room-content/8287adaa075c737986e04d026f137e2e.png"/></a></figure><p id="22e5b2cc-075b-8041-b788-fec110ed2cd9" class="">
+</p><h3 id="22e5b2cc-075b-8011-9883-cbcf760aa36a" class="">Questions</h3><p id="22e5b2cc-075b-8011-bd06-cd6222676304" class="">
+</p><ol type="1" id="22e5b2cc-075b-804a-b680-e79a6710cb0c" class="numbered-list" start="1"><li>How many incorrect login attempts are there?</li></ol><figure id="22e5b2cc-075b-8029-8e16-d573311a79bb" class="image"><a href="image%20206.png"><img style="width:709.9371337890625px" src="image%20206.png"/></a></figure><p id="22e5b2cc-075b-800f-9858-f98cd83ff089" class="">
+</p><ol type="1" id="22e5b2cc-075b-8059-99dc-e66885e2f20d" class="numbered-list" start="2"><li>What is the size of the file accessed by the &quot;ftp&quot; acco</li></ol><figure id="22e5b2cc-075b-80ca-8cb3-e7423a47fb3d" class="image"><a href="37F2363D-8A20-46FB-A033-A2278A7C1EDD.png"><img style="width:709.9685668945312px" src="37F2363D-8A20-46FB-A033-A2278A7C1EDD.png"/></a></figure><p id="22e5b2cc-075b-803d-a3df-decbb652772e" class="">I coudlnt see any get file, so i tried to see if anyone tried to look for the files status, with code 213, then there it was</p><figure id="22e5b2cc-075b-808c-bfda-c07a0330c595" class="image"><a href="2C878867-2200-4D96-AE19-D15D9A5E900F.png"><img style="width:709.952880859375px" src="2C878867-2200-4D96-AE19-D15D9A5E900F.png"/></a></figure><p id="22e5b2cc-075b-8020-a4b9-f72b58465e06" class="">
+</p><ol type="1" id="22e5b2cc-075b-8077-9af1-cf34f46d9de4" class="numbered-list" start="3"><li>The adversary uploaded a document to the FTP server. What is the filename?</li></ol><p id="22e5b2cc-075b-802b-b7a2-d65bf05ff1a7" class="">Actually the command “STOR” is used to upload a file to the FTP Server.</p><p id="22e5b2cc-075b-80c4-afbc-cc5dcb1bf9e5" class="">And here, the file uploaded is “README”.</p><p id="22e5b2cc-075b-80a5-816a-ff854c5f2ffe" class="">The command “RETR” is used to retrieve a file from the FTP Server.</p><p id="22e5b2cc-075b-807f-ae4c-d2e8fb1d895b" class="">The file retrieved is “resume.doc” file.</p><p id="22e5b2cc-075b-8067-ad3a-f87f979baa10" class="">You can view this in the</p><p id="22e5b2cc-075b-80e7-b04a-def48316aa4b" class=""><strong>Follow → “TCP Stream”</strong></p><p id="22e5b2cc-075b-80fd-aef5-e51e414d03fa" class="">window as well.</p><p id="22e5b2cc-075b-8020-bc87-d686e1e95aa9" class=""><strong>But TryHackme accepts the “resume.doc” as correct answer.</strong></p><p id="22e5b2cc-075b-80cc-8f74-fee320ef9443" class="">The Filtering Code must be :</p><p id="22e5b2cc-075b-808f-8c60-c6a88d10e2a8" class=""><strong>ftp.request.command == “STOR”</strong></p><p id="22e5b2cc-075b-8061-b653-d1648d0d383b" class="">But you should use The Filtering Code below to find the answer which is expected :</p><p id="22e5b2cc-075b-8040-a064-e063349e4d7e" class=""><strong>ftp.request.command == “RETR”</strong></p><p id="22e5b2cc-075b-8078-84e6-fc745d1852d9" class="">Or you can go to “TCP Stream” window as well, in order to find the resume.doc file.</p><figure id="22e5b2cc-075b-8032-be34-e6445a695e08" class="image"><a href="https://hacklido.com/assets/files/2023-11-17/1700248279-425254-task-6-quest-3-tcpstream.jpg"><img src="https://hacklido.com/assets/files/2023-11-17/1700248279-425254-task-6-quest-3-tcpstream.jpg"/></a></figure><p id="22e5b2cc-075b-8000-8af7-cc31d1303884" class="">
+</p><ol type="1" id="22e5b2cc-075b-80c2-a5e7-d41f4282eddf" class="numbered-list" start="4"><li>The adversary tried to assign special flags to change the executing permissions of the uploaded file. What is the command used by the adversary?</li></ol><figure id="22e5b2cc-075b-80ba-af32-f93bf0271a9a" class="image"><a href="image%20207.png"><img style="width:709.9685668945312px" src="image%20207.png"/></a></figure><p id="22e5b2cc-075b-8055-9eed-e16cd7dc83d4" class="">
+</p><h2 id="22e5b2cc-075b-801e-b4fb-f66de19b94d5" class="">Cleartext Protocol Analysis: HTTP</h2><p id="22e5b2cc-075b-80cd-a3ea-ec54e8e2a60c" class="">
+</p><h1 id="22e5b2cc-075b-80be-9e0a-cd743ebc6cfe" class=""><strong>HTTP Analysis</strong></h1><p id="22e5b2cc-075b-8002-ae2d-fa64f0806e5e" class="">Hypertext Transfer Protocol (HTTP) is a cleartext-based, request-response and client-server protocol. It is the standard type of network activity to request/serve web pages, and by default, it is not blocked by any network perimeter. As a result of being unencrypted and the backbone of web traffic, HTTP is one of the must-to-know protocols in traffic analysis. Following attacks could be detected with the help of HTTP analysis:</p><ul id="22e5b2cc-075b-807f-89f8-d74f3abad52b" class="bulleted-list"><li style="list-style-type:disc">Phishing pages</li></ul><ul id="22e5b2cc-075b-80fa-b99e-e88ac71e424c" class="bulleted-list"><li style="list-style-type:disc">Web attacks</li></ul><ul id="22e5b2cc-075b-80a7-a089-c2b763fe1859" class="bulleted-list"><li style="list-style-type:disc">Data exfiltration</li></ul><ul id="22e5b2cc-075b-802e-8008-fe06a414fbee" class="bulleted-list"><li style="list-style-type:disc">Command and control traffic (C2)</li></ul><p id="22e5b2cc-075b-8000-b217-d6ca28fe11a4" class="">HTTP analysis in a nutshell:</p><table id="22e5b2cc-075b-80fc-90d9-ca98ae8d55a5" class="simple-table"><tbody><tr id="22e5b2cc-075b-8086-94b6-c853f096a13b"><td id="O]tv" class="" style="width:439.0283203125px"><strong>Notes</strong></td><td id="jPM{" class="" style="width:298.98114013671875px"><strong>Wireshark Filter</strong></td></tr><tr id="22e5b2cc-075b-8050-a08c-f88d9d3ce1e0"><td id="O]tv" class="" style="width:439.0283203125px">Global search<br/><strong>Note:</strong> HTTP2 is a revision of the HTTP protocol for better performance and security. It supports binary data transfer and request&amp;response multiplexing.</td><td id="jPM{" class="" style="width:298.98114013671875px">• <code>http</code><br/>• <code>http2</code></td></tr><tr id="22e5b2cc-075b-805b-88cc-c960c836568c"><td id="O]tv" class="" style="width:439.0283203125px">&quot;HTTP<strong> Request Methods&quot;</strong> for grabbing the low-hanging fruits:<br/>• GET<br/>• POST<br/>• Request: Listing all requests<br/></td><td id="jPM{" class="" style="width:298.98114013671875px">• <code>http.request.method == &quot;GET&quot;</code><br/>• <code>http.request.method == &quot;POST&quot;</code><br/>• <code>http.request</code></td></tr><tr id="22e5b2cc-075b-8062-b943-f457b194a6f3"><td id="O]tv" class="" style="width:439.0283203125px">&quot;HTTP Response Status Codes&quot; for grabbing the low-hanging fruits:<br/>• <strong>200 OK:</strong> Request successful.<br/>• <strong>301 Moved Permanently: </strong>Resource is moved to a new URL/path (permanently).<br/>• <strong>302 Moved Temporarily:</strong> Resource is moved to a new URL/path (temporarily).<br/>• <strong>400 Bad Request:</strong> Server didn&#x27;t understand the request.<br/>• <strong>401 Unauthorised: </strong>URL needs authorisation (login, etc.).<br/>• <strong>403 Forbidden:</strong> No access to the requested URL. <br/>• <strong>404 Not Found:</strong> Server can&#x27;t find the requested URL.<br/>• <strong>405 Method Not Allowed: </strong>Used method is not suitable or blocked.<br/>• <strong>408 Request Timeout:</strong>  Request look longer than server wait time.<br/>• <strong>500 Internal Server Error: </strong>Request not completed, unexpected error.<br/>• <strong>503 Service Unavailable:</strong> Request not completed server or service is down.</td><td id="jPM{" class="" style="width:298.98114013671875px">• <code>http.response.code == 200</code><br/>• <code>http.response.code == 401</code><br/>• <code>http.response.code == 403</code><br/>• <code>http.response.code == 404</code><br/>• <code>http.response.code == 405</code><br/>• <code>http.response.code == 503</code></td></tr><tr id="22e5b2cc-075b-80d5-b2fa-de8c6601b8ab"><td id="O]tv" class="" style="width:439.0283203125px">&quot;HTTP Parameters&quot; for grabbing the low-hanging fruits:<br/>• <strong>User agent:</strong> Browser and operating system identification to a web server application.<br/>• <strong>Request URI:</strong> Points the requested resource from the server.<br/>• <strong>Full *URI: </strong>Complete URI information.<br/><strong>*URI: </strong>Uniform Resource Identifier.</td><td id="jPM{" class="" style="width:298.98114013671875px">• <code>http.user_agent contains &quot;nmap&quot;</code><br/>• <code>http.request.uri contains &quot;admin&quot;</code><br/>• <code>http.request.full_uri contains &quot;admin&quot;</code></td></tr><tr id="22e5b2cc-075b-8045-950e-e747fd7bcef0"><td id="O]tv" class="" style="width:439.0283203125px">&quot;HTTP Parameters&quot; for grabbing the low-hanging fruits:<br/>• <strong>Server: </strong>Server service name.<br/>• <strong>Host:</strong> Hostname of the server<br/>• <strong>Connection:</strong> Connection status.<br/>• <strong>Line-based text data:</strong> Cleartext data provided by the server.<br/>• <strong>HTML Form URL Encoded:</strong> Web form information.</td><td id="jPM{" class="" style="width:298.98114013671875px">• <code>http.server contains &quot;apache&quot;</code><br/>• <code>http.host contains &quot;keyword&quot;</code><br/>• <code>http.host == &quot;keyword&quot;</code><br/>• <code>http.connection == &quot;Keep-Alive&quot;</code><br/>• <code>data-text-lines contains &quot;keyword&quot;</code></td></tr></tbody></table><h1 id="22e5b2cc-075b-80ce-8fad-f56450bc6f21" class=""><strong>User Agent Analysis</strong></h1><p id="22e5b2cc-075b-802f-b575-e39402db66c5" class="">As the adversaries use sophisticated technics to accomplish attacks, they try to leave traces similar to natural traffic through the known and trusted protocols. For a security analyst, it is important to spot the anomaly signs on the bits and pieces of the packets. The &quot;user-agent&quot; field is one of the great resources for spotting anomalies in HTTP traffic. In some cases, adversaries successfully modify the user-agent data, which could look super natural. A security analyst cannot rely only on the user-agent field to spot an anomaly. Never whitelist a user agent, even if it looks natural. User agent-based anomaly/threat detection/hunting is an additional data source to check and is useful when there is an obvious anomaly. If you are unsure about a value, you can conduct a web search to validate your findings with the default and normal user-agent info (<strong><a href="https://developers.whatismybrowser.com/useragents/explore/">example site</a></strong>).</p><p id="22e5b2cc-075b-804e-b71e-ceb211b3f850" class=""><strong>User Agent analysis in a nutshell:</strong></p><table id="22e5b2cc-075b-8047-bbea-e25e223f8a59" class="simple-table"><tbody><tr id="22e5b2cc-075b-80e7-8528-ddc0077c50a7"><td id="tZUr" class="" style="width:462.9842834472656px"><strong>Notes</strong></td><td id="_Ybv" class="" style="width:269.053466796875px"><strong>Wireshark Filter</strong></td></tr><tr id="22e5b2cc-075b-8094-814d-d6781e253f7c"><td id="tZUr" class="" style="width:462.9842834472656px">Global search.</td><td id="_Ybv" class="" style="width:269.053466796875px">• <code>http.user_agent</code></td></tr><tr id="22e5b2cc-075b-80a2-8ff0-e2dea3f60fd3"><td id="tZUr" class="" style="width:462.9842834472656px">Research outcomes for grabbing the low-hanging fruits:<br/>• Different user agent information from the same host in a short time notice.<br/>• Non-standard and custom user agent info.<br/>• Subtle spelling differences. <strong>(&quot;Mozilla&quot; is not the same as  &quot;Mozlilla&quot; or &quot;Mozlila&quot;)</strong><br/>• Audit tools info like Nmap, Nikto, Wfuzz and sqlmap in the user agent field.<br/>• Payload data in the user agent field.</td><td id="_Ybv" class="" style="width:269.053466796875px">• <code>(http.user_agent contains &quot;sqlmap&quot;) or (http.user_agent contains &quot;Nmap&quot;) or (http.user_agent contains &quot;Wfuzz&quot;) or (http.user_agent contains &quot;Nikto&quot;)</code></td></tr></tbody></table><figure id="22e5b2cc-075b-801c-8fed-e6983a9167d9" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/6131132af49360005df01ae3/room-content/8c114d533e1914300bae23b19d3e6f40.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/6131132af49360005df01ae3/room-content/8c114d533e1914300bae23b19d3e6f40.png"/></a></figure><h1 id="22e5b2cc-075b-802e-8c53-e856a0549fe5" class=""><strong>Log4j Analysis</strong></h1><p id="22e5b2cc-075b-80f5-aeb6-c43f4496187b" class="">A proper investigation starts with prior research on threats and anomalies going to be hunted. Let&#x27;s review the knowns on the &quot;Log4j&quot; attack before launching Wireshark.</p><p id="22e5b2cc-075b-80f6-8b7d-ffc126b2ecec" class=""><strong>Log4j vulnerability analysis in a nutshell:</strong></p><table id="22e5b2cc-075b-8069-a8b6-f6d4de9c4702" class="simple-table"><tbody><tr id="22e5b2cc-075b-800e-b049-dca4d3f00f93"><td id="dAs?" class="" style="width:388.9811706542969px"><strong>Notes</strong></td><td id="uP{f" class="" style="width:321.9842834472656px"><strong>Wireshark Filters</strong></td></tr><tr id="22e5b2cc-075b-8002-be21-fa3ed8cd8edd"><td id="dAs?" class="" style="width:388.9811706542969px"><strong>Research outcomes </strong>for grabbing the low-hanging fruits:<br/>• The attack starts with a &quot;POST&quot; request<br/>• There are known cleartext patterns: &quot;<strong>jndi:ldap</strong>&quot; and &quot;<strong>Exploit.class</strong>&quot;.</td><td id="uP{f" class="" style="width:321.9842834472656px">• <code>http.request.method == &quot;POST&quot;</code><br/>• <code>(ip contains &quot;jndi&quot;) or ( ip contains &quot;Exploit&quot;)</code><br/>• <code>(frame contains &quot;jndi&quot;) or ( frame contains &quot;Exploit&quot;)</code><br/>• <code>(http.user_agent contains &quot;$&quot;) or (http.user_agent contains &quot;==&quot;)</code></td></tr></tbody></table><figure id="22e5b2cc-075b-8085-a8d4-fac6877a21f9" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/6131132af49360005df01ae3/room-content/8c3bc1fb4090582de2e36452de4d7d3a.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/6131132af49360005df01ae3/room-content/8c3bc1fb4090582de2e36452de4d7d3a.png"/></a></figure><p id="22e5b2cc-075b-8076-a2f8-dd8dd957ab24" class="">
+</p><h2 id="22e5b2cc-075b-8092-9962-e936452cc31a" class="">Questions</h2><ol type="1" id="22e5b2cc-075b-805c-8a7f-fda641608990" class="numbered-list" start="1"><li>Investigate the user agents. What is the number of anomalous  &quot;user-agent&quot; types?</li></ol><p id="22e5b2cc-075b-8022-80a3-fa3b474479b9" class="">i added the user agent as a solumn, and while goinf through them, i find multiple weird user agetnts, one is the following wher einstead of mozilla it says mozlila<br/></p><figure id="22e5b2cc-075b-80d9-8262-db3e38a31016" class="image"><a href="50E6E8EE-B54F-43D0-9561-184D405552EF.png"><img style="width:709.9371337890625px" src="50E6E8EE-B54F-43D0-9561-184D405552EF.png"/></a></figure><p id="22e5b2cc-075b-804d-9c24-de25b090b9c4" class="">27	1580150846.840448512	172.16.172.132	172.16.172.129	HTTP	495	80	46400	sqlmap/1.4#stable (<a href="http://sqlmap.org/">http://sqlmap.org</a>)<br/></p><p id="22e5b2cc-075b-803e-82f5-f7a97d151138" class="">52	-1063550943.144639779	10.10.57.178	44.228.249.3	HTTP	469	80	57672	Mozlila/5.0 (X11; Ubuntu; Linux x86_64; rv:100.0) Gecko/20100101 Firefox/100.0</p><p id="22e5b2cc-075b-8060-b847-e6624ed14440" class="">
+</p><ol type="1" id="22e5b2cc-075b-80a2-8d97-c7a229789852" class="numbered-list" start="2"><li>What is the packet number with a subtle spelling difference in the user agent field?</li></ol><figure id="22e5b2cc-075b-80c6-b0e5-f3c29bb8f5da" class="image"><a href="image%20208.png"><img style="width:709.9371337890625px" src="image%20208.png"/></a></figure><p id="22e5b2cc-075b-8057-a4be-c1fdb47c241e" class="">
+</p><ol type="1" id="22e5b2cc-075b-80a3-b8d6-f9f87b5bac77" class="numbered-list" start="3"><li>Locate the &quot;Log4j&quot; attack starting phase. What is the packet number?</li></ol><figure id="22e5b2cc-075b-80d0-971a-eb7c68b65f05" class="image"><a href="image%20209.png"><img style="width:709.9685668945312px" src="image%20209.png"/></a></figure><p id="22e5b2cc-075b-803f-a9ca-e078a9175502" class="">
+</p><ol type="1" id="22e5b2cc-075b-80b7-b6ae-d7776abe9daa" class="numbered-list" start="4"><li>Locate the &quot;Log4j&quot; attack starting phase and decode the base64 command. What is the IP address contacted by the adversary? (Enter the address in defanged format and exclude &quot;{}&quot;.)</li></ol><figure id="22e5b2cc-075b-80bb-8e5d-d1833c424b2a" class="image"><a href="image%20210.png"><img style="width:709.9685668945312px" src="image%20210.png"/></a></figure><figure id="22e5b2cc-075b-80df-a859-f27ac992a28d" class="image"><a href="image%20211.png"><img style="width:709.952880859375px" src="image%20211.png"/></a></figure><p id="22e5b2cc-075b-8048-9262-cebec409ab22" class="">
+</p><h2 id="22e5b2cc-075b-8040-b874-f4e6a36c88e1" class="">Encrypted Protocol Analysis: Decrypting HTTPS</h2><p id="22e5b2cc-075b-8074-b93a-c2e94eb36d26" class="">
+</p><h1 id="22e5b2cc-075b-8058-82aa-e684b7c180f6" class="">Decrypting HTTPS Traffic</h1><p id="22e5b2cc-075b-808f-809d-e9544e6ea6b8" class="">When investigating web traffic, analysts often run across encrypted traffic. This is caused by using the Hypertext Transfer Protocol Secure (HTTPS) protocol for enhanced security against spoofing, sniffing and intercepting attacks. HTTPS uses TLS protocol to encrypt communications, so it is impossible to decrypt the traffic and view the transferred data without having the encryption/decryption key pairs. As this protocol provides a good level of security for transmitting sensitive data, attackers and malicious websites also use HTTPS. Therefore, a security analyst should know how to use key files to decrypt encrypted traffic and investigate the traffic activity.</p><p id="22e5b2cc-075b-8082-92a2-d4f17cf756e8" class="">The packets will appear in different colours as the HTTP traffic is encrypted. Also, protocol and info details (actual URL address and data returned from the server) will not be fully visible. The first image below shows the HTTP packets encrypted with the TLS protocol. The second and third images demonstrate filtering HTTP packets without using a key log file.</p><p id="22e5b2cc-075b-805d-9ebd-eecffe951189" class=""><strong>Additional information for HTTPS :</strong></p><table id="22e5b2cc-075b-809f-b0f0-ce4ed074537f" class="simple-table"><tbody><tr id="22e5b2cc-075b-809e-9b4c-f39471c2c77d"><td id="oeFB" class="" style="width:537.9842834472656px">Notes</td><td id="[[z^" class="">Wireshark Filter</td></tr><tr id="22e5b2cc-075b-80f6-8cc5-e468549b17af"><td id="oeFB" class="" style="width:537.9842834472656px">&quot;HTTPS Parameters&quot; for grabbing the low-hanging fruits:<br/>• <strong>Request: </strong>Listing all requests<br/>• <strong>TLS:</strong> Global TLS search<br/>• TLS Client Request<br/>• TLS Server response<br/>• Local Simple Service Discovery Protocol (SSDP)<br/><strong>Note:</strong> SSDP is a network protocol that provides advertisement and discovery of network services.</td><td id="[[z^" class="">• <code>http.request</code><br/>• <code>tls</code><br/>• <code>tls.handshake.type == 1</code><br/>• <code>tls.handshake.type == 2</code><br/>• <code>ssdp</code></td></tr></tbody></table><figure id="22e5b2cc-075b-804f-9e6d-fa5f02d35f9a" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/6131132af49360005df01ae3/room-content/2558999240f7cc60cfb7588d434f9793.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/6131132af49360005df01ae3/room-content/2558999240f7cc60cfb7588d434f9793.png"/></a></figure><p id="22e5b2cc-075b-8085-bfb4-c87f1670cbc3" class="">Similar to the TCP three-way handshake process, the TLS protocol has its handshake process. The first two steps contain &quot;Client Hello&quot; and &quot;Server Hello&quot; messages. The given filters show the initial hello packets in a capture file. These filters are helpful to spot which IP addresses are involved in the TLS handshake.</p><ul id="22e5b2cc-075b-80b0-8c92-fbdfbba76b7c" class="bulleted-list"><li style="list-style-type:disc">Client Hello: <code>(http.request or tls.handshake.type == 1) and !(ssdp)</code></li></ul><ul id="22e5b2cc-075b-80c5-94d9-efbf74929947" class="bulleted-list"><li style="list-style-type:disc">Server Hello:<code> (http.request or tls.handshake.type == 2) and !(ssdp)</code></li></ul><figure id="22e5b2cc-075b-80fa-98db-de27a32433cf" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/6131132af49360005df01ae3/room-content/adad6bec8a257b67664167f52981f820.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/6131132af49360005df01ae3/room-content/adad6bec8a257b67664167f52981f820.png"/></a></figure><p id="22e5b2cc-075b-80b1-b445-ca3f8cc43ca8" class="">An encryption key log file is a text file that contains unique key pairs to decrypt the encrypted traffic session. These key pairs are automatically created (per session) when a connection is established with an SSL/TLS-enabled webpage. As these processes are all accomplished in the browser, you need to configure your system and use a suitable browser (Chrome and Firefox support this) to save these values as a key log file. To do this, you will need to set up an environment variable and create the SSLKEYLOGFILE, and the browser will dump the keys to this file as you browse the web. SSL/TLS key pairs are created per session at the connection time, so it is important to dump the keys during the traffic capture. Otherwise, it is not possible to create/generate a suitable key log file to decrypt captured traffic. You can use the &quot;right-click&quot; menu or <strong>&quot;Edit --&gt; Preferences --&gt; Protocols --&gt; TLS&quot;</strong> menu to add/remove key log files.</p><p id="22e5b2cc-075b-8063-aaf0-e77e9d23bc2a" class=""><strong>Adding key log files with the &quot;right-click&quot; menu:</strong></p><figure id="22e5b2cc-075b-80ab-97c3-fca9912e383d" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/6131132af49360005df01ae3/room-content/17b1557ea94f23b7a9c6851fddbd366b.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/6131132af49360005df01ae3/room-content/17b1557ea94f23b7a9c6851fddbd366b.png"/></a></figure><p id="22e5b2cc-075b-807a-bb74-ee14d2070b2c" class="">Adding key log files with the &quot;Edit --&gt; Preferences --&gt; Protocols --&gt; TLS&quot; menu:</p><figure id="22e5b2cc-075b-80ac-a934-d9e2e6ca1936" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/6131132af49360005df01ae3/room-content/7461f414bdc9926827dd54d57e7a8825.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/6131132af49360005df01ae3/room-content/7461f414bdc9926827dd54d57e7a8825.png"/></a></figure><p id="22e5b2cc-075b-80a1-aaee-cdb016d00529" class=""><strong>Viewing the traffic with/without the key log files:</strong></p><figure id="22e5b2cc-075b-80fc-8a77-f45aa3bccbea" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/6131132af49360005df01ae3/room-content/5df77f4b111b3ae5b7332456046a5ebc.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/6131132af49360005df01ae3/room-content/5df77f4b111b3ae5b7332456046a5ebc.png"/></a></figure><p id="22e5b2cc-075b-8048-be0f-f54cfde0b1fc" class="">The above image shows that the traffic details are visible after using the key log file. Note that the packet details and bytes pane provides the data in different formats for investigation. Decompressed header info and HTTP2 packet details are available after decrypting the traffic. Depending on the packet details, you can also have the following data formats:</p><ul id="22e5b2cc-075b-80ee-aa5b-d6f3486e3ada" class="bulleted-list"><li style="list-style-type:disc">Frame</li></ul><ul id="22e5b2cc-075b-802c-9d4c-d313b6944958" class="bulleted-list"><li style="list-style-type:disc">Decrypted TLS</li></ul><ul id="22e5b2cc-075b-80ba-af1e-fc6466789dc2" class="bulleted-list"><li style="list-style-type:disc">Decompressed Header</li></ul><ul id="22e5b2cc-075b-8009-ac45-e9ded5bf5a66" class="bulleted-list"><li style="list-style-type:disc">Reassembled TCP</li></ul><ul id="22e5b2cc-075b-8015-9568-c4d22c531f4a" class="bulleted-list"><li style="list-style-type:disc">Reassembled SSL</li></ul><p id="22e5b2cc-075b-804e-91da-ff8f67f7ef7a" class="">
+</p><h3 id="22e5b2cc-075b-8014-a474-f037301a11e8" class="">Questions</h3><ul id="22e5b2cc-075b-8015-a444-cfdca1006d15" class="bulleted-list"><li style="list-style-type:disc">What is the frame number of the &quot;Client Hello&quot; message sent to &quot;accounts.google.com&quot;?</li></ul><p id="22e5b2cc-075b-80f7-988d-dbac7a2788b3" class="">I looked at the packet to find where the server name is mentioned when a tls handhsake happens, then i used that as a filter to fin dout <a href="http://accounts.googole.com">accounts.googole.com</a> </p><figure id="22e5b2cc-075b-80d8-94b2-ffbe2a7f96e4" class="image"><a href="B286E240-E72C-4B0C-8A02-7A6BC65878E3.png"><img style="width:709.9057006835938px" src="B286E240-E72C-4B0C-8A02-7A6BC65878E3.png"/></a></figure><ul id="22e5b2cc-075b-80c2-9eee-efc6e98d9f7f" class="bulleted-list"><li style="list-style-type:disc">Decrypt the traffic with the &quot;KeysLogFile.txt&quot; file. What is the number of HTTP2 packets?</li></ul><p id="22e5b2cc-075b-80b8-acf9-c791e91fb695" class="">First I added the pre master shared key form the folder, then i used the filter http2 to look for packets,</p><figure id="22e5b2cc-075b-8037-908d-df78bb2beb40" class="image"><a href="05B8C22A-9FED-4DAB-B915-64417C51AB4C.png"><img style="width:709.952880859375px" src="05B8C22A-9FED-4DAB-B915-64417C51AB4C.png"/></a></figure><ul id="22e5b2cc-075b-805c-b447-e7b62e03c95f" class="bulleted-list"><li style="list-style-type:disc">Go to Frame 322. What is the authority header of the HTTP2 packet? (Enter the address in defanged format.)</li></ul><p id="22e5b2cc-075b-80f3-a896-d53819930a47" class="">This can be found at,</p><figure id="22e5b2cc-075b-80f4-a178-e495c4505588" class="image"><a href="3B10F96A-7FF5-4E98-BF58-B5E408A8C195.png"><img style="width:709.952880859375px" src="3B10F96A-7FF5-4E98-BF58-B5E408A8C195.png"/></a></figure><ul id="22e5b2cc-075b-8084-9806-f80503a79bb8" class="bulleted-list"><li style="list-style-type:disc">Investigate the decrypted packets and find the flag! What is the flag?</li></ul><p id="22e5b2cc-075b-808f-9637-c814384566f0" class="">if the flag is to be within this packet, i can use the export object to get the flag</p><figure id="22e5b2cc-075b-80a4-862b-f997ef8e8460" class="image"><a href="1EF71B5F-404C-4689-B12B-3DEADB99AE86.png"><img style="width:709.952880859375px" src="1EF71B5F-404C-4689-B12B-3DEADB99AE86.png"/></a></figure><figure id="22e5b2cc-075b-809f-84fe-f7705e9ba434" class="image"><a href="image%20212.png"><img style="width:709.9685668945312px" src="image%20212.png"/></a></figure><p id="22e5b2cc-075b-801b-9ef8-f6409774015e" class="">
+</p><h2 id="22e5b2cc-075b-80a3-8703-e27ba632b6c8" class="">Bonus: Hunt Cleartext Credentials!</h2><h3 id="22e5b2cc-075b-80e4-a85e-c43a88b61f05" class="">🧠 Key Concepts</h3><ul id="22e5b2cc-075b-8034-8861-f531144d1fa5" class="bulleted-list"><li style="list-style-type:disc"><strong>Wireshark is not an IDS</strong>: It doesn&#x27;t detect intrusions automatically but provides <strong>expert info hints</strong> for some anomalies.</li></ul><ul id="22e5b2cc-075b-8092-99ab-d1ff0cc9e819" class="bulleted-list"><li style="list-style-type:disc"><strong>Brute-force detection is tricky</strong>:<ul id="22e5b2cc-075b-80db-856f-ee26ec52e882" class="bulleted-list"><li style="list-style-type:circle">Repeated credential attempts may look like normal mistypes.</li></ul><ul id="22e5b2cc-075b-803f-b18f-eb0c55d0e5ee" class="bulleted-list"><li style="list-style-type:circle">Patterns are hard to spot directly from raw packets.</li></ul></li></ul><hr id="22e5b2cc-075b-8087-b6e6-f958f125c375"/><h3 id="22e5b2cc-075b-80ca-97c5-c06d0038273a" class="">🛠️ Wireshark Credential Extraction</h3><p id="22e5b2cc-075b-8060-8f74-fc681184e770" class="">Wireshark <strong>supports extracting cleartext credentials</strong> from certain protocols using <strong>built-in dissectors</strong>:</p><h3 id="22e5b2cc-075b-804f-a34e-fd054cba20e4" class="">✅ Supported Protocols:</h3><ul id="22e5b2cc-075b-8086-bf80-cf637e383e0f" class="bulleted-list"><li style="list-style-type:disc"><strong>FTP</strong></li></ul><ul id="22e5b2cc-075b-80b6-bb6f-c9e488afcd40" class="bulleted-list"><li style="list-style-type:disc"><strong>HTTP</strong></li></ul><ul id="22e5b2cc-075b-80ff-9344-e8e445f98c2c" class="bulleted-list"><li style="list-style-type:disc"><strong>IMAP</strong></li></ul><ul id="22e5b2cc-075b-807e-ac26-c1c9073e2a2b" class="bulleted-list"><li style="list-style-type:disc"><strong>POP3</strong></li></ul><ul id="22e5b2cc-075b-80e6-a2f9-e69485520f8e" class="bulleted-list"><li style="list-style-type:disc"><strong>SMTP</strong></li></ul><h3 id="22e5b2cc-075b-80cf-998e-dd9c4e05298e" class="">📍 Feature Path:</h3><ul id="22e5b2cc-075b-8081-a054-cc219e72e28e" class="bulleted-list"><li style="list-style-type:disc"><code>Tools → Credentials</code><p id="22e5b2cc-075b-806a-91ed-ccf9f72913db" class="">(Available from <strong>Wireshark v3.1+</strong>)</p></li></ul><h3 id="22e5b2cc-075b-808a-97f6-efd9d33e2b8b" class="">👀 What You’ll See:</h3><ul id="22e5b2cc-075b-805f-9b69-e5f90fa3ba22" class="bulleted-list"><li style="list-style-type:disc"><strong>Packet number</strong></li></ul><ul id="22e5b2cc-075b-80a5-a0f1-c421f2809e1b" class="bulleted-list"><li style="list-style-type:disc"><strong>Protocol</strong></li></ul><ul id="22e5b2cc-075b-806c-af48-ca1828296e52" class="bulleted-list"><li style="list-style-type:disc"><strong>Username</strong></li></ul><ul id="22e5b2cc-075b-80e4-bcad-ce296e864527" class="bulleted-list"><li style="list-style-type:disc"><strong>Additional info</strong> (e.g., password packet number)</li></ul><p id="22e5b2cc-075b-80d6-83a3-dea6e5bb81b9" class="">🖱️ Clicking entries will:</p><ul id="22e5b2cc-075b-80f2-bf75-ffb3a45f9ac5" class="bulleted-list"><li style="list-style-type:disc"><strong>Select the packet with the password</strong></li></ul><ul id="22e5b2cc-075b-8032-9994-fac6116951dd" class="bulleted-list"><li style="list-style-type:disc"><strong>Jump to the packet with the username</strong></li></ul><hr id="22e5b2cc-075b-8073-8fe2-e0e6f98972b8"/><h3 id="22e5b2cc-075b-8031-a3e8-e1d108d1376e" class="">⚠️ Important Notes:</h3><ul id="22e5b2cc-075b-804e-a7f8-e16cf79e7af2" class="bulleted-list"><li style="list-style-type:disc">Only works on protocols that transmit <strong>unencrypted credentials</strong>.</li></ul><ul id="22e5b2cc-075b-80bf-91fe-c2c7f8521a96" class="bulleted-list"><li style="list-style-type:disc">Does <strong>not guarantee</strong> full detection — <strong>manual inspection is still crucial</strong>.</li></ul><ul id="22e5b2cc-075b-802f-9ca7-f4eeda852662" class="bulleted-list"><li style="list-style-type:disc">Can <strong>speed up analysis</strong> by summarizing dispersed credential data.</li></ul><p id="22e5b2cc-075b-8068-bbe5-e2a5b5d023ac" class="">
+</p><h3 id="22e5b2cc-075b-806f-91a0-c53e4ba61218" class="">Questions</h3><p id="22e5b2cc-075b-80ac-a3fc-cc60fafec844" class="">What is the packet number of the credentials using &quot;HTTP Basic Auth&quot;?</p><figure id="22e5b2cc-075b-808f-9fb6-fbb58359f8a6" class="image"><a href="image%20213.png"><img style="width:709.9685668945312px" src="image%20213.png"/></a></figure><p id="22e5b2cc-075b-8032-9f5b-ebeb3aee4cd6" class="">
+</p><p id="22e5b2cc-075b-80ed-b9ce-f394c2169517" class="">What is the packet number where &quot;empty password&quot; was submitted?</p><figure id="22e5b2cc-075b-8070-a841-c4cdcdf265f0" class="image"><a href="image%20214.png"><img style="width:709.9685668945312px" src="image%20214.png"/></a></figure><p id="22e5b2cc-075b-8097-8ee2-e5d2e33741ef" class="">
+</p><h2 id="22e5b2cc-075b-80c1-913b-ebf89189ca43" class=""><strong>Bonus: Actionable Results!</strong></h2><p id="22e5b2cc-075b-80b0-854c-c6c6eb1965b1" class="">You have investigated the traffic, detected anomalies and created notes for further investigation. What is next? Not every case investigation is carried out by a crowd team. As a security analyst, there will be some cases you need to spot the anomaly, identify the source and take action. Wireshark is not all about packet details; it can help you to create firewall rules ready to implement with a couple of clicks. You can create firewall rules by using the <strong>&quot;Tools --&gt; Firewall ACL Rules&quot;</strong> menu. Once you use this feature, it will open a new window and provide a combination of rules (IP, port and MAC address-based) for different purposes. Note that these rules are generated for implementation on an outside firewall interface.</p><p id="22e5b2cc-075b-8055-bb63-f9db3a6cb614" class="">Currently, Wireshark can create rules for:</p><ul id="22e5b2cc-075b-80e6-ae25-d3dbb245edb5" class="bulleted-list"><li style="list-style-type:disc">Netfilter (iptables)</li></ul><ul id="22e5b2cc-075b-806a-b63b-c7044dc64989" class="bulleted-list"><li style="list-style-type:disc">Cisco IOS (standard/extended)</li></ul><ul id="22e5b2cc-075b-80ca-87a0-d3388bf20198" class="bulleted-list"><li style="list-style-type:disc">IP Filter (ipfilter)</li></ul><ul id="22e5b2cc-075b-8063-bfb2-c047e567d021" class="bulleted-list"><li style="list-style-type:disc">IPFirewall (ipfw)</li></ul><ul id="22e5b2cc-075b-8092-96cc-eb71e273c066" class="bulleted-list"><li style="list-style-type:disc">Packet filter (pf)</li></ul><ul id="22e5b2cc-075b-8007-a1ae-e2aacd0e0749" class="bulleted-list"><li style="list-style-type:disc">Windows Firewall (netsh new/old format)</li></ul><figure id="22e5b2cc-075b-8074-ab50-f5565d6ab3a5" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/6131132af49360005df01ae3/room-content/448e790da3f31b8566547cd03804b282.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/6131132af49360005df01ae3/room-content/448e790da3f31b8566547cd03804b282.png"/></a></figure><p id="22e5b2cc-075b-806d-8b65-dc308ad2b660" class="">
+</p><h3 id="22e5b2cc-075b-8040-97e0-dd3970c4efec" class="">Questions</h3><p id="22e5b2cc-075b-8073-a57f-d0a08b1ae85c" class="">Select packet number 99. Create a rule for &quot;IPFirewall (ipfw)&quot;. What is the rule for &quot;denying source IPv4 address&quot;?</p><p id="22e5b2cc-075b-80e0-8c00-e86a5552224e" class="">Select the Frame, click on tools-ACL rules, change to IPFireewall </p><figure id="22e5b2cc-075b-8099-97da-c91b9a7a2e85" class="image"><a href="DADC70D6-D807-41ED-9500-84E6361090C0.png"><img style="width:709.9685668945312px" src="DADC70D6-D807-41ED-9500-84E6361090C0.png"/></a></figure><p id="22e5b2cc-075b-808f-981f-fdbfc4735a40" class="">Select packet number 231. Create &quot;IPFirewall&quot; rules. What is the rule for &quot;allowing destination MAC address&quot;?</p><p id="22e5b2cc-075b-805a-b593-e64666472499" class="">change deny to allow</p><figure id="22e5b2cc-075b-8023-8172-c3701e829225" class="image"><a href="image%20215.png"><img style="width:709.952880859375px" src="image%20215.png"/></a></figure></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

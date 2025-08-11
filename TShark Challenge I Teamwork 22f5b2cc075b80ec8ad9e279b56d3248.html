@@ -1,0 +1,687 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>TShark Challenge I: Teamwork</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="22f5b2cc-075b-80ec-8ad9-e279b56d3248" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🚨</span></div><h1 class="page-title"><strong>TShark Challenge I: Teamwork</strong></h1><p class="page-description"></p></header><div class="page-body"><hr id="22f5b2cc-075b-809c-81e8-c905da202702"/><h1 id="22f5b2cc-075b-80bb-a79e-d8434d398eee" class="">🕵️‍♂️ PCAP Investigation Report</h1><p id="22f5b2cc-075b-8033-b6ff-f2f178ca5a69" class=""><strong>File Analyzed:</strong> <code>teamwork.pcap</code></p><p id="22f5b2cc-075b-80f1-8a5d-dc6d2a7e7c13" class=""><strong>Analysis Performed On:</strong> Ubuntu CLI using <code>tshark</code></p><p id="22f5b2cc-075b-80ab-9393-ebd7ece570c2" class=""><strong>Tool Used:</strong> TShark (CLI version of Wireshark)</p><hr id="22f5b2cc-075b-80ec-9c89-e3593c304b41"/><h2 id="22f5b2cc-075b-808b-9c95-f032d6c88030" class="">🔍 Step 1: Traffic Overview – Top Endpoints</h2><p id="22f5b2cc-075b-806a-b310-dbe7147822da" class="">Initial analysis was done to identify the top endpoints in the capture. The screenshot shows a number of IPs and hostnames, sorted by packet count. This helps establish communication patterns and identify unusual traffic destinations.</p><figure id="22f5b2cc-075b-80ec-85a6-e1fa4a32c11b" class="image"><a href="B3AD15D4-F9A7-49B0-82C2-07514A16A7C6.png"><img style="width:685.986328125px" src="B3AD15D4-F9A7-49B0-82C2-07514A16A7C6.png"/></a></figure><hr id="22f5b2cc-075b-8093-a609-fd63182803d5"/><h2 id="22f5b2cc-075b-80d3-b45d-dbbdbcd170dd" class="">🚨 Step 2: Expert Analysis Summary (<code>tshark -z expert</code>)</h2><p id="22f5b2cc-075b-8072-abf6-f1b80238f19d" class="">Executed command:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22f5b2cc-075b-800c-ab9f-c8f905e7359f" class="code code-wrap"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">tshark -r teamwork.pcap -z expert -q
+</code></pre><h3 id="22f5b2cc-075b-800c-b65d-cb9b870771f3" class="">⚠️ Warnings (186)</h3><table id="22f5b2cc-075b-809d-89d9-cffdc5efaa27" class="simple-table"><thead class="simple-table-header"><tr id="22f5b2cc-075b-8018-9a0c-edc1b7bf9d4b"><th id="dYnZ" class="simple-table-header-color simple-table-header">Frequency</th><th id="pw[T" class="simple-table-header-color simple-table-header">Protocol</th><th id="Rc=:" class="simple-table-header-color simple-table-header">Summary</th></tr></thead><tbody><tr id="22f5b2cc-075b-8087-9c75-db294f81138a"><td id="dYnZ" class="">118</td><td id="pw[T" class="">TCP</td><td id="Rc=:" class="">ACKed segment that wasn&#x27;t captured (common at capture start)</td></tr><tr id="22f5b2cc-075b-8095-b5fd-f58d6c5be10c"><td id="dYnZ" class="">24</td><td id="pw[T" class="">TCP</td><td id="Rc=:" class="">Previous segment(s) not captured</td></tr><tr id="22f5b2cc-075b-8043-9834-ed10016e4955"><td id="dYnZ" class="">10</td><td id="pw[T" class="">TCP</td><td id="Rc=:" class="">Suspected out-of-order segment</td></tr><tr id="22f5b2cc-075b-8045-8334-ed62abd4b254"><td id="dYnZ" class="">33</td><td id="pw[T" class="">TCP</td><td id="Rc=:" class="">Connection reset (RST)</td></tr><tr id="22f5b2cc-075b-809c-a06e-f6061e962d3f"><td id="dYnZ" class="">1</td><td id="pw[T" class="">DNS</td><td id="Rc=:" class="">DNS query retransmission (Frame 29)</td></tr></tbody></table><h3 id="22f5b2cc-075b-80c2-af78-c364f8cd78e3" class="">📝 Notes (185)</h3><table id="22f5b2cc-075b-803b-9887-ddf0e2b736b5" class="simple-table"><thead class="simple-table-header"><tr id="22f5b2cc-075b-80aa-b52c-c12edbe18fa8"><th id="Y]&gt;A" class="simple-table-header-color simple-table-header">Frequency</th><th id="d^wk" class="simple-table-header-color simple-table-header">Protocol</th><th id="Ke`L" class="simple-table-header-color simple-table-header">Summary</th></tr></thead><tbody><tr id="22f5b2cc-075b-8070-8d5a-ccf0272d5e4b"><td id="Y]&gt;A" class="">34</td><td id="d^wk" class="">TCP</td><td id="Ke`L" class="">Duplicate ACK (#1)</td></tr><tr id="22f5b2cc-075b-80e0-ab4a-f8bdf3acef95"><td id="Y]&gt;A" class="">28</td><td id="d^wk" class="">TCP</td><td id="Ke`L" class="">Duplicate ACKs (#2–#6)</td></tr><tr id="22f5b2cc-075b-806d-a471-ecfdb305ba74"><td id="Y]&gt;A" class="">7</td><td id="d^wk" class="">TCP</td><td id="Ke`L" class="">Keep-alive segment</td></tr><tr id="22f5b2cc-075b-80e9-a7c6-c92455b1173d"><td id="Y]&gt;A" class="">7</td><td id="d^wk" class="">TCP</td><td id="Ke`L" class="">ACK to keep-alive segment</td></tr><tr id="22f5b2cc-075b-8064-a8ff-f6e5efdddcf0"><td id="Y]&gt;A" class="">1</td><td id="d^wk" class="">TCP</td><td id="Ke`L" class="">Suspected retransmission</td></tr></tbody></table><h3 id="22f5b2cc-075b-8042-a5ba-e40de7507afa" class="">💬 Chats (206)</h3><ul id="22f5b2cc-075b-80fe-88ae-f5bc113a0936" class="bulleted-list"><li style="list-style-type:disc">TCP SYN to port 80: 30</li></ul><ul id="22f5b2cc-075b-8085-9c0f-e432d8b526c5" class="bulleted-list"><li style="list-style-type:disc">TCP SYN+ACK responses: 30</li></ul><ul id="22f5b2cc-075b-80fa-a247-e57e152cca47" class="bulleted-list"><li style="list-style-type:disc">TCP FIN (Connection close): 97</li></ul><ul id="22f5b2cc-075b-80ad-960d-f27913dc0872" class="bulleted-list"><li style="list-style-type:disc">HTTP Requests/Responses:<ul id="22f5b2cc-075b-8069-984c-fb189a5b2a8b" class="bulleted-list"><li style="list-style-type:circle"><code>GET /</code>, <code>POST /inc/login.php</code>, <code>GET /suspecious.php</code>, <code>POST /inc/visit.php</code>, etc.</li></ul><ul id="22f5b2cc-075b-8079-ac9c-e41014beb0a0" class="bulleted-list"><li style="list-style-type:circle"><code>HTTP/1.1 200 OK</code>, <code>HTTP/1.1 403 Forbidden</code></li></ul></li></ul><p id="22f5b2cc-075b-809b-b529-fa20d813a5c9" class="">The chat summary shows typical web browsing behavior, but also includes suspicious endpoints such as <code>/suspecious.php</code>.</p><figure id="22f5b2cc-075b-807b-a1cb-e49ce1d079f4" class="image"><a href="C434E024-3DDA-4B88-805D-1B77C71BAE78.png"><img style="width:685.9605712890625px" src="C434E024-3DDA-4B88-805D-1B77C71BAE78.png"/></a></figure><hr id="22f5b2cc-075b-8079-b386-e058e646458d"/><h2 id="22f5b2cc-075b-8031-8cc4-f3dd8abd9b7a" class="">🧐 Step 3: Suspicious HTTP Requests</h2><p id="22f5b2cc-075b-809a-9f9e-e0247d2c0d82" class="">The HTTP request list includes:</p><ul id="22f5b2cc-075b-80d8-bab2-e723d9c3f699" class="bulleted-list"><li style="list-style-type:disc"><code>GET /suspecious.php</code></li></ul><ul id="22f5b2cc-075b-8019-9044-d9983b6a5963" class="bulleted-list"><li style="list-style-type:disc"><code>POST /inc/login.php</code></li></ul><ul id="22f5b2cc-075b-804c-bc43-f8361b49fd9d" class="bulleted-list"><li style="list-style-type:disc"><code>GET /update.php</code></li></ul><ul id="22f5b2cc-075b-8052-aed4-f99fe623ba0e" class="bulleted-list"><li style="list-style-type:disc"><code>GET /img/shield.png</code></li></ul><ul id="22f5b2cc-075b-808a-a6db-f40848bd9715" class="bulleted-list"><li style="list-style-type:disc"><code>GET /tbr?client=...paypal.com4uswebappsresetaccountrecovery.timeseaways.com/...</code></li></ul><p id="22f5b2cc-075b-8011-b517-e417de198030" class="">This last URL suggests an attempt to impersonate <strong>PayPal</strong>.</p><figure id="22f5b2cc-075b-80e4-83a2-d1b9c85130c6" class="image"><a href="3FEBCDC7-E0EA-49B8-8B88-CFAB1CFE614D.png"><img style="width:685.9734497070312px" src="3FEBCDC7-E0EA-49B8-8B88-CFAB1CFE614D.png"/></a></figure><hr id="22f5b2cc-075b-803d-88bc-c255303a505a"/><h2 id="22f5b2cc-075b-8063-a564-c7f1380a4e4a" class="">🌐 Step 4: Endpoint Mapping</h2><p id="22f5b2cc-075b-80a6-85c4-ea35ae9c02c6" class="">Mapped IPs and hostnames from HTTP traffic and DNS responses. One notable domain stood out due to its suspicious pattern and similarity to PayPal.</p><figure id="22f5b2cc-075b-807a-9e65-c717ff2f9ec7" class="image"><a href="49750CCD-1A4D-40C3-AEA5-6AE1BA37B25A.png"><img style="width:685.9219970703125px" src="49750CCD-1A4D-40C3-AEA5-6AE1BA37B25A.png"/></a></figure><hr id="22f5b2cc-075b-8097-84f8-f7b7b85eaf95"/><h2 id="22f5b2cc-075b-80bc-a744-e9388dee7a65" class="">🧪 Step 5: Domain Reputation – VirusTotal Analysis</h2><h3 id="22f5b2cc-075b-8049-a8f1-dcecf07c58b0" class="">✅ Malicious Domain Identified</h3><p id="22f5b2cc-075b-80f1-88b9-fe630cb81037" class=""><strong>Defanged Full URL:</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22f5b2cc-075b-80fd-b9b6-c4bb665cf247" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">hxxps[://]www[.]paypal[.]com4uswebappsresetaccountrecovery[.]timeseaways[.]com
+</code></pre><p id="22f5b2cc-075b-804c-ae65-e3ebd8693ca9" class=""><strong>🕒 First submitted to VirusTotal:</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22f5b2cc-075b-8025-b473-f1b8208ad45f" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">2017-04-17 22:52:53 UTC
+</code></pre><p id="22f5b2cc-075b-8014-ae07-fafc637ecc98" class=""><strong>🎭 Service Being Impersonated:</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22f5b2cc-075b-8093-837e-f22305385da7" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">PayPal
+</code></pre><p id="22f5b2cc-075b-8027-90a8-d03df43c97da" class=""><strong>💀 Malicious IP Address (Defanged):</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22f5b2cc-075b-80d1-a768-cc8fb9d784e2" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">184[.]154[.]127[.]226
+</code></pre><hr id="22f5b2cc-075b-801f-adea-fd87f9f4c02f"/><h2 id="22f5b2cc-075b-8002-8b76-fc20db65173f" class="">📧 Step 6: Email Address Extraction</h2><p id="22f5b2cc-075b-805a-aa0e-f69c18b7b300" class="">Used the following command to extract all email addresses in plaintext:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22f5b2cc-075b-803a-a864-de695b367661" class="code code-wrap"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">tshark -r teamwork.pcap -V | grep -Eo &#x27;[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}&#x27;
+</code></pre><p id="22f5b2cc-075b-80d2-bdd9-f3868867ffbd" class=""><strong>Email Address Found:</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22f5b2cc-075b-8045-9b33-c4206a7a0336" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">johnny5alive[at]gmail[.]com
+</code></pre><p id="22f5b2cc-075b-8028-b3b7-f48577f0c3e9" class="">(Defanged for safety)</p><figure id="22f5b2cc-075b-8053-bee3-d769bd853f80" class="image"><a href="9B934724-2827-4978-9CE4-E1D6DAD1FECE.png"><img style="width:685.9605712890625px" src="9B934724-2827-4978-9CE4-E1D6DAD1FECE.png"/></a></figure><hr id="22f5b2cc-075b-8077-9d52-cb60baa0b440"/><h2 id="22f5b2cc-075b-80a1-a530-c0e9e37e65bc" class="">🧾 Conclusion</h2><p id="22f5b2cc-075b-801e-ac16-fce089a5b2fc" class="">This PCAP contains signs of a <strong>phishing or credential-harvesting attempt</strong>, likely using a spoofed PayPal domain. The presence of a <code>/suspecious.php</code> path and form-based HTTP POSTs further suggests the possibility of <strong>malicious web-based activity</strong>, possibly a fake login portal.</p><hr id="22f5b2cc-075b-80df-8705-d1feda6a68f6"/><h2 id="22f5b2cc-075b-8080-8759-d4ace2651ebe" class="">✅ Recommendations</h2><ul id="22f5b2cc-075b-805c-849d-fd609e68db52" class="bulleted-list"><li style="list-style-type:disc">Block the IP <code>184.154.127.226</code> and the associated domain at your firewall or proxy.</li></ul><ul id="22f5b2cc-075b-807a-bf64-cc2a7a7f1819" class="bulleted-list"><li style="list-style-type:disc">Investigate any internal activity related to the email <code>johnny5alive[at]gmail[.]com</code>.</li></ul><ul id="22f5b2cc-075b-8003-82c5-ccbbda2f744d" class="bulleted-list"><li style="list-style-type:disc">Review DNS logs for signs of domain resolution attempts to <code>timeseaways[.]com</code>.</li></ul><ul id="22f5b2cc-075b-80bc-9c9a-f7d1d9edabde" class="bulleted-list"><li style="list-style-type:disc">Conduct phishing awareness training for users.</li></ul><hr id="22f5b2cc-075b-808b-a6a7-cdc1e62465cf"/></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

@@ -1,0 +1,684 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>DFIR</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2365b2cc-075b-8098-9654-e2d654257490" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/66704dd0e54a1f39bff7b1a1-1735575194436"/></div><h1 class="page-title"><strong>DFIR</strong></h1><p class="page-description"></p></header><div class="page-body"><p id="2365b2cc-075b-8010-a66d-f52fdb2ac9f5" class="">Security breaches and incidents happen despite the security teams trying their best to avoid them worldwide. The prudent approach in such a scenario is to prepare for the time when an incident will happen so that we are not caught off-guard. Thus, Digital Forensics and Incident Response (DFIR) has become an essential subject in Defensive Security.</p><hr id="2365b2cc-075b-8081-acc7-c023bdff3ee4"/><h2 id="2365b2cc-075b-805f-9807-eef943abc4a1" class="">🛡️ What is DFIR?</h2><p id="2365b2cc-075b-80f1-acd2-dbaa20344af4" class=""><strong>DFIR</strong> stands for <strong>Digital Forensics and Incident Response</strong> — a cybersecurity field focused on:</p><ul id="2365b2cc-075b-80d2-a824-d0a53c782dab" class="bulleted-list"><li style="list-style-type:disc">Collecting forensic data from digital devices (e.g., computers, media devices, smartphones)</li></ul><ul id="2365b2cc-075b-8093-9207-efdce9c6becd" class="bulleted-list"><li style="list-style-type:disc">Investigating security incidents and identifying attacker footprints</li></ul><ul id="2365b2cc-075b-802a-8fe8-ffadd040495a" class="bulleted-list"><li style="list-style-type:disc">Restoring systems to their pre-incident state</li></ul><hr id="2365b2cc-075b-80d5-bc96-c9ff55ddd704"/><h2 id="2365b2cc-075b-80b1-a123-dee4e68a8b21" class="">🚨 Why Is DFIR Needed?</h2><p id="2365b2cc-075b-80b3-9926-d9daa713f066" class="">DFIR supports security professionals by:</p><ul id="2365b2cc-075b-8052-b420-d91df25c2041" class="bulleted-list"><li style="list-style-type:disc">Detecting real attacker activity and filtering out false alarms</li></ul><ul id="2365b2cc-075b-8068-95b2-e4c2bf85acba" class="bulleted-list"><li style="list-style-type:disc">Removing attacker presence and ensuring no residual access</li></ul><ul id="2365b2cc-075b-8027-b3b3-cb8279a68b84" class="bulleted-list"><li style="list-style-type:disc">Identifying breach scope and timeline for stakeholder reporting</li></ul><ul id="2365b2cc-075b-808f-84df-d1449e53eaab" class="bulleted-list"><li style="list-style-type:disc">Pinpointing vulnerabilities that led to the attack</li></ul><ul id="2365b2cc-075b-807b-8f79-d41b5407c90f" class="bulleted-list"><li style="list-style-type:disc">Understanding attacker tactics to prevent future intrusions</li></ul><ul id="2365b2cc-075b-80fe-92da-fe0597a07805" class="bulleted-list"><li style="list-style-type:disc">Sharing attacker intelligence with the cybersecurity community</li></ul><hr id="2365b2cc-075b-80ba-815c-f0b11da38f78"/><h2 id="2365b2cc-075b-8021-b539-d863fab1c307" class="">👥 Who Performs DFIR?</h2><p id="2365b2cc-075b-80b1-aba1-ea380fa82aa4" class="">DFIR professionals blend skills from two key areas:</p><table id="2365b2cc-075b-803f-bcb6-c41cf3a885dc" class="simple-table"><thead class="simple-table-header"><tr id="2365b2cc-075b-808f-ad19-cdb926d6825a"><th id="BufN" class="simple-table-header-color simple-table-header">Domain</th><th id="qx]l" class="simple-table-header-color simple-table-header" style="width:379.00001525878906px">Role/Expertise</th></tr></thead><tbody><tr id="2365b2cc-075b-80ea-9bec-d8e73e43f754"><td id="BufN" class=""><strong>Digital Forensics</strong></td><td id="qx]l" class="" style="width:379.00001525878906px">Identifies forensic artifacts and evidence of human activity on digital devices</td></tr><tr id="2365b2cc-075b-8013-9695-e1deb80127c7"><td id="BufN" class=""><strong>Incident Response</strong></td><td id="qx]l" class="" style="width:379.00001525878906px">Analyzes forensic data to understand and respond to security threats</td></tr></tbody></table><p id="2365b2cc-075b-80e7-b00e-e767af39b793" class="">DFIR merges both domains because they are interdependent:</p><ul id="2365b2cc-075b-805f-a7a4-f1e6539a1d91" class="bulleted-list"><li style="list-style-type:disc"><strong>Incident Response</strong> sets goals and scope for forensic analysis</li></ul><ul id="2365b2cc-075b-8042-aa83-ce417ae8bfb2" class="bulleted-list"><li style="list-style-type:disc"><strong>Digital Forensics</strong> provides insights that guide the response strategy</li></ul><hr id="2365b2cc-075b-8007-94a4-c7af133855d4"/><p id="2365b2cc-075b-8099-8126-e48ca7f81b37" class="">
+</p><h2 id="2365b2cc-075b-807d-8331-e55e1151fd0e" class="">Basic concepts of DFIR</h2><hr id="2365b2cc-075b-8005-a99a-c6d9dd2601da"/><h2 id="2365b2cc-075b-80f2-838d-d6bb8b49b57f" class="">🧩 Artifacts</h2><ul id="2365b2cc-075b-809a-9d7e-dbe40a908059" class="bulleted-list"><li style="list-style-type:disc"><strong>Definition</strong>: Pieces of digital evidence indicating activity on a system.</li></ul><ul id="2365b2cc-075b-8021-95e2-caa29c474f70" class="bulleted-list"><li style="list-style-type:disc"><strong>Purpose</strong>: Support hypotheses about attacker behavior (e.g., registry key used for persistence).</li></ul><ul id="2365b2cc-075b-8031-b1d0-e96f779d6f9f" class="bulleted-list"><li style="list-style-type:disc"><strong>Sources</strong>: Collected from file systems, memory, or network activity.</li></ul><ul id="2365b2cc-075b-80f2-9732-e2cc7aceab87" class="bulleted-list"><li style="list-style-type:disc"><strong>Environment focus</strong>:<ul id="2365b2cc-075b-8042-96f0-ca29135ffdb1" class="bulleted-list"><li style="list-style-type:circle"><strong>Windows</strong>: Common for endpoints and server roles (e.g., Active Directory, MS Exchange)</li></ul><ul id="2365b2cc-075b-8016-8103-e668269a08f9" class="bulleted-list"><li style="list-style-type:circle"><strong>Linux</strong>: Often used for hosting services (e.g., web servers, databases)</li></ul></li></ul><hr id="2365b2cc-075b-80f1-b9b0-dd0f09f88e12"/><h2 id="2365b2cc-075b-80e7-9a82-ee002c8970a4" class="">🗂️ Evidence Preservation</h2><ul id="2365b2cc-075b-805c-8bcc-e5e17e9f6362" class="bulleted-list"><li style="list-style-type:disc"><strong>Key Principle</strong>: Maintain integrity of digital evidence.</li></ul><ul id="2365b2cc-075b-80eb-8761-f33e80a32e36" class="bulleted-list"><li style="list-style-type:disc"><strong>Best Practices</strong>:<ul id="2365b2cc-075b-800c-a4c1-fbe812f60282" class="bulleted-list"><li style="list-style-type:circle">Evidence is <strong>write-protected</strong> upon collection.</li></ul><ul id="2365b2cc-075b-80a7-9e45-f2b57b7cbb9e" class="bulleted-list"><li style="list-style-type:circle">Analysis is conducted on <strong>copied versions</strong> of the original.</li></ul><ul id="2365b2cc-075b-8065-9183-f1ea4b8f7c29" class="bulleted-list"><li style="list-style-type:circle">Originals are safeguarded in case analysis corrupts copies.</li></ul></li></ul><hr id="2365b2cc-075b-80e8-be15-fe54045af704"/><h2 id="2365b2cc-075b-80fb-a426-db7fb6d759bb" class="">🔒 Chain of Custody</h2><ul id="2365b2cc-075b-8066-ac94-c953a51d57b4" class="bulleted-list"><li style="list-style-type:disc"><strong>Definition</strong>: Ensures secure handling and documentation of evidence.</li></ul><ul id="2365b2cc-075b-8071-88c1-cbe3fac31e47" class="bulleted-list"><li style="list-style-type:disc"><strong>Importance</strong>:<ul id="2365b2cc-075b-80c7-9130-d23a2bb46f59" class="bulleted-list"><li style="list-style-type:circle">Prevents unauthorized access.</li></ul><ul id="2365b2cc-075b-800d-b969-fd7e772b2b46" class="bulleted-list"><li style="list-style-type:circle">Avoids contamination and ensures data credibility.</li></ul><ul id="2365b2cc-075b-80d2-86c1-f73bc602ab04" class="bulleted-list"><li style="list-style-type:circle">A broken chain raises doubts about the reliability of findings.</li></ul></li></ul><hr id="2365b2cc-075b-80d0-b5aa-c7c9fc04c30e"/><h2 id="2365b2cc-075b-80e7-93de-d0c0c646d608" class="">⚡ Order of Volatility</h2><ul id="2365b2cc-075b-8062-8a72-c5e0b0260ced" class="bulleted-list"><li style="list-style-type:disc"><strong>Concept</strong>: Volatility refers to how quickly data is lost.</li></ul><ul id="2365b2cc-075b-806c-ab82-da517a92f540" class="bulleted-list"><li style="list-style-type:disc"><strong>Examples</strong>:<ul id="2365b2cc-075b-8072-a6f9-cc0705548024" class="bulleted-list"><li style="list-style-type:circle"><strong>High volatility</strong>: RAM (data lost on shutdown)</li></ul><ul id="2365b2cc-075b-8027-89a9-db5931300fe8" class="bulleted-list"><li style="list-style-type:circle"><strong>Low volatility</strong>: Hard drives (data persists without power)</li></ul></li></ul><ul id="2365b2cc-075b-807b-98f7-c37f0181d8a3" class="bulleted-list"><li style="list-style-type:disc"><strong>DFIR Strategy</strong>: Capture data from most volatile sources first.</li></ul><hr id="2365b2cc-075b-800e-b62b-c20c5f742355"/><h2 id="2365b2cc-075b-800b-ba5e-da3b4da493e4" class="">🕒 Timeline Creation</h2><ul id="2365b2cc-075b-8024-88f5-ed0683b7486b" class="bulleted-list"><li style="list-style-type:disc"><strong>Goal</strong>: Present evidence in chronological order.</li></ul><ul id="2365b2cc-075b-809c-a5b8-f5bc0220f045" class="bulleted-list"><li style="list-style-type:disc"><strong>Benefit</strong>:<ul id="2365b2cc-075b-8092-8800-cce9d0e2f38a" class="bulleted-list"><li style="list-style-type:circle">Builds a clear picture of events.</li></ul><ul id="2365b2cc-075b-80f0-bf37-f75cc3b6168b" class="bulleted-list"><li style="list-style-type:circle">Enables accurate and efficient analysis.</li></ul><ul id="2365b2cc-075b-80ce-9e94-d8c34a226a49" class="bulleted-list"><li style="list-style-type:circle">Helps correlate artifacts across different sources.</li></ul></li></ul><hr id="2365b2cc-075b-80b0-9232-caab6479797d"/><p id="2365b2cc-075b-806b-a6f2-fae7a995d58b" class="">
+</p><h2 id="2365b2cc-075b-8023-8cb9-f6e0d5ead82f" class="">DFIR TOOLS</h2><p id="2365b2cc-075b-8055-a867-cf9e5dc332e1" class="">The security industry has built various exciting tools to help with the DFIR process. These tools help save valuable time and enhance the capabilities of security professionals. Let&#x27;s learn about some of these tools here. You can check out the rooms for these tools on TryHackMe to learn more about them.</p><h2 id="2365b2cc-075b-8024-bdd9-da94768c4504" class=""><strong>Eric Zimmerman&#x27;s tools:</strong></h2><figure id="2365b2cc-075b-806d-9a35-e7e48b71bbc8" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/61306d87a330ed00419e22e7/room-content/1a89eb9ecd42f493fcdf7d105b41dba7.jpg"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/61306d87a330ed00419e22e7/room-content/1a89eb9ecd42f493fcdf7d105b41dba7.jpg"/></a></figure><p id="2365b2cc-075b-80f3-a237-cf8db4e889b6" class="">Eric Zimmerman is a security researcher who has written a few tools to help perform forensic analysis on the Windows platform. These tools help the registry, file system, timeline, and many other analyses. To learn more about these tools, you can check out the <a href="https://tryhackme.com/room/windowsforensics1">Windows Forensics 1</a> and <a href="https://tryhackme.com/room/windowsforensics2">Windows Forensics 2</a> rooms, where these tools are discussed concerning the different artifacts found in the Windows Operating System.</p><h2 id="2365b2cc-075b-8019-b8cb-e187cb10e35a" class=""><strong>KAPE:</strong></h2><figure id="2365b2cc-075b-8049-8982-dc1f55333458" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/61306d87a330ed00419e22e7/room-content/0c82470617c7ebdbfcf956ee9d9547cf.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/61306d87a330ed00419e22e7/room-content/0c82470617c7ebdbfcf956ee9d9547cf.png"/></a></figure><p id="2365b2cc-075b-8061-b1e6-e6bf3454866f" class="">Kroll Artifact Parser and Extractor (KAPE) is another beneficial tool by Eric Zimmerman. This tool automates the collection and parsing of forensic artifacts and can help create a timeline of events. You can check out the <a href="https://tryhackme.com/room/kape">KAPE room</a> to learn more about KAPE.</p><h2 id="2365b2cc-075b-8077-afad-eeed908a5565" class=""><strong>Autopsy:</strong></h2><figure id="2365b2cc-075b-80ea-9619-ca98f3beba56" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/61306d87a330ed00419e22e7/room-content/ea383ef541cfaf0cbbc40a64af0f47ba.jpg"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/61306d87a330ed00419e22e7/room-content/ea383ef541cfaf0cbbc40a64af0f47ba.jpg"/></a></figure><p id="2365b2cc-075b-805f-95ff-c94f3626a645" class="">Autopsy is an open-source forensics platform that helps analyze data from digital media like mobile devices, hard drives, and removable drives. Various plugins for autopsy speed up the forensic process and extract and present valuable information from the raw data sources. TryHackMe&#x27;s <a href="https://tryhackme.com/room/btautopsye0">Autopsy room</a> can help if you want to learn more about it.</p><h2 id="2365b2cc-075b-80cc-905b-e8504d2c6da0" class=""><strong>Volatility:</strong></h2><figure id="2365b2cc-075b-8013-b1db-f36e0bb6f577" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/61306d87a330ed00419e22e7/room-content/c25405634d4fda8271d8df63a252d16a.jpg"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/61306d87a330ed00419e22e7/room-content/c25405634d4fda8271d8df63a252d16a.jpg"/></a></figure><p id="2365b2cc-075b-80d6-b308-f4cf677ed62a" class="">Volatility is a tool that helps perform memory analysis for memory captures from both Windows and Linux Operating Systems. It is a powerful tool that can help extract valuable information from the memory of a machine under investigation. You can learn more about Volatility in the <a href="https://tryhackme.com/room/volatility">Volatility room</a>.</p><h2 id="2365b2cc-075b-8073-b1de-f461fd0019e3" class=""><strong>Redline:</strong></h2><figure id="2365b2cc-075b-80b7-a7b0-fe994e187a53" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/61306d87a330ed00419e22e7/room-content/622d38cddd96ddcc98b8002da9920eec.jpg"><img style="width:100px" src="https://tryhackme-images.s3.amazonaws.com/user-uploads/61306d87a330ed00419e22e7/room-content/622d38cddd96ddcc98b8002da9920eec.jpg"/></a></figure><p id="2365b2cc-075b-8019-8a6a-e58935bc92d7" class="">Redline is an incident response tool developed and freely distributed by FireEye. This tool can gather forensic data from a system and help with collected forensic information. You can learn more about Redline in the <a href="https://tryhackme.com/room/btredlinejoxr3d">Redline room</a>.</p><h2 id="2365b2cc-075b-80e2-a823-d57fd5b9ff1b" class=""><strong>Velociraptor:</strong></h2><figure id="2365b2cc-075b-807d-a42a-eb7931a6af81" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/61306d87a330ed00419e22e7/room-content/fca62b1d63bfcd0e11557606e451c412.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/61306d87a330ed00419e22e7/room-content/fca62b1d63bfcd0e11557606e451c412.png"/></a></figure><p id="2365b2cc-075b-80aa-ac13-c3503bfaa1f2" class="">Velociraptor is an advanced endpoint-monitoring, forensics, and response platform. It is open-source but very powerful. TryHackMe has created a <a href="https://tryhackme.com/room/velociraptorhp">Velociraptor room</a> for you to learn more about it.</p><p id="2365b2cc-075b-8043-9855-c6b4eb5562bb" class="">While all these tools are helpful while performing DFIR, it is essential to understand the process followed to achieve our goals. The next task will focus on the Incident Response process and how we can leverage Digital Forensics in that process.</p><p id="2365b2cc-075b-80d1-abf3-de1d8b93f6f8" class="">
+</p><h2 id="2365b2cc-075b-8072-817f-cb06cc071fc1" class="">The Incident Response process</h2><figure id="2365b2cc-075b-8058-81f8-c940efc0338c" class="image"><a href="image%2042.png"><img style="width:630.9666748046875px" src="image%2042.png"/></a></figure><p id="2365b2cc-075b-80c9-9c18-d0bcac9f206f" class="">PICERL</p><ol type="1" id="2365b2cc-075b-8053-9bee-e289a25ddb64" class="numbered-list" start="1"><li><strong><span style="border-bottom:0.05em solid">Preparation</span></strong><span style="border-bottom:0.05em solid">:</span> Before an incident happens, preparation needs to be done so that everyone is ready in case of an incident. Preparation includes having the required people, processes, and technology to prevent and respond to incidents.</li></ol><ol type="1" id="2365b2cc-075b-8007-ac1a-f883f5bfa2da" class="numbered-list" start="2"><li><strong><span style="border-bottom:0.05em solid">Identification</span></strong><span style="border-bottom:0.05em solid">:</span> An incident is identified through some indicators in the identification phase. These indicators are then analyzed for False Positives, documented, and communicated to the relevant stakeholders.</li></ol><ol type="1" id="2365b2cc-075b-80a7-a68b-f052415ef68b" class="numbered-list" start="3"><li><strong><span style="border-bottom:0.05em solid">Containment</span></strong><span style="border-bottom:0.05em solid">:</span> In this phase, the incident is contained, and efforts are made to limit its effects. There can be short-term and long-term fixes for containing the threat based on forensic analysis of the incident that will be a part of this phase.</li></ol><ol type="1" id="2365b2cc-075b-80d2-8721-e5d228e574c9" class="numbered-list" start="4"><li><strong><span style="border-bottom:0.05em solid">Eradication</span></strong><span style="border-bottom:0.05em solid">:</span> Next, the threat is eradicated from the network. It has to be ensured that a proper forensic analysis is performed and the threat is effectively contained before eradication. For example, if the entry point of the threat actor into the network is not plugged, the threat will not be effectively eradicated, and the actor can gain a foothold again.</li></ol><ol type="1" id="2365b2cc-075b-804b-8ecc-e02fd00ee20a" class="numbered-list" start="5"><li><strong><span style="border-bottom:0.05em solid">Recovery</span></strong><span style="border-bottom:0.05em solid">:</span> Once the threat is removed from the network, the services that had been disrupted are brought back as they were before the incident happened.</li></ol><ol type="1" id="2365b2cc-075b-80ec-9073-d1f206bc8edb" class="numbered-list" start="6"><li><strong><span style="border-bottom:0.05em solid">Lessons Learned</span></strong><span style="border-bottom:0.05em solid">:</span> Finally, a review of the incident is performed, the incident is documented, and steps are taken based on the findings from the incident to make sure that the team is better prepared for the next time an incident occurs.</li></ol><figure id="2365b2cc-075b-80fe-9390-caac4061af32" class="image"><a href="2E314A1A-0C9B-46B3-B406-16EA51FB9CF8.png"><img style="width:631px" src="2E314A1A-0C9B-46B3-B406-16EA51FB9CF8.png"/></a></figure><p id="2365b2cc-075b-806c-834e-ee018fef499e" class="">
+</p><figure id="2375b2cc-075b-803d-9d6d-f4cbbf95b9b1" class="link-to-page"><a href="Windows%20Forensics%201%202375b2cc075b803d9d6df4cbbf95b9b1.html"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/4f3a37633c01bc4453668af0f2d3e7ef.png"/>Windows Forensics 1</a></figure><figure id="2385b2cc-075b-80ab-a6e6-ed4275efab82" class="link-to-page"><a href="Windows%20Forensics%202%202385b2cc075b80aba6e6ed4275efab82.html"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/4444bd37a906e88428d1a00ab5ad22ef.png"/>Windows Forensics 2</a></figure><figure id="2395b2cc-075b-8072-b7cc-fa8140f584f6" class="link-to-page"><a href="Linux%20Forensics%202395b2cc075b8072b7ccfa8140f584f6.html"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/5b1eb3e74900aa4cb2d28dca730e649a.png"/>Linux Forensics</a></figure><figure id="2395b2cc-075b-803a-94c3-e7d357f1996b" class="link-to-page"><a href="Autopsy%202395b2cc075b803a94c3e7d357f1996b.html"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/3a5bffa10dcb6fec1e4ae8b63fedddd2.png"/>Autopsy</a></figure><figure id="23c5b2cc-075b-80eb-83a2-e3c68d97759b" class="link-to-page"><a href="Redline%2023c5b2cc075b80eb83a2e3c68d97759b.html"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/235b72310de986c8c5185959c47f38dc.jpeg"/>Redline</a></figure><figure id="23e5b2cc-075b-8059-97bf-c9bc9dbfcfa6" class="link-to-page"><a href="KAPE%2023e5b2cc075b805997bfc9bc9dbfcfa6.html"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/54fa695b6a8fb47c3e91adf4a5594a81.png"/>KAPE</a></figure><figure id="23f5b2cc-075b-802f-8797-fa700c32517c" class="link-to-page"><a href="Volatility%2023f5b2cc075b802f8797fa700c32517c.html"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/bdd7dca765920c9724b54dea1d17761f.png"/>Volatility</a></figure><figure id="23f5b2cc-075b-8027-acea-cb1101ac5241" class="link-to-page"><a href="Velociraptor%2023f5b2cc075b8027aceacb1101ac5241.html"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/6fd8511c7cfb5afa9c5af0f31964cbbb.png"/>Velociraptor</a></figure><figure id="2415b2cc-075b-80de-9ebe-f1e9542190af" class="link-to-page"><a href="TheHIVE%202415b2cc075b80de9ebef1e9542190af.html"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/0370cb3cf16a89c2bd9fa4297cb284b7.png"/>TheHIVE</a></figure><figure id="2415b2cc-075b-8085-8f3f-fadfa5bea94f" class="link-to-page"><a href="Unattended%202415b2cc075b80858f3ffadfa5bea94f.html"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/ee5321d50c06f5ddea369866fa9fb9d1.png"/>Unattended</a></figure><figure id="2445b2cc-075b-80d7-b896-c95c8193f587" class="link-to-page"><a href="Disgruntled%202445b2cc075b80d7b896c95c8193f587.html"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/03de138b8dfa8f5b003298c17b73fbd8.png"/>Disgruntled</a></figure><figure id="2445b2cc-075b-807c-87ad-ccb6ad871dd1" class="link-to-page"><a href="Critical%202445b2cc075b807c87adccb6ad871dd1.html"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/66264cef7bba67a6bbbe7179-1718813358080"/>Critical</a></figure><figure id="2445b2cc-075b-8086-b035-f59c5ff93a2a" class="link-to-page"><a href="Secret%20Recipe%202445b2cc075b8086b035f59c5ff93a2a.html"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/08870f82d4ce4374cdc6fe1ad922d0e3.png"/>Secret Recipe</a></figure></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

@@ -1,0 +1,690 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Warzone 2</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="24b5b2cc-075b-8055-bf07-e9ffde502895" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/71888d186519a12b2f4f9cdb6c184e20.png"/></div><h1 class="page-title"><strong>Warzone 2</strong></h1><p class="page-description"></p></header><div class="page-body"><h3 id="24b5b2cc-075b-8062-9b5d-d6a788b3a015" class="">Scenario</h3><p id="24b5b2cc-075b-80a3-920b-d36fb98b8b5b" class="">You work as a Tier 1 Security Analyst L1 for a Managed Security Service Provider (MSSP). Again, you&#x27;re tasked with monitoring network alerts.</p><p id="24b5b2cc-075b-807a-9552-df94e28f8127" class="">An alert triggered: <strong>Misc activity</strong>, <strong>A Network Trojan Was Detected</strong>, and <strong>Potential Corporate Privacy Violation</strong>.</p><p id="24b5b2cc-075b-80d7-b430-d4362977fdec" class="">The case was assigned to you. Inspect the PCAP and retrieve the artifacts to confirm this alert is a true positive.<br/></p><p id="24b5b2cc-075b-80f1-8223-da678d858d0c" class="">Your tools:</p><ul id="24b5b2cc-075b-8074-bea1-c001c610d67c" class="bulleted-list"><li style="list-style-type:disc"><a href="https://tryhackme.com/room/brim">Brim</a></li></ul><ul id="24b5b2cc-075b-8088-b46c-d366a31d09ea" class="bulleted-list"><li style="list-style-type:disc"><a href="https://tryhackme.com/room/networkminer">Network Miner</a></li></ul><ul id="24b5b2cc-075b-80a7-aaab-dfa17fed7acb" class="bulleted-list"><li style="list-style-type:disc"><a href="https://tryhackme.com/room/wireshark">Wireshark</a></li></ul><p id="24b5b2cc-075b-8075-827c-db6a5cdac16f" class="">
+</p><ul id="24b5b2cc-075b-80af-9a4a-ff7c551c4f33" class="bulleted-list"><li style="list-style-type:disc">What was the alert signature for <strong>A Network Trojan was Detected</strong>?<br/><br/>I opened the pcap in Brim, From there there are a couple of inbuilt queries<br/></li></ul><figure id="24b5b2cc-075b-8068-b5c9-dadf525991e3" class="image"><a href="C9B159F0-B046-4482-B1EE-65B309B5A96F.png"><img style="width:890px" src="C9B159F0-B046-4482-B1EE-65B309B5A96F.png"/></a></figure><p id="24b5b2cc-075b-80cd-8fe9-d292ca6128c7" class="">
+</p><p id="24b5b2cc-075b-803c-87e7-f369b217c5b3" class="">Once you click on it, you can see the Alerts that have been triggered by Suricata Alerts, From there, right click on the “<strong>A Network Trojan was Detected” then select search with this as a filter</strong></p><figure id="24b5b2cc-075b-8093-9b34-f0e2203f5b7a" class="image"><a href="DFCF232D-AEDD-4FE1-9275-04F10C71B86E.png"><img style="width:890px" src="DFCF232D-AEDD-4FE1-9275-04F10C71B86E.png"/></a></figure><p id="24b5b2cc-075b-800e-b26c-e88130a8c458" class="">You can already see the alert signature that triggered this on the far right column, You can also double click on it to open it and see in detail</p><figure id="24b5b2cc-075b-80b2-85d5-ee48e33ad38c" class="image"><a href="B0C8C6E1-7B0A-4C07-A112-F0A1BA596864.png"><img style="width:890px" src="B0C8C6E1-7B0A-4C07-A112-F0A1BA596864.png"/></a></figure><p id="24b5b2cc-075b-8012-ba32-f48f2a75e547" class="">
+</p><ul id="24b5b2cc-075b-80a8-b573-f4da2756f1b0" class="bulleted-list"><li style="list-style-type:disc">What was the alert signature for <strong>Potential Corporate Privacy Violation</strong>?<br/><br/>Follow the same logic as previous one,<br/></li></ul><figure id="24b5b2cc-075b-80eb-8fa8-e589e2cf8a88" class="image"><a href="BCFD4911-33AF-4092-948F-17E05D289ACC.png"><img style="width:890px" src="BCFD4911-33AF-4092-948F-17E05D289ACC.png"/></a></figure><ul id="24b5b2cc-075b-80b5-8fee-e04e94237145" class="bulleted-list"><li style="list-style-type:disc">What was the IP to trigger either alert? Enter your answer in a <strong>defanged</strong> format.<br/><br/>Both of these were from the same src IP, as seen from the alert<br/></li></ul><figure id="24b5b2cc-075b-8064-9603-d6c64225a7f1" class="image"><a href="96877EC6-2FEC-4A72-8A76-6441401214F2.png"><img style="width:890px" src="96877EC6-2FEC-4A72-8A76-6441401214F2.png"/></a></figure><ul id="24b5b2cc-075b-805c-b918-f13427b475ae" class="bulleted-list"><li style="list-style-type:disc">Provide the full URI for the malicious downloaded file. In your answer, <strong>defang</strong> the URI.<br/><br/>From BRIM, I can use the following filter to get only time, src ip dest ip host and uri<br/><code>_path==&quot;http&quot; | cut ts, id.orig_h, id.resp_h, id.resp_p, method,host, uri | uniq -c | sort ts</code><br/>Brim also has inbuilt Filters to see HTTP Requests<br/>From there, I sorted by time and looked at the first reqeust to download a file</li></ul><figure id="24b5b2cc-075b-80cb-85bd-e64c9e502813" class="image"><a href="F9A2DA24-9638-4313-BC0D-54F2323124EB.png"><img style="width:889.9833374023438px" src="F9A2DA24-9638-4313-BC0D-54F2323124EB.png"/></a></figure><ul id="24b5b2cc-075b-8026-a6b8-edfc2a0f1a6d" class="bulleted-list"><li style="list-style-type:disc">What is the name of the payload within the cab file?<br/><br/>To get this information we need to get the file out, To do this, I moved to Wireshark and located the HTTP stream with the file, since I already know the file name<br/>Then in File-Export Objects I can choose the HTTP packet with the file and save it, then I can calculate its SHA256 sum and use VT to get more information on that file.</li></ul><figure id="24b5b2cc-075b-80e0-b480-ee155c816fb7" class="image"><a href="BEE3E061-3B8E-4FE9-B595-B558224A3A36.png"><img style="width:890px" src="BEE3E061-3B8E-4FE9-B595-B558224A3A36.png"/></a></figure><figure id="24b5b2cc-075b-8035-a88d-ece140f64923" class="image"><a href="E3080ED8-87F7-4D99-B3B3-ABCED8689F15.png"><img style="width:890px" src="E3080ED8-87F7-4D99-B3B3-ABCED8689F15.png"/></a></figure><figure id="24b5b2cc-075b-808a-8a45-f5eb87567734" class="image"><a href="48F22482-CD70-4BEF-B16F-1FD0DF24CF46.png"><img style="width:889.9833374023438px" src="48F22482-CD70-4BEF-B16F-1FD0DF24CF46.png"/></a></figure><p id="24b5b2cc-075b-80a4-9e67-fd3b3bad70d0" class="">Now we know that its a malicious DLL.</p><ul id="24b5b2cc-075b-80e5-b064-ccc29dbbaef4" class="bulleted-list"><li style="list-style-type:disc">What is the user-agent associated with this network traffic?<br/><br/>Since I am already on the HTTP stream where I foun dhte request for the maliicous file, I can just look at the HTTP Request to see the user agent</li></ul><figure id="24b5b2cc-075b-806d-a8e7-fe2a5c7e8907" class="image"><a href="EBBA305A-F531-4A7E-8A85-C873D0627554.png"><img style="width:890px" src="EBBA305A-F531-4A7E-8A85-C873D0627554.png"/></a></figure><ul id="24b5b2cc-075b-807c-888d-f14a9d0e6e60" class="bulleted-list"><li style="list-style-type:disc">What other domains do you see in the network traffic that are labelled as malicious by VirusTotal? Enter the domains <strong>defanged</strong> and in alphabetical order. (<strong>format: domain[.]zzz,domain[.]zzz</strong>)<br/><br/>I looked at Statistics - HTTP - Requests to see the number of URLS, then from there, since there weren&#x27;t many, i checked VT to see which are malicious</li></ul><figure id="24b5b2cc-075b-807b-b227-df82d53f9531" class="image"><a href="818A8089-DC51-4B8D-8406-94CD68950E2D.png"><img style="width:890px" src="818A8089-DC51-4B8D-8406-94CD68950E2D.png"/></a></figure><ul id="24b5b2cc-075b-80a9-b49e-c0814c5cf38f" class="bulleted-list"><li style="list-style-type:disc">There are IP addresses flagged as <strong>Not Suspicious Traffic</strong>. What are the IP addresses? Enter your answer in numerical order and <strong>defanged</strong>. (format: IPADDR,IPADDR)<br/><br/>Back to Brim for this, under the built-in Queries - Suricata Alerts by src and dst, we can see some IP addresses categorized as Not suspicious Traffic</li></ul><figure id="24b5b2cc-075b-804e-a8fa-e66bb6bf2cb7" class="image"><a href="39C37794-72F4-415D-B660-3C38BAAD76BD.png"><img style="width:889.9666748046875px" src="39C37794-72F4-415D-B660-3C38BAAD76BD.png"/></a></figure><p id="24b5b2cc-075b-80e2-8565-ce1d7010beed" class="">
+</p><ul id="24b5b2cc-075b-80b4-95f6-f162f185034f" class="bulleted-list"><li style="list-style-type:disc">For the first IP address flagged as Not Suspicious Traffic. According to VirusTotal, there are several domains associated with this one IP address that was flagged as malicious. What were the domains you spotted in the network traffic associated with this IP address? Enter your answer in a <strong>defanged</strong> format. Enter your answer in alphabetical order, in a defanged format. (<strong>format: domain[.]zzz,domain[.]zzz,etc</strong>)<br/><br/><br/>I used the following query to see domains or server_name associated with the IP</li></ul><figure id="24b5b2cc-075b-805b-82ce-d16cf1ed9179" class="image"><a href="70BC3818-6B6D-43AE-B6E0-FACE89883BF4.png"><img style="width:890px" src="70BC3818-6B6D-43AE-B6E0-FACE89883BF4.png"/></a></figure><p id="24b5b2cc-075b-805b-b812-c1bc983f113e" class="">then i looked at the Passive DNS Replication for this IP, in VirusTotal</p><figure id="24b5b2cc-075b-802d-b701-ea8db36ac7f9" class="image"><a href="5DB26190-5CFE-4DEE-B062-1D5D257F8508.png"><img style="width:890px" src="5DB26190-5CFE-4DEE-B062-1D5D257F8508.png"/></a></figure><p id="24b5b2cc-075b-8062-88d4-fe6212000b46" class="">I found the 3 malicious IP I was looking for - <code>safebanktest[.]top, tocsicambar[.]xyz, ulcertification[.]xyz</code><br/></p><ul id="24b5b2cc-075b-8004-8392-fa6161b2cbf6" class="bulleted-list"><li style="list-style-type:disc">Now for the second IP marked as Not Suspicious Traffic. What was the domain you spotted in the network traffic associated with this IP address? Enter your answer in a <strong>defanged</strong> format. (format: domain[.]zzz)</li></ul><p id="24b5b2cc-075b-80a4-ab43-deff89f59649" class=""><br/>I used the same method for this as well and found the domain</p><figure id="24b5b2cc-075b-80c1-8945-d03c8812797a" class="image"><a href="3101BF7E-E3EB-42AE-B648-5CFEE16319A5.png"><img style="width:889.9666748046875px" src="3101BF7E-E3EB-42AE-B648-5CFEE16319A5.png"/></a></figure><p id="24b5b2cc-075b-800d-addb-e7c066e793d5" class="">
+</p><h2 id="24b5b2cc-075b-8013-8471-fa675fd6736d" class="">Conclusion</h2><p id="24b5b2cc-075b-806a-a220-dbee96b95a3d" class="">
+</p><p id="24b5b2cc-075b-80a0-89e9-f14c92ae7ab0" class="">
+</p><p id="24b5b2cc-075b-8073-8bc8-db1087001d54" class="">
+</p><p id="24b5b2cc-075b-803f-a376-c6dba0202f6a" class="">
+</p><p id="24b5b2cc-075b-80b5-918c-ca16f034154c" class="">This was a perfect refresher for Triage practice with IDS/IPS alerts, and a good practice for BRIM, as I mostly don&#x27;t use BRIM outside of THM. </p><p id="24b5b2cc-075b-80c8-85e1-d78a77c34059" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
